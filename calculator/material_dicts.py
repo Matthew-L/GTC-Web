@@ -126,6 +126,17 @@ HR = {
 
 
 def get_material_dict(string_material):
+    """
+    used to retrieve one of the hardcoded dictionaries;
+    the dictionaries follow the form: gauge, unit_weight;
+    PL: Plain
+    PB: Phosphor Bronze
+    NW: Nickel Wound
+    XS:
+    HR:
+    @param string_material: the type of material the string is made of; determines which dictionary to pass back
+    @return: the dictionary corresponding to the string
+    """
     if string_material == 'PL':
         return PL
     elif string_material == 'PB':
