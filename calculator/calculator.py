@@ -16,7 +16,9 @@ class GTC():
                  'F#/Gb':   23.125,
                  'G':       24.500,
                  'Ab/G#':   25.957,
-                 'A':       27.500}
+                 'A':       27.500,
+                 'A#/Bb':   29.135,
+                 'B':       30.868}
 
 
 
@@ -28,6 +30,7 @@ class GTC():
     #T(Tension) = (UW x (2 x L x F)^2) / 386.4
     def calculate_tension(self):
         tension = (self.unit_weight * (2*self.scale_length*self.freq)**2)/self.tension_constant
+        tension = float("{0:.2f}".format(tension))
         return tension
 
     def convert_to_freq(self, note, octave):
@@ -37,14 +40,7 @@ class GTC():
     def convert_to_unit_weight(self, string_material, gauge):
         material_dict = material_dicts.get_material_dict(string_material)
 
-        for g, unit_weight in material_dict.items():
+        for g in reversed(sorted(material_dict.keys())):
             if g <= gauge:
-                self.unit_weight = unit_weight
-                return unit_weight
-
-        #for(int i=len(-1; i>=0; --i)
-        #        if(PB[i][0] <= gauge)
-        #        {
-        #            unitWeight = (double)PB[i][1];
-        #            return;
-        #        }
+                self.unit_weight = material_dict[g]
+                return self.unit_weight
