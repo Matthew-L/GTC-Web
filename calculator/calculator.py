@@ -22,6 +22,7 @@ class GTC():
 
 
 
+
     def __init__(self, scale_length, string_material, gauge, note, octave):
         self.scale_length = scale_length
         self.freq = self.convert_to_freq(note, octave)
