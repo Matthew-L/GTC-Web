@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 import datetime
 from django.shortcuts import render
-from customforms.contact import StringForm
+from customforms.string import StringForm
 
 def hello(request):
     return HttpResponse("Hello world")
@@ -30,3 +30,17 @@ def calculate(request):
     return render(request, 'calculate.html', {
         'form': form,
     })
+
+def results(request):
+    GET_PARAMETERS = ["Note", "String_Type", "Octave", "Guage"]
+    key = request.GET.keys()
+    for parameter in GET_PARAMETERS:
+        if parameter not in key:
+            return render(request, 'input_error.html')
+    is_metric = False
+    if "Metric" in key:
+        is_metric = True
+
+    #Call Function to calculate tension
+    context = {'tension':'--tension variable here--'}
+    return render(request, 'results.html', context)
