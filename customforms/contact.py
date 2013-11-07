@@ -2,8 +2,8 @@ __author__ = 'mattlodes'
 from django import forms
 
 
-class ContactForm(forms.Form):
-    subject = forms.CharField(max_length=100)
-    message = forms.CharField()
-    sender = forms.EmailField()
-    cc_myself = forms.BooleanField(required=False)
+class StringForm(forms.Form):
+    Octave = forms.ChoiceField(choices=[(x, x) for x in range(0, 10)])
+    String_Type = forms.CharField()
+    Metric = forms.BooleanField(required=False)
+    Note = forms.ChoiceField(choices=[(x, x) for x in range(1, 32)])
