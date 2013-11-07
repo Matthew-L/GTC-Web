@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from GTC.views import hello, current_datetime, index, calculate, results
+from pythonbackend.views import hello, current_datetime, index, calculate, results
 
 from django.contrib import admin
 admin.autodiscover()
