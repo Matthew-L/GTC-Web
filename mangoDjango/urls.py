@@ -18,4 +18,12 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+
+    # user auth urls
+    (r'^accounts/login/$', 'mangoDjango.views.login'),
+    (r'^accounts/auth/$', 'mangoDjango.views.auth_view'),
+    (r'^accounts/logout/$', 'mangoDjango.views.logout'),
+    (r'^accounts/loggedin/$', 'mangoDjango.views.loggedin'),
+    (r'^accounts/invalid/$', 'mangoDjango.views.invalid_login'),
+
 )

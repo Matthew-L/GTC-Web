@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'rango',
     'article',
+    'mangoDjango'
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
