@@ -65,21 +65,28 @@ def is_valid_result(result):
     if result['String_Type'] not in STRING_TYPE:
         return False
 
+
+
     gauge = result['Gauge']
-    if gauge.isdigit():
-        if float(result['Gauge']) < 0:
+    if gauge.count('.')  < 2:
+        temp_gauge = gauge.replace('.', '')
+        if temp_gauge.isdigit():
+            if float(gauge) < 0:
+                return False
+        else:
             return False
-    else:
-        return False
+
 
     if result['Note'] not in ACCEPTED_NOTES:
         return False
 
     scale_length = result['Scale_Length']
-    if scale_length.isdigit():
-        if float(result['Scale_Length']) < 0:
+    if scale_length.count('.') < 2:
+        temp_scale_length = scale_length.replace('.', '')
+        if temp_scale_length.isdigit():
+            if float(scale_length) < 0:
+                return False
+        else:
             return False
-    else:
-        return False
 
     return True
