@@ -29,7 +29,7 @@ def hello_template_simple(request):
     name = 'matt'
     return render_to_response('hello.html', {'name':name})
 
-########################################
+#####################################################
 
 def articles(request):
     return render_to_response('articles.html', {'articles': Article.objects.all()})
@@ -38,4 +38,5 @@ def articles(request):
 def article(request, article_id=1):
     return render_to_response('articles.html', {'articles': Article.objects.get(id=article_id)})
 
+#####################################################
 
