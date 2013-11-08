@@ -1,4 +1,3 @@
-
 from django.shortcuts import render
 from customforms.string import StringForm
 from calculator.calculate import GTC

@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from article.views import HelloTemplate
-from pythonbackend.views import calculate, current_datetime, index, results
+from pythonbackend.views import calculate, results
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -12,8 +12,7 @@ urlpatterns = patterns('',
     url(r'^hello-class/$', HelloTemplate.as_view()),
     url(r'^hello-simple/$', 'article.views.hello_template_simple'),
 
-    url(r'^time/$', current_datetime),
-    url(r'^index/$', index),
+
     url(r'^calculate/$', calculate),
     url(r'^results/$', results),
 
