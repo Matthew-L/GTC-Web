@@ -10,14 +10,16 @@ body {
 }
 
 #sidebar {
-    float: left;
+    float: right;
     width: 200px;
     border: 1px solid #000;
+    background-color: Green ;
 }
 
 #content {
-    float: left;
+    float: right;
     width: 600px;
     border: 1px solid #F00;
     padding: 10px;
+    background-color: #00ffe2;
 }
