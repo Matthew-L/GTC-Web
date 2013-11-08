@@ -1,5 +1,4 @@
 from django.conf.urls import patterns, include, url
-from article.views import HelloTemplate
 from pythonbackend.views import calculate, results
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
