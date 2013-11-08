@@ -2,17 +2,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{% block title %}My Base Template{% endblock %}</title>
+        {% block title %}
+            <title>GTC</title>
+            <h1>Guitar Tension Calculator</h1>
+        {% endblock %}
             <link rel="stylesheet" type="text/css" href="{% static "assets/css/default.css" %}">
     </head>
     <body>
         <div id="page">
             <div id="sidebar">
-                {% block login %}
                 {% block sidebar %}
                     <ul>
-                        <li><a href="/articles/all">Articles</a></li>
-                        <li><a href="/admin/">Admin</a></li>
+                        <li><a href="/accounts/register/">Register New User</a></li>
+                        <li><a href="/accounts/login/">Login</a></li>
+                        <li><a href="/calculate/">Calculate Tension</a></li>
+                        <li><a href="/admin/">Admin Panel</a></li>
+                        <li><a href="/accounts/logout/">Logout</a></li>
+
                     </ul>
                 {% endblock %}
             </div>
@@ -20,7 +26,6 @@
                 {% block content %}
                     This is the content area
                 {% endblock %}
-                <img src="{% static "assets/images/python-logo.jpg" %}" width="200">
             </div>
         </div>
     </body>
