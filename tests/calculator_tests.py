@@ -21,6 +21,16 @@ G,   30#  PB == 0.0239"
 D,   30#  PB == 0.0317"
 A,,  30#  PB == 0.042"
 E,,  26#  PB == 0.0529"
+
+E .009" PL == 14.18#
+B, .012" PL == 14.15#
+G, .015" PL == 13.93#
+D, .022" NW == 14.41#
+A,, .030" NW == 15.17#
+E,, .040 NW == 14.52#
+B,,, .054 NW == 14.66#
+E,,, .074 NW == 12.21#
+total == 113.24#
 """
 
 
@@ -31,6 +41,40 @@ class MyTestCase(unittest.TestCase):
         source code we based this on. This seems to be due to the way the frequencies are calculated differently
 
         """
+
+        #E .009" PL == 14.18#
+        calc = calculator.GTC(26.5, 'PL', .009, 'E', 4)
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(14.17, tension)
+        #B, .012" PL == 14.15#
+        calc = calculator.GTC(26.5, 'PL', .012, 'B', 3)
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(14.14, tension)
+        #G, .015" PL == 13.93#
+        calc = calculator.GTC(26.5, 'PL', .015, 'G', 3)
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(13.92, tension)
+        #D, .022" NW == 14.41#
+        calc = calculator.GTC(26.5, 'NW', .022, 'D', 3)
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(14.39, tension)
+        #A,, .030" NW == 15.17#
+        calc = calculator.GTC(26.5, 'NW', .030, 'A', 2)
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(15.16, tension)
+        #E,, .040 NW == 14.52#
+        calc = calculator.GTC(26.5, 'NW', .040, 'E', 2)
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(14.52, tension)
+        #B,,, .054 NW == 14.66#
+        calc = calculator.GTC(26.5, 'NW', .054, 'G', 1)
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(14.66, tension)
+        #E,,, .074 NW == 12.21#
+        calc = calculator.GTC(26.5, 'NW', .074, 'G', 1)
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(12.21, tension)
+
         calc = calculator.GTC(25.5, 'PL', .012, 'E', 4)
         self.assertEqual(23.33, calc.calculate_tension())
 
@@ -55,9 +99,16 @@ class MyTestCase(unittest.TestCase):
 
         """
         calc = calculator.GTC(1, 'PL', .007, 'C', 0)
-        self.assertEqual(16.352, calc.freq)
+        freq = float("{0:.2f}".format(calc.freq))
+        self.assertEqual(16.35, freq)
+
         calc = calculator.GTC(1, 'PL', .007, 'C#/Db', 0)
-        self.assertEqual(17.324, calc.freq)
+        freq = float("{0:.2f}".format(calc.freq))
+        self.assertEqual(17.32, freq)
+
+        calc = calculator.GTC(26.5, 'PL', .009, 'E', 4)
+        freq = float("{0:.1f}".format(calc.freq))
+        self.assertEqual(329.6, freq)
 
     def test_convert_to_unit_weight(self):
         """
@@ -70,6 +121,16 @@ class MyTestCase(unittest.TestCase):
         calc = calculator.GTC(1, 'PL', .007, 'C#/Db', 0)
         self.assertEqual(.00001085, calc.unit_weight)
 
+    def test_convert_to_halfsteps(self):
+        """
+        tests the unit_weight is converted properly
+
+        """
+        calc = calculator.GTC(1, 'PL', .008, 'C#/Db', 0)
+        self.assertEqual(0, calc.convert_to_halfsteps('A', 4))
+        self.assertEqual(2, calc.convert_to_halfsteps('B', 4))
+        self.assertEqual(15, calc.convert_to_halfsteps('C', 6))
+        self.assertEqual(-10, calc.convert_to_halfsteps('B', 3))
 
 if __name__ == '__main__':
     unittest.main()

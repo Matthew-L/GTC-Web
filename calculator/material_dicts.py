@@ -132,7 +132,7 @@ def get_material_dict(string_material):
     PL: Plain
     PB: Phosphor Bronze
     NW: Nickel Wound
-    XS:
+    XS: Stainless Steel
     HR:
     @param string_material: the type of material the string is made of; determines which dictionary to pass back
     @return: the dictionary corresponding to the string
