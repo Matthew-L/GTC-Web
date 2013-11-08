@@ -108,7 +108,8 @@ ROOT_URLCONF = 'mangoDjango.urls'
 WSGI_APPLICATION = 'mangoDjango.wsgi.application'
 
 import os
-TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\','/'),)
+TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\','/'),
+                 os.path.join(os.path.dirname(__file__), '..', 'article/templates').replace('\\', '/'),)
 
 INSTALLED_APPS = (
     'django.contrib.auth',

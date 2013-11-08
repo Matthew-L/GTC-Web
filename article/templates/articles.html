@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+    <body>
+        {% if articles.count > 0 %}
+            {%  for article in articles %}
+                <div>
+                    <h2><a href="articles/get/{{ article.id }}/">{{ article.title|upper }}</a></h2>
+                    <p>{{ article.body|truncatewords:"10" }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No Articles to show</p>
+        {% endif %}
+    </body>
+</html>
+{% endblock %}
