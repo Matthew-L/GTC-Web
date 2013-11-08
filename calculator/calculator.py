@@ -2,7 +2,6 @@ __author__ = 'Micah'
 
 from calculator import material_dicts
 
-
 class GTC():
     """
     GTC(guitar tension calculator) is a class used to calculate the tension of a given string
@@ -13,18 +12,21 @@ class GTC():
     unit_weight = 0
     freq = 0
     tension_constant = 386.4
-    freq_dict = {'C':       16.352,
-                 'C#/Db':   17.324,
-                 'D':       18.354,
-                 'Eb/D#':   19.445,
-                 'E':       20.602,
-                 'F':       21.827,
-                 'F#/Gb':   23.125,
-                 'G':       24.500,
-                 'Ab/G#':   25.957,
-                 'A':       27.500,
-                 'A#/Bb':   29.135,
-                 'B':       30.868}
+
+    note_dict = {'C':       0,
+                 'C#/Db':   1,
+                 'D':       2,
+                 'D#/Eb':   3,
+                 'E':       4,
+                 'F':       5,
+                 'F#/Gb':   6,
+                 'G':       7,
+                 'G#/Ab':   8,
+                 'A':       9,
+                 'A#/Bb':   10,
+                 'B':       11}
+
+
 
     def __init__(self, scale_length, string_material, gauge, note, octave):
         """
@@ -52,8 +54,15 @@ class GTC():
         @return: the calculated tension using  (UnitWeight x (2 x ScaleLength x Frequency)^2)/TensionConstant
         """
         tension = (self.unit_weight * (2*self.scale_length*self.freq)**2)/self.tension_constant
-        tension = float("{0:.2f}".format(tension))
+        #tension = float("{0:.2f}".format(tension))
         return tension
+
+    def convert_to_halfsteps(self, note, octave):
+        offset = 3
+        base_octave = 5
+        octave_offset = (octave - base_octave)*12
+        note_offset = self.note_dict[note]
+        return offset + octave_offset + note_offset
 
     def convert_to_freq(self, note, octave):
         """
@@ -63,8 +72,9 @@ class GTC():
         @param octave: the octave of the note being converted to a frequency
         @return: the frequency of the note and octave
         """
-        base_freq = self.freq_dict[note]
-        return base_freq * 2**octave
+        half_steps = self.convert_to_halfsteps(note, octave)
+        A4_freq = 440
+        return A4_freq*(2**(1/12))**half_steps
 
     def convert_to_unit_weight(self, string_material, gauge):
         """
