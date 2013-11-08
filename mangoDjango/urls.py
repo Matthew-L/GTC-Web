@@ -5,7 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-
+    (r'^articles/', include('article.urls')),
     url(r'^hello/$', 'article.views.hello'),
     url(r'^hello-template/$', 'article.views.hello_template'),
     url(r'^hello-class/$', HelloTemplate.as_view()),
