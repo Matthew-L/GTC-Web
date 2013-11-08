@@ -6,12 +6,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^articles/', include('article.urls')),
-    url(r'^hello/$', 'article.views.hello'),
-    url(r'^hello-template/$', 'article.views.hello_template'),
-    url(r'^hello-class/$', HelloTemplate.as_view()),
-    url(r'^hello-simple/$', 'article.views.hello_template_simple'),
-
 
     url(r'^calculate/$', calculate),
     url(r'^results/$', results),
@@ -25,7 +19,8 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
-    # user auth urls
+    # user accounts
+    (r'^$', 'mangoDjango.views.login'),
     (r'^accounts/login/$', 'mangoDjango.views.login'),
     (r'^accounts/auth/$', 'mangoDjango.views.auth_view'),
     (r'^accounts/logout/$', 'mangoDjango.views.logout'),
