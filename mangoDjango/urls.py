@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-
+from article.views import HelloTemplate
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -7,6 +7,9 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     url(r'^hello/$', 'article.views.hello'),
+    url(r'^hello-template/$', 'article.views.hello_template'),
+    url(r'^hello-class/$', HelloTemplate.as_view()),
+    url(r'^hello-simple/$', 'article.views.hello_template_simple'),
     # url(r'^$', 'mangoDjango.views.home', name='home'),
     # url(r'^mangoDjango/', include('mangoDjango.foo.urls')),
 
