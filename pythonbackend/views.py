@@ -78,8 +78,6 @@ def is_valid_result(result):
     if result['String_Type'] not in STRING_TYPE:
         return False
 
-
-
     gauge = result['Gauge']
     if gauge.count('.')  < 2:
         temp_gauge = gauge.replace('.', '')

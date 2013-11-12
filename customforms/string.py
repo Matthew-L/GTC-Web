@@ -5,7 +5,7 @@ from django import forms
 
 ACCEPTED_NOTES = ['A', 'C', 'C#/Db', 'D', 'Eb/D#', 'E', 'F', 'F#/Gb', 'G', 'Ab/G#']
 OCTAVE_RANGE = 11
-STRING_TYPE = [("PL","Plain"), ("PB","Phosphorus Bronze"), ("NW","Nickel Wound"), ("XS", "XS"), ("HR","Half-Round")]
+STRING_TYPE = [("PL","Plain"), ("PB","Phosphorus Bronze"), ("NW","Nickel Wound"), ("XS", "Stainless Steel"), ("HR","Half-Round")]
 
 class StringForm(forms.Form):
     Scale_Length = forms.FloatField()
