@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from customforms.string import StringForm
+from customforms.string import StringForm, SaveStringSet
 from calculator.calculate import GTC
 import ast
+from django.http import HttpResponse
+
 
 
 
@@ -49,10 +51,25 @@ def results(request):
         octave = ast.literal_eval(request.GET["Octave"])
         guitar_string = GTC(scale_length, string_material, gauge, note, octave)
         context['string_list'] = [guitar_string]
+        formDict = {'Scale_Length': scale_length, 'Octave': octave, 'String_Type': string_material, 'Note': note,
+                    'Gauge': gauge}
+        form = SaveStringSet(request.GET, initial=formDict)
+        context['form'] = form
         return render(request, 'results.html', context)
 
     return render(request, 'input_error.html', context)
 
+def savestring(request):
+    if request.method == 'GET':
+        form = SaveStringSet(request.GET)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("Thank you")
+    else:
+        return HttpResponse("Error")
+
+
+    return HttpResponse("no get request")
 
 
 

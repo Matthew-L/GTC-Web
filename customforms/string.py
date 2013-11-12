@@ -1,5 +1,6 @@
 __author__ = 'mattlodes'
 from django import forms
+from pythonbackend.models import strings
 
 
 
@@ -13,3 +14,16 @@ class StringForm(forms.Form):
     String_Type = forms.ChoiceField(choices=STRING_TYPE)
     Note = forms.ChoiceField(choices=[(index, index) for index in ACCEPTED_NOTES])
     Gauge = forms.FloatField()
+
+
+class SaveStringSet(forms.Form):
+    Scale_Length = forms.FloatField(widget=forms.HiddenInput())
+    Octave = forms.IntegerField(widget=forms.HiddenInput())
+    String_Type = forms.CharField(widget=forms.HiddenInput())
+    Note = forms.CharField(widget=forms.HiddenInput())
+    Gauge = forms.FloatField(widget=forms.HiddenInput())
+
+
+
+
+
