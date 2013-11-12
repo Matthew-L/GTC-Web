@@ -13,6 +13,7 @@
             <div id="sidebar">
                 {% block login %}
                     {% if is_logged_in %}
+                        <li>Hello, {{ username }}</li>
                         <li><a href="/accounts/logout/">Logout</a></li>
                     {% else %}
                         <li><a href="/accounts/register/">Register New User</a></li>

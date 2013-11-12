@@ -6,9 +6,15 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 def login(request):
-    c = {}
-    c.update(csrf(request))
-    return render_to_response('login.html', c)
+    context = {}
+    if request.user.is_authenticated():
+        context['is_logged_in'] = True
+        context['username'] = request.user.get_username()
+        context['username'] = request.user.get_username()
+    else:
+        context['is_logged_in'] = False
+    context.update(csrf(request))
+    return render_to_response('login.html', context)
 
 def auth_view(request):
     username = request.POST.get('username', '')
@@ -22,13 +28,17 @@ def auth_view(request):
         return HttpResponseRedirect('/accounts/invalid')
 
 def loggedin(request):
+    context = {}
     if request.user.is_authenticated():
-        print ("user is authenticated")
+        context['is_logged_in'] = True
+        context['username'] = request.user.get_username()
     else:
-        print("User not logged in")
-    return render_to_response('loggedin.html',{'full_name':request.user.username})
+        context['is_logged_in'] = False
+    context['full_name'] = request.user.username
+    return render_to_response('loggedin.html',context)
 
 def invalid_login(request):
+
     return render_to_response('invalid_login.html')
 
 def logout(request):
@@ -37,16 +47,28 @@ def logout(request):
 
 ####################################
 def register_user(request):
+    context = {}
+    if request.user.is_authenticated():
+        context['is_logged_in'] = True
+        context['username'] = request.user.get_username()
+    else:
+        context['is_logged_in'] = False
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/accounts/register_success')
-    args = {}
-    args.update(csrf(request))
 
-    args['form'] = UserCreationForm()
-    return render_to_response('register.html', args)
+    context.update(csrf(request))
+
+    context['form'] = UserCreationForm()
+    return render_to_response('register.html', context)
 
 def register_success(request):
-    return render_to_response('register_success.html')
+    context = {}
+    if request.user.is_authenticated():
+        context['is_logged_in'] = True
+        context['username'] = request.user.get_username()
+    else:
+        context['is_logged_in'] = False
+    return render_to_response('register_success.html', context)

@@ -11,10 +11,9 @@ Sends the form that gets the user input for the strings
 def calculate(request):
     context = {}
     if request.user.is_authenticated():
-        print ("user is authenticated")
         context['is_logged_in'] = True
+        context['username'] = request.user.get_username()
     else:
-        print("User not logged in")
         context['is_logged_in'] = False
     form = StringForm()
     context['form'] = form
@@ -30,10 +29,9 @@ Generates the view that displays the tension or an error page there is an error 
 def results(request):
     context = {}
     if request.user.is_authenticated():
-        print ("user is authenticated")
         context['is_logged_in'] = True
+        context['username'] = request.user.get_username()
     else:
-        print("User not logged in")
         context['is_logged_in'] = False
     GET_PARAMETERS = ["String_Type", "Octave", "Gauge", "Scale_Length"]
     key = request.GET.keys()
@@ -50,7 +48,7 @@ def results(request):
         note = request.GET["Note"]
         octave = ast.literal_eval(request.GET["Octave"])
         guitar_string = GTC(scale_length, string_material, gauge, note, octave)
-        context['tension'] = guitar_string.calculate_tension()
+        context['string_list'] = [guitar_string]
         return render(request, 'results.html', context)
 
     return render(request, 'input_error.html', context)

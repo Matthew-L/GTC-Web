@@ -10,6 +10,11 @@ class GTC():
     scale_length = 0
     unit_weight = 0
     freq = 0
+    tension = 0
+    string_material = 'Unknown'
+    octave = 0
+    note = 'Unknown'
+    gauge = 0
     tension_constant = 386.4
     freq_dict = {'C': 16.352,
                  'C#/Db': 17.324,
@@ -43,6 +48,10 @@ class GTC():
         self.scale_length = scale_length
         self.freq = self.convert_to_freq(note, octave)
         self.unit_weight = self.convert_to_unit_weight(string_material, gauge)
+        self.string_material = string_material
+        self.octave = octave
+        self.note = note
+        self.gauge = gauge
 
     def calculate_tension(self):
         """
@@ -51,6 +60,7 @@ class GTC():
         """
         tension = (self.unit_weight * (2 * self.scale_length * self.freq) ** 2) / self.tension_constant
         tension = float("{0:.2f}".format(tension))
+        self.tension = tension
         return tension
 
     def convert_to_freq(self, note, octave):

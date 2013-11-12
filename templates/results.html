@@ -5,6 +5,35 @@
     <html>
         <body>
             <h2>String Tension is {{ tension }}.</h2>
+
+            <table border="1">
+                <tr>
+                    <th>Scale</th>
+                    <th>Type</th>
+                    <th>Octave</th>
+                    <th>Note</th>
+                    <th>Gauge</th>
+                    <th>Tension</th>
+                    <th>Save</th>
+                    <th>Delete</th>
+                </tr>
+                {% for string in string_list %}
+                    <tr>
+                        <td>{{ string.scale_length }}</td>
+                        <td>{{ string.string_material }}</td>
+                        <td>{{ string.octave }}</td>
+                        <td>{{ string.note }}</td>
+                        <td>{{ string.gauge }}</td>
+                        <td>{{ string.tension }}</td>
+                        <td><button type="button">Save</button></td>
+                        <td><button type="button">Delete</button></td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+
+
+
         </body>
     </html>
 {% endblock %}
