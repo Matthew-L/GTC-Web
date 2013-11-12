@@ -22,6 +22,10 @@ def auth_view(request):
         return HttpResponseRedirect('/accounts/invalid')
 
 def loggedin(request):
+    if request.user.is_authenticated():
+        print ("user is authenticated")
+    else:
+        print("User not logged in")
     return render_to_response('loggedin.html',{'full_name':request.user.username})
 
 def invalid_login(request):

@@ -9,8 +9,16 @@ import ast
 Sends the form that gets the user input for the strings
 """
 def calculate(request):
-    form = StringForm() # An unbound form
-    return render(request, 'calculate.html', {'form': form,})
+    context = {}
+    if request.user.is_authenticated():
+        print ("user is authenticated")
+        context['is_logged_in'] = True
+    else:
+        print("User not logged in")
+        context['is_logged_in'] = False
+    form = StringForm()
+    context['form'] = form
+    return render(request, 'calculate.html', context)
 
 
 
@@ -20,6 +28,13 @@ def calculate(request):
 Generates the view that displays the tension or an error page there is an error in the input
 """
 def results(request):
+    context = {}
+    if request.user.is_authenticated():
+        print ("user is authenticated")
+        context['is_logged_in'] = True
+    else:
+        print("User not logged in")
+        context['is_logged_in'] = False
     GET_PARAMETERS = ["String_Type", "Octave", "Gauge", "Scale_Length"]
     key = request.GET.keys()
     print(key)
@@ -35,10 +50,10 @@ def results(request):
         note = request.GET["Note"]
         octave = ast.literal_eval(request.GET["Octave"])
         guitar_string = GTC(scale_length, string_material, gauge, note, octave)
-        context = {'tension': guitar_string.calculate_tension()}
+        context['tension'] = guitar_string.calculate_tension()
         return render(request, 'results.html', context)
 
-    return render(request, 'input_error.html')
+    return render(request, 'input_error.html', context)
 
 
 
