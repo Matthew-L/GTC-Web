@@ -65,33 +65,39 @@ class MyTestCase(unittest.TestCase):
         #E,, .040 NW == 14.52#
         calc = calculator.GTC(26.5, 'NW', .040, 'E', 2)
         tension = float("{0:.2f}".format(calc.calculate_tension()))
-        self.assertEqual(14.52, tension)
+        self.assertEqual(14.50, tension)
         #B,,, .054 NW == 14.66#
-        calc = calculator.GTC(26.5, 'NW', .054, 'G', 1)
+        calc = calculator.GTC(26.5, 'NW', .054, 'B', 1)
         tension = float("{0:.2f}".format(calc.calculate_tension()))
-        self.assertEqual(14.66, tension)
+        self.assertEqual(14.64, tension)
         #E,,, .074 NW == 12.21#
-        calc = calculator.GTC(26.5, 'NW', .074, 'G', 1)
+        calc = calculator.GTC(26.5, 'NW', .074, 'E', 1)
         tension = float("{0:.2f}".format(calc.calculate_tension()))
-        self.assertEqual(12.21, tension)
+        self.assertEqual(12.2, tension)
 
         calc = calculator.GTC(25.5, 'PL', .012, 'E', 4)
-        self.assertEqual(23.33, calc.calculate_tension())
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(23.33, tension)
 
         calc = calculator.GTC(25.5, 'PL', .016, 'B', 3)
-        self.assertEqual(23.28, calc.calculate_tension())
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(23.28, tension)
 
         calc = calculator.GTC(25.5, 'PB', .024, 'G', 3)
-        self.assertEqual(30.21, calc.calculate_tension())
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(30.21, tension)
 
         calc = calculator.GTC(25.5, 'PB', .032, 'D', 3)
-        self.assertEqual(30.5, calc.calculate_tension())
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(30.5, tension)
 
-        calc = calculator.GTC(25.5, 'PB', .043, 'A', 2)
-        self.assertEqual(29.91, calc.calculate_tension())
+        calc = calculator.GTC(25.5, 'PB', .042, 'A', 2)
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(29.91, tension)
 
         calc = calculator.GTC(25.5, 'PB', .053, 'E', 2)
-        self.assertEqual(26.04, calc.calculate_tension())
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(26.04, tension)
 
     def test_convert_to_freq(self):
         """
@@ -115,11 +121,32 @@ class MyTestCase(unittest.TestCase):
         tests the unit_weight is converted properly
 
         """
+
+        calc = calculator.GTC(26.5, 'NW', .074, 'G', 1)
+        self.assertEqual(.00098869, calc.unit_weight)
+
+        #G,,  .027" PL == 10.38#
+        calc = calculator.GTC(25.5, 'PL', .027, 'G', 2)
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(10.37, tension)
+        #G,,  .060" PL == 33.08#
+        calc = calculator.GTC(25.5, 'PL', .060, 'G', 2)
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(33.05, tension)
+
         calc = calculator.GTC(1, 'PL', .008, 'C#/Db', 0)
         self.assertEqual(.00001418, calc.unit_weight)
 
         calc = calculator.GTC(1, 'PL', .007, 'C#/Db', 0)
         self.assertEqual(.00001085, calc.unit_weight)
+
+        #B,  .0165" PL == 24.8#
+        calc = calculator.GTC(25.5, 'PL', .0165, 'B', 3)
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(24.78, tension)
+
+
+
 
     def test_convert_to_halfsteps(self):
         """
@@ -131,6 +158,11 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(2, calc.convert_to_halfsteps('B', 4))
         self.assertEqual(15, calc.convert_to_halfsteps('C', 6))
         self.assertEqual(-10, calc.convert_to_halfsteps('B', 3))
+
+    def test_convert_to_unit_weight(self):
+        calc = calculator.GTC(1, 'PL', .008, 'C#/Db', 0)
+        wt = calc.convert_to_unit_weight('PL', .007)
+        self.assertEqual(.00001085, wt)
 
 if __name__ == '__main__':
     unittest.main()
