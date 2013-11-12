@@ -59,7 +59,7 @@ class GTC():
 
     def convert_to_halfsteps(self, note, octave):
         offset = 3
-        base_octave = 5
+        base_octave = 5  # based off of C5
         octave_offset = (octave - base_octave)*12
         note_offset = self.note_dict[note]
         return offset + octave_offset + note_offset
@@ -83,10 +83,45 @@ class GTC():
         the closest match our hardcoded dictionary values allow for
         @param string_material: one of 5 types used to determine which array to fetch
         @param gauge: the desired gauge, used to find the unit weight in the material_dict
-        @return: the closest matched unit_weight to the gauge of the givin material
+        @return: the closest matched unit_weight to the gauge of the given material
         """
         material_dict = material_dicts.get_material_dict(string_material)
-        for g in reversed(sorted(material_dict.keys())):
-            if g <= gauge:
-                self.unit_weight = material_dict[g]
-                return self.unit_weight
+        gauge_keys = sorted(material_dict.keys())
+        max_gauge_index = gauge_keys.index(max(gauge_keys))
+
+        if gauge > max(gauge_keys):
+            low_gauge = gauge_keys[max_gauge_index-2]
+            high_gauge = max(gauge_keys)
+        elif gauge < min(gauge_keys):
+            low_gauge = gauge_keys[0]
+            high_gauge = gauge_keys[2]
+        else:
+            gauge_index = 0
+            for matched_gauge in gauge_keys:
+                if gauge < matched_gauge:
+                    break
+                gauge_index += 1
+            low_gauge = gauge_keys[gauge_index-1]
+            high_gauge = gauge_keys[gauge_index]
+
+        low_unit_weight = material_dict[low_gauge]
+        high_unit_weight = material_dict[high_gauge]
+
+        unit_weight = low_unit_weight + ((high_unit_weight - low_unit_weight) * (gauge - low_gauge)
+                                                                            / (high_gauge - low_gauge))
+        return unit_weight
+
+        #for g in reversed(sorted(material_dict.keys())):
+        #    if g <= gauge:
+        #        self.unit_weight = material_dict[g]
+        #        return self.unit_weight
+        #if string_material == 'PL':
+        #    return 0.221494*gauge**2 + 1.25633*10**-6*gauge-1.24374*10**-8
+        #elif string_material == 'PB':
+        #    return 0.187794*gauge**2 + 0.00121316*gauge - 0.0000193337
+        #elif string_material == 'XS':
+        #    return -61.0913*gauge**4 + 10.7501*gauge**3 - 0.482377*gauge**2 + 0.016472*gauge - 0.000135256
+        #elif string_material == 'NW':
+        #    return -47.8322*gauge**4 + 8.91982*gauge**3 - 0.397346*gauge**2 + 0.0151077*gauge - 0.000126257
+        #else:
+        #    return 0.179274*gauge**2 + 0.00112123*gauge + 2.18724*10**-6
