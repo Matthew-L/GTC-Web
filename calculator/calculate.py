@@ -76,7 +76,7 @@ class GTC():
         except ValueError:
             raise InvalidOctaveError('octave must be an integer')
 
-        if not (0 < octave < 10):
+        if not (0 <= octave < 10):
             raise OutOfRangeError('octave must be fall between 0 and 10 (inclusive)')
 
         try:
@@ -87,9 +87,16 @@ class GTC():
         if gauge <= 0:
             raise OutOfRangeError('gauge must be a positive number')
 
+        self.string_material = string_material
+        self.gauge = gauge
+        self.note = note
+        self.octave = octave
+
         self.scale_length = scale_length
         self.freq = self.convert_to_freq(note, octave)
         self.unit_weight = self.convert_to_unit_weight(string_material, gauge)
+
+        self.tension = self.calculate_tension()
 
     def calculate_tension(self):
         """

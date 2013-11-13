@@ -123,9 +123,6 @@ HR = {
     .022: .00011271
 }
 
-class InvalidStringMaterial(KeyError):
-    pass
-
 def get_material_dict(string_material):
     """
     used to retrieve one of the hardcoded dictionaries;
