@@ -9,7 +9,9 @@ STRING_TYPE = [("PL","Plain"), ("PB","Phosphorus Bronze"), ("NW","Nickel Wound")
 
 class StringForm(forms.Form):
     Scale_Length = forms.FloatField()
-    Octave = forms.ChoiceField(choices=[(octave, octave) for octave in range(OCTAVE_RANGE)])
-    String_Type = forms.ChoiceField(choices=STRING_TYPE)
     Note = forms.ChoiceField(choices=[(index, index) for index in ACCEPTED_NOTES])
+    Octave = forms.ChoiceField(choices=[(octave, octave) for octave in range(OCTAVE_RANGE)])
     Gauge = forms.FloatField()
+    String_Type = forms.ChoiceField(choices=STRING_TYPE)
+
+
