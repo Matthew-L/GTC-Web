@@ -123,6 +123,8 @@ HR = {
     .022: .00011271
 }
 
+class InvalidStringMaterial(KeyError):
+    pass
 
 def get_material_dict(string_material):
     """
@@ -131,8 +133,8 @@ def get_material_dict(string_material):
     PL: Plain
     PB: Phosphor Bronze
     NW: Nickel Wound
-    XS:
-    HR:
+    XS: Stainless Steel
+    HR: Half-Round Wound
     @param string_material: the type of material the string is made of; determines which dictionary to pass back
     @return: the dictionary corresponding to the string
     """
@@ -144,5 +146,7 @@ def get_material_dict(string_material):
         return XS
     elif string_material == 'NW':
         return NW
-    else:
+    elif string_material == 'HR':
         return HR
+    else:
+        return 'Invalid'

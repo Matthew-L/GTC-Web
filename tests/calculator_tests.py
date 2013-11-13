@@ -42,6 +42,24 @@ class MyTestCase(unittest.TestCase):
 
         """
 
+        # bad values
+        #calc = calculate.GTC(26.5, 'PL', .009, 'E', 4)
+        self.assertRaises(calculate.InvalidScaleLengthError, calculate.GTC, 'bad_scale_length', 'PL', .009, 'E', 4)
+        self.assertRaises(calculate.OutOfRangeError, calculate.GTC, 0, 'PL', .009, 'E', 4)
+
+        self.assertRaises(calculate.InvalidNoteError, calculate.GTC, 26.5, 'PL', .009, 'cherry', 4)
+        self.assertRaises(calculate.InvalidNoteError, calculate.GTC, 26.5, 'PL', .009, 3, 4)
+
+        self.assertRaises(calculate.InvalidStringMaterialError, calculate.GTC, 26.5, 'XXX', .009, 'E', 4)
+        self.assertRaises(calculate.InvalidStringMaterialError, calculate.GTC, 26.5, 0, .009, 'E', 4)
+
+        self.assertRaises(calculate.OutOfRangeError, calculate.GTC, 26.5, 'PL', .009, 'E', 0)
+        self.assertRaises(calculate.OutOfRangeError, calculate.GTC, 26.5, 'PL', .009, 'E', 11)
+        self.assertRaises(calculate.InvalidOctaveError, calculate.GTC, 26.5, 'PL', .009, 'E', 'xxx')
+
+        self.assertRaises(calculate.InvalidGaugeError, calculate.GTC, 26.5, 'PL', 'bad_gauge', 'E', 4)
+        self.assertRaises(calculate.OutOfRangeError, calculate.GTC, 26.5, 'PL', 0, 'E', 4)
+
         #E .009" PL == 14.18#
         calc = calculate.GTC(26.5, 'PL', .009, 'E', 4)
         tension = float("{0:.2f}".format(calc.calculate_tension()))

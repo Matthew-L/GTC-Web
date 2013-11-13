@@ -3,6 +3,14 @@ __author__ = 'Micah'
 from calculator import material_dicts
 
 
+class InvalidScaleLengthError(ValueError): pass
+class InvalidNoteError(KeyError): pass
+class InvalidStringMaterialError(KeyError): pass
+class InvalidOctaveError(ValueError): pass
+class InvalidGaugeError(ValueError): pass
+class OutOfRangeError(ValueError): pass
+
+
 class GTC():
     """
     GTC(guitar tension calculator) is a class used to calculate the tension of a given string
@@ -47,6 +55,38 @@ class GTC():
         @param note: the note the string is tuned to, one of the 12 notes possible; used to calculate the frequency
         @param octave: the octave of the note the string is being tuned to; used to calculate unit_weight
         """
+        try:
+            scale_length = float(scale_length)
+        except ValueError:
+            raise InvalidScaleLengthError('scale_length must be a float')
+
+        if scale_length <= 0:
+            raise OutOfRangeError('scale_length must be a positive number')
+
+        if material_dicts.get_material_dict(string_material) == 'Invalid':
+            raise InvalidStringMaterialError('string_material does not match predefined string materials')
+
+        try:
+            self.note_dict[note]
+        except KeyError:
+            raise InvalidNoteError('note does not match specified format')
+
+        try:
+            int(octave)
+        except ValueError:
+            raise InvalidOctaveError('octave must be an integer')
+
+        if not (0 < octave < 10):
+            raise OutOfRangeError('octave must be fall between 0 and 10 (inclusive)')
+
+        try:
+            float(gauge)
+        except ValueError:
+            raise InvalidGaugeError('gauge must be a float')
+
+        if gauge <= 0:
+            raise OutOfRangeError('gauge must be a positive number')
+
         self.scale_length = scale_length
         self.freq = self.convert_to_freq(note, octave)
         self.unit_weight = self.convert_to_unit_weight(string_material, gauge)

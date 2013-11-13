@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-    {% include "includes/header.html" %}
+{#    {% include "includes/header.html" %}#}
     <form action="/results/" method="get">
-        <h1>Guitar Tension Calculator</h1>
         {{ form.as_p }}
         <input type="submit" value="Calculate"/>
     </form>

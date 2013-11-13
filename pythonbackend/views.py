@@ -57,7 +57,7 @@ def results(request):
 
 
 VALIDATE_PARAMETERS = ["String_Type", "Octave", "Gauge", "Scale_Length"]
-ACCEPTED_NOTES = ['A', 'C', 'C#/Db', 'D', 'Eb/D#', 'E', 'F', 'F#/Gb', 'G', 'Ab/G#']
+ACCEPTED_NOTES = ['A', 'A#/Bb', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab']
 OCTAVE_RANGE = 11
 STRING_TYPE = ["PL", "PB", "NW", "XS", "HR"]
 
