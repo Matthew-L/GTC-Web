@@ -42,7 +42,7 @@ class GuitarString():
                  'A#/Bb':   10,
                  'B':       11}
 
-    def __init__(self,  number_of_strings, string_number, scale_length, string_material, gauge, note, octave):
+    def __init__(self, scale_length, string_material, gauge, note, octave, number_of_strings=None, string_number=None):
         """
         Constructor for calculator class;
         initializes scale_length,
@@ -65,11 +65,12 @@ class GuitarString():
         self.is_valid_note(note)
         self.note = note
         self.octave = self.sanitize_octave(octave)
-        self.number_of_strings, self.string_number = self.sanitize_string_numbers(number_of_strings, string_number)
-
-
 
         if str(scale_length).find('-') != -1:
+            if number_of_strings is None or string_number is None:
+                raise InvalidScaleLengthError("Multi-scale scale_lengths (scale_lengths containing \'-\'"
+                                              " must specify the number of strings and string_number")
+            self.number_of_strings, self.string_number = self.sanitize_string_numbers(number_of_strings, string_number)
             self.scale_length = self.convert_multiscale_to_scale_length(scale_length, number_of_strings, string_number)
         else:
             self.scale_length = self.sanitize_scale_length(scale_length)
@@ -80,7 +81,6 @@ class GuitarString():
         self.tension = self.calculate_tension()
 
     def convert_multiscale_to_scale_length(self, scale_length, number_of_strings, string_number):
-        #(# of strings - 1)/(fan width)
         low_scale_length, high_scale_length = scale_length.split('-')
 
         low_scale_length = self.sanitize_scale_length(low_scale_length)
