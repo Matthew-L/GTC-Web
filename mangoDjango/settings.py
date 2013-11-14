@@ -1,5 +1,8 @@
 # Django settings for mangoDjango project.
 
+import os
+ROOT_PATH = os.path.dirname(__file__)
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -9,11 +12,11 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-import dj_database_url
+#import dj_database_url
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'D:\Dropbox\GTC-Web\storage.db',                      # Or path to database file if using sqlite3.
+        'NAME': 'storage.db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -73,7 +76,8 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    ('assets','D:\Dropbox\GTC-Web\static'),
+    #[os.path.join(ROOT_PATH, 'static')]
+    ('assets', 'static'),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -112,7 +116,6 @@ ROOT_URLCONF = 'mangoDjango.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'mangoDjango.wsgi.application'
 
-import os
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\','/'),
                  os.path.join(os.path.dirname(__file__), '..', 'article/templates').replace('\\', '/'),)
 
