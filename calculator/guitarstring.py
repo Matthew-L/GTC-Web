@@ -11,12 +11,15 @@ class InvalidGaugeError(ValueError): pass
 class OutOfRangeError(ValueError): pass
 class InvalidStringNumberError(ValueError): pass
 
-class GTC():
+
+class GuitarString():
     """
     GTC(guitar tension calculator) is a class used to calculate the tension of a given string
     using the parameters: scale_length, string_material, gauge, note, octave.
     These parameters are defined in the constructor.
     """
+    number_of_strings = 0
+    string_number = 0
     scale_length = 0
     unit_weight = 0
     freq = 0
@@ -56,67 +59,32 @@ class GTC():
         @param octave: the octave of the note the string is being tuned to; used to calculate unit_weight
         """
 
-        try:
-            string_number = int(string_number)
-            number_of_strings = int(number_of_strings)
-        except ValueError:
-            raise InvalidStringNumberError('number_of_strings and string_number must be an integer')
-
-        if material_dicts.get_material_dict(string_material) == 'Invalid':
-            raise InvalidStringMaterialError('string_material does not match predefined string materials')
-
-        try:
-            self.note_dict[note]
-        except KeyError:
-            raise InvalidNoteError('note does not match specified format')
-
-        try:
-            int(octave)
-        except ValueError:
-            raise InvalidOctaveError('octave must be an integer')
-
-        if not (0 <= octave < 10):
-            raise OutOfRangeError('octave must be fall between 0 and 10 (inclusive)')
-
-        try:
-            float(gauge)
-        except ValueError:
-            raise InvalidGaugeError('gauge must be a float')
-
-        if gauge <= 0:
-            raise OutOfRangeError('gauge must be a positive number')
-
+        self.is_valid_string_material(string_material)
         self.string_material = string_material
-        self.gauge = gauge
+        self.gauge = self.sanitize_gauge(gauge)
+        self.is_valid_note(note)
         self.note = note
-        self.octave = octave
+        self.octave = self.sanitize_octave(octave)
+        self.number_of_strings, self.string_number = self.sanitize_string_numbers(number_of_strings, string_number)
+
+
 
         if str(scale_length).find('-') != -1:
             self.scale_length = self.convert_multiscale_to_scale_length(scale_length, number_of_strings, string_number)
         else:
-            self.scale_length = self.is_valid_scale_length(scale_length)
+            self.scale_length = self.sanitize_scale_length(scale_length)
 
         self.freq = self.convert_to_freq(note, octave)
         self.unit_weight = self.convert_to_unit_weight(string_material, gauge)
 
         self.tension = self.calculate_tension()
 
-    @staticmethod
-    def is_valid_scale_length(scale_length):
-        try:
-            scale_length = float(scale_length)
-        except ValueError:
-            raise InvalidScaleLengthError('scale_length must be a float or two floats separated by a \'-\'')
-        if scale_length <= 0:
-            raise OutOfRangeError('scale_length must be a positive number')
-        return scale_length
-
     def convert_multiscale_to_scale_length(self, scale_length, number_of_strings, string_number):
         #(# of strings - 1)/(fan width)
         low_scale_length, high_scale_length = scale_length.split('-')
 
-        low_scale_length = self.is_valid_scale_length(low_scale_length)
-        high_scale_length = self.is_valid_scale_length(high_scale_length)
+        low_scale_length = self.sanitize_scale_length(low_scale_length)
+        high_scale_length = self.sanitize_scale_length(high_scale_length)
 
         fan_distance = high_scale_length - low_scale_length
         if number_of_strings > 1 :
@@ -152,8 +120,9 @@ class GTC():
         half_steps = self.convert_to_halfsteps(note, octave)
         A4_freq = 440
         return A4_freq*(2**(1/12))**half_steps
-
-    def convert_to_unit_weight(self, string_material, gauge):
+    
+    @staticmethod
+    def convert_to_unit_weight(string_material, gauge):
         """
         cycles through an array of the appropriate string materials, comparing each entry to the gauge
         if the gauge in the reversed sorted list of keys is less than the given gauge then we have found
@@ -188,3 +157,55 @@ class GTC():
                                                                             / (high_gauge - low_gauge))
         return unit_weight
 
+    @staticmethod
+    def sanitize_string_numbers(number_of_strings, string_number):
+        try:
+            string_number = int(string_number)
+            number_of_strings = int(number_of_strings)
+        except ValueError:
+            raise InvalidStringNumberError('number_of_strings and string_number must be an integer')
+        return number_of_strings, string_number
+
+    @staticmethod
+    def is_valid_string_material(string_material):
+        if material_dicts.get_material_dict(string_material) == 'Invalid':
+            raise InvalidStringMaterialError('string_material does not match predefined string materials')
+        return True
+
+    def is_valid_note(self, note):
+        try:
+            self.note_dict[note]
+        except KeyError:
+            raise InvalidNoteError('note does not match specified format')
+        return True
+    
+    @staticmethod
+    def sanitize_octave(octave):
+        try:
+           octave = int(octave)
+        except ValueError:
+            raise InvalidOctaveError('octave must be an integer')
+        if not (0 <= octave < 10):
+            raise OutOfRangeError('octave must be fall between 0 and 10 (inclusive)')
+
+        return octave
+    
+    @staticmethod
+    def sanitize_gauge(gauge):
+        try:
+            float(gauge)
+        except ValueError:
+            raise InvalidGaugeError('gauge must be a float')
+        if gauge <= 0:
+            raise OutOfRangeError('gauge must be a positive number')
+        return gauge
+    
+    @staticmethod
+    def sanitize_scale_length(scale_length):
+        try:
+            scale_length = float(scale_length)
+        except ValueError:
+            raise InvalidScaleLengthError('scale_length must be a float or two floats separated by a \'-\'')
+        if scale_length <= 0:
+            raise OutOfRangeError('scale_length must be a positive number')
+        return scale_length

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from customforms.string import StringForm
-from calculator.calculate import GTC
+from calculator.guitarstring import GuitarString
 import ast
 
 
@@ -47,7 +47,7 @@ def results(request):
         gauge = ast.literal_eval(request.GET["Gauge"])
         note = request.GET["Note"]
         octave = ast.literal_eval(request.GET["Octave"])
-        guitar_string = GTC(scale_length, string_material, gauge, note, octave)
+        guitar_string = GuitarString(scale_length, string_material, gauge, note, octave)
         guitar_string.tension = float("{0:.2f}".format(guitar_string.tension))
         context['string_list'] = [guitar_string]
         return render(request, 'results.html', context)
@@ -67,7 +67,7 @@ STRING_TYPE = ["PL", "PB", "NW", "XS", "HR"]
 
 """
     Checks that users input is valid
-    result = Dictionary of data to be sent to GTC
+    result = Dictionary of data to be sent to GuitarString
     return boolean if result is valid
 """
 def is_valid_result(result):
