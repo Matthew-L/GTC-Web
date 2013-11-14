@@ -9,7 +9,7 @@ class InvalidStringMaterialError(KeyError): pass
 class InvalidOctaveError(ValueError): pass
 class InvalidGaugeError(ValueError): pass
 class OutOfRangeError(ValueError): pass
-
+class InvalidStringNumberError(ValueError): pass
 
 class GTC():
     """
@@ -39,7 +39,7 @@ class GTC():
                  'A#/Bb':   10,
                  'B':       11}
 
-    def __init__(self, scale_length, string_material, gauge, note, octave):
+    def __init__(self,  number_of_strings, string_number, scale_length, string_material, gauge, note, octave):
         """
         Constructor for calculator class;
         initializes scale_length,
@@ -55,13 +55,12 @@ class GTC():
         @param note: the note the string is tuned to, one of the 12 notes possible; used to calculate the frequency
         @param octave: the octave of the note the string is being tuned to; used to calculate unit_weight
         """
-        try:
-            scale_length = float(scale_length)
-        except ValueError:
-            raise InvalidScaleLengthError('scale_length must be a float')
 
-        if scale_length <= 0:
-            raise OutOfRangeError('scale_length must be a positive number')
+        try:
+            string_number = int(string_number)
+            number_of_strings = int(number_of_strings)
+        except ValueError:
+            raise InvalidStringNumberError('number_of_strings and string_number must be an integer')
 
         if material_dicts.get_material_dict(string_material) == 'Invalid':
             raise InvalidStringMaterialError('string_material does not match predefined string materials')
@@ -92,11 +91,40 @@ class GTC():
         self.note = note
         self.octave = octave
 
-        self.scale_length = scale_length
+        if str(scale_length).find('-') != -1:
+            self.scale_length = self.convert_multiscale_to_scale_length(scale_length, number_of_strings, string_number)
+        else:
+            self.scale_length = self.is_valid_scale_length(scale_length)
+
         self.freq = self.convert_to_freq(note, octave)
         self.unit_weight = self.convert_to_unit_weight(string_material, gauge)
 
         self.tension = self.calculate_tension()
+
+    @staticmethod
+    def is_valid_scale_length(scale_length):
+        try:
+            scale_length = float(scale_length)
+        except ValueError:
+            raise InvalidScaleLengthError('scale_length must be a float or two floats separated by a \'-\'')
+        if scale_length <= 0:
+            raise OutOfRangeError('scale_length must be a positive number')
+        return scale_length
+
+    def convert_multiscale_to_scale_length(self, scale_length, number_of_strings, string_number):
+        #(# of strings - 1)/(fan width)
+        low_scale_length, high_scale_length = scale_length.split('-')
+
+        low_scale_length = self.is_valid_scale_length(low_scale_length)
+        high_scale_length = self.is_valid_scale_length(high_scale_length)
+
+        fan_distance = high_scale_length - low_scale_length
+        if number_of_strings > 1 :
+            scale_constant = fan_distance/(number_of_strings-1)
+        else:
+            scale_constant = 0
+
+        return low_scale_length + (string_number-1) * scale_constant
 
     def calculate_tension(self):
         """
@@ -104,7 +132,6 @@ class GTC():
         @return: the calculated tension using  (UnitWeight x (2 x ScaleLength x Frequency)^2)/TensionConstant
         """
         tension = (self.unit_weight * (2*self.scale_length*self.freq)**2)/self.tension_constant
-        #tension = float("{0:.2f}".format(tension))
         return tension
 
     def convert_to_halfsteps(self, note, octave):

@@ -48,6 +48,7 @@ def results(request):
         note = request.GET["Note"]
         octave = ast.literal_eval(request.GET["Octave"])
         guitar_string = GTC(scale_length, string_material, gauge, note, octave)
+        guitar_string.tension = float("{0:.2f}".format(guitar_string.tension))
         context['string_list'] = [guitar_string]
         return render(request, 'results.html', context)
 
