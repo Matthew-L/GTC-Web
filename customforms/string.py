@@ -1,6 +1,7 @@
 __author__ = 'mattlodes'
 from django import forms
-
+#from django.forms import ModelForm
+#from pythonbackend.models import strings
 
 
 ACCEPTED_NOTES = ['A', 'A#/Bb', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab']
@@ -14,4 +15,12 @@ class StringForm(forms.Form):
     Gauge = forms.FloatField()
     String_Type = forms.ChoiceField(choices=STRING_TYPE)
 
+
+class SubmitStringForm(forms.Form):
+    Username = forms.CharField(widget=forms.HiddenInput())
+    Scale_Length = forms.FloatField(widget=forms.HiddenInput())
+    Note = forms.CharField(widget=forms.HiddenInput())
+    Octave = forms.IntegerField(widget=forms.HiddenInput())
+    Gauge = forms.FloatField(widget=forms.HiddenInput())
+    String_Type = forms.CharField(widget=forms.HiddenInput())
 

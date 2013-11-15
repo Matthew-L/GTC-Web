@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from customforms.string import StringForm
+from customforms.string import StringForm, SubmitStringForm
 from calculator.guitarstring import GuitarString
 import ast
-
+from pythonbackend.models import strings
+from django.core.context_processors import csrf
 
 
 """
@@ -17,7 +18,32 @@ def calculate(request):
         context['is_logged_in'] = False
     form = StringForm()
     context['form'] = form
+    context.update(csrf(request))
     return render(request, 'calculate.html', context)
+
+
+
+
+
+def save_string(request):
+    print(request.POST)
+    context = {}
+    if request.user.is_authenticated():
+        context['is_logged_in'] = True
+        context['username'] = request.user.get_username()
+        username = request.user.get_username()
+        scale_length = ast.literal_eval(request.POST["Scale_Length"])
+        string_material = request.POST["String_Type"]
+        gauge = ast.literal_eval(request.POST["Gauge"])
+        note = request.POST["Note"]
+        octave = ast.literal_eval(request.POST["Octave"])
+        user_string = strings(username=username, scale_length=scale_length, note=note, octave=octave, gauge=gauge, string_type=string_material)
+        user_string.save()
+
+
+
+    return render(request, 'save_string.html')
+
 
 
 
@@ -33,23 +59,34 @@ def results(request):
         context['username'] = request.user.get_username()
     else:
         context['is_logged_in'] = False
-    GET_PARAMETERS = ["String_Type", "Octave", "Gauge", "Scale_Length"]
-    key = request.GET.keys()
+    POST_PARAMETERS = ["String_Type", "Octave", "Gauge", "Scale_Length"]
+    key = request.POST.keys()
     print(key)
-    for parameter in GET_PARAMETERS:
+    for parameter in POST_PARAMETERS:
         print(parameter)
         if parameter not in key:
             return render(request, 'input_error.html')
 
-    if is_valid_result(request.GET):
-        scale_length = ast.literal_eval(request.GET["Scale_Length"])
-        string_material = request.GET["String_Type"]
-        gauge = ast.literal_eval(request.GET["Gauge"])
-        note = request.GET["Note"]
-        octave = ast.literal_eval(request.GET["Octave"])
+    if is_valid_result(request.POST):
+        scale_length = ast.literal_eval(request.POST["Scale_Length"])
+        string_material = request.POST["String_Type"]
+        gauge = ast.literal_eval(request.POST["Gauge"])
+        note = request.POST["Note"]
+        octave = ast.literal_eval(request.POST["Octave"])
         guitar_string = GuitarString(scale_length, string_material, gauge, note, octave)
         guitar_string.tension = float("{0:.2f}".format(guitar_string.tension))
         context['string_list'] = [guitar_string]
+        initdata = {}
+        initdata['Username'] = request.user.get_username()
+        initdata['Scale_Length'] = scale_length
+        initdata['Note'] = note
+        initdata['Octave'] = octave
+        initdata['Gauge'] = gauge
+        initdata['String_Type'] = string_material
+        print(initdata)
+        context.update(csrf(request))
+        form = SubmitStringForm(initial=initdata)
+        context['form'] = form
         return render(request, 'results.html', context)
 
     return render(request, 'input_error.html', context)

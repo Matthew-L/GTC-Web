@@ -23,15 +23,17 @@
                         <td>{{ string.note }}</td>
                         <td>{{ string.gauge }}</td>
                         <td>{{ string.tension }}</td>
-                        <td><button type="button">Save</button></td>
+                        <td>
+                            <form action="/save/" method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input type="submit" value="Save"/>
+                            </form>
+                        </td>
                         <td><button type="button">Delete</button></td>
                     </tr>
                 {% endfor %}
             </table>
-
-
-
-
         </body>
     </html>
 {% endblock %}
