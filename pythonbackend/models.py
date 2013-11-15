@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class StringSet(models.Model):
-    name = models.CharField()
+    name = models.CharField(max_length=30)
     user = models.ForeignKey(User)
 
     def __unicode__(self):
@@ -15,10 +15,10 @@ class StringSet(models.Model):
 
 class String(models.Model):
     string_set = models.ForeignKey(StringSet)
-    string_number = models.IntegerField()
+    string_number = models.IntegerField(max_length=2)
     scale_length = models.CharField(max_length=30)
-    note = models.CharField()
-    octave = models.IntegerField()
-    gauge = models.DecimalField()
-    string_type = models.CharField()
+    note = models.CharField(max_length=5)
+    octave = models.IntegerField(max_length=2)
+    gauge = models.DecimalField(max_digits=5, decimal_places=5)
+    string_type = models.CharField(max_length=30)
 

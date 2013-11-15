@@ -18,6 +18,9 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
+    # models
+    #(r'^polls/(?P<poll_id>\d+)/vote/$', 'MyDjangoApp.polls.views.vote'),
+
     # user accounts
     (r'^$', 'mangoDjango.views.login'),
     (r'^accounts/login/$', 'mangoDjango.views.login'),

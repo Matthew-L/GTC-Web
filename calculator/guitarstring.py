@@ -14,7 +14,7 @@ class InvalidStringNumberError(ValueError): pass
 
 class GuitarString():
     """
-    GTC(guitar tension calculator) is a class used to calculate the tension of a given string
+    GuitarString is a class used to calculate the tension of a given string
     using the parameters: scale_length, string_material, gauge, note, octave.
     These parameters are defined in the constructor.
     """
@@ -44,6 +44,7 @@ class GuitarString():
 
     def __init__(self, scale_length, string_material, gauge, note, octave, number_of_strings=None, string_number=None):
         """
+        Needs to be rewritten...
         Constructor for calculator class;
         initializes scale_length,
         frequency: using note and octave,
@@ -81,13 +82,25 @@ class GuitarString():
         self.tension = self.calculate_tension()
 
     def convert_multiscale_to_scale_length(self, scale_length, number_of_strings, string_number):
+        """
+        Takes the scale_length as a str and transforms it into the scale length range (two separate values)
+        By using the total number of strings and the current string's string_number the current strings
+        scale_length is calculated.
+
+        @param scale_length: a string containing two floats separated by a hyphen
+        @param number_of_strings: the total numbers of strings the multi-scale neck spans
+        @param string_number: the current strings number (the higher the string typically the lower the number)
+                                high e on standard would be a 1
+                                low E on standard would be a 6
+        @return: the current strings scale_length
+        """
         low_scale_length, high_scale_length = scale_length.split('-')
 
         low_scale_length = self.sanitize_scale_length(low_scale_length)
         high_scale_length = self.sanitize_scale_length(high_scale_length)
 
         fan_distance = high_scale_length - low_scale_length
-        if number_of_strings > 1 :
+        if number_of_strings > 1:
             scale_constant = fan_distance/(number_of_strings-1)
         else:
             scale_constant = 0
@@ -103,6 +116,12 @@ class GuitarString():
         return tension
 
     def convert_to_halfsteps(self, note, octave):
+        """
+        Calculates the number of half-steps between any given note and A4
+        @param note: the note which is having its half-steps calculated
+        @param octave: the octave of the note
+        @return: the number of half-steps between A4 and the note-octave combo
+        """
         offset = 3
         base_octave = 5  # based off of C5
         octave_offset = (octave - base_octave)*12
@@ -111,6 +130,7 @@ class GuitarString():
 
     def convert_to_freq(self, note, octave):
         """
+        Needs to be rewritten...
         uses note and octave to calculate the frequency by using the dictionary of base frequencies
         Follows the equation: Frequency = BaseFrequncy * 2^Octave
         @param note: the note being converted to a frequency
@@ -124,6 +144,7 @@ class GuitarString():
     @staticmethod
     def convert_to_unit_weight(string_material, gauge):
         """
+        Needs to be rewritten...
         cycles through an array of the appropriate string materials, comparing each entry to the gauge
         if the gauge in the reversed sorted list of keys is less than the given gauge then we have found
         the closest match our hardcoded dictionary values allow for
@@ -159,6 +180,12 @@ class GuitarString():
 
     @staticmethod
     def sanitize_string_numbers(number_of_strings, string_number):
+        """
+        converts both parameters to an int and raises an appropriate error on failure
+        @param number_of_strings:
+        @param string_number:
+        @return: @raise InvalidStringNumberError:
+        """
         try:
             string_number = int(string_number)
             number_of_strings = int(number_of_strings)
@@ -168,11 +195,21 @@ class GuitarString():
 
     @staticmethod
     def is_valid_string_material(string_material):
+        """
+        converts parameter to an int and raises an appropriate error on failure
+        @param string_material:
+        @return: @raise InvalidStringMaterialError:
+        """
         if material_dicts.get_material_dict(string_material) == 'Invalid':
             raise InvalidStringMaterialError('string_material does not match predefined string materials')
         return True
 
     def is_valid_note(self, note):
+        """
+        checks validity of note
+        @param note:
+        @return: @raise InvalidNoteError:
+        """
         try:
             self.note_dict[note]
         except KeyError:
@@ -181,8 +218,13 @@ class GuitarString():
     
     @staticmethod
     def sanitize_octave(octave):
+        """
+        converts parameter to an int and raises an appropriate error on failure
+        @param octave:
+        @return: @raise OutOfRangeError:
+        """
         try:
-           octave = int(octave)
+            octave = int(octave)
         except ValueError:
             raise InvalidOctaveError('octave must be an integer')
         if not (0 <= octave < 10):
@@ -192,6 +234,12 @@ class GuitarString():
     
     @staticmethod
     def sanitize_gauge(gauge):
+        """
+        converts parameter to an float and raises an appropriate error on failure
+        also checks that the scale length is above zero or it will throw OutOfRangeError
+        @param gauge:
+        @return: @raise OutOfRangeError:
+        """
         try:
             float(gauge)
         except ValueError:
@@ -202,6 +250,12 @@ class GuitarString():
     
     @staticmethod
     def sanitize_scale_length(scale_length):
+        """
+        converts parameter to an float and raises an appropriate error on failure
+        also checks that the scale length is above zero or it will throw OutOfRangeError
+        @param scale_length:
+        @return: @raise OutOfRangeError:
+        """
         try:
             scale_length = float(scale_length)
         except ValueError:

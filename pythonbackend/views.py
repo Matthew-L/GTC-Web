@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from customforms.string import StringForm
 from calculator.guitarstring import GuitarString
+from pythonbackend.models import StringSet, String
 import ast
 
 
@@ -42,7 +43,7 @@ def results(request):
             return render(request, 'input_error.html')
 
     if is_valid_result(request.GET):
-        scale_length = ast.literal_eval(request.GET["Scale_Length"])
+        scale_length = str(ast.literal_eval(request.GET["Scale_Length"]))
         string_material = request.GET["String_Type"]
         gauge = ast.literal_eval(request.GET["Gauge"])
         note = request.GET["Note"]
@@ -50,6 +51,18 @@ def results(request):
         guitar_string = GuitarString(scale_length, string_material, gauge, note, octave)
         guitar_string.tension = float("{0:.2f}".format(guitar_string.tension))
         context['string_list'] = [guitar_string]
+
+
+
+        #This works, just need to implement a form to get a StringSet name
+        string_set = StringSet(user=request.user, name=str(request.user)+'\'s Set')
+        string_set.save()
+
+
+        string = String(string_set=string_set, string_number=1, scale_length=scale_length,
+                        note=note, octave=octave, gauge=gauge, string_type=string_material)
+        string.save()
+
         return render(request, 'results.html', context)
 
     return render(request, 'input_error.html', context)
@@ -80,7 +93,7 @@ def is_valid_result(result):
         return False
 
     gauge = result['Gauge']
-    if gauge.count('.')  < 2:
+    if gauge.count('.') < 2:
         temp_gauge = gauge.replace('.', '')
         if temp_gauge.isdigit():
             if float(gauge) < 0:
