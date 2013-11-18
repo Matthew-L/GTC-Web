@@ -63,8 +63,7 @@ class GuitarString():
         self.is_valid_string_material(string_material)
         self.string_material = string_material
         self.gauge = self.sanitize_gauge(gauge)
-        self.is_valid_note(note)
-        self.note = note
+        self.note = self.sanitize_note(note)
         self.octave = self.sanitize_octave(octave)
 
         if str(scale_length).find('-') != -1:
@@ -76,8 +75,8 @@ class GuitarString():
         else:
             self.scale_length = self.sanitize_scale_length(scale_length)
 
-        self.freq = self.convert_to_freq(note, octave)
-        self.unit_weight = self.convert_to_unit_weight(string_material, gauge)
+        self.freq = self.convert_to_freq(self.note, self.octave)
+        self.unit_weight = self.convert_to_unit_weight(self.string_material, self.gauge)
 
         self.tension = self.calculate_tension()
 
@@ -204,17 +203,22 @@ class GuitarString():
             raise InvalidStringMaterialError('string_material does not match predefined string materials')
         return True
 
-    def is_valid_note(self, note):
+    def sanitize_note(self, note):
         """
         checks validity of note
         @param note:
         @return: @raise InvalidNoteError:
         """
+        if len(note) == 5:
+            note = note[0].upper() + '#/' + note[3].upper() + 'b'
+        else:
+            note = note.upper()
+
         try:
             self.note_dict[note]
         except KeyError:
             raise InvalidNoteError('note does not match specified format')
-        return True
+        return note
     
     @staticmethod
     def sanitize_octave(octave):

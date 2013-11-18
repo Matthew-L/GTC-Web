@@ -143,6 +143,11 @@ class MyTestCase(unittest.TestCase):
 
         """
 
+        #test converting lowercase notes to uppercase
+        calc1 = guitarstring.GuitarString(26.5, 'PL', .009, 'A#/Bb', 4)
+        calc2 = guitarstring.GuitarString(26.5, 'PL', .009, 'a#/bb', 4)
+        self.assertEqual(calc2.tension, calc1.tension)
+
         #E .009" PL == 14.18#
         calc = guitarstring.GuitarString(26.5, 'PL', .009, 'E', 4)
         tension = float("{0:.2f}".format(calc.calculate_tension()))
