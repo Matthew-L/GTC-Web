@@ -209,14 +209,13 @@ class GuitarString():
         @param note:
         @return: @raise InvalidNoteError:
         """
-        if len(note) == 5:
-            note = note[0].upper() + '#/' + note[3].upper() + 'b'
-        else:
-            note = note.upper()
-
         try:
+            if len(note) == 5:
+                note = note[0].upper() + '#/' + note[3].upper() + 'b'
+            else:
+                note = note.upper()
             self.note_dict[note]
-        except KeyError:
+        except (KeyError, TypeError):
             raise InvalidNoteError('note does not match specified format')
         return note
     
