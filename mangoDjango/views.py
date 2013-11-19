@@ -5,16 +5,21 @@ from django.core.context_processors import csrf
 from django.contrib.auth.forms import UserCreationForm
 
 
-def login(request):
+def set_users_login_status(request):
     context = {}
     if request.user.is_authenticated():
         context['is_logged_in'] = True
         context['username'] = request.user.get_username()
-        context['username'] = request.user.get_username()
     else:
         context['is_logged_in'] = False
+    return context
+
+
+def login(request):
+    context = set_users_login_status(request)
     context.update(csrf(request))
     return render_to_response('login.html', context)
+
 
 def auth_view(request):
     username = request.POST.get('username', '')
@@ -27,19 +32,16 @@ def auth_view(request):
     else:
         return HttpResponseRedirect('/accounts/invalid')
 
+
 def loggedin(request):
-    context = {}
-    if request.user.is_authenticated():
-        context['is_logged_in'] = True
-        context['username'] = request.user.get_username()
-    else:
-        context['is_logged_in'] = False
+    context = set_users_login_status(request)
     context['full_name'] = request.user.username
-    return render_to_response('loggedin.html',context)
+    return render_to_response('loggedin.html', context)
+
 
 def invalid_login(request):
-
     return render_to_response('invalid_login.html')
+
 
 def logout(request):
     auth.logout(request)
@@ -47,12 +49,7 @@ def logout(request):
 
 ####################################
 def register_user(request):
-    context = {}
-    if request.user.is_authenticated():
-        context['is_logged_in'] = True
-        context['username'] = request.user.get_username()
-    else:
-        context['is_logged_in'] = False
+    context = set_users_login_status(request)
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -64,11 +61,14 @@ def register_user(request):
     context['form'] = UserCreationForm()
     return render_to_response('register.html', context)
 
+
 def register_success(request):
-    context = {}
-    if request.user.is_authenticated():
-        context['is_logged_in'] = True
-        context['username'] = request.user.get_username()
-    else:
-        context['is_logged_in'] = False
+    context = set_users_login_status(request)
     return render_to_response('register_success.html', context)
+
+
+def profile(request):
+    context = set_users_login_status(request)
+    print(str(context['username']))
+
+    return render_to_response('profile.html', context)
