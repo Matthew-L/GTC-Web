@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if form.errors %}
+        <p class="error">Sorry, that's not a valid username or password</p>
+    {% endif %}
+
+    <h1>{{ username }}'s Profile</h1>
+    <h2>String Sets {{ username }} Made</h2>
+    {% for string_set in string_sets %}
+        <li>{{ string_set.name }}</li>
+    {% endfor %}
+
+    <h2>Other String Sets {{ username }} Uses</h2>
+
+{% endblock %}

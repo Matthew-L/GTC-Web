@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.contrib.auth.forms import UserCreationForm
+from pythonbackend.models import StringSet, String
 
 
 def set_users_login_status(request):
@@ -28,15 +29,9 @@ def auth_view(request):
 
     if user is not None:
         auth.login(request, user)
-        return HttpResponseRedirect('/accounts/loggedin')
+        return HttpResponseRedirect('/profile/')
     else:
         return HttpResponseRedirect('/accounts/invalid')
-
-
-def loggedin(request):
-    context = set_users_login_status(request)
-    context['full_name'] = request.user.username
-    return render_to_response('loggedin.html', context)
 
 
 def invalid_login(request):
@@ -69,6 +64,10 @@ def register_success(request):
 
 def profile(request):
     context = set_users_login_status(request)
-    print(str(context['username']))
+    context.update(csrf(request))
+    if not context['is_logged_in']:
+        return render_to_response('login.html', context)
 
+    string_sets = StringSet.objects.filter(user=request.user)
+    context['string_sets'] = string_sets
     return render_to_response('profile.html', context)
