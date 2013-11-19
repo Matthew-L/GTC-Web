@@ -23,10 +23,16 @@ class StringSet(models.Model):
 
 
 class StringSetForm(ModelForm):
+    def __init__(self, user, *args, **kwargs):
+        super(StringSetForm, self).__init__(*args, **kwargs)
+        print(user)
+        self.fields['user'] = forms.CharField(initial=str(user))
+        #self.fields['user'].widget = forms.HiddenInput()
+
     class Meta:
         model = StringSet
         fields = ['name']
-        exclude = ('user',)
+        #exclude = ('user',)
 
 
 
@@ -56,7 +62,7 @@ class StringForm(ModelForm):
         else:
             string_set_list = []
             for set in StringSet.objects.all():
-                if str(set.user) == user:
+                if str(set.user) == str(user):
                     string_set_list.append(str(set.name))
             set_tuple = zip(string_set_list, string_set_list)
             set_tuple = tuple(set_tuple)

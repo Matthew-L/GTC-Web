@@ -13,10 +13,16 @@ Sends the form that gets the user input for the strings
 """
 def calculate(request):
     if request.method == 'POST':
-        form = StringForm(request.POST)
-        if form.is_valid():
-            form.save()
+        string_form = StringForm(request.POST)
+        if string_form.is_valid():
+            string_form.save()
             return HttpResponseRedirect('/')
+
+        set_form = StringSetForm(request.POST)
+        if set_form.is_valid():
+            set_form.save()
+            return HttpResponseRedirect('/')
+
     context = {}
     if request.user.is_authenticated():
         context['is_logged_in'] = True
@@ -24,8 +30,8 @@ def calculate(request):
     else:
         context['is_logged_in'] = False
 
-    string_set = StringSet(request.POST, user=request.user)
-    string_set_form = StringSetForm(instance=string_set)
+    #string_set = StringSetForm(user=request.user)
+    string_set_form = StringSetForm(user=request.user)
     context['string_set_form'] = string_set_form
 
     form = StringForm(user=request.user)
