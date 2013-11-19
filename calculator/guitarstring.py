@@ -98,6 +98,9 @@ class GuitarString():
         low_scale_length = self.sanitize_scale_length(low_scale_length)
         high_scale_length = self.sanitize_scale_length(high_scale_length)
 
+        if high_scale_length > low_scale_length:
+            InvalidScaleLengthError('Multi-scale scale_lengths must follow a format similar to \'26.5-30\' and the lower value comes first')
+
         fan_distance = high_scale_length - low_scale_length
         if number_of_strings > 1:
             scale_constant = fan_distance/(number_of_strings-1)

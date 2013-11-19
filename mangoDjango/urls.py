@@ -27,4 +27,5 @@ urlpatterns = patterns('',
     (r'^accounts/invalid/$', 'mangoDjango.views.invalid_login'),
     (r'^accounts/register/$', 'mangoDjango.views.register_user'),
     (r'^accounts/register_success/$', 'mangoDjango.views.register_success'),
+    (r'^profile/$', 'mangoDjango.views.profile'),
 )
