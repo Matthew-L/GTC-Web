@@ -3,7 +3,6 @@
 
     {# String Set Name Form #}
     <form method='post' action='.'>
-        <!-- display the form fields -->
         {% csrf_token %}
         {% for field in string_set_form %}
             {% if field.name == 'name' %}
@@ -11,18 +10,36 @@
             {% endif %}
             {{ field }}
         {% endfor %}
-        <!-- submit button -->
         <input type='submit' value="New Set">
     </form>
 
-    {# New User String Form #}
-    <form method='post' action='.'>
-        <!-- display the form fields -->
+
+    <table border="1">
+        <tr>
+            <th>Set Name</th>
+            <th>String Number</th>
+            <th>Scale Length</th>
+            <th>Note</th>
+            <th>Octave</th>
+            <th>Gauge</th>
+            <th>String Type</th>
+            <th>Save</th>
+            <th>Delete</th>
+        </tr>
+        {# New User String Form #}
+        <form method='post' action='.'>
         {% csrf_token %}
-        {{ form.as_p }}
-        <!-- submit button -->
-        <input type='submit' value="Calculate">
-    </form>
-
-
+            <tr>
+                {% for field in form %}
+                    <td>{{ field }}</td>
+                {% endfor %}
+                <td>
+                    <input type='submit' value="Calculate">
+                </td>
+                <td>
+                    <button type="button">Delete</button>
+                </td>
+            </tr>
+        </form>
+    </table>
 {% endblock %}
