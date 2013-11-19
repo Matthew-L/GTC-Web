@@ -4,6 +4,7 @@ from calculator.guitarstring import GuitarString
 from pythonbackend.models import StringSet, String
 import ast
 from django.core.context_processors import csrf
+from pythonbackend.models import StringSetForm, StringForm
 
 
 """
@@ -16,8 +17,14 @@ def calculate(request):
         context['username'] = request.user.get_username()
     else:
         context['is_logged_in'] = False
+
+    string_set = StringSet(user=request.user)
+    string_set_form = StringSetForm(instance=string_set)
+    context['string_set_form'] = string_set_form
+
     form = StringForm()
     context['form'] = form
+
     context.update(csrf(request))
     return render(request, 'calculate.html', context)
 
@@ -90,6 +97,10 @@ def results(request):
         return render(request, 'results.html', context)
 
     return render(request, 'input_error.html', context)
+
+
+
+
 
 
 
