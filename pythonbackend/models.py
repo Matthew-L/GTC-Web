@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django import forms
+from django.contrib.auth.models import User
+
 
 NOTE_CHOICES = (('A', 'A'), ('A#/Bb', 'A#/Bb'), ('B', 'B'), ('C', 'C'), ('C#/Db', 'C#/Db'), ('D', 'D'),
                 ('D#/Eb','D#/Eb'), ('E','E'), ('F','F'), ('F#/Gb','F#/Gb'), ('G','G'), ('G#/Ab','G#/Ab'))
@@ -23,16 +25,14 @@ class StringSet(models.Model):
 
 
 class StringSetForm(ModelForm):
-    def __init__(self, user, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super(StringSetForm, self).__init__(*args, **kwargs)
-        print(user)
-        self.fields['user'] = forms.CharField(initial=str(user))
-        #self.fields['user'].widget = forms.HiddenInput()
+        self.fields['user'].widget.attrs['hidden'] = True
+
 
     class Meta:
         model = StringSet
-        fields = ['name']
-        #exclude = ('user',)
+        fields = ['name', 'user']
 
 
 

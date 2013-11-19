@@ -5,9 +5,14 @@
     <form method='post' action='.'>
         <!-- display the form fields -->
         {% csrf_token %}
-        {{ string_set_form.as_p }}
+        {% for field in string_set_form %}
+            {% if field.name == 'name' %}
+                String Set Name
+            {% endif %}
+            {{ field }}
+        {% endfor %}
         <!-- submit button -->
-        <input type='submit'>
+        <input type='submit' value="New Set">
     </form>
 
     {# New User String Form #}
@@ -16,7 +21,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <!-- submit button -->
-        <input type='submit'>
+        <input type='submit' value="Calculate">
     </form>
 
 

@@ -6,22 +6,27 @@ import ast
 from django.core.context_processors import csrf
 from pythonbackend.models import StringSetForm, StringForm
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
 
 
 """
 Sends the form that gets the user input for the strings
 """
+
+
 def calculate(request):
     if request.method == 'POST':
         string_form = StringForm(request.POST)
-        if string_form.is_valid():
-            string_form.save()
-            return HttpResponseRedirect('/')
-
         set_form = StringSetForm(request.POST)
         if set_form.is_valid():
             set_form.save()
             return HttpResponseRedirect('/')
+
+        if string_form.is_valid():
+            string_form.save()
+            return HttpResponseRedirect('/')
+
+
 
     context = {}
     if request.user.is_authenticated():
@@ -30,9 +35,7 @@ def calculate(request):
     else:
         context['is_logged_in'] = False
 
-    #string_set = StringSetForm(user=request.user)
-    string_set_form = StringSetForm(user=request.user)
-    context['string_set_form'] = string_set_form
+    context['string_set_form'] = StringSetForm(initial={'user': request.user.id})
 
     form = StringForm(user=request.user)
     context['form'] = form
