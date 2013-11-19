@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.forms import ModelForm
+from django import forms
 
 NOTE_CHOICES = (('A', 'A'), ('A#/Bb', 'A#/Bb'), ('B', 'B'), ('C', 'C'), ('C#/Db', 'C#/Db'), ('D', 'D'),
                 ('D#/Eb','D#/Eb'), ('E','E'), ('F','F'), ('F#/Gb','F#/Gb'), ('G','G'), ('G#/Ab','G#/Ab'))
@@ -15,6 +16,7 @@ class StringSet(models.Model):
 
     def __unicode__(self):
         return self.name
+
 
     class Meta:
         ordering = ['name']
@@ -42,6 +44,25 @@ class String(models.Model):
 
 
 class StringForm(ModelForm):
+    """
+    Generates a form to insert a new user string
+    @params user: populates the string_set ChoiceField with the names of the string_sets from that user or
+                    if user is None a CharField will appear to make a new name
+    """
+    def __init__(self,user, *args, **kwargs):
+        super(StringForm, self).__init__(*args, **kwargs)
+        if user == None:
+            self.fields['string_set'] = forms.CharField()
+        else:
+            string_set_list = []
+            for set in StringSet.objects.all():
+                if str(set.user) == user:
+                    string_set_list.append(str(set.name))
+            set_tuple = zip(string_set_list, string_set_list)
+            set_tuple = tuple(set_tuple)
+            self.fields['string_set'] = forms.ChoiceField(set_tuple)
+
+
     class Meta:
         model = String
-        fields = ['string_set', 'string_number', 'scale_length', 'note', 'octave', 'gauge', 'string_type']
+        #exclude = ['string_set']

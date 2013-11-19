@@ -5,12 +5,18 @@ from pythonbackend.models import StringSet, String
 import ast
 from django.core.context_processors import csrf
 from pythonbackend.models import StringSetForm, StringForm
+from django.http import HttpResponseRedirect
 
 
 """
 Sends the form that gets the user input for the strings
 """
 def calculate(request):
+    if request.method == 'POST':
+        form = StringForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
     context = {}
     if request.user.is_authenticated():
         context['is_logged_in'] = True
@@ -18,88 +24,16 @@ def calculate(request):
     else:
         context['is_logged_in'] = False
 
-    string_set = StringSet(user=request.user)
+    string_set = StringSet(request.POST, user=request.user)
     string_set_form = StringSetForm(instance=string_set)
     context['string_set_form'] = string_set_form
 
-    form = StringForm()
+    form = StringForm(user=request.user)
     context['form'] = form
 
     context.update(csrf(request))
+
     return render(request, 'calculate.html', context)
-
-
-
-
-
-def save_string(request):
-    print(request.POST)
-    context = {}
-    if request.user.is_authenticated():
-        context['is_logged_in'] = True
-        context['username'] = request.user.get_username()
-        username = request.user.get_username()
-        scale_length = ast.literal_eval(request.POST["Scale_Length"])
-        string_material = request.POST["String_Type"]
-        gauge = ast.literal_eval(request.POST["Gauge"])
-        note = request.POST["Note"]
-        octave = ast.literal_eval(request.POST["Octave"])
-        #user_string = strings(username=username, scale_length=scale_length, note=note, octave=octave, gauge=gauge, string_type=string_material)
-        #user_string.save()
-
-
-
-    return render(request, 'save_string.html')
-
-
-
-
-
-
-"""
-Generates the view that displays the tension or an error page there is an error in the input
-"""
-def results(request):
-    context = {}
-    if request.user.is_authenticated():
-        context['is_logged_in'] = True
-        context['username'] = request.user.get_username()
-    else:
-        context['is_logged_in'] = False
-    POST_PARAMETERS = ["String_Type", "Octave", "Gauge", "Scale_Length"]
-    key = request.POST.keys()
-    print(key)
-    for parameter in POST_PARAMETERS:
-        print(parameter)
-        if parameter not in key:
-            return render(request, 'input_error.html')
-
-    if is_valid_result(request.POST):
-        scale_length = ast.literal_eval(request.POST["Scale_Length"])
-        string_material = request.POST["String_Type"]
-        gauge = ast.literal_eval(request.POST["Gauge"])
-        note = request.POST["Note"]
-        octave = ast.literal_eval(request.POST["Octave"])
-        guitar_string = GuitarString(scale_length, string_material, gauge, note, octave)
-        guitar_string.tension = float("{0:.2f}".format(guitar_string.tension))
-        context['string_list'] = [guitar_string]
-        initdata = {}
-        initdata['Username'] = request.user.get_username()
-        initdata['Scale_Length'] = scale_length
-        initdata['Note'] = note
-        initdata['Octave'] = octave
-        initdata['Gauge'] = gauge
-        initdata['String_Type'] = string_material
-        print(initdata)
-        context.update(csrf(request))
-        form = SubmitStringForm(initial=initdata)
-        context['form'] = form
-        return render(request, 'results.html', context)
-
-    return render(request, 'input_error.html', context)
-
-
-
 
 
 
