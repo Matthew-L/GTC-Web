@@ -55,9 +55,9 @@ class StringForm(ModelForm):
     @params user: populates the string_set ChoiceField with the names of the string_sets from that user or
                     if user is None a CharField will appear to make a new name
     """
-    def __init__(self,user, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         super(StringForm, self).__init__(*args, **kwargs)
-        if user == None:
+        if user is None:
             self.fields['string_set'] = forms.CharField()
         else:
             string_set_list = []

@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.contrib.auth.forms import UserCreationForm
@@ -71,3 +71,14 @@ def profile(request):
     string_sets = StringSet.objects.filter(user=request.user)
     context['string_sets'] = string_sets
     return render_to_response('profile.html', context)
+
+def search(request):
+    context = {}
+    if request.method == 'GET':
+        print('here ' + str(request.GET['query']))
+        if 'query' in request.GET:
+            context['search_result'] = 'You searched for: %r' % request.GET['query']
+        else:
+            context['search_result'] = 'You submitted an empty form.'
+        print(context['search_result'])
+    return HttpResponse('search_result', context)
