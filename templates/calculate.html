@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load get_range %}
 {% block content %}
     {# String Set Name Form #}
     <form method='post' action='.'>
@@ -10,11 +11,12 @@
             {% endif %}
             {{ field }}
         {% endfor %}
-        <input type='submit' value="New Set">
+{#        <input type='submit' value="New Set">#}
     </form>
-    <input type='submit' value="Calculate">
-    <button type="button" class="addstring_btn" >Add String</button>
-
+    <div>
+        Scale Length
+        <input id="scale_length" type="text" name="scale_length">
+    </div>
     <table border="1" id="strings-tbl">
         <tr>
 {#            <th>Set Name</th>#}
@@ -28,18 +30,16 @@
 {#            <th>Add String</th>#}
         </tr>
         {# New User String Form #}
-        {% load get_range %}
+
         {% for i in MAX_STRINGS|get_range %} {% comment %}12 times{% endcomment %}
         <tr id="string_row{{ forloop.counter0 }}">
-            <form method='post' action='.'>
-            {% csrf_token %}
-                {% for field in form %}
-                    <td>{{ field }}</td>
-                {% endfor %}
-            </form>
-        {% endfor %}
+        {% include "includes/forms.html" %}
         </tr>
+        {% endfor %}
     </table>
+    <button type="button" class="addstring_btn" >Add String</button>
+    <input type='submit' value="Save">
+
 {% endblock %}
 {% block scripts %}
     {{ block.super }}

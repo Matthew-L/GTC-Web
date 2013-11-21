@@ -1,0 +1,52 @@
+{% load get_range %}
+<!DOCTYPE html>
+<html>
+
+<td >
+    <input id="string_number{{ forloop.counter0 }}" type="text" name="string_number">
+</td>
+
+<td >
+<select id="note{{ forloop.counter0 }}">
+  <option value="A">-</option>
+  <option value="A">A</option>
+  <option value="A#/Bb">A#/Bb</option>
+  <option value="B">B</option>
+  <option value="C">C</option>
+  <option value="C#/Db">C#/Db</option>
+  <option value="D">D</option>
+  <option value="E">E</option>
+  <option value="F">F</option>
+  <option value="F#/Gb">F#/Gb</option>
+  <option value="G">G</option>
+  <option value="G#/Ab">G#/Ab</option>
+</select>
+</td>
+
+<td >
+<select id="octave{{ forloop.counter0 }}">
+    {% for i in 11|get_range %}
+        {% if forloop.first %}
+            <option value="-">-</option>
+        {% else %}
+            <option value="{{ i }}">{{ i }}</option>
+        {% endif %}
+    {% endfor %}
+</select>
+</td>
+
+<td>
+    <input id="gauge{{ forloop.counter0 }}" type="text" name="gauge">
+</td>
+
+<td >
+<select id="string_type{{ forloop.counter0 }}">
+    <option value="-">-</option>
+    <option value="PL">Plain</option>
+    <option value="PB">Phosphorus Bronze</option>
+    <option value="NW">Nickel Wound</option>
+    <option value="XS">Stainless Steel</option>
+    <option value="HR">Half-Round</option>
+</select>
+</td>
+</html>
