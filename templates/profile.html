@@ -8,7 +8,7 @@
     <h1>{{ username }}'s Profile</h1>
     <h2>String Sets {{ username }} Made</h2>
     {% for string_set in string_sets %}
-        <li>{{ string_set.name }}</li>
+        <li><p><a href="/edit-set?string_set_name={{ string_set.name }}">{{ string_set.name }}</a></p></li>
     {% empty %}
         <p><a href="/calculate/">You have not made any string sets.</a></p>
     {% endfor %}
@@ -16,3 +16,6 @@
     <h2>Other String Sets {{ username }} Uses</h2>
     <p>You have not added any other string sets you use.</p>
 {% endblock %}
+
+
+http://127.0.0.1:8000/edit-set?=
