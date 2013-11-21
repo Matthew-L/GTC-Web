@@ -33,7 +33,9 @@
 
         {% for i in MAX_STRINGS|get_range %} {% comment %}12 times{% endcomment %}
         <tr id="string_row{{ forloop.counter0 }}">
-        {% include "includes/forms.html" %}
+            {% include "includes/forms.html" %}
+            <td id="tension{{ forloop.counter0 }}"></td>
+            <td><button type="button" class="remove_btn" id="remove_btn{{ forloop.counter0 }}" >Hide</button></td>
         </tr>
         {% endfor %}
     </table>
