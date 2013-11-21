@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 """
 Sends the form that gets the user input for the strings
 """
+MAX_STRINGS = 12
 
 
 def calculate(request):
@@ -39,7 +40,7 @@ def calculate(request):
 
     form = StringForm(user=request.user)
     context['form'] = form
-
+    context['MAX_STRINGS'] = MAX_STRINGS
     context.update(csrf(request))
 
     return render(request, 'calculate.html', context)

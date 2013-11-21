@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.models import User
@@ -68,6 +67,7 @@ class StringForm(ModelForm):
             set_tuple = tuple(set_tuple)
             self.fields['string_set'] = forms.ChoiceField(set_tuple)
 
+        #self.fields['scale_length'].widget.attrs['hidden'] = True
 
     class Meta:
         model = String

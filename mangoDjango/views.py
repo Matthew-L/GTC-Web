@@ -74,11 +74,15 @@ def profile(request):
 
 def search(request):
     context = {}
-    if request.method == 'GET':
-        print('here ' + str(request.GET['query']))
-        if 'query' in request.GET:
-            context['search_result'] = 'You searched for: %r' % request.GET['query']
+    errors = []
+    if 'q' in request.GET:
+        q = request.GET['q']
+        if not q:
+            errors.append('Enter a search term.')
+        elif len(q) > 50:
+            errors.append('Please enter at most 50 characters.')
         else:
-            context['search_result'] = 'You submitted an empty form.'
-        print(context['search_result'])
-    return HttpResponse('search_result', context)
+            context['search_results'] = StringSet.objects.filter(name__icontains=q)
+        context['errors'] = errors
+
+    return render_to_response('search_results.html', context)
