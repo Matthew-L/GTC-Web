@@ -7,12 +7,34 @@ from django.core.context_processors import csrf
 from pythonbackend.models import StringSetForm, StringForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
+from django.core import serializers
+
+
+MAX_STRINGS = 12
+
+
+def edit_set(request):
+    context = {}
+    if request.method == 'GET':
+        print("using 'GET'")
+        string_set_name = 'First Set'#str(request.GET['string_set_name'])
+        print("String set name: " + string_set_name)
+        context['string_set_name'] = string_set_name
+        strings = String.objects.all()
+        user_set = []
+        for string in strings:
+            if str(string.string_set.name) == str(string_set_name):
+                user_set.append(string)
+    data = serializers.serialize("json", user_set)
+    print(data)
+    context['json_data'] = data
+    context['someDjangoVariable'] = data
+    return render(request, 'edit_string_set.html', context)
 
 
 """
 Sends the form that gets the user input for the strings
 """
-MAX_STRINGS = 12
 
 
 def calculate(request):

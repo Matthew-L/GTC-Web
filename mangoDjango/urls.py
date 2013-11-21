@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from pythonbackend.views import calculate
+from pythonbackend.views import calculate, edit_set
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -7,6 +7,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     url(r'^calculate/$', calculate),
+    url(r'^edit-set/$', edit_set),
+
     #url(r'^results/$', results),
 
     # url(r'^$', 'mangoDjango.views.home', name='home'),
