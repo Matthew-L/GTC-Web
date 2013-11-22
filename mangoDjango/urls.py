@@ -8,6 +8,7 @@ urlpatterns = patterns('',
 
     url(r'^calculate/$', calculate),
     url(r'^edit-set/$', edit_set),
+    url(r'^download-set', 'mangoDjango.views.downloadStringSet'),
 
     #url(r'^results/$', results),
 

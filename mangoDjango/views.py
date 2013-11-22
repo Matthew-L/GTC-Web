@@ -4,7 +4,7 @@ from django.contrib import auth
 from django.core.context_processors import csrf
 from django.contrib.auth.forms import UserCreationForm
 from pythonbackend.models import StringSet, String
-
+import csv
 
 def set_users_login_status(request):
     context = {}
@@ -86,3 +86,31 @@ def search(request):
         context['errors'] = errors
 
     return render_to_response('search_results.html', context)
+
+def downloadStringSet(request):
+    # get the response object, this can be used as a stream.
+    response = HttpResponse(mimetype='text/csv')
+    # force download.
+    response['Content-Disposition'] = 'attachment;filename="export.csv"'
+
+    # the csv writer
+    writer = csv.writer(response)
+
+    context = {}
+    if request.method == 'GET':
+        string_set_name = 'First Set'#str(request.GET['string_set_name'])
+        response['Content-Disposition'] = 'attachment;filename="' + string_set_name + 'export.csv"'
+        context['string_set_name'] = string_set_name
+        strings = String.objects.all()
+        user_set = []
+        for string in strings:
+            if str(string.string_set.name) == str(string_set_name):
+                user_set.append(string)
+
+
+
+
+    for string in user_set:
+        writer.writerow([string.note, string.octave, string.gauge, string.scale_length, string.string_type])
+
+    return response

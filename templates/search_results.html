@@ -12,7 +12,7 @@
     {% else %}
         <ul>
             {% for result in search_results %}
-            <li>{{ result }}</li>
+                <li><p><a href="/edit-set?string_set_name={{ result.name }}">{{ result.name }}</a></p></li>
             {% endfor %}
         </ul>
     {% endif %}
