@@ -15,6 +15,7 @@ MAX_STRINGS = 12
 
 def edit_set(request):
     context = {}
+    context['MAX_STRINGS'] = MAX_STRINGS
     if request.method == 'GET':
         print("using 'GET'")
         string_set_name = 'First Set'#str(request.GET['string_set_name'])

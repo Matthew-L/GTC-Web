@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load get_range %}
 {% block content %}
     {# Contains the json file for the strings in the string set #}
     <input type="hidden" id="string_data" name="variable" value='{{ json_data }}'>
@@ -7,7 +8,7 @@
         Editting String Set: {{ string_set_name }}
         <br>
         Json Data:<br>
-
+        <div id="forms"></div>
 
 
 
@@ -51,15 +52,30 @@
         var json = "{{someDjangoVariable}}".replace(/&quot;/g, "\"")
         json = json.slice(1);
         json = json.substring(0, json.length - 1);
-        alert(json);
-        var json1 = JSON.stringify(eval("(" + json + ")"));
-        alert(json1);
-        json1 = jQuery.parseJSON(json1);
-        var keys = Object.keys(json1);
-        console.log(keys);
-        for (var key in json1) {
-            document.write(key);
-            document.write(json1[key]);
-        }
+        //alert(json);
     </script>
 {% endblock %}
+
+
+
+
+
+
+
+
+
+{#        var json1 = JSON.stringify(eval("(" + json + ")"));#}
+{#        alert(json1);#}
+{#        json1 = jQuery.parseJSON(json1);#}
+{#        var keys = Object.keys(json1);#}
+{#        console.log(keys);#}
+{#        for (var key in json1.fields) {#}
+{#            document.write(key);#}
+{#            document.write(json1[key]);#}
+{#            console.log(json1[key]);#}
+{#        }#}
+{#    console.log(json1.fields.note);#}
+{#    console.log(json1.fields.scale_length);#}
+{#    console.log(json1.fields.gauge);#}
+{#    console.log(json1.fields.octave);#}
+{#    console.log(json1.fields.string_set);#}
