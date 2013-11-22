@@ -1,14 +1,16 @@
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+from calculator import guitarstring
 from customforms.string import StringForm, SubmitStringForm
-from calculator.guitarstring import GuitarString
+from calculator.guitarstring import GuitarString, InvalidOctaveError, InvalidGaugeError
 from pythonbackend.models import StringSet, String
 import ast
 from django.core.context_processors import csrf
 from pythonbackend.models import StringSetForm, StringForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.core import serializers
-
+import json
 
 MAX_STRINGS = 12
 
@@ -117,3 +119,29 @@ def is_valid_result(result):
             return False
 
     return True
+
+
+
+@csrf_exempt
+def ajax(request):
+    if request.is_ajax() and request.method == "POST":
+        string_set_name = request.POST['string_set_name']
+        scale_length = request.POST['scale_length']
+        string_number = request.POST['string_number']
+        note = request.POST['note']
+        octave = request.POST['octave']
+        gauge = request.POST['gauge']
+        string_type = request.POST['string_type']
+        number_of_strings = request.POST['string_type']
+
+        #try:
+        gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
+                                           octave, number_of_strings, string_number)
+        tension = float("{0:.2f}".format(gs.tension))
+        response = {"tension": tension}
+        #except InvalidOctaveError, InvalidGaugeError as e:
+        #    print(str(e))
+
+        print(tension)
+
+        return HttpResponse(json.dumps(response), mimetype='application/javascript')

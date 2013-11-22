@@ -247,7 +247,7 @@ class GuitarString():
         @return: @raise OutOfRangeError:
         """
         try:
-            float(gauge)
+            gauge = float(gauge)
         except ValueError:
             raise InvalidGaugeError('gauge must be a float')
         if gauge <= 0:

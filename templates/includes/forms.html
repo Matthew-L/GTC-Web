@@ -3,12 +3,12 @@
 <html>
 
 <td >
-    <input id="string_number{{ forloop.counter0 }}" type="text" name="string_number" size="3">
+    <input class="row_input" id="string_number{{ forloop.counter0 }}" type="text" name="string_number" size="3">
 </td>
 
 <td >
-<select id="note{{ forloop.counter0 }}">
-  <option value="A">-</option>
+<select class="row_input" id="note{{ forloop.counter0 }}">
+  <option value="-">-</option>
   <option value="A">A</option>
   <option value="A#/Bb">A#/Bb</option>
   <option value="B">B</option>
@@ -24,7 +24,7 @@
 </td>
 
 <td >
-<select id="octave{{ forloop.counter0 }}">
+<select class="row_input" id="octave{{ forloop.counter0 }}">
     {% for i in 11|get_range %}
         {% if forloop.first %}
             <option value="-">-</option>
@@ -36,11 +36,11 @@
 </td>
 
 <td>
-    <input id="gauge{{ forloop.counter0 }}" type="text" name="gauge" size="3">
+    <input class="row_input" id="gauge{{ forloop.counter0 }}" type="text" name="gauge" size="3">
 </td>
 
 <td >
-<select id="string_type{{ forloop.counter0 }}">
+<select class="row_input" id="string_type{{ forloop.counter0 }}">
     <option value="-">-</option>
     <option value="PL">Plain</option>
     <option value="PB">Phosphorus Bronze</option>
