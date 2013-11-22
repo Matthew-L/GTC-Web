@@ -23,6 +23,8 @@
         })
 
         $(".row_input").on("change", calculate)
+
+
     });
 
 
@@ -86,3 +88,4 @@ function calculate(){
         }
     }
 }
+
