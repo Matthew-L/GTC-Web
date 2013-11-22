@@ -30,5 +30,6 @@ urlpatterns = patterns('',
     (r'^accounts/register_success/$', 'mangoDjango.views.register_success'),
     (r'^profile/$', 'mangoDjango.views.profile'),
     (r'^search/$', 'mangoDjango.views.search'),
+    (r'^ajax/$', 'pythonbackend.views.ajax'),
 
 )
