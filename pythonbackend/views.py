@@ -125,7 +125,7 @@ def is_valid_result(result):
 @csrf_exempt
 def ajax(request):
     if request.is_ajax() and request.method == "POST":
-        string_set_name = request.POST['string_set_name']
+        #string_set_name = request.POST['string_set_name']
         scale_length = request.POST['scale_length']
         string_number = request.POST['string_number']
         note = request.POST['note']
