@@ -2,57 +2,88 @@
 {% load static %}
 {% load get_range %}
 {% block content %}
+
     {# Contains the json file for the strings in the string set #}
     <input type="hidden" id="string_data" name="variable" value='{{ json_data }}'>
     {# String Set Name #}
         Editting String Set: {{ string_set_name }}
         <br>
-        Json Data:<br>
+        Json Data: <p id="test" value="a"></p> <br>
         <div id="forms"></div>
+        <div id="txtHint"></div>
 
-
-
-
-    {% comment %}<input type='submit' value="Calculate">
-    <button type="button" class="addstring_btn">Add String</button>
-
-   <table border="1" id="strings-tbl">
+    <table border="1" id="strings-tbl">
         <tr>
-            {#            <th>Set Name</th>#}
-            <th>String Number</th>
-            {#            <th>Scale Length</th>#}
+            <th>Number</th>
             <th>Note</th>
             <th>Octave</th>
             <th>Gauge</th>
             <th>String Type</th>
-            {#            <th>Save</th>#}
-            {#            <th>Add String</th>#}
         </tr>
+
         {# New User String Form #}
-        {% load get_range %}
-        {% for i in MAX_STRINGS|get_range %} {% endcomment %}{% comment %}{% endcomment %}{% comment %}12 times{% endcomment %}{% comment %}
+        {% for i in MAX_STRINGS|get_range %}
             <tr id="string_row{{ forloop.counter0 }}">
-            <form method='post' action='.'>
-                {% csrf_token %}
-                {% for field in form %}
-                    <td>{{ field }}</td>
-                {% endfor %}
-            </form>
+                {% include "includes/forms.html" %}
+                <td id="tension{{ forloop.counter0 }}"></td>
+                <td>
+                    <button type="button" class="remove_btn" id="remove_btn{{ forloop.counter0 }}">Hide</button>
+                </td>
+            </tr>
         {% endfor %}
-        </tr>
     </table>
-    {% endcomment %}
+    <button type="button" class="addstring_btn">Add String</button>
+    <input type='submit' value="Save">
+
+
+
 {% endblock %}
 {% block scripts %}
     {{ block.super }}
     <script src="{% static "assets/js/add_string.js" %}" type="text/javascript"></script>
     <script type="text/javascript"></script>
-
+    <script src="{% static "assets/js/load_string_set_data.js" %}" type="text/javascript"></script>
     <script type="text/javascript">
+
+
+        //$('#string_number0').val("4");
+        var string_set_data = document.getElementById("string_number0").value;
+        console.log(string_set_data)
+        console.log("{{someDjangoVariable}}")
         var json = "{{someDjangoVariable}}".replace(/&quot;/g, "\"")
+        var newJSON = json.replace("[", "{\"gstring\":[")
+        var newJSON1 = newJSON.replace("]", "]}")
+        console.log(newJSON1)
         json = json.slice(1);
         json = json.substring(0, json.length - 1);
+        var json1 = JSON.stringify(eval("(" + newJSON1 + ")"));
         //alert(json);
+        //alert(json1);
+        var json1 = jQuery.parseJSON(newJSON1);
+        var keys = Object.keys(json1);
+        console.log(keys);
+
+
+        for (var index = 0; index < json1.gstring.length; index += 1){
+            console.log("Guitar String: " + index)
+            console.log(json1.gstring[index].fields.note);
+            console.log(json1.gstring[index].fields.scale_length);
+            console.log(json1.gstring[index].fields.gauge);
+            console.log(json1.gstring[index].fields.octave);
+            console.log(json1.gstring[index].fields.string_set);
+            $('#string_number' + index).val(json1.gstring[index].fields.string_number);
+            $('#note' + index).val(json1.gstring[index].fields.note);
+            $('#scale_length' + index).val(json1.gstring[index].fields.scale_length);
+            $('#gauge' + index).val(json1.gstring[index].fields.gauge);
+            $('#octave' + index).val(json1.gstring[index].fields.octave);
+            $('#string_set' + index).val(json1.gstring[index].fields.string_set);
+            $('#string_type' + index).val(json1.gstring[index].fields.string_type);
+        }
+
+
+    </script>
+
+    <script type="text/javascript">
     </script>
 {% endblock %}
 
@@ -64,18 +95,3 @@
 
 
 
-{#        var json1 = JSON.stringify(eval("(" + json + ")"));#}
-{#        alert(json1);#}
-{#        json1 = jQuery.parseJSON(json1);#}
-{#        var keys = Object.keys(json1);#}
-{#        console.log(keys);#}
-{#        for (var key in json1.fields) {#}
-{#            document.write(key);#}
-{#            document.write(json1[key]);#}
-{#            console.log(json1[key]);#}
-{#        }#}
-{#    console.log(json1.fields.note);#}
-{#    console.log(json1.fields.scale_length);#}
-{#    console.log(json1.fields.gauge);#}
-{#    console.log(json1.fields.octave);#}
-{#    console.log(json1.fields.string_set);#}
