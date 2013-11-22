@@ -3,19 +3,13 @@
 {% load get_range %}
 {% block content %}
     {# String Set Name Form #}
-    <form method='post' action='.'>
-        {% csrf_token %}
-        {% for field in string_set_form %}
-            {% if field.name == 'name' %}
-                String Set Name
-            {% endif %}
-            {{ field }}
-        {% endfor %}
-{#        <input type='submit' value="New Set">#}
-    </form>
+    <div>
+        String Set Name
+        <input id="string_set_name" class="user_input" type="text">
+    </div>
     <div>
         Scale Length
-        <input id="scale_length" type="text" name="scale_length">
+        <input id="scale_length" class="user_input" type="text" name="scale_length">
     </div>
     <table border="1" id="strings-tbl">
         <tr>
@@ -41,6 +35,7 @@
     </table>
     <button type="button" class="addstring_btn" >Add String</button>
     <input type='submit' value="Save">
+    <label class="error" for="name" id="name_error">This field is required.</label>
 
 {% endblock %}
 {% block scripts %}
