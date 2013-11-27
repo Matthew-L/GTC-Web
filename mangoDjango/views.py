@@ -114,3 +114,6 @@ def downloadStringSet(request):
         writer.writerow([string.note, string.octave, string.gauge, string.scale_length, string.string_type])
 
     return response
+
+def bootstrap(request):
+    return render_to_response('bootstrap.html')

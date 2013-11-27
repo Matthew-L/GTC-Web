@@ -6,10 +6,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-    url(r'^calculate/$', calculate),
-    url(r'^edit-set/$', edit_set),
-    url(r'^download-set', 'mangoDjango.views.downloadStringSet'),
-
     #url(r'^results/$', results),
 
     # url(r'^$', 'mangoDjango.views.home', name='home'),
@@ -21,6 +17,14 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
+    # functionality
+    (r'^calculate/$', calculate),
+    (r'^edit-set/$', edit_set),
+    (r'^download-set', 'mangoDjango.views.downloadStringSet'),
+    (r'^search/$', 'mangoDjango.views.search'),
+    (r'^ajax/$', 'pythonbackend.views.ajax'),
+    (r'^edit_string_set$', 'pythonbackend.views.edit_set'),
+
     # user accounts
     (r'^$', 'mangoDjango.views.login'),
     (r'^accounts/login/$', 'mangoDjango.views.login'),
@@ -30,7 +34,5 @@ urlpatterns = patterns('',
     (r'^accounts/register/$', 'mangoDjango.views.register_user'),
     (r'^accounts/register_success/$', 'mangoDjango.views.register_success'),
     (r'^profile/$', 'mangoDjango.views.profile'),
-    (r'^search/$', 'mangoDjango.views.search'),
-    (r'^ajax/$', 'pythonbackend.views.ajax'),
-    (r'^edit_string_set$', 'pythonbackend.views.edit_set'),
+    (r'^bootstrap/$', 'mangoDjango.views.bootstrap'),
 )
