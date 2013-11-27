@@ -17,12 +17,22 @@ MAX_STRINGS = 12
 
 def calculate(request):
     context = {}
+    try:
+        if request.user.is_authenticated():
+            context['is_logged_in'] = True
+            context['username'] = request.user.get_username()
+        else:
+            context['is_logged_in'] = False
+    except:
+        HttpResponseRedirect('/accounts/login')
+
     if request.method == 'GET':
         print("using 'GET'")
         try:
             string_set_name = str(request.GET['string_set_name'])
         except:
             return render(request, 'calculate.html', context)
+
         print("String set name: " + string_set_name)
         context['string_set_name'] = string_set_name
         strings = String.objects.all()
