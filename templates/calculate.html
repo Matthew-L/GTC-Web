@@ -97,6 +97,17 @@
                     backSubstring = currentRow.substr(tagIndex);
                     tagIndex += 1
                 }
+
+
+                tension = '<div id="tension'
+                console.log('Front: ' + frontSubstring)
+                console.log('Tend : ' + tension)
+                if(frontSubstring === tension){
+                    return '<div id="tension_GTC_'+rowNumber+'">tension goes here</div>'
+
+                }
+
+
                 backSubstring = currentRow.substr(tagIndex );
                 console.log("Original " + currentRow)
                 console.log("newrow " + frontSubstring + backSubstring)
@@ -144,11 +155,7 @@
             $('#scale_length').val(json1.gstring[index].fields.scale_length);
         }
 
-        $(document).ready(function () {
-            $('#strings-tbl td').click(function () {
-                $(this).parent().remove();
-            });
-        });
+
 
         /**
          * Deletes a row when the correct column is clicked on
@@ -160,9 +167,8 @@
             var rowCount = $('table#strings-tbl tr:last').index() + 1;
             console.log("Row Count:" + rowCount)
             if(rowCount == 2){
-                newRow()
+                    newRow()
             }
-
             row.closest('tr').remove();
         }
     </script>
