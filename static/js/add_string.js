@@ -9,7 +9,6 @@
         $(".addstring_btn").click(function() {
             var row = "#string_row"+counter
             $(row).show("slide")
-//            alert($(row).load( "../templates/includes/forms.html" ));
             counter += 1;
         })
 
@@ -17,9 +16,6 @@
             console.log('hi')
             var curr = this.id.substr(this.id.length - 1)
             $("#string_row"+curr).toggle();
-//            alert("#string_row"+curr.substr(curr.length - 1))
-//            counter -= 1;
-//            $("#string_row"+id_num).toggle("slide")
         })
 
         $(".row_input").on("change", calculate)
@@ -32,7 +28,7 @@ function calculate(){
     var name = $("#string_set_name").val();
     var scale_length = $("#scale_length").val();
     var rows = $('tr')
-//    alert("here")
+
     if(name != '' && scale_length != ''){
         var number_of_strings = 0;
             console.log(rows.length);
@@ -54,7 +50,6 @@ function calculate(){
             && octave != '-' && gauge != ''
             && string_type != '-' && name != ''
             && scale_length != ''){
-
             $.ajax({
                 type: "POST",
                 url: "/ajax/",
@@ -70,15 +65,7 @@ function calculate(){
                 },
                 dataType: "json",
                 success: function(response){
-//                    alert(response.tension)
                     $('#tension'+curr).text(response.tension);
-//                    $("#editor").hide()
-//                    $("#save").hide();
-//                    $("#cancel").hide();
-//
-//                    response_text = response.message;
-//                    $("#text").text(response_text);
-//                    $("#text").show();
                 },
                 error: function(response, error){
                     alert("ERROR!");

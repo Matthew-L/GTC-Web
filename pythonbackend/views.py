@@ -124,6 +124,11 @@ def is_valid_result(result):
 
 @csrf_exempt
 def ajax(request):
+    """
+    Takes a request that contains all the information posted necessary to calculate a strings tension.
+    @param request: a request object containing a dictionary of GuitarString parameters
+    @return: the calculated tension rouned off to 2 decimal places
+    """
     if request.is_ajax() and request.method == "POST":
         #string_set_name = request.POST['string_set_name']
         scale_length = request.POST['scale_length']
