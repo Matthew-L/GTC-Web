@@ -8,7 +8,7 @@
     <h1>{{ username }}'s Profile</h1>
     <h2>String Sets {{ username }} Made</h2>
     {% for string_set in string_sets %}
-        <li><p><a href="/edit-set?string_set_name={{ string_set.name }}">Edit:{{ string_set.name }}</a><a
+        <li><p><a href="/calculate?string_set_name={{ string_set.name }}">Edit:{{ string_set.name }}</a><a
                 href="/download-set?string_set_name={{ string_set.name }}">-Download-</a></p></li>
     {% empty %}
         <p><a href="/calculate/">You have not made any string sets.</a></p>

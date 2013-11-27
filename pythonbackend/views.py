@@ -15,14 +15,14 @@ import json
 MAX_STRINGS = 12
 
 
-def edit_set(request):
+def calculate(request):
     context = {}
     if request.method == 'GET':
         print("using 'GET'")
         try:
             string_set_name = str(request.GET['string_set_name'])
         except:
-            return render(request, 'edit_string_set.html', context)
+            return render(request, 'calculate.html', context)
         print("String set name: " + string_set_name)
         context['string_set_name'] = string_set_name
         strings = String.objects.all()
@@ -35,55 +35,19 @@ def edit_set(request):
         context['json_data'] = data
         context['someDjangoVariable'] = data
         context['MAX_STRINGS'] = MAX_STRINGS
-    return render(request, 'edit_string_set.html', context)
+    return render(request, 'calculate.html', context)
 
 
 """
 Sends the form that gets the user input for the strings
 """
-
-
-def calculate(request):
-    return HttpResponseRedirect('/edit-set')
-    if request.method == 'POST':
-        string_form = StringForm(request.POST)
-        set_form = StringSetForm(request.POST)
-        if set_form.is_valid():
-            set_form.save()
-            return HttpResponseRedirect('/')
-
-        if string_form.is_valid():
-            string_form.save()
-            return HttpResponseRedirect('/')
-
-
-
-    context = {}
-    if request.user.is_authenticated():
-        context['is_logged_in'] = True
-        context['username'] = request.user.get_username()
-    else:
-        context['is_logged_in'] = False
-
-    context['string_set_form'] = StringSetForm(initial={'user': request.user.id})
-
-    form = StringForm(user=request.user)
-    context['form'] = form
-    context['MAX_STRINGS'] = MAX_STRINGS
-    context.update(csrf(request))
-
-    return render(request, 'calculate.html', context)
-
-
-
-
-
-VALIDATE_PARAMETERS = ["String_Type", "Octave", "Gauge", "Scale_Length"]
-ACCEPTED_NOTES = ['A', 'A#/Bb', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab']
-OCTAVE_RANGE = 11
-STRING_TYPE = ["PL", "PB", "NW", "XS", "HR"]
-
-
+#
+#VALIDATE_PARAMETERS = ["String_Type", "Octave", "Gauge", "Scale_Length"]
+#ACCEPTED_NOTES = ['A', 'A#/Bb', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab']
+#OCTAVE_RANGE = 11
+#STRING_TYPE = ["PL", "PB", "NW", "XS", "HR"]
+#
+#
 
 
 """
@@ -154,3 +118,17 @@ def ajax(request):
         print(tension)
 
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
+
+@csrf_exempt
+def save(request):
+     if request.is_ajax() and request.method == "POST":
+        #string_set_name = request.POST['string_set_name']
+        scale_length = request.POST['scale_length']
+
+
+        string_number = request.POST['string_number']
+        note = request.POST['note']
+        octave = request.POST['octave']
+        gauge = request.POST['gauge']
+        string_type = request.POST['string_type']
+        number_of_strings = request.POST['string_type']

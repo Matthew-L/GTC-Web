@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from pythonbackend.views import calculate, edit_set
+from pythonbackend.views import calculate
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -19,11 +19,11 @@ urlpatterns = patterns('',
 
     # functionality
     (r'^calculate/$', calculate),
-    (r'^edit-set/$', edit_set),
+    #(r'^edit-set/$', calculate),
     (r'^download-set', 'mangoDjango.views.downloadStringSet'),
     (r'^search/$', 'mangoDjango.views.search'),
     (r'^ajax/$', 'pythonbackend.views.ajax'),
-    (r'^edit_string_set$', 'pythonbackend.views.edit_set'),
+    #(r'^edit_string_set$', 'pythonbackend.views.edit_set'),
 
     # user accounts
     (r'^$', 'mangoDjango.views.login'),
