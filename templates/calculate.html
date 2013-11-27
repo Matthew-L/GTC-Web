@@ -19,8 +19,6 @@
         <input id="scale_length" class="user_input" type="text" name="scale_length">
     </div>
 
-
-
     <br>
 
     <table border="1" id="strings-tbl">
@@ -70,10 +68,6 @@
                     console.log($(this).html())
                 });
 
-
-                //tds += '<td><a class="delete" onclick="delete_user($(this))">Delete</a></td>'
-
-
                 tds += '</tr>';
                 if ($('tbody', this).length > 0) {
                     $('tbody', this).append(tds);
@@ -85,7 +79,6 @@
         }
 
         function returnValidRow(currentRow, rowNumber){
-            //alert(currentRow);
             if(currentRow == '<a class="delete" onclick="delete_user($(this))">Delete</a>')
                 return currentRow
             var id_tag = "_GTC_";
@@ -100,13 +93,11 @@
 
 
                 tension = '<div id="tension'
-                console.log('Front: ' + frontSubstring)
-                console.log('Tend : ' + tension)
+
                 if(frontSubstring === tension){
                     return '<div id="tension_GTC_'+rowNumber+'">tension goes here</div>'
 
                 }
-
 
                 backSubstring = currentRow.substr(tagIndex );
                 console.log("Original " + currentRow)
@@ -136,14 +127,6 @@
 
 
         for (var index = 0; index < json1.gstring.length; index += 1){
-
-            console.log("Guitar String: " + index)
-            console.log("Note: " + json1.gstring[index].fields.note);
-            console.log("Scale Length: " + json1.gstring[index].fields.scale_length);
-            console.log("Gauge: " + json1.gstring[index].fields.gauge);
-            console.log("Octave: " + json1.gstring[index].fields.octave);
-            console.log("String Set Name: " + json1.gstring[index].fields.string_set);
-            console.log("String Type: " + json1.gstring[index].fields.string_type);
             newRow()
             $('#string_number_GTC_' + index).val(json1.gstring[index].fields.string_number);
             $('#note_GTC_' + index).val(json1.gstring[index].fields.note);
@@ -153,6 +136,71 @@
             $('#string_set_GTC_' + index).val(json1.gstring[index].fields.string_set);
             $('#string_type_GTC_' + index).val(json1.gstring[index].fields.string_type);
             $('#scale_length').val(json1.gstring[index].fields.scale_length);
+        }
+
+        calculate1()
+        function calculate1() {
+            console.log("in calculate")
+            var name = $("#string_set_name").val();
+            var scale_length = $("#scale_length").val();
+            var rows = $('tr')
+
+            console.log("name: " + name)
+            console.log("scale_length: " + scale_length)
+            if (name != '' && scale_length != '') {
+                var number_of_strings = 0;
+                console.log("Number of rows: " + rows.length);
+                for (var i = 0; i < rows.length; ++i) {
+                    if ($(rows[i]).css("display") == 'table-row') {
+                        number_of_strings++;
+                    }
+                }
+                number_of_strings = number_of_strings - 1; // offset due to header table row
+
+                var curr = this.id.substr(this.id.length - 1);
+                var string_number = $("#string_number_GTC_" + curr).val();
+                var note = $("#note_GTC_" + curr).val();
+                var octave = $("#octave_GTC_" + curr).val();
+                var gauge = $("#gauge_GTC_" + curr).val();
+                var string_type = $("#string_type_GTC_" + curr).val();
+
+                console.log("number: " + string_number)
+                console.log("note: " + note)
+                console.log("gauge: " + gauge)
+                console.log("type: " + string_type)
+                console.log("name: " + name)
+                console.log("length: " + scale_length)
+
+
+                if (string_number != '' && note != '-'
+                        && octave != '-' && gauge != ''
+                        && string_type != '-' && name != ''
+                        && scale_length != '') {
+                    $.ajax({
+                        type: "POST",
+                        url: "/ajax/",
+                        data: {
+                            string_set_name: name,
+                            scale_length: scale_length,
+                            string_number: string_number,
+                            note: note,
+                            octave: octave,
+                            gauge: gauge,
+                            string_type: string_type,
+                            number_of_strings: number_of_strings
+                        },
+                        dataType: "json",
+                        success: function (response) {
+                            console.log(response);
+                            $('#tension_GTC_' + curr).text(response.tension);
+                        },
+                        error: function (response, error) {
+                            alert("ERROR!");
+                        }
+                    })
+
+                }
+            }
         }
 
 
