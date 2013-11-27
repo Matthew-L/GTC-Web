@@ -19,7 +19,10 @@ def edit_set(request):
     context = {}
     if request.method == 'GET':
         print("using 'GET'")
-        string_set_name = 'First Set'#str(request.GET['string_set_name'])
+        try:
+            string_set_name = str(request.GET['string_set_name'])
+        except:
+            return render(request, 'edit_string_set.html', context)
         print("String set name: " + string_set_name)
         context['string_set_name'] = string_set_name
         strings = String.objects.all()
@@ -27,11 +30,11 @@ def edit_set(request):
         for string in strings:
             if str(string.string_set.name) == str(string_set_name):
                 user_set.append(string)
-    data = serializers.serialize("json", user_set)
-    print(data)
-    context['json_data'] = data
-    context['someDjangoVariable'] = data
-    context['MAX_STRINGS'] = MAX_STRINGS
+        data = serializers.serialize("json", user_set)
+        print(data)
+        context['json_data'] = data
+        context['someDjangoVariable'] = data
+        context['MAX_STRINGS'] = MAX_STRINGS
     return render(request, 'edit_string_set.html', context)
 
 
@@ -41,6 +44,7 @@ Sends the form that gets the user input for the strings
 
 
 def calculate(request):
+    return HttpResponseRedirect('/edit-set')
     if request.method == 'POST':
         string_form = StringForm(request.POST)
         set_form = StringSetForm(request.POST)
