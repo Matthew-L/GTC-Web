@@ -37,8 +37,10 @@
         {% for i in 1|get_range %}
             <tr id="string_row{{ forloop.counter0 }}">
                 {% include "includes/forms.html" %}
+
             </tr>
         {% endfor %}
+
     </table>
 
     <button href='#' id=insert-more type="button" class="addstring_btn">Add String</button>
@@ -68,6 +70,10 @@
                     console.log($(this).html())
                 });
 
+
+                //tds += '<td><a class="delete" onclick="delete_user($(this))">Delete</a></td>'
+
+
                 tds += '</tr>';
                 if ($('tbody', this).length > 0) {
                     $('tbody', this).append(tds);
@@ -80,6 +86,8 @@
 
         function returnValidRow(currentRow, rowNumber){
             //alert(currentRow);
+            if(currentRow == '<a class="delete" onclick="delete_user($(this))">Delete</a>')
+                return currentRow
             var id_tag = "_GTC_";
             if(currentRow.indexOf(id_tag) !== -1){
                 tagIndex = currentRow.indexOf(id_tag);
@@ -96,7 +104,6 @@
                 validRow = frontSubstring + id_tag + rowNumber + "\"" +  backSubstring
                 console.log("valid Row: " + validRow)
                 return validRow
-
             }
         }
 
@@ -137,7 +144,27 @@
             $('#scale_length').val(json1.gstring[index].fields.scale_length);
         }
 
+        $(document).ready(function () {
+            $('#strings-tbl td').click(function () {
+                $(this).parent().remove();
+            });
+        });
 
+        /**
+         * Deletes a row when the correct column is clicked on
+         * Checks if the row is the last one, if so another is inserted before so that
+         * the table is never empty
+         * @param row:
+         */
+        function delete_user(row) {
+            var rowCount = $('table#strings-tbl tr:last').index() + 1;
+            console.log("Row Count:" + rowCount)
+            if(rowCount == 2){
+                newRow()
+            }
+
+            row.closest('tr').remove();
+        }
     </script>
 
     <script type="text/javascript">
