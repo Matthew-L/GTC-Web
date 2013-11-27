@@ -6,10 +6,21 @@
     {# Contains the json file for the strings in the string set #}
     <input type="hidden" id="string_data" name="variable" value='{{ json_data }}'>
     {# String Set Name #}
-    <h3>Editting String Set: {{ string_set_name }}</h3>
+    <div>
+        String Set Name
+        <input id="string_set_name" class="user_input" type="text" name="scale_length" value="{{ string_set_name }}">
+
+    </div>
+
     <br>
 
-    <a href="#" id="insert-more"> Add New Row </a>
+    <div>
+        Scale Length
+        <input id="scale_length" class="user_input" type="text" name="scale_length">
+    </div>
+
+
+
     <br>
 
     <table border="1" id="strings-tbl">
@@ -19,16 +30,18 @@
             <th>Octave</th>
             <th>Gauge</th>
             <th>String Type</th>
+            <th>Tension</th>
         </tr>
 
         {# New User String Form #}
-        {% for i in MAX_STRINGS|get_range %}
+        {% for i in 1|get_range %}
             <tr id="string_row{{ forloop.counter0 }}">
                 {% include "includes/forms.html" %}
             </tr>
         {% endfor %}
     </table>
-    <button type="button" class="addstring_btn">Add String</button>
+
+    <button href='#' id=insert-more type="button" class="addstring_btn">Add String</button>
     <input type='submit' value="Save">
 
 
@@ -40,8 +53,13 @@
     <script type="text/javascript"></script>
     <script src="{% static "assets/js/load_string_set_data.js" %}" type="text/javascript"></script>
     <script type="text/javascript">
-        var numberOfRows = 12;
+        var numberOfRows = 1;
         $("#insert-more").click(function () {
+            newRow()
+        });
+
+
+        function newRow(){
             $("#strings-tbl").each(function () {
                 var tds = '<tr>';
                 jQuery.each($('tr:last td', this), function () {
@@ -56,11 +74,9 @@
                 } else {
                     $(this).append(tds);
                 }
-
                 numberOfRows += 1;
-
             });
-        });
+        }
 
         function returnValidRow(currentRow, rowNumber){
             //alert(currentRow);
@@ -102,6 +118,7 @@
 
 
         for (var index = 0; index < json1.gstring.length; index += 1){
+
             console.log("Guitar String: " + index)
             console.log("Note: " + json1.gstring[index].fields.note);
             console.log("Scale Length: " + json1.gstring[index].fields.scale_length);
@@ -109,6 +126,7 @@
             console.log("Octave: " + json1.gstring[index].fields.octave);
             console.log("String Set Name: " + json1.gstring[index].fields.string_set);
             console.log("String Type: " + json1.gstring[index].fields.string_type);
+            newRow()
             $('#string_number_GTC_' + index).val(json1.gstring[index].fields.string_number);
             $('#note_GTC_' + index).val(json1.gstring[index].fields.note);
             $('#scale_length_GTC_' + index).val(json1.gstring[index].fields.scale_length);
@@ -116,6 +134,7 @@
             $('#octave_GTC_' + index).val(json1.gstring[index].fields.octave);
             $('#string_set_GTC_' + index).val(json1.gstring[index].fields.string_set);
             $('#string_type_GTC_' + index).val(json1.gstring[index].fields.string_type);
+            $('#scale_length').val(json1.gstring[index].fields.scale_length);
         }
 
 

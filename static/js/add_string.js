@@ -4,7 +4,7 @@
 
     $(document).ready(function() {
 
-        $("#string_row0").show();
+        //$("#string_row_GTC_0").show();
         var counter = 1;
         $(".addstring_btn").click(function() {
             var row = "#string_row"+counter
@@ -15,7 +15,7 @@
         $(".remove_btn").click(function() {
             console.log('hi')
             var curr = this.id.substr(this.id.length - 1)
-            $("#string_row"+curr).toggle();
+            $("#string_row_GTC_"+curr).toggle();
         })
 
         $(".row_input").on("change", calculate)
@@ -25,13 +25,16 @@
 
 
 function calculate(){
+    console.log("in calculate")
     var name = $("#string_set_name").val();
     var scale_length = $("#scale_length").val();
     var rows = $('tr')
 
+    console.log("name: "+name)
+    console.log("scale_length: "+scale_length)
     if(name != '' && scale_length != ''){
         var number_of_strings = 0;
-            console.log(rows.length);
+            console.log("Number of rows: " + rows.length);
         for(var i=0; i<rows.length; ++i){
             if($(rows[i]).css("display")=='table-row'){
                 number_of_strings++;
@@ -40,11 +43,19 @@ function calculate(){
         number_of_strings = number_of_strings-1; // offset due to header table row
 
         var curr = this.id.substr(this.id.length - 1);
-        var string_number = $("#string_number"+curr).val();
-        var note = $("#note"+curr).val();
-        var octave = $("#octave"+curr).val();
-        var gauge = $("#gauge"+curr).val();
-        var string_type = $("#string_type"+curr).val();
+        var string_number = $("#string_number_GTC_"+curr).val();
+        var note = $("#note_GTC_"+curr).val();
+        var octave = $("#octave_GTC_"+curr).val();
+        var gauge = $("#gauge_GTC_"+curr).val();
+        var string_type = $("#string_type_GTC_"+curr).val();
+
+        console.log("number: "+string_number)
+        console.log("note: "+note)
+        console.log("gauge: "+gauge)
+        console.log("type: "+string_type)
+        console.log("name: "+name)
+        console.log("length: "+scale_length)
+
 
         if(string_number != '' && note != '-'
             && octave != '-' && gauge != ''
@@ -65,7 +76,8 @@ function calculate(){
                 },
                 dataType: "json",
                 success: function(response){
-                    $('#tension'+curr).text(response.tension);
+                    console.log(response);
+                    $('#tension_GTC_'+curr).text(response.tension);
                 },
                 error: function(response, error){
                     alert("ERROR!");
