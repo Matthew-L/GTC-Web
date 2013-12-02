@@ -2,13 +2,13 @@
 {% load static %}
 {% load get_range %}
 {% block content %}
-
+    <form method="get" action="/save-set/">
     {# Contains the json file for the strings in the string set #}
     <input type="hidden" id="string_data" name="variable" value='{{ json_data }}'>
     {# String Set Name #}
     <div>
         String Set Name
-        <input id="string_set_name" class="user_input" type="text" name="scale_length" value="{{ string_set_name }}">
+        <input name="string_set_name" id="string_set_name" class="user_input" type="text" name="scale_length" value="{{ string_set_name }}">
 
     </div>
 
@@ -16,7 +16,7 @@
 
     <div>
         Scale Length
-        <input id="scale_length" class="user_input" type="text" name="scale_length">
+        <input name="scale_length" d="scale_length" class="user_input" type="text" name="scale_length">
     </div>
 
     <br>
@@ -41,9 +41,12 @@
 
     </table>
 
-    <button href='#' id=insert-more type="button" class="addstring_btn">Add String</button>
-    <input type='submit' value="Save">
+    <button id=insert-more type="button" class="btn btn-success">Add String</button>
 
+
+    First name: <input type="text" name="fname"><br>
+     <button class="btn btn-success" type="submit">Save String Set</button>
+    </form>
 
 
 {% endblock %}
@@ -91,7 +94,6 @@
                     tagIndex += 1
                 }
 
-
                 tension = '<div id="tension'
 
                 if(frontSubstring === tension){
@@ -104,6 +106,9 @@
                 console.log("newrow " + frontSubstring + backSubstring)
 
                 validRow = frontSubstring + id_tag + rowNumber + "\"" +  backSubstring
+                console.log("valid Row: " + validRow)
+                console.log("id: "+ $(validRow.id))
+{#                $("#td_id").attr('name', $());#}
                 console.log("valid Row: " + validRow)
                 return validRow
             }
@@ -137,72 +142,72 @@
             $('#string_type_GTC_' + index).val(json1.gstring[index].fields.string_type);
             $('#scale_length').val(json1.gstring[index].fields.scale_length);
         }
-
-        calculate1()
-        function calculate1() {
-            console.log("in calculate")
-            var name = $("#string_set_name").val();
-            var scale_length = $("#scale_length").val();
-            var rows = $('tr')
-
-            console.log("name: " + name)
-            console.log("scale_length: " + scale_length)
-            if (name != '' && scale_length != '') {
-                var number_of_strings = 0;
-                console.log("Number of rows: " + rows.length);
-                for (var i = 0; i < rows.length; ++i) {
-                    if ($(rows[i]).css("display") == 'table-row') {
-                        number_of_strings++;
-                    }
-                }
-                number_of_strings = number_of_strings - 1; // offset due to header table row
-
-                var curr = this.id.substr(this.id.length - 1);
-                var string_number = $("#string_number_GTC_" + curr).val();
-                var note = $("#note_GTC_" + curr).val();
-                var octave = $("#octave_GTC_" + curr).val();
-                var gauge = $("#gauge_GTC_" + curr).val();
-                var string_type = $("#string_type_GTC_" + curr).val();
-
-                console.log("number: " + string_number)
-                console.log("note: " + note)
-                console.log("gauge: " + gauge)
-                console.log("type: " + string_type)
-                console.log("name: " + name)
-                console.log("length: " + scale_length)
-
-
-                if (string_number != '' && note != '-'
-                        && octave != '-' && gauge != ''
-                        && string_type != '-' && name != ''
-                        && scale_length != '') {
-                    $.ajax({
-                        type: "POST",
-                        url: "/ajax/",
-                        data: {
-                            string_set_name: name,
-                            scale_length: scale_length,
-                            string_number: string_number,
-                            note: note,
-                            octave: octave,
-                            gauge: gauge,
-                            string_type: string_type,
-                            number_of_strings: number_of_strings
-                        },
-                        dataType: "json",
-                        success: function (response) {
-                            console.log(response);
-                            $('#tension_GTC_' + curr).text(response.tension);
-                        },
-                        error: function (response, error) {
-                            alert("ERROR!");
-                        }
-                    })
-
-                }
-            }
-        }
-
+{##}
+{#        calculate1()#}
+{#        function calculate1() {#}
+{#            console.log("in calculate")#}
+{#            var name = $("#string_set_name").val();#}
+{#            var scale_length = $("#scale_length").val();#}
+{#            var rows = $('tr')#}
+{##}
+{#            console.log("name: " + name)#}
+{#            console.log("scale_length: " + scale_length)#}
+{#            if (name != '' && scale_length != '') {#}
+{#                var number_of_strings = 0;#}
+{#                console.log("Number of rows: " + rows.length);#}
+{#                for (var i = 0; i < rows.length; ++i) {#}
+{#                    if ($(rows[i]).css("display") == 'table-row') {#}
+{#                        number_of_strings++;#}
+{#                    }#}
+{#                }#}
+{#                number_of_strings = number_of_strings - 1; // offset due to header table row#}
+{##}
+{#                var curr = this.id.substr(this.id.length - 1);#}
+{#                var string_number = $("#string_number_GTC_" + curr).val();#}
+{#                var note = $("#note_GTC_" + curr).val();#}
+{#                var octave = $("#octave_GTC_" + curr).val();#}
+{#                var gauge = $("#gauge_GTC_" + curr).val();#}
+{#                var string_type = $("#string_type_GTC_" + curr).val();#}
+{##}
+{#                console.log("number: " + string_number)#}
+{#                console.log("note: " + note)#}
+{#                console.log("gauge: " + gauge)#}
+{#                console.log("type: " + string_type)#}
+{#                console.log("name: " + name)#}
+{#                console.log("length: " + scale_length)#}
+{##}
+{##}
+{#                if (string_number != '' && note != '-'#}
+{#                        && octave != '-' && gauge != ''#}
+{#                        && string_type != '-' && name != ''#}
+{#                        && scale_length != '') {#}
+{#                    $.ajax({#}
+{#                        type: "POST",#}
+{#                        url: "/ajax/",#}
+{#                        data: {#}
+{#                            string_set_name: name,#}
+{#                            scale_length: scale_length,#}
+{#                            string_number: string_number,#}
+{#                            note: note,#}
+{#                            octave: octave,#}
+{#                            gauge: gauge,#}
+{#                            string_type: string_type,#}
+{#                            number_of_strings: number_of_strings#}
+{#                        },#}
+{#                        dataType: "json",#}
+{#                        success: function (response) {#}
+{#                            console.log(response);#}
+{#                            $('#tension_GTC_' + curr).text(response.tension);#}
+{#                        },#}
+{#                        error: function (response, error) {#}
+{#                            alert("ERROR!");#}
+{#                        }#}
+{#                    })#}
+{##}
+{#                }#}
+{#            }#}
+{#        }#}
+{##}
 
 
         /**

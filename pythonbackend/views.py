@@ -130,15 +130,24 @@ def ajax(request):
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
 
 @csrf_exempt
-def save(request):
-     if request.is_ajax() and request.method == "POST":
-        #string_set_name = request.POST['string_set_name']
-        scale_length = request.POST['scale_length']
+def save_set(request):
+     #if request.is_ajax() and request.method == "POST":
+     #   #string_set_name = request.POST['string_set_name']
+     #   scale_length = request.POST['scale_length']
+     #
+     #
+     #   string_number = request.POST['string_number']
+     #   note = request.POST['note']
+     #   octave = request.POST['octave']
+     #   gauge = request.POST['gauge']
+     #   string_type = request.POST['string_type']
+     #   number_of_strings = request.POST['string_type']
+    print('here')
+    if request.method == 'GET':
+        #context.update(csrf(request))
+        for user_input in request.GET:
+            print(user_input)
 
 
-        string_number = request.POST['string_number']
-        note = request.POST['note']
-        octave = request.POST['octave']
-        gauge = request.POST['gauge']
-        string_type = request.POST['string_type']
-        number_of_strings = request.POST['string_type']
+    print(request.GET['string_set_name'])
+    return render(request, 'save_set.html')

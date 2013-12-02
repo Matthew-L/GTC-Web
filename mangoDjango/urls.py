@@ -23,6 +23,7 @@ urlpatterns = patterns('',
     (r'^download-set', 'mangoDjango.views.downloadStringSet'),
     (r'^search/$', 'mangoDjango.views.search'),
     (r'^ajax/$', 'pythonbackend.views.ajax'),
+    (r'^save-set/$', 'pythonbackend.views.save_set'),
     #(r'^edit_string_set$', 'pythonbackend.views.edit_set'),
 
     # user accounts
