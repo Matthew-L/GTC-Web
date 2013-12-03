@@ -34,43 +34,40 @@ function addChangeEvent() {
 
 
 function countValidRows() {
-    var curr = 0;
-    var name;
-    var scale_length;
-    var string_number;
-    var note;
-    var octave;
-    var gauge;
-    var string_type;
-
-    var isLastRow = false;
-    while (!isLastRow) {
-        name = $("#string_set_name").val();
-        scale_length = $("#scale_length").val();
-        string_number = $("#string_number_GTC_" + curr).val();
-        note = $("#note_GTC_" + curr).val();
-        octave = $("#octave_GTC_" + curr).val();
-        gauge = $("#gauge_GTC_" + curr).val();
-        string_type = $("#string_type_GTC_" + curr).val();
-
-        if (string_number != '' && note != '-'
-            && octave != '-' && gauge != ''
-            && string_type != '-' && name != ''
-            && scale_length != '') {
-            console.log("curr :" + curr);
-        }
-        else {
-            isLastRow = true;
-        }
-        curr++;
-    }
-
+    var lastid = $('#strings-tbl tr:last-child').find("div").attr('id')
+    var curr = lastid.substr(lastid.length - 1);
     return curr;
+
+}
+function ajaxCalculate(name, scale_length, string_number, note, octave, gauge, string_type, number_of_strings, curr) {
+    $.ajax({
+        type: "POST",
+        url: "/ajax/",
+        data: {
+            string_set_name: name,
+            scale_length: scale_length,
+            string_number: string_number,
+            note: note,
+            octave: octave,
+            gauge: gauge,
+            string_type: string_type,
+            number_of_strings: number_of_strings
+        },
+        dataType: "json",
+        success: function (response) {
+            console.log(response.tension);
+
+            $('#tension_GTC_' + curr).text(response.tension);
+        },
+        error: function (response, error) {
+            alert("ERROR!");
+        }
+    })
 }
 function calculateSet(){
 //        $(#testsss);
-    var number_of_strings = countValidRows() + 1;
-
+    var number_of_strings = countValidRows();
+    console.log("number_of_strings :" + number_of_strings);
     var curr;
     var name;
     var scale_length;
@@ -79,8 +76,8 @@ function calculateSet(){
     var octave;
     var gauge;
     var string_type;
-    var i = 0;
-    for(curr = 0; curr < number_of_strings + i; ++curr){
+
+    for(curr = 0; curr < number_of_strings; ++curr){
         name = $("#string_set_name").val();
         scale_length = $("#scale_length").val();
         string_number = $("#string_number_GTC_" + curr).val();
@@ -99,33 +96,8 @@ function calculateSet(){
             && octave != '-' && gauge != ''
             && string_type != '-' && name != ''
             && scale_length != ''){
-
-         $.ajax({
-                type: "POST",
-                url: "/ajax/",
-                data: {
-                    string_set_name: name,
-                    scale_length: scale_length,
-                    string_number: string_number,
-                    note: note,
-                    octave: octave,
-                    gauge: gauge,
-                    string_type: string_type,
-                    number_of_strings: number_of_strings
-                },
-                dataType: "json",
-                success: function(response){
-                    console.log(response.tension);
-                    console.log('cccurr ' + curr);
-                    $('#tension_GTC_'+curr).text(response.tension);
-                },
-                error: function(response, error){
-                    alert("ERROR!");
-                   }
-            })
-        }else{
-            alert("here");
-            i++;
+            ajaxCalculate(name, scale_length, string_number, note,
+                octave, gauge, string_type, number_of_strings, curr);
         }
     }
 }
