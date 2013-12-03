@@ -240,7 +240,7 @@ def save_set(request):
                 row_errors -= 1
         else:
             row_errors = 0
-            string = String(string_set=string_set, string_number=1, scale_length=scale_length,
+            string = String(string_set=string_set, string_number=string_number, scale_length=scale_length,
                         note=note, octave=octave, gauge=gauge, string_type=string_type)
             string.save()
 
