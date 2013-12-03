@@ -180,8 +180,6 @@
             $('#octave_GTC_' + currentRow).css("background-color", "White");
             $('#string_set_GTC_' + currentRow).css("background-color", "White");
             $('#string_type_GTC_' + currentRow).css("background-color", "White");
-
-
         }
 
 
@@ -195,11 +193,23 @@
         function delete_user(row) {
             var rowCount = $('table#strings-tbl tr:last').index() + 1;
             console.log("Row Count:" + rowCount)
-            if(rowCount == 2){
-                    newRow()
+            if (rowCount == 2) {
+                newRow()
+
             }
-            row.closest('tr').remove();
+
+            $(row).closest('tr')
+                    .children('td')
+                    .animate({ padding: 0 })
+                    .wrapInner('<div />')
+                    .children()
+                    .slideUp(function () {
+                        row.closest('tr').remove();
+                    });
         }
+
+
+
 {#        calculateSet();#}
     </script>
 

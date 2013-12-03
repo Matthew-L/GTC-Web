@@ -23,13 +23,20 @@ function addChangeEvent() {
         $("#string_row_GTC_" + curr).toggle();
     })
 
-    $(".row_input").on("change", calculate)
+    $(".row_input").on("change", calculate);
 
-    $(".scale_length_input").keyup(validateScaleLength)
-    $(".gauge_input").keyup(validateGauge)
-    $(".string_number_input").keyup(validateStringNumber)
-    $(".dropdown_input").on("change", validateDropdown)
-    $(".string_set_name_input").keyup(validateStringSetName)
+    $(".scale_length_input").keyup(validateScaleLength);
+    $(".gauge_input").keyup(validateGauge);
+    $(".string_number_input").keyup(validateStringNumber);
+    $(".dropdown_input").on("change", validateDropdown);
+    $(".string_set_name_input").keyup(validateStringSetName);
+
+    last_row = $('#strings-tbl tr:last');
+    last_row.css('display', 'none');
+    last_row.insertAfter('#strings-tbl tr:last');
+    last_row.fadeIn('slow');
+    //$(last_row).hide().insertAfter('#strings-tbl tr:last').slideDown('slow');
+    //last_row.insertAfter('#strings-tbl tr:last').slideDown('slow');
 }
 
 
