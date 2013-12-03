@@ -35,8 +35,6 @@ function addChangeEvent() {
     last_row.css('display', 'none');
     last_row.insertAfter('#strings-tbl tr:last');
     last_row.fadeIn('slow');
-    //$(last_row).hide().insertAfter('#strings-tbl tr:last').slideDown('slow');
-    //last_row.insertAfter('#strings-tbl tr:last').slideDown('slow');
 }
 
 

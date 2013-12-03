@@ -154,7 +154,11 @@ def isValidStringNumber(request):
 def save_set(request):
     context = {}
     errors = []
-
+    if request.user.is_authenticated():
+        context['is_logged_in'] = True
+        context['username'] = request.user.get_username()
+    else:
+        context['is_logged_in'] = False
     if request.method == 'GET':
         for user_input in request.GET:
             print(user_input)

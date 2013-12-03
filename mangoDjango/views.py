@@ -81,6 +81,11 @@ def profile(request):
 
 def search(request):
     context = {}
+    if request.user.is_authenticated():
+        context['is_logged_in'] = True
+        context['username'] = request.user.get_username()
+    else:
+        context['is_logged_in'] = False
     errors = []
     if 'q' in request.GET:
         q = request.GET['q']
