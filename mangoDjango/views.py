@@ -44,8 +44,8 @@ def invalid_login(request):
 def logout(request):
 
     auth.logout(request)
-    #context = set_users_login_status(request)
-    #context.update(csrf(request))
+    context = set_users_login_status(request)
+    context.update(csrf(request))
 
     return render_to_response('logout.html')
 

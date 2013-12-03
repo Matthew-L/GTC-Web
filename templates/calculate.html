@@ -95,7 +95,7 @@
                 idNameIndex = frontSubstring.indexOf(idSubstring);
                 idName = frontSubstring.replace(idSubstring, "")
                 idName = idName + id_tag + rowNumber;
-
+                htmlNameTag = 'name="' + idName + '"';
                 backSubstring = currentRow.substr(tagIndex);
 
                 while(backSubstring.charAt(0) != "\""){
@@ -106,7 +106,7 @@
                 tension = '<div id="tension'
 
                 if(frontSubstring === tension){
-                    return '<div id="tension_GTC_'+rowNumber+'">tension goes here</div>'
+                    return '<div id="tension_GTC_'+rowNumber+'"' + htmlNameTag + '>tension goes here</div>'
 
                 }
 
@@ -114,7 +114,7 @@
                 console.log("Original " + currentRow)
                 console.log("newrow " + frontSubstring + backSubstring)
 
-                validRow = frontSubstring + id_tag + rowNumber + "\"" +  backSubstring
+                validRow = frontSubstring + id_tag + rowNumber + "\"" +  htmlNameTag + backSubstring
                 console.log("valid Row: " + validRow)
                 console.log("id: "+ $(validRow.id))
 {#                $("#td_id").attr('name', $());#}
