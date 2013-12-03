@@ -12,8 +12,6 @@ from django.contrib.auth.models import User
 from django.core import serializers
 import json
 
-MAX_STRINGS = 12
-
 
 def calculate(request):
     context = {}
@@ -44,59 +42,9 @@ def calculate(request):
         print(data)
         context['json_data'] = data
         context['someDjangoVariable'] = data
-        context['MAX_STRINGS'] = MAX_STRINGS
+
     return render(request, 'calculate.html', context)
 
-
-"""
-Sends the form that gets the user input for the strings
-"""
-#
-#VALIDATE_PARAMETERS = ["String_Type", "Octave", "Gauge", "Scale_Length"]
-#ACCEPTED_NOTES = ['A', 'A#/Bb', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab']
-#OCTAVE_RANGE = 11
-#STRING_TYPE = ["PL", "PB", "NW", "XS", "HR"]
-#
-#
-
-
-"""
-    Checks that users input is valid
-    result = Dictionary of data to be sent to GuitarString
-    return boolean if result is valid
-"""
-def is_valid_result(result):
-    print("In is_valid_result")
-    for parameter in VALIDATE_PARAMETERS:
-        if parameter not in result.keys():
-            return False
-
-    if result['String_Type'] not in STRING_TYPE:
-        return False
-
-    gauge = result['Gauge']
-    if gauge.count('.') < 2:
-        temp_gauge = gauge.replace('.', '')
-        if temp_gauge.isdigit():
-            if float(gauge) < 0:
-                return False
-        else:
-            return False
-
-
-    if result['Note'] not in ACCEPTED_NOTES:
-        return False
-
-    scale_length = result['Scale_Length']
-    if scale_length.count('.') < 2:
-        temp_scale_length = scale_length.replace('.', '')
-        if temp_scale_length.isdigit():
-            if float(scale_length) < 0:
-                return False
-        else:
-            return False
-
-    return True
 
 
 
@@ -204,23 +152,98 @@ def isValidStringNumber(request):
 
 #@csrf_exempt
 def save_set(request):
-     #if request.is_ajax() and request.method == "POST":
-     #   #string_set_name = request.POST['string_set_name']
-     #   scale_length = request.POST['scale_length']
-     #
-     #
-     #   string_number = request.POST['string_number']
-     #   note = request.POST['note']
-     #   octave = request.POST['octave']
-     #   gauge = request.POST['gauge']
-     #   string_type = request.POST['string_type']
-     #   number_of_strings = request.POST['string_type']
-    print('here')
+    context = {}
+    errors = []
+
     if request.method == 'GET':
-        #context.update(csrf(request))
         for user_input in request.GET:
             print(user_input)
 
+        curr = 0
+        try:
+            while request.GET['gauge_GTC_'+str(curr)] is not None:
+                curr += 1
+                print(request.GET['gauge_GTC_'+str(curr)])
+        except (KeyError):
+            if curr == 0:
+                errors.append("Nothing Submitted! Are you trying to cause trouble!? Are you trying to save nothing?! Idiot!")
+                context['errors'] = errors
+                return render(request, 'save_set.html', context)
 
-    print(request.GET['string_set_name'])
-    return render(request, 'save_set.html')
+    name = request.GET['string_set_name']
+
+    try:
+        string_set = StringSet(name=name, user=request.user)
+        string_set.save(request.user)
+    except ValueError:
+        errors.append("Register and Log In to Save Sets!")
+        context['errors'] = errors
+        return render(request, 'save_set.html', context)
+
+    try:
+        scale_length = request.GET['scale_length']
+        GuitarString.sanitize_scale_length(scale_length)
+    except:
+        errors.append("Invalid Scale Length!")
+        context['errors'] = errors
+        return render(request, 'save_set.html', context)
+
+    number_of_strings = curr
+
+    number_of_parameters = 5
+    row_errors = 0
+    i = 0
+    while i < number_of_strings:
+        print(i)
+        print(number_of_strings)
+
+        try:
+            string_number = request.GET['string_number_GTC_'+str(i)]
+            GuitarString.sanitize_string_numbers(number_of_strings, string_number)
+        except:
+            row_errors += 1
+            errors.append('Invalid String Number in Row' + str(i))
+
+        try:
+            note = request.GET['note_GTC_'+str(i)]
+            GuitarString(26, 'NW', .009, note, 1, 1, 1)
+        except:
+            row_errors += 1;
+            errors.append('Invalid Note in Row' + str(i))
+
+        try:
+            octave = request.GET['octave_GTC_'+str(i)]
+            GuitarString.sanitize_octave(octave)
+        except:
+            row_errors += 1;
+            errors.append('Invalid Octave in Row' + str(i))
+
+        try:
+            gauge = request.GET['gauge_GTC_'+str(i)]
+            GuitarString.sanitize_gauge(gauge)
+        except:
+            row_errors += 1;
+            errors.append('Invalid Gauge in Row' + str(i))
+
+        try:
+            string_type = request.GET['string_type_GTC_'+str(i)]
+            GuitarString.is_valid_string_material(string_type)
+        except:
+            row_errors += 1;
+            errors.append('Invalid String Type in Row' + str(i))
+        i += 1
+
+        print("row_err " + str(row_errors) )
+        if row_errors == number_of_parameters:
+            while( row_errors > 0):
+                errors.pop()
+                row_errors -= 1
+        else:
+            row_errors = 0
+            string = String(string_set=string_set, string_number=1, scale_length=scale_length,
+                        note=note, octave=octave, gauge=gauge, string_type=string_type)
+            string.save()
+
+    context['errors'] = errors
+
+    return render(request, 'save_set.html', context)

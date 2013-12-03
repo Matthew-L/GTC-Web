@@ -106,20 +106,12 @@ function calculate(){
     console.log("in calculate")
     var name = $("#string_set_name").val();
     var scale_length = $("#scale_length").val();
-    var rows = $('tr')
+//    var rows = $('tr')
 
     console.log("name: "+name)
     console.log("scale_length: "+scale_length)
     if(name != '' && scale_length != ''){
-         var number_of_strings = countValidRows() + 1;
-//
-//            console.log("Number of rows: " + rows.length);
-//        for(var i=0; i<rows.length; ++i){
-//            if($(rows[i]).css("display")=='table-row'){
-//                number_of_strings++;
-//            }
-//        }
-//        number_of_strings = number_of_strings-1; // offset due to header table row
+         var number_of_strings = countValidRows()+1;
 
         var curr = this.id.substr(this.id.length - 1);
         var string_number = $("#string_number_GTC_"+curr).val();
@@ -140,28 +132,8 @@ function calculate(){
             && octave != '-' && gauge != ''
             && string_type != '-' && name != ''
             && scale_length != ''){
-            $.ajax({
-                type: "POST",
-                url: "/ajax/",
-                data: {
-                    string_set_name: name,
-                    scale_length: scale_length,
-                    string_number: string_number,
-                    note: note,
-                    octave: octave,
-                    gauge: gauge,
-                    string_type: string_type,
-                    number_of_strings: number_of_strings
-                },
-                dataType: "json",
-                success: function(response){
-                    console.log(response);
-                    $('#tension_GTC_'+curr).text(response.tension);
-                },
-                error: function(response, error){
-                    alert("ERROR!");
-                   }
-            })
+              ajaxCalculate(name, scale_length, string_number, note,
+                octave, gauge, string_type, number_of_strings, curr);
 
         }
     }
