@@ -27,7 +27,7 @@ urlpatterns = patterns('',
     (r'^is-valid-scale-length/$', 'pythonbackend.views.isValidScaleLength'),
     (r'^is-valid-gauge/$', 'pythonbackend.views.isValidGauge'),
     (r'^is-valid-string-number/$', 'pythonbackend.views.isValidStringNumber'),
-    #(r'^edit_string_set$', 'pythonbackend.views.edit_set'),
+    (r'^info/$','mangoDjango.views.info'),
 
     # user accounts
     (r'^$', 'mangoDjango.views.login'),
@@ -38,7 +38,7 @@ urlpatterns = patterns('',
     (r'^accounts/register/$', 'mangoDjango.views.register_user'),
     (r'^accounts/register_success/$', 'mangoDjango.views.register_success'),
     (r'^profile/$', 'mangoDjango.views.profile'),
-    (r'^bootstrap/$', 'mangoDjango.views.bootstrap'),
+
 
     # ios user accounts
     (r'^ios/login/$', 'mangoDjango.views.iosLogin'),

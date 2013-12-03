@@ -122,8 +122,8 @@ def downloadStringSet(request):
 
     return response
 
-def bootstrap(request):
-    return render_to_response('bootstrap.html')
+def info(request):
+    return render_to_response('info.html')
 
 
 @csrf_exempt
