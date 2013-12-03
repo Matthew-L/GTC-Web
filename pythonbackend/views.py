@@ -150,7 +150,7 @@ def isValidStringNumber(request):
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
 
 
-#@csrf_exempt
+
 def save_set(request):
     context = {}
     errors = []
@@ -164,22 +164,30 @@ def save_set(request):
             while request.GET['gauge_GTC_'+str(curr)] is not None:
                 curr += 1
                 print(request.GET['gauge_GTC_'+str(curr)])
-        except (KeyError):
+        except KeyError:
             if curr == 0:
-                errors.append("Nothing Submitted! Are you trying to cause trouble!? Are you trying to save nothing?! Idiot!")
+                errors.append("Nothing Submitted! Are you trying to save nothing?! Idiot!")
                 context['errors'] = errors
                 return render(request, 'save_set.html', context)
 
+    # make new string set
     name = request.GET['string_set_name']
-
-    try:
-        string_set = StringSet(name=name, user=request.user)
-        string_set.save(request.user)
-    except ValueError:
+    user = request.user
+    if user.is_anonymous():
         errors.append("Register and Log In to Save Sets!")
         context['errors'] = errors
         return render(request, 'save_set.html', context)
 
+    if StringSet.objects.filter(name=name, user=user):
+        print(StringSet.objects.filter(name=name, user=user))
+        errors.append("You already used that String Set Name")
+        context['errors'] = errors
+        return render(request, 'save_set.html', context)
+
+    string_set = StringSet(name=name, user=request.user)
+    string_set.save()
+
+    # verify string parameters
     try:
         scale_length = request.GET['scale_length']
         GuitarString.sanitize_scale_length(scale_length)
@@ -199,7 +207,8 @@ def save_set(request):
 
         try:
             string_number = request.GET['string_number_GTC_'+str(i)]
-            GuitarString.sanitize_string_numbers(number_of_strings, string_number)
+            print(GuitarString.sanitize_string_numbers(number_of_strings, string_number))
+
         except:
             row_errors += 1
             errors.append('Invalid String Number in Row' + str(i))
@@ -208,34 +217,34 @@ def save_set(request):
             note = request.GET['note_GTC_'+str(i)]
             GuitarString(26, 'NW', .009, note, 1, 1, 1)
         except:
-            row_errors += 1;
+            row_errors += 1
             errors.append('Invalid Note in Row' + str(i))
 
         try:
             octave = request.GET['octave_GTC_'+str(i)]
             GuitarString.sanitize_octave(octave)
         except:
-            row_errors += 1;
+            row_errors += 1
             errors.append('Invalid Octave in Row' + str(i))
 
         try:
             gauge = request.GET['gauge_GTC_'+str(i)]
             GuitarString.sanitize_gauge(gauge)
         except:
-            row_errors += 1;
+            row_errors += 1
             errors.append('Invalid Gauge in Row' + str(i))
 
         try:
             string_type = request.GET['string_type_GTC_'+str(i)]
             GuitarString.is_valid_string_material(string_type)
         except:
-            row_errors += 1;
+            row_errors += 1
             errors.append('Invalid String Type in Row' + str(i))
         i += 1
 
         print("row_err " + str(row_errors) )
         if row_errors == number_of_parameters:
-            while( row_errors > 0):
+            while row_errors > 0:
                 errors.pop()
                 row_errors -= 1
         else:
