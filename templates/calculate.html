@@ -1,24 +1,34 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load get_range %}
+
+{% block breadcrumb %}
+    <li class="active"><a href="/calculate">Calculate</a></li>
+
+    {% if not is_logged_in %}
+        <li><a href="/accounts/register">Register</a></li>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     <form method="get" action="/save-set/">
     {# Contains the json file for the strings in the string set #}
     <input type="hidden" id="string_data" name="variable" value='{{ json_data }}'>
     {# String Set Name #}
-    <div>
-        String Set Name
-        <input name="string_set_name" id="string_set_name" class="user_input string_set_name_input" type="text" name="scale_length" value="{{ string_set_name }}">
+     <table border="1" >
+        <tr>
+            <th>String Set Name</th>
+            <td><input name="string_set_name" id="string_set_name" class="user_input" type="text" name="scale_length" value="{{ string_set_name }}"></td>
 
-    </div>
+        </tr>
 
-    <br>
+        <br>
 
-    <div>
-        Scale Length
-        <input name="scale_length" id="scale_length" class="user_input scale_length_input" type="text" name="scale_length">
-    </div>
-
+        <tr>
+            <th>Scale Length</th>
+            <td><input name="scale_length" id="scale_length" class="user_input" type="text" name="scale_length"></td>
+        </tr>
+    </table>
     <br>
 
     <table border="1" id="strings-tbl">
@@ -41,11 +51,14 @@
 
     </table>
 
-    <button id=insert-more type="button" class="btn btn-success">Add String</button>
-
-
-    First name: <input type="text" name="fname"><br>
-     <button class="btn btn-success" type="submit">Save String Set</button>
+{#        <button id=insert-more type="button" class="btn btn-primary pull-left">Add String</button>#}
+{#        <button class="btn btn-success pull-right" type="submit">Save String Set</button>#}
+    <table border="0">
+    <tr>
+        <td><button id=insert-more type="button" class="btn btn-primary pull-left">Add String</button> </td>
+        <td> <button class="btn btn-success pull-right" type="submit">Save String Set</button> </td>
+    </tr>
+    </table>
     </form>
 
 
@@ -84,7 +97,7 @@
         }
 
         function returnValidRow(currentRow, rowNumber){
-            if(currentRow == '<a class="delete" onclick="delete_user($(this))">Delete</a>')
+            if(currentRow == '<a class="delete btn btn-danger" onclick="delete_user($(this))">Delete</a>')
                 return currentRow
             var id_tag = "_GTC_";
             if(currentRow.indexOf(id_tag) !== -1){
@@ -108,6 +121,8 @@
                 tension = '<div id="tension'
 
                 if(frontSubstring === tension){
+                    return '<div id="tension_GTC_'+rowNumber+'"' + htmlNameTag + '> - </div>'
+
                     return '<div id="tension_GTC_'+rowNumber+'"' + htmlNameTag + '>tension goes here</div>'
                 }
 
@@ -170,6 +185,7 @@
         }
 
 
+
         /**
          * Deletes a row when the correct column is clicked on
          * Checks if the row is the last one, if so another is inserted before so that
@@ -184,6 +200,7 @@
             }
             row.closest('tr').remove();
         }
+        calculateSet();
     </script>
 
     <script type="text/javascript">

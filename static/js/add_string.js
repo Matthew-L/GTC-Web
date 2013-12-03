@@ -36,6 +36,43 @@ function addChangeEvent() {
 
 
 
+function calculateSet(){
+//        $(#testsss);
+        var curr = 0;
+        var name;
+        var scale_length;
+        var string_number;
+        var note;
+        var octave;
+        var gauge;
+        var string_type;
+
+        var isLastRow = false;
+        while( !isLastRow ){
+            name = $("#string_set_name").val();
+            scale_length = $("#scale_length").val();
+            string_number = $("#string_number_GTC_"+curr).val();
+            note = $("#note_GTC_"+curr).val();
+            octave = $("#octave_GTC_"+curr).val();
+            gauge = $("#gauge_GTC_"+curr).val();
+            string_type = $("#string_type_GTC_"+curr).val();
+
+            if(string_number != '' && note != '-'
+            && octave != '-' && gauge != ''
+            && string_type != '-' && name != ''
+            && scale_length != ''){
+                console.log("curr :" + curr);
+            }
+            else{
+                isLastRow = true;
+            }
+            curr++;
+
+        }
+
+
+
+    }
 
 function calculate(){
     console.log("in calculate")
@@ -113,10 +150,10 @@ function validateScaleLength(){
         dataType: "json",
         success: function (response) {
             console.log(response);
-           $("#scale_length").css("background-color", "Green");
+           $("#scale_length").css("background-color", "#5cb85c");
         },
         error: function (response, error) {
-            $("#scale_length").css("background-color", "Red");
+            $("#scale_length").css("background-color", "#d2322d");
         }
     })
 }
@@ -134,11 +171,11 @@ function validateGauge() {
         dataType: "json",
         success: function (response) {
             console.log(response);
-            $(id).css("background-color", "Green");
+            $(id).css("background-color", "#5cb85c");
             calculate()
         },
         error: function (response, error) {
-            $(id).css("background-color", "Red");
+            $(id).css("background-color", "#d2322d");
         }
     })
 }
@@ -156,11 +193,11 @@ function validateStringNumber() {
         dataType: "json",
         success: function (response) {
             console.log(response);
-            $(id).css("background-color", "Green");
+            $(id).css("background-color", "#5cb85c");
             calculate()
         },
         error: function (response, error) {
-            $(id).css("background-color", "Red");
+            $(id).css("background-color", "#d2322d");
         }
     })
 }
@@ -172,9 +209,9 @@ function validateDropdown() {
     var dropdown_value = $(id).val();
     console.log("Dropdown onChange: " + dropdown_value);
     if(dropdown_value == value_not_set){
-        $(id).css("background-color", "Red");
+        $(id).css("background-color", "#d2322d");
     }else{
-        $(id).css("background-color", "Green");
+        $(id).css("background-color", "#5cb85c");
         calculate()
     }
 }
@@ -185,9 +222,9 @@ function validateStringSetName() {
     var string_set_name = $(id).val();
     console.log("Dropdown onChange: " + string_set_name);
     if (string_set_name == value_not_set) {
-        $(id).css("background-color", "Red");
+        $(id).css("background-color", "#d2322d");
     } else {
-        $(id).css("background-color", "Green");
+        $(id).css("background-color", "#5cb85c");
     }
 }
 

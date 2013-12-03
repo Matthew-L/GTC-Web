@@ -1,5 +1,30 @@
 {% extends 'base.html' %}
 
+ {% block login %}
+         <ul class="nav navbar-nav pull-right">
+        {% if is_logged_in %}
+            <li class="active"> <a href=/profile/>Profile: {{ username }}</a></li>
+            <li><a href="/accounts/logout/">Logout</a></li>
+        {% else %}
+          {% if form.errors %}
+            <p class="error">Sorry, that's not a valid username or password</p>
+          {% endif %}
+
+          <form class="navbar-form navbar-right"  action="/accounts/auth/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="username" value="" id="username" placeholder="Username" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" value="" id="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Log in</button>
+          </form>
+        {% endif %}
+          </ul>
+    {% endblock %}
+
+
 {% block content %}
     {% if form.errors %}
         <p class="error">Sorry, that's not a valid username or password</p>
@@ -13,9 +38,6 @@
     {% empty %}
         <p><a href="/calculate/">You have not made any string sets.</a></p>
     {% endfor %}
-
-    <h2>Other String Sets {{ username }} Uses</h2>
-    <p>You have not added any other string sets you use.</p>
 {% endblock %}
 
 

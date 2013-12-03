@@ -202,7 +202,7 @@ def isValidStringNumber(request):
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
 
 
-@csrf_exempt
+#@csrf_exempt
 def save_set(request):
      #if request.is_ajax() and request.method == "POST":
      #   #string_set_name = request.POST['string_set_name']
