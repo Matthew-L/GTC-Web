@@ -3,29 +3,37 @@
  */
 
     $(document).ready(function() {
-
-        //$("#string_row_GTC_0").show();
-        var counter = 1;
-        $(".addstring_btn").click(function() {
-            var row = "#string_row"+counter
-            $(row).show("slide")
-            counter += 1;
-        })
-
-        $(".remove_btn").click(function() {
-            console.log('hi')
-            var curr = this.id.substr(this.id.length - 1)
-            $("#string_row_GTC_"+curr).toggle();
-        })
-
-        $(".row_input").on("change", calculate)
-
-        $(".scale_length_input").keyup(validateScaleLength)
-        $(".gauge_input").keyup(validateGauge)
-        $(".string_number_input").keyup(validateStringNumber)
-        $(".dropdown_input").on("change",validateDropdown)
-        $(".string_set_name_input").keyup(validateStringSetName)
+        addChangeEvent()
     });
+
+
+function addChangeEvent() {
+    //$("#string_row_GTC_0").show();
+    var counter = 1;
+    $(".addstring_btn").click(function () {
+        var row = "#string_row" + counter
+        $(row).show("slide")
+        counter += 1;
+    })
+
+    $(".remove_btn").click(function () {
+        console.log('hi')
+        var curr = this.id.substr(this.id.length - 1)
+        $("#string_row_GTC_" + curr).toggle();
+    })
+
+    $(".row_input").on("change", calculate)
+
+    $(".scale_length_input").keyup(validateScaleLength)
+    $(".gauge_input").keyup(validateGauge)
+    $(".string_number_input").keyup(validateStringNumber)
+    $(".dropdown_input").on("change", validateDropdown)
+    $(".string_set_name_input").keyup(validateStringSetName)
+}
+
+
+
+
 
 
 

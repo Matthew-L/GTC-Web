@@ -59,6 +59,8 @@
         var numberOfRows = 1;
         $("#insert-more").click(function () {
             newRow()
+            resetBackgroundColor()
+            addChangeEvent()
         });
 
 
@@ -68,7 +70,7 @@
                 jQuery.each($('tr:last td', this), function () {
                     tds += '<td>' + returnValidRow($(this).html(), numberOfRows) + '</td>';
                     //returnValidRow($(this).html(), index)
-                    console.log($(this).html())
+                    console.log("returned valid row  " + $(this).html())
                 });
 
                 tds += '</tr>';
@@ -107,7 +109,6 @@
 
                 if(frontSubstring === tension){
                     return '<div id="tension_GTC_'+rowNumber+'"' + htmlNameTag + '>tension goes here</div>'
-
                 }
 
                 backSubstring = currentRow.substr(tagIndex );
@@ -122,6 +123,8 @@
                 return validRow
             }
         }
+
+
 
         var string_set_data = document.getElementById("string_number_GTC_0").value;
         console.log(string_set_data)
@@ -151,6 +154,21 @@
             $('#string_type_GTC_' + index).val(json1.gstring[index].fields.string_type);
             $('#scale_length').val(json1.gstring[index].fields.scale_length);
         }
+
+
+        function resetBackgroundColor(){
+            currentRow = numberOfRows - 1
+            $('#string_number_GTC_' + currentRow).css("background-color", "White");
+            $('#note_GTC_' + currentRow).css("background-color", "White");
+            $('#scale_length_GTC_' + currentRow).css("background-color", "White");
+            $('#gauge_GTC_' + currentRow).css("background-color", "White");
+            $('#octave_GTC_' + currentRow).css("background-color", "White");
+            $('#string_set_GTC_' + currentRow).css("background-color", "White");
+            $('#string_type_GTC_' + currentRow).css("background-color", "White");
+
+
+        }
+
 
         /**
          * Deletes a row when the correct column is clicked on
