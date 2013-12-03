@@ -20,9 +20,13 @@
 
         $(".row_input").on("change", calculate)
 
-        $(".user_input").keyup(validateScaleLength)
-
+        $(".scale_length_input").keyup(validateScaleLength)
+        $(".gauge_input").keyup(validateGauge)
+        $(".string_number_input").keyup(validateStringNumber)
+        $(".dropdown_input").on("change",validateDropdown)
+        $(".string_set_name_input").keyup(validateStringSetName)
     });
+
 
 
 function calculate(){
@@ -91,7 +95,7 @@ function calculate(){
 
 function validateScaleLength(){
     var scale_length = $("#scale_length").val();
-    console.log("Scale Length onChange value: " + scale_length);
+    console.log("Scale Length keyup value: " + scale_length);
     $.ajax({
         type: "POST",
         url: "/is-valid-scale-length/",
@@ -101,12 +105,82 @@ function validateScaleLength(){
         dataType: "json",
         success: function (response) {
             console.log(response);
-            $("#scale_length").css("background-color", "Green");
+           $("#scale_length").css("background-color", "Green");
         },
         error: function (response, error) {
             $("#scale_length").css("background-color", "Red");
         }
     })
-
 }
+
+function validateGauge() {
+    id = "#" + this.id
+    var gauge_value = $(id).val();
+    console.log("Gauge keyup value: " + gauge_value);
+    $.ajax({
+        type: "POST",
+        url: "/is-valid-gauge/",
+        data: {
+            gauge: gauge_value
+        },
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+            $(id).css("background-color", "Green");
+            calculate()
+        },
+        error: function (response, error) {
+            $(id).css("background-color", "Red");
+        }
+    })
+}
+
+function validateStringNumber() {
+    id = "#" + this.id
+    var string_number_value = $(id).val();
+    console.log("StringNumber keyup value: " + string_number_value);
+    $.ajax({
+        type: "POST",
+        url: "/is-valid-string-number/",
+        data: {
+            string_number: string_number_value
+        },
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+            $(id).css("background-color", "Green");
+            calculate()
+        },
+        error: function (response, error) {
+            $(id).css("background-color", "Red");
+        }
+    })
+}
+
+
+function validateDropdown() {
+    value_not_set = "-"
+    id = "#" + this.id
+    var dropdown_value = $(id).val();
+    console.log("Dropdown onChange: " + dropdown_value);
+    if(dropdown_value == value_not_set){
+        $(id).css("background-color", "Red");
+    }else{
+        $(id).css("background-color", "Green");
+        calculate()
+    }
+}
+
+function validateStringSetName() {
+    value_not_set = ""
+    id = "#" + this.id
+    var string_set_name = $(id).val();
+    console.log("Dropdown onChange: " + string_set_name);
+    if (string_set_name == value_not_set) {
+        $(id).css("background-color", "Red");
+    } else {
+        $(id).css("background-color", "Green");
+    }
+}
+
 

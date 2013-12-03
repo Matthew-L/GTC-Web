@@ -25,6 +25,8 @@ urlpatterns = patterns('',
     (r'^ajax/$', 'pythonbackend.views.ajax'),
     (r'^save-set/$', 'pythonbackend.views.save_set'),
     (r'^is-valid-scale-length/$', 'pythonbackend.views.isValidScaleLength'),
+    (r'^is-valid-gauge/$', 'pythonbackend.views.isValidGauge'),
+    (r'^is-valid-string-number/$', 'pythonbackend.views.isValidStringNumber'),
     #(r'^edit_string_set$', 'pythonbackend.views.edit_set'),
 
     # user accounts

@@ -154,6 +154,52 @@ def isValidScaleLength(request):
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
 
 
+@csrf_exempt
+def isValidGauge(request):
+    if request.is_ajax() and request.method == "POST":
+        scale_length = 32
+        string_number = 1
+        note = 'C'
+        octave = 1
+        gauge = request.POST['gauge']
+        string_type = 'PL'
+        number_of_strings = 1
+
+        #try:
+        gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
+                                       octave, number_of_strings, string_number)
+        tension = float("{0:.2f}".format(gs.tension))
+        response = {"tension": tension}
+        #except InvalidOctaveError, InvalidGaugeError as e:
+        #    print(str(e))
+
+        print(tension)
+
+        return HttpResponse(json.dumps(response), mimetype='application/javascript')
+
+
+@csrf_exempt
+def isValidStringNumber(request):
+    if request.is_ajax() and request.method == "POST":
+        scale_length = 32
+        string_number = request.POST['string_number']
+        note = 'C'
+        octave = 1
+        gauge = .001
+        string_type = 'PL'
+        number_of_strings = 1
+
+        #try:
+        gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
+                                       octave, number_of_strings, string_number)
+        tension = float("{0:.2f}".format(gs.tension))
+        response = {"tension": tension}
+        #except InvalidOctaveError, InvalidGaugeError as e:
+        #    print(str(e))
+
+        print(tension)
+
+        return HttpResponse(json.dumps(response), mimetype='application/javascript')
 
 
 @csrf_exempt
