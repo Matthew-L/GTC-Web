@@ -3,7 +3,8 @@
  */
 
     $(document).ready(function() {
-        addChangeEvent()
+        addChangeEvent();
+        calculateSet();
     });
 
 
@@ -32,47 +33,102 @@ function addChangeEvent() {
 }
 
 
+function countValidRows() {
+    var curr = 0;
+    var name;
+    var scale_length;
+    var string_number;
+    var note;
+    var octave;
+    var gauge;
+    var string_type;
 
+    var isLastRow = false;
+    while (!isLastRow) {
+        name = $("#string_set_name").val();
+        scale_length = $("#scale_length").val();
+        string_number = $("#string_number_GTC_" + curr).val();
+        note = $("#note_GTC_" + curr).val();
+        octave = $("#octave_GTC_" + curr).val();
+        gauge = $("#gauge_GTC_" + curr).val();
+        string_type = $("#string_type_GTC_" + curr).val();
 
+        if (string_number != '' && note != '-'
+            && octave != '-' && gauge != ''
+            && string_type != '-' && name != ''
+            && scale_length != '') {
+            console.log("curr :" + curr);
+        }
+        else {
+            isLastRow = true;
+        }
+        curr++;
+    }
 
-
+    return curr;
+}
 function calculateSet(){
 //        $(#testsss);
-        var curr = 0;
-        var name;
-        var scale_length;
-        var string_number;
-        var note;
-        var octave;
-        var gauge;
-        var string_type;
+    var number_of_strings = countValidRows() + 1;
 
-        var isLastRow = false;
-        while( !isLastRow ){
-            name = $("#string_set_name").val();
-            scale_length = $("#scale_length").val();
-            string_number = $("#string_number_GTC_"+curr).val();
-            note = $("#note_GTC_"+curr).val();
-            octave = $("#octave_GTC_"+curr).val();
-            gauge = $("#gauge_GTC_"+curr).val();
-            string_type = $("#string_type_GTC_"+curr).val();
+    var curr;
+    var name;
+    var scale_length;
+    var string_number;
+    var note;
+    var octave;
+    var gauge;
+    var string_type;
+    var i = 0;
+    for(curr = 0; curr < number_of_strings + i; ++curr){
+        name = $("#string_set_name").val();
+        scale_length = $("#scale_length").val();
+        string_number = $("#string_number_GTC_" + curr).val();
+        note = $("#note_GTC_" + curr).val();
+        octave = $("#octave_GTC_" + curr).val();
+        gauge = $("#gauge_GTC_" + curr).val();
+        string_type = $("#string_type_GTC_" + curr).val()
 
-            if(string_number != '' && note != '-'
+        console.log("number: "+string_number)
+        console.log("note: "+note)
+        console.log("gauge: "+gauge)
+        console.log("type: "+string_type)
+        console.log("name: "+name)
+        console.log("length: "+scale_length)
+        if(string_number != '' && note != '-'
             && octave != '-' && gauge != ''
             && string_type != '-' && name != ''
             && scale_length != ''){
-                console.log("curr :" + curr);
-            }
-            else{
-                isLastRow = true;
-            }
-            curr++;
 
+         $.ajax({
+                type: "POST",
+                url: "/ajax/",
+                data: {
+                    string_set_name: name,
+                    scale_length: scale_length,
+                    string_number: string_number,
+                    note: note,
+                    octave: octave,
+                    gauge: gauge,
+                    string_type: string_type,
+                    number_of_strings: number_of_strings
+                },
+                dataType: "json",
+                success: function(response){
+                    console.log(response.tension);
+                    console.log('cccurr ' + curr);
+                    $('#tension_GTC_'+curr).text(response.tension);
+                },
+                error: function(response, error){
+                    alert("ERROR!");
+                   }
+            })
+        }else{
+            alert("here");
+            i++;
         }
-
-
-
     }
+}
 
 function calculate(){
     console.log("in calculate")
@@ -83,14 +139,15 @@ function calculate(){
     console.log("name: "+name)
     console.log("scale_length: "+scale_length)
     if(name != '' && scale_length != ''){
-        var number_of_strings = 0;
-            console.log("Number of rows: " + rows.length);
-        for(var i=0; i<rows.length; ++i){
-            if($(rows[i]).css("display")=='table-row'){
-                number_of_strings++;
-            }
-        }
-        number_of_strings = number_of_strings-1; // offset due to header table row
+         var number_of_strings = countValidRows() + 1;
+//
+//            console.log("Number of rows: " + rows.length);
+//        for(var i=0; i<rows.length; ++i){
+//            if($(rows[i]).css("display")=='table-row'){
+//                number_of_strings++;
+//            }
+//        }
+//        number_of_strings = number_of_strings-1; // offset due to header table row
 
         var curr = this.id.substr(this.id.length - 1);
         var string_number = $("#string_number_GTC_"+curr).val();
