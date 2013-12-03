@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     (r'^search/$', 'mangoDjango.views.search'),
     (r'^ajax/$', 'pythonbackend.views.ajax'),
     (r'^save-set/$', 'pythonbackend.views.save_set'),
+    (r'^is-valid-scale-length/$', 'pythonbackend.views.isValidScaleLength'),
     #(r'^edit_string_set$', 'pythonbackend.views.edit_set'),
 
     # user accounts

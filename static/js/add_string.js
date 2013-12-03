@@ -20,6 +20,7 @@
 
         $(".row_input").on("change", calculate)
 
+        $(".user_input").keyup(validateScaleLength)
 
     });
 
@@ -86,5 +87,26 @@ function calculate(){
 
         }
     }
+}
+
+function validateScaleLength(){
+    var scale_length = $("#scale_length").val();
+    console.log("Scale Length onChange value: " + scale_length);
+    $.ajax({
+        type: "POST",
+        url: "/is-valid-scale-length/",
+        data: {
+            scale_length: scale_length
+        },
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+            $("#scale_length").css("background-color", "Green");
+        },
+        error: function (response, error) {
+            $("#scale_length").css("background-color", "Red");
+        }
+    })
+
 }
 
