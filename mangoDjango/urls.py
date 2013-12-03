@@ -36,4 +36,7 @@ urlpatterns = patterns('',
     (r'^accounts/register_success/$', 'mangoDjango.views.register_success'),
     (r'^profile/$', 'mangoDjango.views.profile'),
     (r'^bootstrap/$', 'mangoDjango.views.bootstrap'),
+
+    # ios user accounts
+    (r'^ios/login/$', 'mangoDjango.views.iosLogin'),
 )

@@ -5,6 +5,9 @@ from django.core.context_processors import csrf
 from django.contrib.auth.forms import UserCreationForm
 from pythonbackend.models import StringSet, String
 import csv
+import json
+from django.views.decorators.csrf import csrf_exempt
+
 
 def set_users_login_status(request):
     context = {}
@@ -121,3 +124,25 @@ def downloadStringSet(request):
 
 def bootstrap(request):
     return render_to_response('bootstrap.html')
+
+
+@csrf_exempt
+def iosLogin(request):
+    loginResult = {}
+    if (request.method == "POST"):
+        print("Method is post")
+        print(request.POST.keys())
+        print(request.POST['username'])
+
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            loginResult['username'] = username
+            loginResult['validLogin'] = 'true'
+            return HttpResponse(json.dumps(loginResult), content_type="application/json")
+
+    loginResult['validLogin'] = 'false'
+    return HttpResponse(json.dumps(loginResult), content_type="application/json")
