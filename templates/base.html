@@ -34,7 +34,7 @@
          {% block login %}
              <ul class="nav navbar-nav pull-right">
             {% if is_logged_in %}
-                <li> <a href=/profile/>Profile: {{ username }}</a></li>
+                <li> <a href=/profile/><span class="glyphicon glyphicon-user">&nbsp </span>{{ username }}</a></li>
                 <li><a href="/accounts/logout/">Logout</a></li>
             {% else %}
               {% if form.errors %}

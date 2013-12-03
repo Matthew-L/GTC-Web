@@ -53,8 +53,13 @@
 {#        <button class="btn btn-success pull-right" type="submit">Save String Set</button>#}
     <table border="0">
     <tr>
-        <td><button class="btn btn-primary" id=insert-more type="button" >Add String</button> </td>
-        <td> <button class="btn btn-success" type="submit">Save String Set</button> </td>
+        <td><button class="btn btn-primary" id=insert-more type="button" >
+            <span class="glyphicon glyphicon-plus btn-divider"></span>
+            Add String</button>
+        </td>
+        <td> <button class="btn btn-success" type="submit">
+            <span class="glyphicon glyphicon-floppy-disk btn-divider"></span>
+            Save String Set</button> </td>
     </tr>
     </table>
     </form>
@@ -95,7 +100,7 @@
         }
 
         function returnValidRow(currentRow, rowNumber){
-            if(currentRow == '<a class="delete btn btn-danger" onclick="delete_user($(this))">Delete</a>')
+            if(currentRow == '<a class="delete btn btn-danger" onclick="delete_user($(this))"><span class="glyphicon glyphicon-trash"></span></a>')
                 return currentRow
             var id_tag = "_GTC_";
             if(currentRow.indexOf(id_tag) !== -1){
@@ -189,6 +194,8 @@
          * @param row:
          */
         function delete_user(row) {
+            if (confirm('Are you sure you want delete this entire string?')) {
+
             var rowCount = $('table#strings-tbl tr:last').index() + 1;
             console.log("Row Count:" + rowCount)
             if (rowCount == 2) {
@@ -204,6 +211,10 @@
                     .slideUp(function () {
                         row.closest('tr').remove();
                     });
+                  // Save it!
+            } else {
+                // Do nothing!
+            }
         }
 
 

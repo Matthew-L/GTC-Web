@@ -27,3 +27,11 @@ body {
 tr.table_row{
     display:none
 }
+
+.btn-divider{
+       text-align:center;
+    padding: 1px 4px 4px 1px;
+    /*margin-right: 10px;*/
+    /*margin-left: 10px;*/
+    border-right: 1px solid #ffffff;
+}
