@@ -12,8 +12,34 @@
     {% else %}
         <ul>
             {% for result in search_results %}
-                <li><p><a href="/calculate?string_set_name={{ result.name }}">{{ result.name }}</a></p></li>
+                <div class="row">
+                    <a href="/calculate?string_set_name={{ result.name }}">
+                        <div class="col-md-5 col-md-offset-3 my-grid text-left">
+                            {{ result.name }}
+                        </div>
+                    </a>
+
+                    <a href="/download-set?string_set_name={{ string_set.name }}" >
+                        <div class="col-md-1 my-grid">
+                            <span class="glyphicon glyphicon-floppy-save"></span>
+                        </div>
+                    </a>
+                </div>
             {% endfor %}
         </ul>
     {% endif %}
 {% endblock %}
+
+
+
+
+
+
+
+            <a href="#" >
+                <div class="col-md-1 my-grid">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </div>
+            </a>
+
+        </div>
