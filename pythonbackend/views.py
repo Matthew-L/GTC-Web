@@ -278,10 +278,22 @@ def deleteSet(request):
     return render(request, 'delete_set.html', context)
 
 @csrf_exempt
-def asyncDeleteSet(request):
+def ajaxDeleteSet(request):
     if request.is_ajax() and request.method == "POST":
         name = request.POST['string_set_name']
         user = request.user
+        print(name)
+
+        string_set = StringSet.objects.filter(name=name, user=user)
+        if string_set:
+            print(StringSet.objects.filter(name=name, user=user))
+            # errors.append("You already used that String Set Name")
+            # context['errors'] = errors
+            string_set.all().delete()
+            response = {"name": name}
+
+        return HttpResponse(json.dumps(response), mimetype='application/javascript')
+
         #string_set_name = request.POST['string_set_name']
         # scale_length = request.POST['scale_length']
         # string_number = request.POST['string_number']

@@ -5,8 +5,14 @@
 $(document).ready(function() {
     addChangeEvent();
     calculateSet();
+
 });
 
+    $("#insert-more").click(function () {
+        newRow()
+        resetBackgroundColor()
+        addChangeEvent()
+    });
 
 function addChangeEvent() {
     //$("#string_row_GTC_0").show();
@@ -70,22 +76,7 @@ function ajaxCalculate(name, scale_length, string_number, note, octave, gauge, s
     })
 }
 
-function ajaxDelete(name) {
-    $.ajax({
-        type: "POST",
-        url: "/ajax-delete/",
-        data: {
-            string_set_name: name
-        },
-        dataType: "json",
-        success: function (response) {
-            alert("success")
-        },
-        error: function (response, error) {
-            alert("ERROR!");
-        }
-    })
-}
+
 
 function calculateSet(){
 

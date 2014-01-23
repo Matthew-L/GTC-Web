@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
  {% block login %}
          <ul class="nav navbar-nav pull-right">
@@ -34,9 +35,9 @@
     <h2>String Sets {{ username }} Made</h2>
     <div>
     {% for string_set in string_sets %}
-        <div class="row">
+        <div class="row" id="row-{{ forloop.counter0 }}">
             <a href="/calculate?string_set_name={{ string_set.name }}">
-                <div class="col-md-4 col-md-offset-3 my-grid text-left">
+                <div class="col-md-4 col-md-offset-3 my-grid text-left" id={{ string_set.name }}>
                     {{ string_set.name }}
                 </div>
             </a>
@@ -47,8 +48,8 @@
                 </div>
             </a>
 
-            <a href="/delete-set?string_set_name={{ string_set.name }}" >
-                <div class="col-md-1 my-grid delete-set-btn">
+            <a>
+                <div class="col-md-1 my-grid delete-set-btn" id="del-{{ string_set}}" num = {{ forloop.counter0 }}>
                     <span class="glyphicon glyphicon-trash"></span>
                 </div>
             </a>
@@ -60,3 +61,8 @@
     </div>
 {% endblock %}
 
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static "assets/js/delete_set.js" %}" type="text/javascript"></script>
+
+{% endblock %}
