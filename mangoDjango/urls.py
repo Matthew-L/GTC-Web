@@ -19,10 +19,11 @@ urlpatterns = patterns('',
 
     # functionality
     (r'^calculate/$', calculate),
-    #(r'^edit-set/$', calculate),
+    (r'^delete-set/$', 'pythonbackend.views.deleteSet'),
     (r'^download-set', 'mangoDjango.views.downloadStringSet'),
     (r'^search/$', 'mangoDjango.views.search'),
     (r'^ajax/$', 'pythonbackend.views.ajax'),
+    (r'^ajax-delete/$', 'pythonbackend.views.ajax'),
     (r'^save-set/$', 'pythonbackend.views.save_set'),
     (r'^is-valid-scale-length/$', 'pythonbackend.views.isValidScaleLength'),
     (r'^is-valid-gauge/$', 'pythonbackend.views.isValidGauge'),

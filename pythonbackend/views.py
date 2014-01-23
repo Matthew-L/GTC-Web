@@ -170,7 +170,7 @@ def save_set(request):
                 print(request.GET['gauge_GTC_'+str(curr)])
         except KeyError:
             if curr == 0:
-                errors.append("Nothing Submitted! Are you trying to save nothing?! Idiot!")
+                errors.append("Nothing Submitted! Are you trying to save nothing?!")
                 context['errors'] = errors
                 return render(request, 'save_set.html', context)
 
@@ -260,3 +260,45 @@ def save_set(request):
     context['errors'] = errors
 
     return render(request, 'save_set.html', context)
+
+def deleteSet(request):
+    context = {}
+    errors = []
+    name = request.GET['string_set_name']
+    user = request.user
+    string_set = StringSet.objects.filter(name=name, user=user)
+    if string_set:
+        print(StringSet.objects.filter(name=name, user=user))
+        # errors.append("You already used that String Set Name")
+        # context['errors'] = errors
+        string_set.all().delete()
+
+    else:
+        errors.append( 'You do not have '+str(string_set)+'in your profile.')
+    return render(request, 'delete_set.html', context)
+
+@csrf_exempt
+def asyncDeleteSet(request):
+    if request.is_ajax() and request.method == "POST":
+        name = request.POST['string_set_name']
+        user = request.user
+        #string_set_name = request.POST['string_set_name']
+        # scale_length = request.POST['scale_length']
+        # string_number = request.POST['string_number']
+        # note = request.POST['note']
+        # octave = request.POST['octave']
+        # gauge = request.POST['gauge']
+        # string_type = request.POST['string_type']
+        # number_of_strings = request.POST['string_type']
+        #
+        # #try:
+        # gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
+        #                                    octave, number_of_strings, string_number)
+        # tension = float("{0:.2f}".format(gs.tension))
+        # response = {"tension": tension}
+        # #except InvalidOctaveError, InvalidGaugeError as e:
+        # #    print(str(e))
+        #
+        # print(tension)
+        #
+        # return HttpResponse(json.dumps(response), mimetype='application/javascript')

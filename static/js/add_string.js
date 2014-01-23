@@ -2,10 +2,10 @@
  * Created by Micah on 11/19/13.
  */
 
-    $(document).ready(function() {
-        addChangeEvent();
-        calculateSet();
-    });
+$(document).ready(function() {
+    addChangeEvent();
+    calculateSet();
+});
 
 
 function addChangeEvent() {
@@ -23,12 +23,12 @@ function addChangeEvent() {
         $("#string_row_GTC_" + curr).toggle();
     })
 
-    $(".row_input").on("change", calculate);
+    $(".row_input").on("change", calculate(curr));
 
-    $(".scale_length_input").keyup(validateScaleLength);
-    $(".gauge_input").keyup(validateGauge);
-    $(".string_number_input").keyup(validateStringNumber);
-    $(".dropdown_input").on("change", validateDropdown);
+    $(".scale_length_input").keyup(validateScaleLength(curr));
+    $(".gauge_input").keyup(validateGauge(curr));
+    $(".string_number_input").keyup(validateStringNumber(curr));
+    $(".dropdown_input").on("change", validateDropdown(curr));
     $(".string_set_name_input").keyup(validateStringSetName);
 
     last_row = $('#strings-tbl tr:last');
@@ -42,8 +42,8 @@ function countValidRows() {
     var lastid = $('#strings-tbl tr:last-child').find("div").attr('id')
     var curr = lastid.substr(lastid.length - 1);
     return curr;
-
 }
+
 function ajaxCalculate(name, scale_length, string_number, note, octave, gauge, string_type, number_of_strings, curr) {
     $.ajax({
         type: "POST",
@@ -69,8 +69,26 @@ function ajaxCalculate(name, scale_length, string_number, note, octave, gauge, s
         }
     })
 }
+
+function ajaxDelete(name) {
+    $.ajax({
+        type: "POST",
+        url: "/ajax-delete/",
+        data: {
+            string_set_name: name
+        },
+        dataType: "json",
+        success: function (response) {
+            alert("success")
+        },
+        error: function (response, error) {
+            alert("ERROR!");
+        }
+    })
+}
+
 function calculateSet(){
-//        $(#testsss);
+
     var number_of_strings = countValidRows();
     console.log("number_of_strings :" + number_of_strings);
     var curr;
@@ -83,40 +101,39 @@ function calculateSet(){
     var string_type;
 
     for(curr = 0; curr < number_of_strings; ++curr){
-        name = $("#string_set_name").val();
-        scale_length = $("#scale_length").val();
-        string_number = $("#string_number_GTC_" + curr).val();
-        note = $("#note_GTC_" + curr).val();
-        octave = $("#octave_GTC_" + curr).val();
-        gauge = $("#gauge_GTC_" + curr).val();
-        string_type = $("#string_type_GTC_" + curr).val()
-
-        console.log("number: "+string_number)
-        console.log("note: "+note)
-        console.log("gauge: "+gauge)
-        console.log("type: "+string_type)
-        console.log("name: "+name)
-        console.log("length: "+scale_length)
-        if(string_number != '' && note != '-'
-            && octave != '-' && gauge != ''
-            && string_type != '-' && name != ''
-            && scale_length != ''){
-            ajaxCalculate(name, scale_length, string_number, note,
-                octave, gauge, string_type, number_of_strings, curr);
-        }
+//        name = $("#string_set_name").val();
+//        scale_length = $("#scale_length").val();
+//        string_number = $("#string_number_GTC_" + curr).val();
+//        note = $("#note_GTC_" + curr).val();
+//        octave = $("#octave_GTC_" + curr).val();
+//        gauge = $("#gauge_GTC_" + curr).val();
+//        string_type = $("#string_type_GTC_" + curr).val()
+//
+//        console.log("number: "+string_number)
+//        console.log("note: "+note)
+//        console.log("gauge: "+gauge)
+//        console.log("type: "+string_type)
+//        console.log("name: "+name)
+//        console.log("length: "+scale_length)
+//        if(string_number != '' && note != '-'
+//            && octave != '-' && gauge != ''
+//            && string_type != '-' && name != ''
+//            && scale_length != ''){
+//            ajaxCalculate(name, scale_length, string_number, note,
+//                octave, gauge, string_type, number_of_strings, curr);
+//        }
     }
 }
 
-function calculate(){
+function calculate(curr){
     console.log("in calculate")
     var name = $("#string_set_name").val();
     var scale_length = $("#scale_length").val();
-//    var rows = $('tr')
 
     console.log("name: "+name)
     console.log("scale_length: "+scale_length)
     if(name != '' && scale_length != ''){
-         var number_of_strings = countValidRows()+1;
+        var number_of_strings = countValidRows()+1;
 
         var curr = this.id.substr(this.id.length - 1);
         var string_number = $("#string_number_GTC_"+curr).val();
@@ -178,7 +195,7 @@ function validateGauge() {
         success: function (response) {
             console.log(response);
             $(id).css("background-color", "#5cb85c");
-            calculate()
+            calculate();
         },
         error: function (response, error) {
             $(id).css("background-color", "#d2322d");

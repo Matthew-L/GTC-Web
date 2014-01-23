@@ -75,6 +75,72 @@ class MyTestCase(unittest.TestCase):
 
     def test_multiscale_tension(self):
 
+        calc = guitarstring.GuitarString('27-28.625', 'PL', .009, 'E', 4, 8, 1)
+        tension = float("{0:.2f}".format(calc.tension))
+        print("1 E: " + str(tension))
+
+        calc = guitarstring.GuitarString('27-28.625', 'PL', .013, 'B', 3, 8, 2)
+        tension = float("{0:.2f}".format(calc.tension))
+        print("2 B: " + str(tension))
+
+        calc = guitarstring.GuitarString('27-28.625', 'PL', .017, 'G', 3, 8, 3)
+        tension = float("{0:.2f}".format(calc.tension))
+        print("3 G: " + str(tension))
+
+        calc = guitarstring.GuitarString('27-28.625', 'NW', .023, 'D', 3, 8, 4)
+        tension = float("{0:.2f}".format(calc.tension))
+        print("4 D: " + str(tension))
+
+        calc = guitarstring.GuitarString('27-28.625', 'NW', .031, 'A', 2, 8, 5)
+        tension = float("{0:.2f}".format(calc.tension))
+        print("5 A: " + str(tension))
+
+        calc = guitarstring.GuitarString('27-28.625', 'NW', .043, 'E', 2, 8, 6)
+        tension = float("{0:.2f}".format(calc.tension))
+        print("6 E: " + str(tension))
+
+        calc = guitarstring.GuitarString('27-28.625', 'NW', .059, 'B', 1, 8, 7)
+        tension = float("{0:.2f}".format(calc.tension))
+        print("7 B: " + str(tension))
+
+        calc = guitarstring.GuitarString('27-28.625', 'NW', .079, 'E', 1, 8, 8)
+        tension = float("{0:.2f}".format(calc.tension))
+        print("8 E: " + str(tension))
+
+
+        #calc = guitarstring.GuitarString('27-28.625', 'PL', .009, 'E', 4, 8, 1)
+        #tension = float("{0:.2f}".format(calc.tension))
+        #print("1 E: " + str(tension))
+        #
+        #calc = guitarstring.GuitarString('27-28.625', 'PL', .012, 'B', 3, 8, 2)
+        #tension = float("{0:.2f}".format(calc.tension))
+        #print("2 B: " + str(tension))
+        #
+        #calc = guitarstring.GuitarString('27-28.625', 'PL', .015, 'G', 3, 8, 3)
+        #tension = float("{0:.2f}".format(calc.tension))
+        #print("3 G: " + str(tension))
+        #
+        #calc = guitarstring.GuitarString('27-28.625', 'PL', .020, 'D', 3, 8, 4)
+        #tension = float("{0:.2f}".format(calc.tension))
+        #print("4 D: " + str(tension))
+        #
+        #calc = guitarstring.GuitarString('27-28.625', 'NW', .028, 'A', 2, 8, 5)
+        #tension = float("{0:.2f}".format(calc.tension))
+        #print("5 A: " + str(tension))
+        #
+        #calc = guitarstring.GuitarString('27-28.625', 'NW', .038, 'E', 2, 8, 6)
+        #tension = float("{0:.2f}".format(calc.tension))
+        #print("6 E: " + str(tension))
+        #
+        #calc = guitarstring.GuitarString('27-28.625', 'NW', .050, 'B', 1, 8, 7)
+        #tension = float("{0:.2f}".format(calc.tension))
+        #print("7 B: " + str(tension))
+        #
+        #calc = guitarstring.GuitarString('27-28.625', 'NW', .074, 'E', 1, 8, 8)
+        #tension = float("{0:.2f}".format(calc.tension))
+        #print("8 E: " + str(tension))
+        #
+
         #len 26.5"
         #E .009" PL == 14.18#
         calc = guitarstring.GuitarString(26.5, 'PL', .009, 'E', 4)
