@@ -17,6 +17,8 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
+    #url(r'^', include('favicon.urls')),
+
     # functionality
     (r'^calculate/$', calculate),
     (r'^delete-set/$', 'pythonbackend.views.deleteSet'),
@@ -43,4 +45,7 @@ urlpatterns = patterns('',
 
     # ios user accounts
     (r'^ios/login/$', 'mangoDjango.views.iosLogin'),
+
+    #(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/images/favicon.ico'}),
+
 )

@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'mangoDjango',
     'pythonbackend',
     'pythonbackend.templatetags',
+    # 'favicon',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
