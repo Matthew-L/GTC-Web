@@ -60,6 +60,8 @@ class GuitarString():
         @param octave: the octave of the note the string is being tuned to; used to calculate unit_weight
         """
 
+        print(scale_length, string_material, gauge, note, octave, number_of_strings, string_number)
+
         self.is_valid_string_material(string_material)
         self.string_material = string_material
         self.gauge = self.sanitize_gauge(gauge)
@@ -71,7 +73,7 @@ class GuitarString():
                 raise InvalidScaleLengthError("Multi-scale scale_lengths (scale_lengths containing \'-\'"
                                               " must specify the number of strings and string_number")
             self.number_of_strings, self.string_number = self.sanitize_string_numbers(number_of_strings, string_number)
-            self.scale_length = self.convert_multiscale_to_scale_length(scale_length, number_of_strings, string_number)
+            self.scale_length = self.convert_multiscale_to_scale_length(scale_length, self.number_of_strings, self.string_number)
         else:
             self.scale_length = self.sanitize_scale_length(scale_length)
 
@@ -99,8 +101,11 @@ class GuitarString():
         high_scale_length = self.sanitize_scale_length(high_scale_length)
 
         if high_scale_length > low_scale_length:
-            InvalidScaleLengthError('Multi-scale scale_lengths must follow a format similar to \'26.5-30\' and the lower value comes first')
-
+            #InvalidScaleLengthError('Multi-scale scale_lengths must follow a format similar to \'26.5-30\' and the lower value comes first')
+            temp = high_scale_length
+            high_scale_length = low_scale_length
+            low_scale_length = temp
+        #print(low_scale_length, high_scale_length)
         fan_distance = high_scale_length - low_scale_length
         if number_of_strings > 1:
             scale_constant = fan_distance/(number_of_strings-1)
@@ -189,8 +194,8 @@ class GuitarString():
         @return: @raise InvalidStringNumberError:
         """
         try:
-            string_number = int(string_number)
-            number_of_strings = int(number_of_strings)
+            string_number = int(float(string_number))
+            number_of_strings = int(float(number_of_strings))
         except ValueError:
             raise InvalidStringNumberError('number_of_strings and string_number must be an integer')
         return number_of_strings, string_number

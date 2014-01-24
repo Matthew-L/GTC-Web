@@ -58,20 +58,22 @@ def ajax(request):
     if request.is_ajax() and request.method == "POST":
         #string_set_name = request.POST['string_set_name']
         scale_length = request.POST['scale_length']
+        number_of_strings = request.POST['number_of_strings']
+        is_mscale = request.POST['is_mscale']
         string_number = request.POST['string_number']
         note = request.POST['note']
         octave = request.POST['octave']
         gauge = request.POST['gauge']
         string_type = request.POST['string_type']
-        number_of_strings = request.POST['string_type']
-
-        #try:
-        gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
+        print(is_mscale)
+        if(is_mscale):
+            gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
+                                   octave, number_of_strings, string_number)
+        else:
+            gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
                                            octave, number_of_strings, string_number)
         tension = float("{0:.2f}".format(gs.tension))
         response = {"tension": tension}
-        #except InvalidOctaveError, InvalidGaugeError as e:
-        #    print(str(e))
 
         print(tension)
 
@@ -89,9 +91,14 @@ def isValidScaleLength(request):
         string_type = 'PL'
         number_of_strings = 1
 
-        #try:
-        gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
+        print(request.POST["is_mscale"])
+        if(request.POST["is_mscale"]):
+            gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
                                        octave, number_of_strings, string_number)
+        else:
+            gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
+                                       octave)
+
         tension = float("{0:.2f}".format(gs.tension))
         response = {"tension": tension}
         #except InvalidOctaveError, InvalidGaugeError as e:
@@ -293,24 +300,3 @@ def ajaxDeleteSet(request):
             response = {"name": name}
 
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
-
-        #string_set_name = request.POST['string_set_name']
-        # scale_length = request.POST['scale_length']
-        # string_number = request.POST['string_number']
-        # note = request.POST['note']
-        # octave = request.POST['octave']
-        # gauge = request.POST['gauge']
-        # string_type = request.POST['string_type']
-        # number_of_strings = request.POST['string_type']
-        #
-        # #try:
-        # gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
-        #                                    octave, number_of_strings, string_number)
-        # tension = float("{0:.2f}".format(gs.tension))
-        # response = {"tension": tension}
-        # #except InvalidOctaveError, InvalidGaugeError as e:
-        # #    print(str(e))
-        #
-        # print(tension)
-        #
-        # return HttpResponse(json.dumps(response), mimetype='application/javascript')

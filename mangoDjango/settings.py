@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'pythonbackend',
     'pythonbackend.templatetags',
     # 'favicon',
+    'south',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

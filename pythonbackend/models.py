@@ -2,7 +2,7 @@ from django.db import models
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.models import User
-
+from south.db import db
 
 NOTE_CHOICES = (('A', 'A'), ('A#/Bb', 'A#/Bb'), ('B', 'B'), ('C', 'C'), ('C#/Db', 'C#/Db'), ('D', 'D'),
                 ('D#/Eb','D#/Eb'), ('E','E'), ('F','F'), ('F#/Gb','F#/Gb'), ('G','G'), ('G#/Ab','G#/Ab'))
@@ -14,7 +14,7 @@ STRING_TYPE = (("PL", "Plain"), ("PB", "Phosphorus Bronze"), ("NW", "Nickel Woun
 class StringSet(models.Model):
     name = models.CharField(max_length=30)
     user = models.ForeignKey(User)
-
+    desc = models.CharField(max_length=1000)
     def __unicode__(self):
         return self.name
 
@@ -31,7 +31,7 @@ class StringSetForm(ModelForm):
 
     class Meta:
         model = StringSet
-        fields = ['name', 'user']
+        fields = ['name', 'user', 'desc']
 
 
 

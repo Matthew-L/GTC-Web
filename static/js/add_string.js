@@ -4,16 +4,16 @@
 
     $(document).ready(function() {
         addChangeEvent();
-        calculateSet();
+//        calculateSet();
     });
 
 
 function addChangeEvent() {
     //$("#string_row_GTC_0").show();
 
+
     $("#mscale_checkbox").click(function () {
         console.log('hi')
-//        var curr = this.id.substr(this.id.length - 1)
         $(".hidden_row").slideToggle("slow");
     })
 
@@ -51,12 +51,14 @@ function countValidRows() {
     return curr;
 }
 
-function ajaxCalculate(name, scale_length, string_number, note, octave, gauge, string_type, number_of_strings, curr) {
+function ajaxCalculate(name, desc, is_mscale, scale_length, string_number, note, octave, gauge, string_type, number_of_strings, curr) {
     $.ajax({
         type: "POST",
         url: "/ajax/",
         data: {
             string_set_name: name,
+            desc: desc,
+            is_mscale: is_mscale,
             scale_length: scale_length,
             string_number: string_number,
             note: note,
@@ -77,19 +79,19 @@ function ajaxCalculate(name, scale_length, string_number, note, octave, gauge, s
     })
 }
 
-function calculateSet(){
-    var number_of_strings = countValidRows();
+//function calculateSet(){
+//    var number_of_strings = countValidRows();
 //    console.log("number_of_strings :" + number_of_strings);
-    var curr;
-    var name;
-    var scale_length;
-    var string_number;
-    var note;
-    var octave;
-    var gauge;
-    var string_type;
-
-    for(curr = 0; curr < number_of_strings; ++curr){
+//    var curr;
+//    var name;
+//    var scale_length;
+//    var string_number;
+//    var note;
+//    var octave;
+//    var gauge;
+//    var string_type;
+//
+//    for(curr = 0; curr < number_of_strings; ++curr){
 //        name = $("#string_set_name").val();
 //        scale_length = $("#scale_length").val();
 //        string_number = $("#string_number_GTC_" + curr).val();
@@ -111,8 +113,8 @@ function calculateSet(){
 //            ajaxCalculate(name, scale_length, string_number, note,
 //                octave, gauge, string_type, number_of_strings, curr);
 //        }
-    }
-}
+//    }
+//}
 
 function calculate(curr){
 //    console.log("in calculate")
@@ -122,9 +124,23 @@ function calculate(curr){
 //    console.log("name: "+name)
 //    console.log("scale_length: "+scale_length)
     if(name != '' && scale_length != ''){
-        var number_of_strings = countValidRows()+1;
-
+//        var number_of_strings = countValidRows()+1;
         var curr = this.id.substr(this.id.length - 1);
+
+
+        var is_mscale = $("#mscale_checkbox").is(':checked');
+        var is_valid_scale = false;
+        var number_of_strings = $("#number_of_strings").val();
+
+        if(is_mscale){
+            if( !isNaN(number_of_strings) ){
+                is_valid_scale = true;
+            }
+        }else{
+            //must be standard scale and therefore does not need string total
+            is_valid_scale = true;
+        }
+        var desc = $("#desc").val();
         var string_number = $("#string_number_GTC_"+curr).val();
         var note = $("#note_GTC_"+curr).val();
         var octave = $("#octave_GTC_"+curr).val();
@@ -137,13 +153,15 @@ function calculate(curr){
 //        console.log("type: "+string_type)
 //        console.log("name: "+name)
 //        console.log("length: "+scale_length)
-
+//        alert(is_mscale)
+//        alert(is_valid_scale)
+//        alert(number_of_strings)
 
         if(string_number != '' && note != '-'
             && octave != '-' && gauge != ''
             && string_type != '-' && name != ''
-            && scale_length != ''){
-              ajaxCalculate(name, scale_length, string_number, note,
+            && scale_length != '' && is_valid_scale){
+              ajaxCalculate(name, desc, is_mscale, scale_length, string_number, note,
                 octave, gauge, string_type, number_of_strings, curr);
 
         }
@@ -152,17 +170,21 @@ function calculate(curr){
 
 function validateScaleLength(){
     var scale_length = $("#scale_length").val();
+    var is_mscale = $("#mscale_checkbox").is(':checked');
 //    console.log("Scale Length keyup value: " + scale_length);
     $.ajax({
         type: "POST",
         url: "/is-valid-scale-length/",
         data: {
-            scale_length: scale_length
+            scale_length: scale_length,
+            is_mscale: is_mscale
         },
         dataType: "json",
         success: function (response) {
 //            console.log(response);
+//            alert( $("#scale_length"))
            $("#scale_length").css("background-color", "#5cb85c");
+           calculate();
         },
         error: function (response, error) {
             $("#scale_length").css("background-color", "#d2322d");
