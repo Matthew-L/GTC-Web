@@ -12,7 +12,7 @@ __author__ = 'Micah'
 #dahr half round wound
 #dacg Chromes - Stainless steel Flat wound
 #daft Flat Tops - Phosphore Bronze Polished
-#dabw 80-20’'S- 80/20 Brass Round Wound
+#dabw 80-20 S- 80/20 Brass Round Wound
 #dazw Great American Bronze - 85/15 Brass Round W
 #daxb Bass - Nickplated Round Wound
 #dahb Bass - Half Round - Pure Nickel Half Round
