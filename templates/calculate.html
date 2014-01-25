@@ -1,5 +1,99 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load get_range %}
+
+{% block breadcrumb %}
+    <li class="active"><a href="/calculate">Calculate</a></li>
+
+    {% if not is_logged_in %}
+        <li><a href="/accounts/register">Register</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <form method="get" action="/save-set/">
+    {# Contains the json file for the strings in the string set #}
+    <input type="hidden" id="string_data" name="variable" value='{{ json_data }}'>
+    {# String Set Name #}
+     <table border="1" >
+        <tr>
+            <th>String Set Name</th>
+            <td><input name="string_set_name" id="string_set_name" class="string_set_name" type="text" name="scale_length" value="{{ string_set_name }}"></td>
+
+        </tr>
+         <tr>
+             <th>Description</th>
+             <td>
+                <textarea id="desc" name="myTextBox" cols="25" rows="1"></textarea>
+            </td>
+         </tr>
+        <br>
+     </table>
+         <table border="1" >
+        <tr>
+                <th>
+                    Multiscale &nbsp<input type="checkbox" id="mscale_checkbox" name="scale" value="multiscale">
+                </th>
+        </tr>
+
+         <tr id="number_of_strings_row" class="hidden_row" hidden = "hidden">
+
+            <th class="hidden_row" hidden = "hidden" ><div class="hidden_row" hidden = "hidden">Total Number of Strings</div></th>
+            <td class="hidden_row" hidden = "hidden"><div class="hidden_row" hidden = "hidden"><input name="number_of_strings" id="number_of_strings" class="number_of_strings_input" type="text" name="number_of_strings" >
+            </div></td>
+
+        </tr>
+         <br>
+        <tr>
+            <th>Scale Length</th>
+            <td><input name="scale_length" id="scale_length" class="scale_length_input" type="text" name="scale_length"></td>
+        </tr>
+    </table>
+
+    <table>
+
+
+        <td>
+        </td>
+    </table>
+    <br>
+    <table border="1" id="strings-tbl" >
+        <tr>
+            <th>Number</th>
+            <th>Note</th>
+            <th>Octave</th>
+            <th>Gauge</th>
+            <th>String Type</th>
+            <th>Tension</th>
+        </tr>
+
+        {# New User String Form #}
+        {% for i in 1|get_range %}
+            <tr id="string_row{{ forloop.counter0 }}">
+                {% include "includes/forms.html" %}
+
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{#        <button id=insert-more type="button" class="btn btn-primary pull-left">Add String</button>#}
+{#        <button class="btn btn-success pull-right" type="submit">Save String Set</button>#}
+    <table border="0">
+    <tr>
+        <td><button class="btn btn-primary" id=insert-more type="button" >
+            <span class="glyphicon glyphicon-plus btn-divider"></span>
+            Add String</button>
+        </td>
+        <td> <button class="btn btn-success" type="submit">
+            <span class="glyphicon glyphicon-floppy-disk btn-divider"></span>
+            Save String Set</button> </td>
+    </tr>
+    </table>
+    </form>
+
+
+{% endblock %}
 {% block scripts %}
     {{ block.super }}
     <script src="{% static "assets/js/add_string.js" %}" type="text/javascript"></script>
@@ -158,101 +252,6 @@
 
     <script type="text/javascript">
     </script>
-{% endblock %}
-    
-{% load get_range %}
-
-{% block breadcrumb %}
-    <li class="active"><a href="/calculate">Calculate</a></li>
-
-    {% if not is_logged_in %}
-        <li><a href="/accounts/register">Register</a></li>
-    {% endif %}
-{% endblock %}
-
-{% block content %}
-    <form method="get" action="/save-set/">
-    {# Contains the json file for the strings in the string set #}
-    <input type="hidden" id="string_data" name="variable" value='{{ json_data }}'>
-    {# String Set Name #}
-     <table border="1" >
-        <tr>
-            <th>String Set Name</th>
-            <td><input name="string_set_name" id="string_set_name" class="string_set_name" type="text" name="scale_length" value="{{ string_set_name }}"></td>
-
-        </tr>
-         <tr>
-             <th>Description</th>
-             <td>
-                <textarea id="desc" name="myTextBox" cols="25" rows="1"></textarea>
-            </td>
-         </tr>
-        <br>
-     </table>
-         <table border="1" >
-        <tr>
-                <th>
-                    Multiscale &nbsp<input type="checkbox" id="mscale_checkbox" name="scale" value="multiscale">
-                </th>
-        </tr>
-
-         <tr id="number_of_strings_row" class="hidden_row" hidden = "hidden">
-
-            <th class="hidden_row" hidden = "hidden" ><div class="hidden_row" hidden = "hidden">Total Number of Strings</div></th>
-            <td class="hidden_row" hidden = "hidden"><div class="hidden_row" hidden = "hidden"><input name="number_of_strings" id="number_of_strings" class="number_of_strings_input" type="text" name="number_of_strings" >
-            </div></td>
-
-        </tr>
-         <br>
-        <tr>
-            <th>Scale Length</th>
-            <td><input name="scale_length" id="scale_length" class="scale_length_input" type="text" name="scale_length"></td>
-        </tr>
-    </table>
-
-    <table>
-
-
-        <td>
-        </td>
-    </table>
-    <br>
-    <table border="1" id="strings-tbl" >
-        <tr>
-            <th>Number</th>
-            <th>Note</th>
-            <th>Octave</th>
-            <th>Gauge</th>
-            <th>String Type</th>
-            <th>Tension</th>
-        </tr>
-
-        {# New User String Form #}
-        {% for i in 1|get_range %}
-            <tr id="string_row{{ forloop.counter0 }}">
-                {% include "includes/forms.html" %}
-
-            </tr>
-        {% endfor %}
-
-    </table>
-
-{#        <button id=insert-more type="button" class="btn btn-primary pull-left">Add String</button>#}
-{#        <button class="btn btn-success pull-right" type="submit">Save String Set</button>#}
-    <table border="0">
-    <tr>
-        <td><button class="btn btn-primary" id=insert-more type="button" >
-            <span class="glyphicon glyphicon-plus btn-divider"></span>
-            Add String</button>
-        </td>
-        <td> <button class="btn btn-success" type="submit">
-            <span class="glyphicon glyphicon-floppy-disk btn-divider"></span>
-            Save String Set</button> </td>
-    </tr>
-    </table>
-    </form>
-
-
 {% endblock %}
 
 
