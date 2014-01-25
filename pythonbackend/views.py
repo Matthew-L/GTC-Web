@@ -1,14 +1,9 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from calculator import guitarstring
-from customforms.string import StringForm, SubmitStringForm
-from calculator.guitarstring import GuitarString, InvalidOctaveError, InvalidGaugeError
+from calculator.guitarstring import GuitarString
 from pythonbackend.models import StringSet, String
-import ast
-from django.core.context_processors import csrf
-from pythonbackend.models import StringSetForm, StringForm
 from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.models import User
 from django.core import serializers
 import json
 
@@ -136,26 +131,26 @@ def isValidGauge(request):
 @csrf_exempt
 def isValidStringNumber(request):
     if request.is_ajax() and request.method == "POST":
-        scale_length = '26.5-30'
+        # scale_length = '26.5-30'
         string_number = request.POST['string_number']
-        note = 'C'
-        octave = 1
-        gauge = .001
-        string_type = 'PL'
-        number_of_strings = request.POST['number_of_strings']
-        is_mscale = request.POST['is_mscale']
-        response = {"tension": 0}
-        print(is_mscale)
-        if is_mscale == 'true':
-            print(is_mscale)
-            gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
-                                       octave, number_of_strings, string_number)
-            tension = float("{0:.2f}".format(gs.tension))
-            response = {"tension": tension}
-        else:
-            int(string_number)
-        # guitarstring.sanitize_string_number(string_number)
-        # response = {"tension": 1}
+        # note = 'C'
+        # octave = 1
+        # gauge = .001
+        # string_type = 'PL'
+        # number_of_strings = request.POST['number_of_strings']
+        # is_mscale = request.POST['is_mscale']
+        # response = {"tension": 0}
+        # print(is_mscale)
+        # if is_mscale == 'true':
+        #     print(is_mscale)
+        #     gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
+        #                                octave, number_of_strings, string_number)
+        #     tension = float("{0:.2f}".format(gs.tension))
+        #     response = {"tension": tension}
+        # else:
+        #     int(string_number)
+        GuitarString.sanitize_string_number(string_number)
+        response = {"tension": 1}
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
 
 
