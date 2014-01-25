@@ -1,0 +1,10 @@
+0000000000000000000000000000000000000000 9778ef2336950a38f36dc543735a2e5ccb3f2a4b Micah Gajewski <gajewsk2@illinois.edu> 1384837841 -0600	clone: from https://github.com/Matthew-L/GTC-Web.git
+9778ef2336950a38f36dc543735a2e5ccb3f2a4b a77c26cf0a8729d9e798637f0349f20c601ff2d3 Micah Gajewski <gajewsk2@illinois.edu> 1384838042 -0600	commit: implemented profile skeleton
+a77c26cf0a8729d9e798637f0349f20c601ff2d3 0acfa3e40a19dc80d354b9bbc145931130c40084 Micah Gajewski <gajewsk2@illinois.edu> 1384839173 -0600	merge origin/master: Fast-forward
+0acfa3e40a19dc80d354b9bbc145931130c40084 f3da531a2769fd8bab9e16cbd5bc04f7f8d6da43 Micah Gajewski <gajewsk2@illinois.edu> 1384842874 -0600	merge origin/master: Fast-forward
+f3da531a2769fd8bab9e16cbd5bc04f7f8d6da43 5aa98b8c5d08b6f5a8cf91dc83db5ee34e38ea9a Micah Gajewski <gajewsk2@illinois.edu> 1384843932 -0600	merge origin/master: Fast-forward
+5aa98b8c5d08b6f5a8cf91dc83db5ee34e38ea9a 20e77726b027c3941a7ff9eb10e068bcb3e66b59 Micah Gajewski <gajewsk2@illinois.edu> 1384844882 -0600	commit: working on search
+20e77726b027c3941a7ff9eb10e068bcb3e66b59 af15670d26047e0ae5442c10695718af6dae4b24 Micah Gajewski <gajewsk2@illinois.edu> 1384915761 -0600	commit: working on jquery
+af15670d26047e0ae5442c10695718af6dae4b24 da679c2a3bed6b27e4086d5a07d161e9352eb89b Micah <gajewsk2@illinois.edu> 1385067975 -0600	merge origin/master: Fast-forward
+da679c2a3bed6b27e4086d5a07d161e9352eb89b 8297de29562c69c55d7c846664e92540c787c65f Micah <gajewsk2@illinois.edu> 1385078435 -0600	commit: attempted to add dajax
+8297de29562c69c55d7c846664e92540c787c65f 75295dcece966dae4743608f9ab931cf92eb97d6 Micah <gajewsk2@illinois.edu> 1385961211 -0600	merge origin/master: Fast-forward

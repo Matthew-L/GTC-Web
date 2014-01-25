@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ <h2>Info</h2>
+    <div class="dropdown">
+  <a class="dropdown-toggle btn" data-toggle="dropdown" href="#" >Dropdown trigger</a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      <li>Item One</li>
+      <li>Item Two</li>
+    </ul>
+</div>
+{% endblock %}

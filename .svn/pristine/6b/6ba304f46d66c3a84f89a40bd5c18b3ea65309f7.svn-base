@@ -1,0 +1,33 @@
+0000000000000000000000000000000000000000 48cc4ba15f24255d675ca806cb720545cf683efe Micah Gajewski <gajewsk2@illinois.edu> 1385089562 -0600	clone: from https://github.com/Matthew-L/GTC-Web.git
+48cc4ba15f24255d675ca806cb720545cf683efe 7196c89facd72bd18c75b73d35710110d3e52034 Micah Gajewski <gajewsk2@illinois.edu> 1385099562 -0600	commit: jquery catches all events, starting ajax
+7196c89facd72bd18c75b73d35710110d3e52034 ef1fee5d99964247b0da3c89144952cde1e0e4e6 Micah Gajewski <gajewsk2@illinois.edu> 1385110394 -0600	merge origin/master: Fast-forward
+ef1fee5d99964247b0da3c89144952cde1e0e4e6 258ea01921852338fc080e929dcc2e96c31ea50d Micah Gajewski <gajewsk2@illinois.edu> 1385112967 -0600	commit: ajax calculate tension done
+258ea01921852338fc080e929dcc2e96c31ea50d 8872df0330be7db807ea5ca26d83b8f76f5ba2ea Micah Gajewski <gajewsk2@illinois.edu> 1385115039 -0600	merge origin/master: Fast-forward
+8872df0330be7db807ea5ca26d83b8f76f5ba2ea da5c59cf69529acbcaad64628ed0a911d5f8d75a Micah Gajewski <gajewsk2@illinois.edu> 1385115335 -0600	commit: merged
+da5c59cf69529acbcaad64628ed0a911d5f8d75a ec1759b900a4e22eb8f41e541121477ab36c177e Micah Gajewski <gajewsk2@illinois.edu> 1385116173 -0600	merge origin/master: Fast-forward
+ec1759b900a4e22eb8f41e541121477ab36c177e d2e0aecbc619c6fc772607788775a0ed1ab89770 Micah Gajewski <gajewsk2@illinois.edu> 1385519077 -0600	commit: DONE FINAL2
+d2e0aecbc619c6fc772607788775a0ed1ab89770 4a3ae660f075bfaa8edb35f97490776b218e740d Micah Gajewski <gajewsk2@illinois.edu> 1385519101 -0600	commit (merge): Merge remote-tracking branch 'origin/master'
+4a3ae660f075bfaa8edb35f97490776b218e740d d8df9d69e5fbdaae01ab7e2e5001c7690c1c1a58 Micah Gajewski <gajewsk2@illinois.edu> 1385519183 -0600	commit: DONE FINAL2
+d8df9d69e5fbdaae01ab7e2e5001c7690c1c1a58 7519ade4863a78ef129ce694239ad336ad86f726 Micah Gajewski <gajewsk2@illinois.edu> 1385525512 -0600	merge origin/master: Fast-forward
+7519ade4863a78ef129ce694239ad336ad86f726 60705a4c0faef8e890711a9e895740f1c4572e84 Micah Gajewski <gajewsk2@illinois.edu> 1385528560 -0600	commit: bootstrap added
+60705a4c0faef8e890711a9e895740f1c4572e84 7ec2d8b2f3d658e9ed4909b468d07f6be6dd6be3 Micah Gajewski <gajewsk2@illinois.edu> 1385530351 -0600	commit: removed edit_string
+7ec2d8b2f3d658e9ed4909b468d07f6be6dd6be3 9b6692bf8f30c01d4be62c35618bc8f8762b6a44 Micah Gajewski <gajewsk2@illinois.edu> 1385532757 -0600	commit: added register button
+9b6692bf8f30c01d4be62c35618bc8f8762b6a44 a7e42a5b4bee1caa2bac725cb7544d11defc1aa4 Micah Gajewski <gajewsk2@illinois.edu> 1385532784 -0600	commit (merge): Merge remote-tracking branch 'origin/master'
+a7e42a5b4bee1caa2bac725cb7544d11defc1aa4 ddf6556680d0eb8b8cc28128897f8c65ef8b078e Micah Gajewski <gajewsk2@illinois.edu> 1385532841 -0600	commit: added register button
+ddf6556680d0eb8b8cc28128897f8c65ef8b078e fdf5aab4f169bbd17a2b11ae8c7425f25c6f68e8 Micah Gajewski <gajewsk2@illinois.edu> 1385535064 -0600	merge origin/master: Fast-forward
+fdf5aab4f169bbd17a2b11ae8c7425f25c6f68e8 75295dcece966dae4743608f9ab931cf92eb97d6 Micah Gajewski <gajewsk2@illinois.edu> 1385961136 -0600	commit: fixing save button...
+75295dcece966dae4743608f9ab931cf92eb97d6 c55eaf64bbb7966254490010a365ba2b493bd605 Micah Gajewski <gajewsk2@illinois.edu> 1386039966 -0600	merge origin/master: Fast-forward
+c55eaf64bbb7966254490010a365ba2b493bd605 2fe141cdcb395f7816c8e772f98bcb976f342514 Micah Gajewski <gajewsk2@illinois.edu> 1386043235 -0600	merge origin/master: Fast-forward
+2fe141cdcb395f7816c8e772f98bcb976f342514 d66d15a306a500103c4195d776cefa8058376041 Micah Gajewski <gajewsk2@illinois.edu> 1386043803 -0600	merge origin/master: Fast-forward
+d66d15a306a500103c4195d776cefa8058376041 f28b687bfef3abf03b5e8ce28d451c3ff8c4f267 Micah Gajewski <gajewsk2@illinois.edu> 1386046630 -0600	merge origin/master: Fast-forward
+f28b687bfef3abf03b5e8ce28d451c3ff8c4f267 3a0147194b345598e9a399dcabf4bbbcd0092e06 Micah Gajewski <gajewsk2@illinois.edu> 1386047074 -0600	commit: added more bootstrap and working on loading tension of entire set
+3a0147194b345598e9a399dcabf4bbbcd0092e06 57a61277c22a701cf333c63485d2031c7774ec2f Micah Gajewski <gajewsk2@illinois.edu> 1386050414 -0600	commit: added more bootstrap and working on loading tension of entire set
+57a61277c22a701cf333c63485d2031c7774ec2f a3f6d52c7944e64d173aabab489db31dc1554ff4 Micah Gajewski <gajewsk2@illinois.edu> 1386056045 -0600	commit: automatically loads tensions of prebuilt sets
+a3f6d52c7944e64d173aabab489db31dc1554ff4 278a5d187b4f12c5c63b1efe7b9bd17c499ad602 Micah Gajewski <gajewsk2@illinois.edu> 1386064272 -0600	commit: save works, need to fix duplicate names
+278a5d187b4f12c5c63b1efe7b9bd17c499ad602 afe67951689f005249f5e182588a4e41c8282108 Micah Gajewski <gajewsk2@illinois.edu> 1386064299 -0600	commit (merge): Merge remote-tracking branch 'origin/master'
+afe67951689f005249f5e182588a4e41c8282108 3bdaa1361a9e0dba5b62cd28fb0b4a2a6e00d2d2 Micah Gajewski <gajewsk2@illinois.edu> 1386064696 -0600	commit: fixed string number bug
+3bdaa1361a9e0dba5b62cd28fb0b4a2a6e00d2d2 a4f5897d27eb2bb3873b75213faedff4eb6dedaa Micah Gajewski <gajewsk2@illinois.edu> 1386104304 -0600	commit: added a footer and fixed duplicate saves
+a4f5897d27eb2bb3873b75213faedff4eb6dedaa 637284b127868778a153ceb7ef6629319137a300 Micah Gajewski <gajewsk2@illinois.edu> 1386106471 -0600	commit: added info to front page
+637284b127868778a153ceb7ef6629319137a300 113d414c107957260fd5097391788801453c6862 Micah Gajewski <gajewsk2@illinois.edu> 1386106494 -0600	commit (merge): Merge remote-tracking branch 'origin/master'
+113d414c107957260fd5097391788801453c6862 0b69a147423150e8d881149b89dc80d181959e67 Micah Gajewski <gajewsk2@illinois.edu> 1386108268 -0600	commit: added icons
+0b69a147423150e8d881149b89dc80d181959e67 65237028c38c64c7b348e2e34a3ca51e32a13061 Micah Gajewski <gajewsk2@illinois.edu> 1386134009 -0600	commit: fixed profile and search
