@@ -30,6 +30,7 @@ urlpatterns = patterns('',
     (r'^is-valid-scale-length/$', 'pythonbackend.views.isValidScaleLength'),
     (r'^is-valid-gauge/$', 'pythonbackend.views.isValidGauge'),
     (r'^is-valid-string-number/$', 'pythonbackend.views.isValidStringNumber'),
+    (r'^is-valid-number-of-strings/$', 'pythonbackend.views.isValidNumberOfStrings'),
     (r'^info/$','mangoDjango.views.info'),
 
     # user accounts

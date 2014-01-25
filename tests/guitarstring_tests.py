@@ -76,7 +76,7 @@ class MyTestCase(unittest.TestCase):
     def test_multiscale_tension(self):
 
         #26.5-30 PL 0.009 A 1 2 1
-
+        #26.5-3 PL 0.001 C 1 0 1
         calc = guitarstring.GuitarString('26.5-30', 'PL', .009, 'A', 1, '2', 1)
         tension = float("{0:.2f}".format(calc.tension))
         print("1 A: " + str(tension))
