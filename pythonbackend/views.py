@@ -66,7 +66,7 @@ def ajax(request):
         gauge = request.POST['gauge']
         string_type = request.POST['string_type']
         print(string_number)
-        if(is_mscale):
+        if is_mscale == 'true':
             gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
                                    octave, number_of_strings, string_number)
         else:
@@ -92,7 +92,9 @@ def isValidScaleLength(request):
 
 
         print(request.POST["is_mscale"])
-        if(request.POST["is_mscale"]):
+        if request.POST["is_mscale"] == 'true':
+            print('sl')
+            print(request.POST["is_mscale"])
             number_of_strings = request.POST["number_of_strings"]
             gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
                                        octave, number_of_strings, string_number)
@@ -145,7 +147,10 @@ def isValidStringNumber(request):
         string_type = 'PL'
         number_of_strings = request.POST['number_of_strings']
         is_mscale = request.POST['is_mscale']
-        if(is_mscale):
+        response = {"tension": 0}
+        print(is_mscale)
+        if is_mscale == 'true':
+            print(is_mscale)
             gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
                                        octave, number_of_strings, string_number)
             tension = float("{0:.2f}".format(gs.tension))
@@ -172,7 +177,7 @@ def isValidNumberOfStrings(request):
         string_type = 'PL'
         number_of_strings = request.POST["number_of_strings"]
 
-        if(int(number_of_strings) > 0 ):
+        if int(number_of_strings) > 0:
             gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
                                        octave, number_of_strings, string_number)
 
@@ -331,3 +336,4 @@ def ajaxDeleteSet(request):
             response = {"name": name}
 
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
+

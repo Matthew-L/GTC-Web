@@ -211,9 +211,7 @@ function validateScaleLength(){
 function validateGauge() {
     id = "#" + this.id
     var gauge_value = $(id).val();
-    var scale_length = $("#scale_length").val();
-    var is_mscale = $("#mscale_checkbox").is(':checked');
-    var number_of_strings = $("#number_of_strings").val();
+
 //    console.log("Gauge keyup value: " + gauge_value);
     $.ajax({
         type: "POST",
@@ -254,6 +252,7 @@ function validateStringNumber() {
             calculate()
         },
         error: function (response, error) {
+            console.log
             $(id).css("background-color", "#d2322d");
         }
     })

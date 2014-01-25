@@ -72,7 +72,11 @@ class GuitarString():
             if number_of_strings is None or string_number is None:
                 raise InvalidScaleLengthError("Multi-scale scale_lengths (scale_lengths containing \'-\'"
                                               " must specify the number of strings and string_number")
-            self.number_of_strings, self.string_number = self.sanitize_string_numbers(number_of_strings, string_number)
+            self.number_of_strings = self.sanitize_number_of_strings(number_of_strings)
+            self.string_number = self.sanitize_string_numbers(string_number)
+            if self.string_number > self.number_of_strings:
+                raise OutOfRangeError(' string_number must be less than number_of_strings')
+
             self.scale_length = self.convert_multiscale_to_scale_length(scale_length, self.number_of_strings, self.string_number)
         else:
             self.scale_length = self.sanitize_scale_length(scale_length)
@@ -186,7 +190,7 @@ class GuitarString():
         return unit_weight
 
     @staticmethod
-    def sanitize_string_numbers(number_of_strings, string_number):
+    def sanitize_string_number(string_number):
         """
         converts both parameters to an int and raises an appropriate error on failure
         @param number_of_strings:
@@ -195,10 +199,26 @@ class GuitarString():
         """
         try:
             string_number = int(float(string_number))
+        except ValueError:
+            raise InvalidStringNumberError('string_number must be an integer')
+        if string_number <= 0:
+            raise OutOfRangeError(' string_number must be positive')
+        return string_number
+
+    @staticmethod
+    def sanitize_number_of_strings(number_of_strings):
+        try:
             number_of_strings = int(float(number_of_strings))
         except ValueError:
-            raise InvalidStringNumberError('number_of_strings and string_number must be an integer')
-        return number_of_strings, string_number
+            raise InvalidStringNumberError('number_of_strings must be an integer')
+        if number_of_strings <= 0:
+            raise OutOfRangeError('number_of_strings must be positive')
+        return number_of_strings
+
+    # @staticmethod
+    # def is_valid_string_number_and_number_of_strings(string_number, number_of_strings):
+    #     if string_number > number_of_strings:
+    #         raise OutOfRangeError(' string_number must be less than number_of_strings')
 
     @staticmethod
     def is_valid_string_material(string_material):
