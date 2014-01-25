@@ -56,7 +56,6 @@ def ajax(request):
     @return: the calculated tension rouned off to 2 decimal places
     """
     if request.is_ajax() and request.method == "POST":
-        #string_set_name = request.POST['string_set_name']
         scale_length = request.POST['scale_length']
         number_of_strings = request.POST['number_of_strings']
         is_mscale = request.POST['is_mscale']
@@ -68,16 +67,14 @@ def ajax(request):
         print(string_number)
         if is_mscale == 'true':
             gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
-                                   octave, number_of_strings, string_number)
+                                           octave, number_of_strings, string_number)
         else:
             gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
                                            octave)
         tension = float("{0:.2f}".format(gs.tension))
         response = {"tension": tension}
-
-        print(tension)
-
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
+
 
 @csrf_exempt
 def isValidScaleLength(request):
@@ -157,11 +154,6 @@ def isValidStringNumber(request):
             response = {"tension": tension}
         else:
             int(string_number)
-
-        #except InvalidOctaveError, InvalidGaugeError as e:
-        #    print(str(e))
-
-        #print(tension)
 
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
 

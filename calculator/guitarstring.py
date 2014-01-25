@@ -73,7 +73,7 @@ class GuitarString():
                 raise InvalidScaleLengthError("Multi-scale scale_lengths (scale_lengths containing \'-\'"
                                               " must specify the number of strings and string_number")
             self.number_of_strings = self.sanitize_number_of_strings(number_of_strings)
-            self.string_number = self.sanitize_string_numbers(string_number)
+            self.string_number = self.sanitize_string_number(string_number)
             if self.string_number > self.number_of_strings:
                 raise OutOfRangeError(' string_number must be less than number_of_strings')
 
