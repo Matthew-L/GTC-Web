@@ -179,11 +179,11 @@ function validateStringNumber() {
             number_of_strings: number_of_strings
         },
         dataType: "json",
-        success: function (response) {
+        success: function () {
             $(id).css("background-color", "#5cb85c");
             calculate()
         },
-        error: function (response, error) {
+        error: function ( error) {
             console.log
             $(id).css("background-color", "#d2322d");
         }

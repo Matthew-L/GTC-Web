@@ -154,7 +154,8 @@ def isValidStringNumber(request):
             response = {"tension": tension}
         else:
             int(string_number)
-
+        # guitarstring.sanitize_string_number(string_number)
+        # response = {"tension": 1}
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
 
 
@@ -176,10 +177,6 @@ def isValidNumberOfStrings(request):
             tension = float("{0:.2f}".format(gs.tension))
             response = {"tension": tension}
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
-        #except InvalidOctaveError, InvalidGaugeError as e:
-        #    print(str(e))
-
-        #print(tension)
 
 
 
