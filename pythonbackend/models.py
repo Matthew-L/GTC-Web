@@ -6,7 +6,7 @@ from south.db import db
 
 NOTE_CHOICES = (('A', 'A'), ('A#/Bb', 'A#/Bb'), ('B', 'B'), ('C', 'C'), ('C#/Db', 'C#/Db'), ('D', 'D'),
                 ('D#/Eb','D#/Eb'), ('E','E'), ('F','F'), ('F#/Gb','F#/Gb'), ('G','G'), ('G#/Ab','G#/Ab'))
-OCTAVE_RANGE = 11
+OCTAVE_RANGE = 10
 STRING_TYPE = (("PL", "Plain"), ("PB", "Phosphorus Bronze"), ("NW", "Nickel Wound"), ("XS", "Stainless Steel"),
                ("HR", "Half-Round"))
 

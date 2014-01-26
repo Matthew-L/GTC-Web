@@ -258,8 +258,8 @@ class GuitarString():
             octave = int(octave)
         except ValueError:
             raise InvalidOctaveError('octave must be an integer')
-        if not (0 <= octave < 10):
-            raise OutOfRangeError('octave must be fall between 0 and 10 (inclusive)')
+        if not (0 <= octave <= 9):
+            raise OutOfRangeError('octave must be fall between 0 and 9 (inclusive)')
 
         return octave
     

@@ -4,11 +4,11 @@
 
 <td >
     <input  id="string_number_GTC_{{ forloop.counter0 }}" name="string_number_GTC_{{ forloop.counter0 }}" type="text" name="string_number" size="3"
-           class="row_input string_number_input">
+           class="row_input string_number_input user_input">
 </td>
 
 <td >
-<select  id="note_GTC_{{ forloop.counter0 }}" name="note_GTC_{{ forloop.counter0 }}" class="row_input dropdown_input">
+<select  id="note_GTC_{{ forloop.counter0 }}" name="note_GTC_{{ forloop.counter0 }}" class="row_input dropdown_input user_input">
   <option value="-">-</option>
   <option value="A">A</option>
   <option value="A#/Bb">A#/Bb</option>
@@ -27,8 +27,8 @@
 
 <td >
 <select  id="octave_GTC_{{ forloop.counter0 }}" name="octave_GTC_{{ forloop.counter0 }}"
-         class="row_input octave_input dropdown_input">
-    {% for i in 11|get_range %}
+         class="row_input octave_input dropdown_input user_input">
+    {% for i in 10|get_range %}
         {% if forloop.first %}
             <option value="-">-</option>
         {% else %}
@@ -40,12 +40,12 @@
 
 <td>
     <input  id="gauge_GTC_{{ forloop.counter0 }}" name="gauge_GTC_{{ forloop.counter0 }}" type="text" name="gauge" size="3"
-            class="row_input gauge_input">
+            class="row_input gauge_input user_input">
 </td>
 
 <td >
 <select  id="string_type_GTC_{{ forloop.counter0 }}" name="string_type_GTC_{{ forloop.counter0 }}"
-         class="row_input dropdown_input">
+         class="row_input dropdown_input user_input">
     <option value="-">-</option>
     <option value="PL">Plain</option>
     <option value="PB">Phosphorus Bronze</option>

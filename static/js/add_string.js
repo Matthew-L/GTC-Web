@@ -26,12 +26,9 @@ function addChangeEvent() {
         $("#string_row_GTC_" + curr).toggle();
     })
 
-    $(".scale_length_input").keyup(validateScaleLength);
-    $(".gauge_input").keyup(validateGauge);
-    $(".string_number_input").keyup(validateStringNumber);
-    $(".number_of_strings_input").keyup(validateNumberOfStrings);
-    $(".dropdown_input").on("change", validateDropdown);
-    $(".string_set_name_input").keyup(validateStringSetName);
+    $(".dropdown_input").on("change", validateInput);
+    $(".user_input").keyup(validateInput);
+
 
     last_row = $('#strings-tbl tr:last');
     last_row.css('display', 'none');
@@ -39,6 +36,38 @@ function addChangeEvent() {
     last_row.fadeIn('slow');
 }
 
+function validateInput(){
+    var id = "#" + this.id
+    var val = $(id).val()
+    var is_valid;
+
+    if( $(id).hasClass("dropdown_input") ){
+        is_valid = validateDropdown(val)
+    }
+    else if($(id).hasClass("string_number_input")){
+        is_valid = validateStringNumber(val);
+    }
+    else if($(id).hasClass("number_of_strings_input")){
+        is_valid = validateNumberOfStrings(val);
+        return;
+    }
+    else if($(id).hasClass("gauge_input")){
+        is_valid = validateGauge(val);
+    }
+    else if($(id).hasClass("scale_length_input")){
+        is_valid = validateScaleLength(val);
+        return;
+    }
+
+
+    colorValid(id, is_valid);
+    if(is_valid){
+
+        var curr = id.substr(id.length - 1);
+        calculate(curr)
+    }
+
+}
 
 function countValidRows() {
     var lastid = $('#strings-tbl tr:last-child').find("div").attr('id')
@@ -87,17 +116,18 @@ function check_valid_scale(is_mscale, number_of_strings) {
         //must be standard scale and therefore does not need string total
         var scale_length = $("#scale_length").val();
         if(scale_length.match('^[0-9]*\.[0-9]*$')){
+//        if( isInt(scale_length) ){
             is_valid_scale = true;
         }
     }
     return is_valid_scale;
 }
-function calculate(){
+function calculate(curr){
     var name = $("#string_set_name").val();
     var scale_length = $("#scale_length").val();
 
     if(name != '' && scale_length != '') {
-        var curr = this.id.substr(this.id.length - 1);
+//        var curr = this.id.substr(this.id.length - 1);
 
         var is_mscale = $("#mscale_checkbox").is(':checked');
         var number_of_strings = $("#number_of_strings").val();
@@ -120,118 +150,101 @@ function calculate(){
     }
 }
 
-function validateScaleLength(){
-    var scale_length = $("#scale_length").val();
+function validateScaleLength( scale_length){
+
     var is_mscale = $("#mscale_checkbox").is(':checked');
     var number_of_strings = $("#number_of_strings").val();
+    var is_valid = true;
 //    console.log("Scale Length keyup value: " + scale_length);
-    $.ajax({
-        type: "POST",
-        url: "/is-valid-scale-length/",
-        data: {
-            scale_length: scale_length,
-            is_mscale: is_mscale,
-            number_of_strings: number_of_strings
-        },
-        dataType: "json",
-        success: function (response) {
-           $("#scale_length").css("background-color", "#5cb85c");
-           calculate();
-        },
-        error: function (response, error) {
-            $("#scale_length").css("background-color", "#d2322d");
-        }
-    })
+//    $.ajax({
+//        type: "POST",
+//        url: "/is-valid-scale-length/",
+//        data: {
+//            scale_length: scale_length,
+//            is_mscale: is_mscale,
+//            number_of_strings: number_of_strings
+//        },
+//        dataType: "json",
+//        success: function (response) {
+//           $("#scale_length").css("background-color", "#5cb85c");
+//           calculate();
+//        },
+//        error: function (response, error) {
+//            $("#scale_length").css("background-color", "#d2322d");
+//        }
+//    })
+    return is_valid;
 }
 
-function validateGauge() {
-    id = "#" + this.id
-    var gauge_value = $(id).val();
+function validateGauge(gauge) {
 
-    $.ajax({
-        type: "POST",
-        url: "/is-valid-gauge/",
-        data: {
-            gauge: gauge_value
-        },
-        dataType: "json",
-        success: function (response) {
-            $(id).css("background-color", "#5cb85c");
-            calculate();
-        },
-        error: function (response, error) {
-            $(id).css("background-color", "#d2322d");
+    var is_valid = false;
+    if( isFloat(gauge) ){
+        if( 0 < gauge && gauge < 1){
+            is_valid = true;
         }
-    })
+    }
+    return is_valid;
 }
 
-function validateStringNumber() {
-    id = "#" + this.id
-    var string_number_value = $(id).val();
-    var is_mscale = $("#mscale_checkbox").is(':checked');
-    var number_of_strings = $("#number_of_strings").val();
-    $.ajax({
-        type: "POST",
-        url: "/is-valid-string-number/",
-        data: {
-            string_number: string_number_value,
-            is_mscale: is_mscale,
-            number_of_strings: number_of_strings
-        },
-        dataType: "json",
-        success: function () {
-            $(id).css("background-color", "#5cb85c");
-            calculate()
-        },
-        error: function ( error) {
-            console.log
-            $(id).css("background-color", "#d2322d");
+function validateStringNumber(string_number) {
+    var is_valid = false;
+    if(isInt(string_number)){
+        if(string_number > 0){
+
+            var is_mscale = $("#mscale_checkbox").is(':checked');
+            if( is_mscale){
+                var number_of_strings = $("#number_of_strings").val();
+                if(isInt(number_of_strings)){
+                    if(number_of_strings >= string_number){
+                        is_valid = true;
+                    }
+                }
+            }
+            else{
+                is_valid = true;
+            }
+
         }
-    })
+    }
+
+    return is_valid
 }
 
-function validateNumberOfStrings() {
-
-    var number_of_strings = $('#number_of_strings').val();
-    $.ajax({
-        type: "POST",
-        url: "/is-valid-number-of-strings/",
-        data: {
-            number_of_strings: number_of_strings
-        },
-        dataType: "json",
-        success: function (response) {
-//            console.log(response);
-            $('#number_of_strings').css("background-color", "#5cb85c");
-            validateScaleLength()
-        },
-        error: function (response, error) {
-            $(id).css("background-color", "#d2322d");
-        }
-    })
+function validateNumberOfStrings(number_of_strings) {
+    if( isInt(number_of_strings) )
+        return true;
+    return false;
 }
 
 
-function validateDropdown() {
-    value_not_set = "-"
-    id = "#" + this.id
-    var dropdown_value = $(id).val();
-    if(dropdown_value == value_not_set){
-        $(id).css("background-color", "#d2322d");
+function validateDropdown(dropdown_value) {
+    if( dropdown_value != '-')
+        return true;
+    return false;
+}
+
+
+function colorValid(id, is_valid){
+    if(is_valid){
+        $(id).css("background-color", "#5cb85c");
     }else{
-        $(id).css("background-color", "#5cb85c");
-        calculate()
-    }
-}
-
-function validateStringSetName() {
-    id = "#" + this.id
-    var string_set_name = $(id).val();
-    if (string_set_name == "") {
         $(id).css("background-color", "#d2322d");
-    } else {
-        $(id).css("background-color", "#5cb85c");
     }
 }
 
+function isInt(input){
+    var int_regex = /^\d+$/;
+    if(int_regex.test(input))
+        return true;
+    else
+        return false;
+}
 
+function isFloat(input){
+    var float_regex = /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/;
+    if (float_regex.test(input))
+        return true;
+    else
+        return false;
+}
