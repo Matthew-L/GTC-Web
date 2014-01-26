@@ -63,7 +63,8 @@ function validateInput(){
     colorValid(id, is_valid);
     if(is_valid){
 
-        var curr = id.substr(id.length - 1);
+//        var curr = id.substr(id.length - 1);
+//        for(var i = )
         calculate(curr)
     }
 
