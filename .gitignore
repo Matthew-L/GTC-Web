@@ -1,0 +1,6 @@
+workspace.xml
+venv
+*.pyc
+staticfiles
+*.idea
+*.svn
