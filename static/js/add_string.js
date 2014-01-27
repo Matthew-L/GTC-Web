@@ -29,7 +29,7 @@ function addChangeEvent() {
 
     $(".dropdown_input").on("change", validateAll);
     $(".user_input").keyup(validateAll);
-
+    $("#mscale_checkbox").click(validateAll);
 
     last_row = $('#strings-tbl tr:last');
     last_row.css('display', 'none');

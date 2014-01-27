@@ -80,7 +80,7 @@
       <file leaf-file-name="add_string.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/js/add_string.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="214" column="77" selection-start="6221" selection-end="6221" vertical-scroll-proportion="0.43724138" vertical-offset="3321" max-vertical-offset="4607">
+            <state line="31" column="43" selection-start="743" selection-end="743" vertical-scroll-proportion="0.6565517" vertical-offset="51" max-vertical-offset="4607">
               <folding />
             </state>
           </provider>
@@ -846,7 +846,11 @@
       <created>1390803055546</created>
       <updated>1390803055546</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="fixed string number bug">
+      <created>1390805104670</created>
+      <updated>1390805104670</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -911,7 +915,6 @@
     <MESSAGE value="added more bootstrap and working on loading tension of entire set" />
     <MESSAGE value="automatically loads tensions of prebuilt sets" />
     <MESSAGE value="save works, need to fix duplicate names" />
-    <MESSAGE value="fixed string number bug" />
     <MESSAGE value="added a footer and fixed duplicate saves" />
     <MESSAGE value="added info to front page" />
     <MESSAGE value="added icons" />
@@ -927,7 +930,8 @@
     <MESSAGE value="fixed javascript" />
     <MESSAGE value="added validate all" />
     <MESSAGE value="validates all and loads tension" />
-    <option name="LAST_COMMIT_MESSAGE" value="validates all and loads tension" />
+    <MESSAGE value="fixed string number bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed string number bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1026,7 +1030,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/js/add_string.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="214" column="77" selection-start="6221" selection-end="6221" vertical-scroll-proportion="0.43724138" vertical-offset="3321" max-vertical-offset="4607">
+        <state line="31" column="43" selection-start="743" selection-end="743" vertical-scroll-proportion="0.6565517" vertical-offset="51" max-vertical-offset="4607">
           <folding />
         </state>
       </provider>
