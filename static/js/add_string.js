@@ -4,6 +4,7 @@
 
     $(document).ready(function() {
         addChangeEvent();
+        validateAll();
     });
 
 
@@ -26,8 +27,8 @@ function addChangeEvent() {
         $("#string_row_GTC_" + curr).toggle();
     })
 
-    $(".dropdown_input").on("change", validateAll());
-    $(".user_input").keyup(validateAll());
+    $(".dropdown_input").on("change", validateAll);
+    $(".user_input").keyup(validateAll);
 
 
     last_row = $('#strings-tbl tr:last');
@@ -123,8 +124,12 @@ function ajaxCalculate(is_mscale, scale_length, string_number, note, octave, gau
         },
         dataType: "json",
         success: function (response) {
-            console.log(response.tension);
-            $('#tension_GTC_' + curr).text(response.tension);
+            var tension = response.tension;
+            if(tension < 0){
+                tension = 0;
+            }
+
+            $('#tension_GTC_' + curr).text(tension);
         },
         error: function (response, error) {
             alert("ERROR!");
@@ -132,27 +137,6 @@ function ajaxCalculate(is_mscale, scale_length, string_number, note, octave, gau
     })
 }
 
-//function check_valid_scale(is_mscale, number_of_strings) {
-//    var is_valid_scale = false;
-//
-//    if (is_mscale) {
-//        var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/; //checks for digit
-//        if (numberRegex.test(number_of_strings)) {
-////          if( isInt(number_of_strings)){
-//            if (number_of_strings > 1) {
-//                is_valid_scale = true;
-//            }
-//        }
-//    }else {
-//        //must be standard scale and therefore does not need string total
-//        var scale_length = $("#scale_length").val();
-//        if(scale_length.match('^[0-9]*\.[0-9]*$')){
-////        if( isInt(scale_length) ){
-//            is_valid_scale = true;
-//        }
-//    }
-//    return is_valid_scale;
-//}
 function validateRow(curr){
 
     var is_mscale = $("#mscale_checkbox").is(':checked');
@@ -228,7 +212,7 @@ function validateStringNumber(string_number) {
             if( is_mscale){
                 var number_of_strings = $("#number_of_strings").val();
                 if(isInt(number_of_strings)){
-                    if(number_of_strings >= string_number){
+                    if(parseInt(number_of_strings) >= parseInt(string_number)){
                         is_valid = true;
                     }
                 }

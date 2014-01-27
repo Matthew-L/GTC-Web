@@ -80,7 +80,7 @@
       <file leaf-file-name="add_string.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/js/add_string.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="95" column="128" selection-start="2939" selection-end="2939" vertical-scroll-proportion="0.14482759" vertical-offset="1510" max-vertical-offset="4879">
+            <state line="214" column="77" selection-start="6221" selection-end="6221" vertical-scroll-proportion="0.43724138" vertical-offset="3321" max-vertical-offset="4607">
               <folding />
             </state>
           </provider>
@@ -112,7 +112,8 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
-    <option name="UPDATE_TYPE" value="REBASE" />
+    <option name="UPDATE_CHANGES_POLICY" value="SHELVE" />
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitLogSettings">
@@ -841,7 +842,11 @@
       <created>1390801449636</created>
       <updated>1390801449636</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="validates all and loads tension">
+      <created>1390803055546</created>
+      <updated>1390803055546</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -897,7 +902,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="merged" />
     <MESSAGE value="done" />
     <MESSAGE value="DONE FINAL2" />
     <MESSAGE value="bootstrap added" />
@@ -922,7 +926,8 @@
     <MESSAGE value="about to refactor2" />
     <MESSAGE value="fixed javascript" />
     <MESSAGE value="added validate all" />
-    <option name="LAST_COMMIT_MESSAGE" value="added validate all" />
+    <MESSAGE value="validates all and loads tension" />
+    <option name="LAST_COMMIT_MESSAGE" value="validates all and loads tension" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1021,7 +1026,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/js/add_string.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="128" selection-start="2939" selection-end="2939" vertical-scroll-proportion="0.14482759" vertical-offset="1510" max-vertical-offset="4879">
+        <state line="214" column="77" selection-start="6221" selection-end="6221" vertical-scroll-proportion="0.43724138" vertical-offset="3321" max-vertical-offset="4607">
           <folding />
         </state>
       </provider>
