@@ -26,8 +26,8 @@ function addChangeEvent() {
         $("#string_row_GTC_" + curr).toggle();
     })
 
-    $(".dropdown_input").on("change", validateInput);
-    $(".user_input").keyup(validateInput);
+    $(".dropdown_input").on("change", validateAll());
+    $(".user_input").keyup(validateAll());
 
 
     last_row = $('#strings-tbl tr:last');
@@ -84,40 +84,21 @@ function calculateAllRows() {
 
         for (var i = 0; i <= countValidRows(); ++i) {
             if ($("#string_number_GTC_" + i).length) {//check if it exists
-                calculate(i)
+                if(validateRow(i)){
+                    var is_mscale = $("#mscale_checkbox").is(':checked');
+                    var scale_length = $("#scale_length").val();
+                    var number_of_strings = $("#number_of_strings").val();
+                    var string_number = $("#string_number_GTC_" + i).val();
+                    var note = $("#note_GTC_" + i).val();
+                    var octave = $("#octave_GTC_" + i).val();
+                    var gauge = $("#gauge_GTC_" + i).val();
+                    var string_type = $("#string_type_GTC_" + i).val();
+                    ajaxCalculate(is_mscale, scale_length, string_number, note, octave, gauge, string_type, number_of_strings, i);
+                }
+
             }
         }
 
-}
-function validateInput(){
-    validateAll();
-
-//    var id = "#" + this.id
-//    var val = $(id).val()
-//    var is_valid;
-//
-//    if( $(id).hasClass("dropdown_input") ){
-//        is_valid = validateDropdown(val)
-//    }
-//    else if($(id).hasClass("string_number_input")){
-//        is_valid = validateStringNumber(val);
-//    }
-//    else if($(id).hasClass("number_of_strings_input")){
-//        is_valid = validateNumberOfStrings(val);
-//
-//    }
-//    else if($(id).hasClass("gauge_input")){
-//        is_valid = validateGauge(val);
-//    }
-//    else if($(id).hasClass("scale_length_input")){
-//        is_valid = validateScaleLength(val);
-//
-//    }
-//
-//
-//    colorValid(id, is_valid);
-//    if (is_valid) {
-//    calculateAllRows();
 }
 
 function countValidRows() {
@@ -126,13 +107,11 @@ function countValidRows() {
     return curr;
 }
 
-function ajaxCalculate(name, desc, is_mscale, scale_length, string_number, note, octave, gauge, string_type, number_of_strings, curr) {
+function ajaxCalculate(is_mscale, scale_length, string_number, note, octave, gauge, string_type, number_of_strings, curr) {
     $.ajax({
         type: "POST",
         url: "/ajax/",
         data: {
-            string_set_name: name,
-            desc: desc,
             is_mscale: is_mscale,
             scale_length: scale_length,
             string_number: string_number,
@@ -153,53 +132,59 @@ function ajaxCalculate(name, desc, is_mscale, scale_length, string_number, note,
     })
 }
 
-function check_valid_scale(is_mscale, number_of_strings) {
-    var is_valid_scale = false;
-
-    if (is_mscale) {
-        var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/; //checks for digit
-        if (numberRegex.test(number_of_strings)) {
-//          if( isInt(number_of_strings)){
-            if (number_of_strings > 1) {
-                is_valid_scale = true;
-            }
-        }
-    }else {
-        //must be standard scale and therefore does not need string total
-        var scale_length = $("#scale_length").val();
-        if(scale_length.match('^[0-9]*\.[0-9]*$')){
-//        if( isInt(scale_length) ){
-            is_valid_scale = true;
-        }
-    }
-    return is_valid_scale;
-}
+//function check_valid_scale(is_mscale, number_of_strings) {
+//    var is_valid_scale = false;
+//
+//    if (is_mscale) {
+//        var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/; //checks for digit
+//        if (numberRegex.test(number_of_strings)) {
+////          if( isInt(number_of_strings)){
+//            if (number_of_strings > 1) {
+//                is_valid_scale = true;
+//            }
+//        }
+//    }else {
+//        //must be standard scale and therefore does not need string total
+//        var scale_length = $("#scale_length").val();
+//        if(scale_length.match('^[0-9]*\.[0-9]*$')){
+////        if( isInt(scale_length) ){
+//            is_valid_scale = true;
+//        }
+//    }
+//    return is_valid_scale;
+//}
 function validateRow(curr){
-    var name = $("#string_set_name").val();
+
+    var is_mscale = $("#mscale_checkbox").is(':checked');
     var scale_length = $("#scale_length").val();
+    var number_of_strings = $("#number_of_strings").val();
+    var string_number = $("#string_number_GTC_" + curr).val();
+    var note = $("#note_GTC_" + curr).val();
+    var octave = $("#octave_GTC_" + curr).val();
+    var gauge = $("#gauge_GTC_" + curr).val();
+    var string_type = $("#string_type_GTC_" + curr).val();
 
-    if(name != '' && scale_length != '') {
-//        var curr = this.id.substr(this.id.length - 1);
-
-        var is_mscale = $("#mscale_checkbox").is(':checked');
-        var number_of_strings = $("#number_of_strings").val();
-        var desc = $("#desc").val();
-        var string_number = $("#string_number_GTC_" + curr).val();
-        var note = $("#note_GTC_" + curr).val();
-        var octave = $("#octave_GTC_" + curr).val();
-        var gauge = $("#gauge_GTC_" + curr).val();
-        var string_type = $("#string_type_GTC_" + curr).val();
-
-        var is_valid_scale =  check_valid_scale(is_mscale, number_of_strings);
-        if (string_number != '' && note != '-'
-            && octave != '-' && gauge != ''
-            && string_type != '-' && name != ''
-            && scale_length != '' && is_valid_scale)
+    if(is_mscale){
+        if(validateScaleLength(scale_length) && validateStringNumber(string_number)
+        && validateDropdown(note) && validateDropdown(octave) &&
+            validateGauge(gauge) && validateDropdown(string_type) && validateNumberOfStrings(number_of_strings)
+            )
         {
-            ajaxCalculate(name, desc, is_mscale, scale_length, string_number, note,
-                octave, gauge, string_type, number_of_strings, curr);
+            return true;
         }
     }
+    else{
+        if(validateScaleLength(scale_length) && validateStringNumber(string_number)
+        && validateDropdown(note) && validateDropdown(octave) &&
+            validateGauge(gauge) && validateDropdown(string_type)
+            )
+        {
+            return true;
+        }
+
+    }
+
+    return false;
 }
 
 function validateScaleLength( scale_length){
