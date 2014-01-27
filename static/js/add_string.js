@@ -36,38 +36,88 @@ function addChangeEvent() {
     last_row.fadeIn('slow');
 }
 
-function validateInput(){
-    var id = "#" + this.id
-    var val = $(id).val()
+function validateAll(){
     var is_valid;
-
-    if( $(id).hasClass("dropdown_input") ){
-        is_valid = validateDropdown(val)
-    }
-    else if($(id).hasClass("string_number_input")){
-        is_valid = validateStringNumber(val);
-    }
-    else if($(id).hasClass("number_of_strings_input")){
-        is_valid = validateNumberOfStrings(val);
-        return;
-    }
-    else if($(id).hasClass("gauge_input")){
-        is_valid = validateGauge(val);
-    }
-    else if($(id).hasClass("scale_length_input")){
-        is_valid = validateScaleLength(val);
-        return;
-    }
-
-
+    var id = "#scale_length";
+    var val = $(id).val();
+    is_valid = validateScaleLength(val);
     colorValid(id, is_valid);
-    if(is_valid){
 
-//        var curr = id.substr(id.length - 1);
-//        for(var i = )
-        calculate(curr)
+    id = "#number_of_strings";
+    val = $(id).val();
+    is_valid = validateNumberOfStrings(val);
+    colorValid(id, is_valid);
+
+    for (var i = 0; i <= countValidRows(); ++i) {
+        if ($("#string_number_GTC_" + i).length) {//check if it exists
+            id = "#string_number_GTC_"+i;
+            val = $(id).val();
+            is_valid = validateStringNumber(val);
+            colorValid(id, is_valid);
+
+            id = "#note_GTC_"+i;
+            val = $(id).val();
+            is_valid = validateDropdown(val);
+            colorValid(id, is_valid);
+
+            id = "#octave_GTC_"+i;
+            val = $(id).val();
+            is_valid = validateDropdown(val);
+            colorValid(id, is_valid);
+
+            id = "#gauge_GTC_"+i;
+            val = $(id).val();
+            is_valid = validateGauge(val);
+            colorValid(id, is_valid);
+
+            id = "#string_type_GTC_"+i;
+            val = $(id).val();
+            is_valid = validateDropdown(val);
+            colorValid(id, is_valid);
+
+        }
     }
+    calculateAllRows()
+}
 
+function calculateAllRows() {
+
+        for (var i = 0; i <= countValidRows(); ++i) {
+            if ($("#string_number_GTC_" + i).length) {//check if it exists
+                calculate(i)
+            }
+        }
+
+}
+function validateInput(){
+    validateAll();
+
+//    var id = "#" + this.id
+//    var val = $(id).val()
+//    var is_valid;
+//
+//    if( $(id).hasClass("dropdown_input") ){
+//        is_valid = validateDropdown(val)
+//    }
+//    else if($(id).hasClass("string_number_input")){
+//        is_valid = validateStringNumber(val);
+//    }
+//    else if($(id).hasClass("number_of_strings_input")){
+//        is_valid = validateNumberOfStrings(val);
+//
+//    }
+//    else if($(id).hasClass("gauge_input")){
+//        is_valid = validateGauge(val);
+//    }
+//    else if($(id).hasClass("scale_length_input")){
+//        is_valid = validateScaleLength(val);
+//
+//    }
+//
+//
+//    colorValid(id, is_valid);
+//    if (is_valid) {
+//    calculateAllRows();
 }
 
 function countValidRows() {
@@ -109,11 +159,12 @@ function check_valid_scale(is_mscale, number_of_strings) {
     if (is_mscale) {
         var numberRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/; //checks for digit
         if (numberRegex.test(number_of_strings)) {
+//          if( isInt(number_of_strings)){
             if (number_of_strings > 1) {
                 is_valid_scale = true;
             }
         }
-    } else {
+    }else {
         //must be standard scale and therefore does not need string total
         var scale_length = $("#scale_length").val();
         if(scale_length.match('^[0-9]*\.[0-9]*$')){
@@ -123,7 +174,7 @@ function check_valid_scale(is_mscale, number_of_strings) {
     }
     return is_valid_scale;
 }
-function calculate(curr){
+function validateRow(curr){
     var name = $("#string_set_name").val();
     var scale_length = $("#scale_length").val();
 
@@ -154,26 +205,21 @@ function calculate(curr){
 function validateScaleLength( scale_length){
 
     var is_mscale = $("#mscale_checkbox").is(':checked');
-    var number_of_strings = $("#number_of_strings").val();
-    var is_valid = true;
-//    console.log("Scale Length keyup value: " + scale_length);
-//    $.ajax({
-//        type: "POST",
-//        url: "/is-valid-scale-length/",
-//        data: {
-//            scale_length: scale_length,
-//            is_mscale: is_mscale,
-//            number_of_strings: number_of_strings
-//        },
-//        dataType: "json",
-//        success: function (response) {
-//           $("#scale_length").css("background-color", "#5cb85c");
-//           calculate();
-//        },
-//        error: function (response, error) {
-//            $("#scale_length").css("background-color", "#d2322d");
-//        }
-//    })
+    var is_valid = false;
+
+    if (is_mscale) {
+        var arr;
+        arr = scale_length.split("-", 2)
+        if(scale_length == arr[0]+"-"+arr[1]){
+            if( isFloat(arr[0]) && isFloat(arr[1]) ){
+                is_valid = true;
+            }
+        }
+    }else {
+        if(isFloat(scale_length)){
+            is_valid = true;
+        }
+    }
     return is_valid;
 }
 
