@@ -86,6 +86,7 @@ class GuitarString():
 
         self.tension = self.calculate_tension()
 
+
     def convert_multiscale_to_scale_length(self, scale_length, number_of_strings, string_number):
         """
         Takes the scale_length as a str and transforms it into the scale length range (two separate values)
@@ -99,10 +100,7 @@ class GuitarString():
                                 low E on standard would be a 6
         @return: the current strings scale_length
         """
-        low_scale_length, high_scale_length = scale_length.split('-')
-
-        low_scale_length = self.sanitize_scale_length(low_scale_length)
-        high_scale_length = self.sanitize_scale_length(high_scale_length)
+        high_scale_length, low_scale_length = self.sanitize_multiscale(scale_length)
 
         if high_scale_length > low_scale_length:
             #InvalidScaleLengthError('Multi-scale scale_lengths must follow a format similar to \'26.5-30\' and the lower value comes first')
@@ -230,19 +228,31 @@ class GuitarString():
         if material_dicts.get_material_dict(string_material) == 'Invalid':
             raise InvalidStringMaterialError('string_material does not match predefined string materials')
         return True
-
-    def sanitize_note(self, note):
+    @staticmethod
+    def sanitize_note( note):
         """
         checks validity of note
         @param note:
         @return: @raise InvalidNoteError:
         """
+        note_dict = {'C':       0,
+                     'C#/Db':   1,
+                     'D':       2,
+                     'D#/Eb':   3,
+                     'E':       4,
+                     'F':       5,
+                     'F#/Gb':   6,
+                     'G':       7,
+                     'G#/Ab':   8,
+                     'A':       9,
+                     'A#/Bb':   10,
+                     'B':       11}
         try:
             if len(note) == 5:
                 note = note[0].upper() + '#/' + note[3].upper() + 'b'
             else:
                 note = note.upper()
-            self.note_dict[note]
+            note_dict[note]
         except (KeyError, TypeError):
             raise InvalidNoteError('note does not match specified format')
         return note
@@ -290,7 +300,19 @@ class GuitarString():
         try:
             scale_length = float(scale_length)
         except ValueError:
-            raise InvalidScaleLengthError('scale_length must be a float or two floats separated by a \'-\'')
+            raise InvalidScaleLengthError('scale_length must be a float')
         if scale_length <= 0:
             raise OutOfRangeError('scale_length must be a positive number')
         return scale_length
+
+    @staticmethod
+    def sanitize_multiscale( scale_length):
+        low_scale_length, high_scale_length = scale_length.split('-')
+        try:
+            low_scale_length = float(low_scale_length)
+            high_scale_length = float(high_scale_length)
+        except ValueError:
+            raise InvalidScaleLengthError('a multi scale_length must be two floats separated by a \'-\'')
+        if high_scale_length <= 0 or low_scale_length <= 0:
+            raise OutOfRangeError('both multi scale_lengths must be a positive number')
+        return high_scale_length, low_scale_length

@@ -18,13 +18,13 @@
      <table border="1" >
         <tr>
             <th>String Set Name</th>
-            <td><input name="string_set_name" id="string_set_name" class="string_set_name user_input" type="text" name="scale_length" value="{{ string_set_name }}"></td>
+            <td><input name="string_set_name" id="string_set_name" class="string_set_name" type="text" name="scale_length" value="{{ string_set_name }}"></td>
 
         </tr>
          <tr>
              <th>Description</th>
              <td>
-                <textarea id="desc" name="myTextBox" cols="25" rows="1"></textarea>
+                <textarea id="desc" name="desc" cols="25" rows="1"></textarea>
             </td>
          </tr>
         <br>
@@ -32,7 +32,7 @@
          <table border="1" >
         <tr>
                 <th>
-                    Multiscale &nbsp<input type="checkbox" id="mscale_checkbox" name="scale" value="multiscale">
+                    Multiscale &nbsp<input type="checkbox" id="mscale_checkbox" name="is_mscale" value="multiscale">
                 </th>
         </tr>
 
@@ -96,10 +96,11 @@
 {% endblock %}
 {% block scripts %}
     {{ block.super }}
-    <script src="{% static "assets/js/add_string.js" %}" type="text/javascript"></script>
+    <script src="{% static "assets/js/calculate.js" %}" type="text/javascript"></script>
     <script type="text/javascript"></script>
-{#    <script src="{% static "assets/js/load_string_set_data.js" %}" type="text/javascript"></script>#}
+    <script src="{% static "assets/js/add_row.js" %}" type="text/javascript"></script>
     <script type="text/javascript">
+
         var numberOfRows = 1;
         $("#insert-more").click(function () {
             newRow()
@@ -107,78 +108,13 @@
             addChangeEvent()
         });
 
-
-        function newRow(){
-            $("#strings-tbl").each(function () {
-                var tds = '<tr>';
-                jQuery.each($('tr:last td', this), function () {
-                    tds += '<td>' + returnValidRow($(this).html(), numberOfRows) + '</td>';
-                    //returnValidRow($(this).html(), index)
-                    console.log("returned valid row  " + $(this).html())
-                });
-
-                tds += '</tr>';
-                if ($('tbody', this).length > 0) {
-                    $('tbody', this).append(tds);
-                } else {
-                    $(this).append(tds);
-                }
-                numberOfRows += 1;
-            });
-        }
-
-        function returnValidRow(currentRow, rowNumber){
-            if(currentRow == '<a class="delete btn btn-danger" onclick="delete_user($(this))"><span class="glyphicon glyphicon-trash"></span></a>')
-                return currentRow
-            var id_tag = "_GTC_";
-            if(currentRow.indexOf(id_tag) !== -1){
-                tagIndex = currentRow.indexOf(id_tag);
-
-                frontSubstring = currentRow.substr(0,tagIndex);
-
-                quoteIndex = currentRow.indexOf('"');
-                idSubstring = currentRow.substr(0, quoteIndex + 1);
-                idNameIndex = frontSubstring.indexOf(idSubstring);
-                idName = frontSubstring.replace(idSubstring, "")
-                idName = idName + id_tag + rowNumber;
-                htmlNameTag = 'name="' + idName + '"';
-                backSubstring = currentRow.substr(tagIndex);
-
-                while(backSubstring.charAt(0) != "\""){
-                    backSubstring = currentRow.substr(tagIndex);
-                    tagIndex += 1
-                }
-
-                tension = '<div id="tension'
-
-                if(frontSubstring === tension){
-                    return '<div id="tension_GTC_'+rowNumber+'"' + htmlNameTag + '> - </div>'
-
-                    return '<div id="tension_GTC_'+rowNumber+'"' + htmlNameTag + '>tension goes here</div>'
-                }
-
-                backSubstring = currentRow.substr(tagIndex );
-                console.log("Original " + currentRow)
-                console.log("newrow " + frontSubstring + backSubstring)
-
-                validRow = frontSubstring + id_tag + rowNumber + "\"" +  htmlNameTag + backSubstring
-                console.log("valid Row: " + validRow)
-                console.log("id: "+ $(validRow.id))
-{#                $("#td_id").attr('name', $());#}
-                console.log("valid Row: " + validRow)
-                return validRow
-            }
-        }
-
-
-
         var string_set_data = document.getElementById("string_number_GTC_0").value;
-        console.log(string_set_data)
-        console.log("{{someDjangoVariable}}")
+{#        console.log(string_set_data)#}
+{#        console.log("{{someDjangoVariable}}")#}
         var json = "{{someDjangoVariable}}".replace(/&quot;/g, "\"")
         var newJSON = json.replace("[", "{\"gstring\":[")
         var newJSON1 = newJSON.replace("]", "]}")
-        console.log(newJSON1)
+{#        console.log(newJSON1)#}
         json = json.slice(1);
         json = json.substring(0, json.length - 1);
         var json1 = JSON.stringify(eval("(" + newJSON1 + ")"));
@@ -201,53 +137,6 @@
             $('#scale_length').val(json1.gstring[index].fields.scale_length);
         }
 
-
-        function resetBackgroundColor(){
-            currentRow = numberOfRows - 1
-            $('#string_number_GTC_' + currentRow).css("background-color", "White");
-            $('#note_GTC_' + currentRow).css("background-color", "White");
-            $('#scale_length_GTC_' + currentRow).css("background-color", "White");
-            $('#gauge_GTC_' + currentRow).css("background-color", "White");
-            $('#octave_GTC_' + currentRow).css("background-color", "White");
-            $('#string_set_GTC_' + currentRow).css("background-color", "White");
-            $('#string_type_GTC_' + currentRow).css("background-color", "White");
-        }
-
-
-
-        /**
-         * Deletes a row when the correct column is clicked on
-         * Checks if the row is the last one, if so another is inserted before so that
-         * the table is never empty
-         * @param row:
-         */
-        function delete_user(row) {
-            if (confirm('Are you sure you want delete this entire string?')) {
-
-            var rowCount = $('table#strings-tbl tr:last').index() + 1;
-            console.log("Row Count:" + rowCount)
-            if (rowCount == 2) {
-                newRow()
-
-            }
-
-            $(row).closest('tr')
-                    .children('td')
-                    .animate({ padding: 0 })
-                    .wrapInner('<div />')
-                    .children()
-                    .slideUp(function () {
-                        row.closest('tr').remove();
-                    });
-                  // Save it!
-            } else {
-                // Do nothing!
-            }
-        }
-
-
-
-{#        calculateSet();#}
     </script>
 
     <script type="text/javascript">

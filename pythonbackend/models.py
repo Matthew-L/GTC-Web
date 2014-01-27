@@ -15,6 +15,8 @@ class StringSet(models.Model):
     name = models.CharField(max_length=30)
     user = models.ForeignKey(User)
     desc = models.CharField(max_length=1000)
+    is_mscale = models.BooleanField()
+    number_of_strings = models.IntegerField(max_length=2)
     def __unicode__(self):
         return self.name
 
@@ -31,7 +33,7 @@ class StringSetForm(ModelForm):
 
     class Meta:
         model = StringSet
-        fields = ['name', 'user', 'desc']
+        fields = ['name', 'user', 'desc', 'is_mscale', 'number_of_strings']
 
 
 

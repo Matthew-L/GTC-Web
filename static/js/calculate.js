@@ -11,8 +11,8 @@
 function addChangeEvent() {
 
     $("#mscale_checkbox").click(function () {
-        console.log('hi')
         $(".hidden_row").slideToggle("slow");
+        validateAll();
     })
 
     var counter = 1;
@@ -29,7 +29,7 @@ function addChangeEvent() {
 
     $(".dropdown_input").on("change", validateAll);
     $(".user_input").keyup(validateAll);
-    $("#mscale_checkbox").click(validateAll);
+//    $("#mscale_checkbox").click();
 
     last_row = $('#strings-tbl tr:last');
     last_row.css('display', 'none');
