@@ -20,23 +20,31 @@ def calculate(request):
         HttpResponseRedirect('/accounts/login')
 
     if request.method == 'GET':
-        print("using 'GET'")
+
         try:
             string_set_name = str(request.GET['string_set_name'])
-            desc = str(request.GET['desc'])
+            string_set = StringSet.objects.filter(name=string_set_name)
+
+            #print(context['fields']['scale_length'])
         except:
             return render(request, 'calculate.html', context)
 
-        print("String set name: " + string_set_name)
+        # wont iterate any other way for some reason
+        for set in string_set:
+            context['is_mscale'] = set.is_mscale
+            context['desc'] = set.desc
+            context['number_of_strings'] = set.number_of_strings
+
         context['string_set_name'] = string_set_name
-        context['desc'] = desc
+
+
         strings = String.objects.all()
         user_set = []
         for string in strings:
             if str(string.string_set.name) == str(string_set_name):
                 user_set.append(string)
         data = serializers.serialize("json", user_set)
-        print(data)
+        #print(data)
         context['json_data'] = data
         context['someDjangoVariable'] = data
 
@@ -114,13 +122,15 @@ def save_set(request):
         errors.append("You already used that String Set Name")
         context['errors'] = errors
         return render(request, 'save_set.html', context)
-
-    string_set = StringSet(name=name, user=request.user, desc=desc)
-    string_set.save()
+    if name == "":
+        errors.append("You must give the String Set a name")
+        context['errors'] = errors
+        return render(request, 'save_set.html', context)
 
     # verify string parameters
     try:
         is_mscale = request.GET["is_mscale"]
+        is_mscale = True
     except:
         is_mscale = False
 
@@ -148,6 +158,10 @@ def save_set(request):
             context['errors'] = errors
             return render(request, 'save_set.html', context)
         number_of_strings = 0
+
+
+    string_set = StringSet(name=name, user=request.user, desc=desc, is_mscale=is_mscale, number_of_strings=number_of_strings)
+    string_set.save()
 
     number_of_parameters = 5
     row_errors = 0
@@ -220,7 +234,7 @@ def deleteSet(request):
         string_set.all().delete()
 
     else:
-        errors.append( 'You do not have '+str(string_set)+'in your profile.')
+        errors.append('You do not have '+str(string_set)+'in your profile.')
     return render(request, 'delete_set.html', context)
 
 @csrf_exempt
@@ -239,108 +253,3 @@ def ajaxDeleteSet(request):
             response = {"name": name}
 
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
-
-#
-#@csrf_exempt
-#def isValidScaleLength(request):
-#    if request.is_ajax() and request.method == "POST":
-#
-#        scale_length = request.POST['scale_length']
-#        string_number = 1
-#        note = 'C'
-#        octave = 1
-#        gauge = .001
-#        string_type = 'PL'
-#
-#
-#        print(request.POST["is_mscale"])
-#        if request.POST["is_mscale"] == 'true':
-#            print('sl')
-#            print(request.POST["is_mscale"])
-#            number_of_strings = request.POST["number_of_strings"]
-#            gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
-#                                       octave, number_of_strings, string_number)
-#        else:
-#            gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
-#                                       octave)
-#
-#        tension = float("{0:.2f}".format(gs.tension))
-#        response = {"tension": tension}
-#        #except InvalidOctaveError, InvalidGaugeError as e:
-#        #    print(str(e))
-#
-#        print(tension)
-#
-#        return HttpResponse(json.dumps(response), mimetype='application/javascript')
-#
-#
-#@csrf_exempt
-#def isValidGauge(request):
-#    if request.is_ajax() and request.method == "POST":
-#        scale_length = 32
-#        string_number = 1
-#        note = 'C'
-#        octave = 1
-#        gauge = request.POST['gauge']
-#        string_type = 'PL'
-#        number_of_strings = 1
-#
-#        #try:
-#        gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
-#                                       octave, number_of_strings, string_number)
-#        tension = float("{0:.2f}".format(gs.tension))
-#        response = {"tension": tension}
-#        #except InvalidOctaveError, InvalidGaugeError as e:
-#        #    print(str(e))
-#
-#        print(tension)
-#
-#        return HttpResponse(json.dumps(response), mimetype='application/javascript')
-#
-#
-#@csrf_exempt
-#def isValidStringNumber(request):
-#    if request.is_ajax() and request.method == "POST":
-#        # scale_length = '26.5-30'
-#        string_number = request.POST['string_number']
-#        # note = 'C'
-#        # octave = 1
-#        # gauge = .001
-#        # string_type = 'PL'
-#        # number_of_strings = request.POST['number_of_strings']
-#        # is_mscale = request.POST['is_mscale']
-#        # response = {"tension": 0}
-#        # print(is_mscale)
-#        # if is_mscale == 'true':
-#        #     print(is_mscale)
-#        #     gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
-#        #                                octave, number_of_strings, string_number)
-#        #     tension = float("{0:.2f}".format(gs.tension))
-#        #     response = {"tension": tension}
-#        # else:
-#        #     int(string_number)
-#        GuitarString.sanitize_string_number(string_number)
-#        response = {"tension": 1}
-#        return HttpResponse(json.dumps(response), mimetype='application/javascript')
-#
-#
-#@csrf_exempt
-#def isValidNumberOfStrings(request):
-#    if request.is_ajax() and request.method == "POST":
-#        scale_length = 32
-#        string_number = 1
-#        note = 'C'
-#        octave = 1
-#        gauge = .001
-#        string_type = 'PL'
-#        number_of_strings = request.POST["number_of_strings"]
-#
-#        if int(number_of_strings) > 0:
-#            gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
-#                                       octave, number_of_strings, string_number)
-#
-#            tension = float("{0:.2f}".format(gs.tension))
-#            response = {"tension": tension}
-#        return HttpResponse(json.dumps(response), mimetype='application/javascript')
-#
-#

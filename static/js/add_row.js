@@ -64,7 +64,7 @@
             if (confirm('Are you sure you want delete this entire string?')) {
 
             var rowCount = $('table#strings-tbl tr:last').index() + 1;
-            console.log("Row Count:" + rowCount)
+//            console.log("Row Count:" + rowCount)
             if (rowCount == 2) {
                 newRow()
 
@@ -89,7 +89,7 @@
                 jQuery.each($('tr:last td', this), function () {
                     tds += '<td>' + returnValidRow($(this).html(), numberOfRows) + '</td>';
 
-                    console.log("returned valid row  " + $(this).html())
+//                    console.log("returned valid row  " + $(this).html())
                 });
 
                 tds += '</tr>';
@@ -133,14 +133,14 @@
                 }
 
                 backSubstring = currentRow.substr(tagIndex );
-                console.log("Original " + currentRow)
-                console.log("newrow " + frontSubstring + backSubstring)
+//                console.log("Original " + currentRow)
+//                console.log("newrow " + frontSubstring + backSubstring)
 
                 validRow = frontSubstring + id_tag + rowNumber + "\"" +  htmlNameTag + backSubstring
-                console.log("valid Row: " + validRow)
-                console.log("id: "+ $(validRow.id))
+//                console.log("valid Row: " + validRow)
+//                console.log("id: "+ $(validRow.id))
 
-                console.log("valid Row: " + validRow)
+//                console.log("valid Row: " + validRow)
                 return validRow
             }
         }

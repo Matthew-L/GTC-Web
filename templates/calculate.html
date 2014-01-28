@@ -109,8 +109,10 @@
         });
 
         var string_set_data = document.getElementById("string_number_GTC_0").value;
-{#        console.log(string_set_data)#}
-{#        console.log("{{someDjangoVariable}}")#}
+        console.log("string_set_data")
+        console.log(string_set_data)
+        console.log("someDjangoVariable")
+        console.log("{{someDjangoVariable}}")
         var json = "{{someDjangoVariable}}".replace(/&quot;/g, "\"")
         var newJSON = json.replace("[", "{\"gstring\":[")
         var newJSON1 = newJSON.replace("]", "]}")
@@ -122,7 +124,7 @@
 
         var json1 = jQuery.parseJSON(newJSON1);
         var keys = Object.keys(json1);
-        console.log(keys);
+{#        console.log(keys);#}
 
 
         for (var index = 0; index < json1.gstring.length; index += 1){
