@@ -136,7 +136,8 @@ function ajaxCalculate(is_mscale, scale_length, string_number, note, octave, gau
             $('#tension_GTC_' + curr).text(tension);
         },
         error: function (response, error) {
-            alert("ERROR!");
+//            alert("ERROR!");
+            console.log("error calculating tension")
         }
     })
 }

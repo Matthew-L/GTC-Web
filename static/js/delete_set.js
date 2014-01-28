@@ -2,15 +2,17 @@
  * Created by Micah on 1/22/14.
  */
 $(document).ready(function() {
+    console.log("delete")
     $(".delete-set-btn").click(function () {
-            if(confirm('Are you sure you want delete this entire set?')){
-                var name = this.id.substring(4)
-                var num = $(this).attr("num")
-                ajaxDelete(name);
-                $("#row-"+num).slideUp();
 
-            }
-        });
+        if(confirm('Are you sure you want delete this entire set?')){
+
+            var name = this.id.substring(4)
+            var num = $(this).attr("num")
+            ajaxDelete(name);
+            $("#row-"+num).slideUp();
+        }
+    });
 });
 
 function ajaxDelete(name) {

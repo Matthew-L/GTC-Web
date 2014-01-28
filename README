@@ -1,4 +1,32 @@
 __STRINGULATOR__
 
 
-1234
+Stringulator to-do’s
+
+Major:
+add javascript / descriptions of appropriate inputs - matt
+edit existing sets - micah
+fix csrf verification
+fix mini nav bar - matt
+add legit readme to github
+reload users last input on error on string set save
+fix register page - matt
+change export sets file name
+
+Extra
+ajax password check on register
+circle k’s string tension values (parse into usable array, add parameters to dropdowns)
+add favicon
+add paypal donate button
+feedback on tension of set
+search by description
+have a sort button to arrange strings by number
+fix adding rows color(always shows last color)
+
+Done
+calc tension on loading of saved set
+fix ajax verification
+add contact page
+add multiscale calculations (add description and total num as well) - micah
+save and load multiscale -micah
+fix info page -> change to link to our github
