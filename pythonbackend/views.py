@@ -29,8 +29,12 @@ def calculate(request):
         except:
             return render(request, 'calculate.html', context)
 
+        user_set = []
         # wont iterate any other way for some reason
         for set in string_set:
+            #user_set.append(set)
+            #user_set.append(set.desc)
+            #user_set.append(set.number_of_strings)
             context['is_mscale'] = set.is_mscale
             context['desc'] = set.desc
             context['number_of_strings'] = set.number_of_strings
@@ -39,7 +43,7 @@ def calculate(request):
 
 
         strings = String.objects.all()
-        user_set = []
+
         for string in strings:
             if str(string.string_set.name) == str(string_set_name):
                 user_set.append(string)

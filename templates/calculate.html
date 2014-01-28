@@ -24,7 +24,7 @@
          <tr>
              <th>Description</th>
              <td>
-                <textarea id="desc" name="desc" cols="25" rows="1"></textarea>
+                <textarea id="desc" name="desc" cols="25" rows="1">{{ desc }}</textarea>
             </td>
          </tr>
         <br>
@@ -32,14 +32,15 @@
          <table border="1" >
         <tr>
                 <th>
-                    Multiscale &nbsp<input type="checkbox" id="mscale_checkbox" name="is_mscale" value="multiscale">
+                    Multiscale &nbsp<input type="checkbox" id="mscale_checkbox" name="is_mscale" value="True" checked="{{ is_mscale }}">
                 </th>
         </tr>
 
          <tr id="number_of_strings_row" class="hidden_row" hidden = "hidden">
 
             <th class="hidden_row" hidden = "hidden" ><div class="hidden_row" hidden = "hidden">Total Number of Strings</div></th>
-            <td class="hidden_row" hidden = "hidden"><div class="hidden_row" hidden = "hidden"><input name="number_of_strings" id="number_of_strings" class="number_of_strings_input user_input" type="text" name="number_of_strings" >
+            <td class="hidden_row" hidden = "hidden"><div class="hidden_row" hidden = "hidden">
+                <input name="number_of_strings" id="number_of_strings" class="number_of_strings_input user_input" type="text" name="number_of_strings" value="{{ number_of_strings }}">
             </div></td>
 
         </tr>
@@ -109,34 +110,31 @@
         });
 
         var string_set_data = document.getElementById("string_number_GTC_0").value;
-        console.log("string_set_data")
-        console.log(string_set_data)
-        console.log("someDjangoVariable")
-        console.log("{{someDjangoVariable}}")
         var json = "{{someDjangoVariable}}".replace(/&quot;/g, "\"")
         var newJSON = json.replace("[", "{\"gstring\":[")
         var newJSON1 = newJSON.replace("]", "]}")
-{#        console.log(newJSON1)#}
         json = json.slice(1);
         json = json.substring(0, json.length - 1);
         var json1 = JSON.stringify(eval("(" + newJSON1 + ")"));
-
-
         var json1 = jQuery.parseJSON(newJSON1);
         var keys = Object.keys(json1);
-{#        console.log(keys);#}
 
 
         for (var index = 0; index < json1.gstring.length; index += 1){
-            newRow()
-            $('#string_number_GTC_' + index).val(json1.gstring[index].fields.string_number);
-            $('#note_GTC_' + index).val(json1.gstring[index].fields.note);
-            $('#scale_length_GTC_' + index).val(json1.gstring[index].fields.scale_length);
-            $('#gauge_GTC_' + index).val(json1.gstring[index].fields.gauge);
-            $('#octave_GTC_' + index).val(json1.gstring[index].fields.octave);
-            $('#string_set_GTC_' + index).val(json1.gstring[index].fields.string_set);
-            $('#string_type_GTC_' + index).val(json1.gstring[index].fields.string_type);
-            $('#scale_length').val(json1.gstring[index].fields.scale_length);
+{#            if(json1.gstring[index].fields.desc){#}
+                console.log(json1.gstring[0].fields)
+{#            }else{#}
+                newRow()
+
+                $('#string_number_GTC_' + index).val(json1.gstring[index].fields.string_number);
+                $('#note_GTC_' + index).val(json1.gstring[index].fields.note);
+    {#            $('#scale_length_GTC_' + index).val(json1.gstring[index].fields.scale_length);#}
+                $('#gauge_GTC_' + index).val(json1.gstring[index].fields.gauge);
+                $('#octave_GTC_' + index).val(json1.gstring[index].fields.octave);
+                $('#string_set_GTC_' + index).val(json1.gstring[index].fields.string_set);
+                $('#string_type_GTC_' + index).val(json1.gstring[index].fields.string_type);
+                $('#scale_length').val(json1.gstring[index].fields.scale_length);
+{#            }#}
         }
 
     </script>

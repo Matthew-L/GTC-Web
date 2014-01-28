@@ -4,6 +4,10 @@
 
     $(document).ready(function() {
         addChangeEvent();
+
+        if($("#mscale_checkbox").is(":checked")){
+                $(".hidden_row").slideToggle("slow");
+        }
         validateAll();
     });
 

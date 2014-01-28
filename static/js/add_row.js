@@ -42,14 +42,14 @@
 //}
 
         function resetBackgroundColor(){
-            currentRow = numberOfRows - 1
-            $('#string_number_GTC_' + currentRow).css("background-color", "White");
-            $('#note_GTC_' + currentRow).css("background-color", "White");
-            $('#scale_length_GTC_' + currentRow).css("background-color", "White");
-            $('#gauge_GTC_' + currentRow).css("background-color", "White");
-            $('#octave_GTC_' + currentRow).css("background-color", "White");
-            $('#string_set_GTC_' + currentRow).css("background-color", "White");
-            $('#string_type_GTC_' + currentRow).css("background-color", "White");
+            var currentRow = numberOfRows - 1
+//            $('#string_number_GTC_' + currentRow).css("background-color", "White");
+//            $('#note_GTC_' + currentRow).css("background-color", "White");
+//            $('#scale_length_GTC_' + currentRow).css("background-color", "White");
+//            $('#gauge_GTC_' + currentRow).css("background-color", "White");
+//            $('#octave_GTC_' + currentRow).css("background-color", "White");
+//            $('#string_set_GTC_' + currentRow).css("background-color", "White");
+//            $('#string_type_GTC_' + currentRow).css("background-color", "White");
         }
 
 
@@ -107,24 +107,24 @@
                 return currentRow
             var id_tag = "_GTC_";
             if(currentRow.indexOf(id_tag) !== -1){
-                tagIndex = currentRow.indexOf(id_tag);
+                var tagIndex = currentRow.indexOf(id_tag);
 
-                frontSubstring = currentRow.substr(0,tagIndex);
+                var frontSubstring = currentRow.substr(0,tagIndex);
 
-                quoteIndex = currentRow.indexOf('"');
-                idSubstring = currentRow.substr(0, quoteIndex + 1);
-                idNameIndex = frontSubstring.indexOf(idSubstring);
-                idName = frontSubstring.replace(idSubstring, "")
-                idName = idName + id_tag + rowNumber;
-                htmlNameTag = 'name="' + idName + '"';
-                backSubstring = currentRow.substr(tagIndex);
+                var quoteIndex = currentRow.indexOf('"');
+                var idSubstring = currentRow.substr(0, quoteIndex + 1);
+                var idNameIndex = frontSubstring.indexOf(idSubstring);
+                var idName = frontSubstring.replace(idSubstring, "")
+                var idName = idName + id_tag + rowNumber;
+                var htmlNameTag = 'name="' + idName + '"';
+                var backSubstring = currentRow.substr(tagIndex);
 
                 while(backSubstring.charAt(0) != "\""){
                     backSubstring = currentRow.substr(tagIndex);
                     tagIndex += 1
                 }
 
-                tension = '<div id="tension'
+                var tension = '<div id="tension'
 
                 if(frontSubstring === tension){
                     return '<div id="tension_GTC_'+rowNumber+'"' + htmlNameTag + '> - </div>'
@@ -136,7 +136,7 @@
 //                console.log("Original " + currentRow)
 //                console.log("newrow " + frontSubstring + backSubstring)
 
-                validRow = frontSubstring + id_tag + rowNumber + "\"" +  htmlNameTag + backSubstring
+                var validRow = frontSubstring + id_tag + rowNumber + "\"" +  htmlNameTag + backSubstring
 //                console.log("valid Row: " + validRow)
 //                console.log("id: "+ $(validRow.id))
 

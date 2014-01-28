@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd70047a-2053-4756-9556-42ea27776a90" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage.db" afterPath="$PROJECT_DIR$/storage.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/add_row.js" afterPath="$PROJECT_DIR$/static/js/add_row.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/calculate.html" afterPath="$PROJECT_DIR$/templates/calculate.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/calculate.js" afterPath="$PROJECT_DIR$/static/js/calculate.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pythonbackend/views.py" afterPath="$PROJECT_DIR$/pythonbackend/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -37,16 +37,25 @@
       <file leaf-file-name="calculate.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/calculate.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="119" column="29" selection-start="4043" selection-end="4043" vertical-scroll-proportion="-9.961538" vertical-offset="1764" max-vertical-offset="2737">
+            <state line="34" column="131" selection-start="1172" selection-end="1172" vertical-scroll-proportion="-5.974026" vertical-offset="118" max-vertical-offset="2703">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add_row.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="calculate.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/static/js/calculate.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="8" selection-start="216" selection-end="216" vertical-scroll-proportion="0.20211361" vertical-offset="0" max-vertical-offset="4675">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add_row.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/add_row.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="21" selection-start="390" selection-end="401" vertical-scroll-proportion="0.31303117" vertical-offset="0" max-vertical-offset="2635">
+            <state line="75" column="41" selection-start="3138" selection-end="3138" vertical-scroll-proportion="-25.0" vertical-offset="0" max-vertical-offset="2635">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -54,19 +63,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="guitarstring.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/calculator/guitarstring.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="0" selection-start="3250" selection-end="3250" vertical-scroll-proportion="0.0" vertical-offset="1091" max-vertical-offset="5491">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pythonbackend/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="20" selection-start="1538" selection-end="1538" vertical-scroll-proportion="-10.0" vertical-offset="153" max-vertical-offset="4318">
+            <state line="39" column="12" selection-start="1301" selection-end="1301" vertical-scroll-proportion="-7.6666665" vertical-offset="153" max-vertical-offset="4386">
               <folding />
             </state>
           </provider>
@@ -121,14 +121,14 @@
         <option value="$PROJECT_DIR$/templates/includes/forms.html" />
         <option value="$PROJECT_DIR$/templates/includes/header.html" />
         <option value="$PROJECT_DIR$/static/js/add_string.js" />
-        <option value="$PROJECT_DIR$/static/js/calculate.js" />
         <option value="$PROJECT_DIR$/mangoDjango/urls.py" />
         <option value="$PROJECT_DIR$/calculator/guitarstring.py" />
         <option value="$PROJECT_DIR$/mangoDjango/settings.py" />
         <option value="$PROJECT_DIR$/pythonbackend/models.py" />
+        <option value="$PROJECT_DIR$/static/js/add_row.js" />
         <option value="$PROJECT_DIR$/pythonbackend/views.py" />
         <option value="$PROJECT_DIR$/templates/calculate.html" />
-        <option value="$PROJECT_DIR$/static/js/add_row.js" />
+        <option value="$PROJECT_DIR$/static/js/calculate.js" />
       </list>
     </option>
   </component>
@@ -888,7 +888,11 @@
       <created>1390854785033</created>
       <updated>1390854785033</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="fixing mscale load">
+      <created>1390874842570</created>
+      <updated>1390874842570</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -923,7 +927,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="bootstrap added" />
     <MESSAGE value="removed edit_string" />
     <MESSAGE value="added register button" />
     <MESSAGE value="fixing save button..." />
@@ -948,7 +951,8 @@
     <MESSAGE value="fixed string number bug" />
     <MESSAGE value="validates on checkbox click now" />
     <MESSAGE value="made new db" />
-    <option name="LAST_COMMIT_MESSAGE" value="made new db" />
+    <MESSAGE value="fixing mscale load" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing mscale load" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -963,11 +967,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/js/calculate.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="135" selection-end="135" vertical-scroll-proportion="-3.0" vertical-offset="0" max-vertical-offset="4607" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="72" column="11" selection-start="2906" selection-end="2908" vertical-scroll-proportion="0.0" vertical-offset="996" max-vertical-offset="1989">
@@ -1017,13 +1016,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mangoDjango/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="34" selection-start="2942" selection-end="2942" vertical-scroll-proportion="0.0" vertical-offset="824" max-vertical-offset="2550">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python33/Lib/unittest/case.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="390" column="37" selection-start="13455" selection-end="13455" vertical-scroll-proportion="1.9431968" vertical-offset="4989" max-vertical-offset="20570">
@@ -1040,7 +1032,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/calculator/guitarstring.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="0" selection-start="3250" selection-end="3250" vertical-scroll-proportion="0.0" vertical-offset="1091" max-vertical-offset="5491">
+        <state line="79" column="0" selection-start="3250" selection-end="3250" vertical-scroll-proportion="1.2760898" vertical-offset="377" max-vertical-offset="5491">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mangoDjango/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="97" column="34" selection-start="2942" selection-end="2942" vertical-scroll-proportion="0.0" vertical-offset="824" max-vertical-offset="2550">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pythonbackend/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="12" selection-start="1301" selection-end="1301" vertical-scroll-proportion="-7.6666665" vertical-offset="153" max-vertical-offset="4386">
           <folding />
         </state>
       </provider>
@@ -1054,26 +1060,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pythonbackend/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="20" selection-start="1538" selection-end="1538" vertical-scroll-proportion="-10.0" vertical-offset="153" max-vertical-offset="4318">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/calculate.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="119" column="29" selection-start="4043" selection-end="4043" vertical-scroll-proportion="-9.961538" vertical-offset="1764" max-vertical-offset="2737">
+        <state line="34" column="131" selection-start="1172" selection-end="1172" vertical-scroll-proportion="-5.974026" vertical-offset="118" max-vertical-offset="2703">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/js/add_row.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="21" selection-start="390" selection-end="401" vertical-scroll-proportion="0.31303117" vertical-offset="0" max-vertical-offset="2635">
+        <state line="75" column="41" selection-start="3138" selection-end="3138" vertical-scroll-proportion="-25.0" vertical-offset="0" max-vertical-offset="2635">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/calculate.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="8" selection-start="216" selection-end="216" vertical-scroll-proportion="0.20211361" vertical-offset="0" max-vertical-offset="4675">
+          <folding />
         </state>
       </provider>
     </entry>
