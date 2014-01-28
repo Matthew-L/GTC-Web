@@ -32,7 +32,12 @@
          <table border="1" >
         <tr>
                 <th>
-                    Multiscale &nbsp<input type="checkbox" id="mscale_checkbox" name="is_mscale" value="True" checked="{{ is_mscale }}">
+                    Multiscale &nbsp<input type="checkbox" id="mscale_checkbox" name="is_mscale" value="True"
+                                           {% if is_mscale %}
+                                                checked="true"
+                                           {% else %}
+
+                                           {% endif %}>
                 </th>
         </tr>
 
@@ -121,20 +126,14 @@
 
 
         for (var index = 0; index < json1.gstring.length; index += 1){
-{#            if(json1.gstring[index].fields.desc){#}
-                console.log(json1.gstring[0].fields)
-{#            }else{#}
                 newRow()
-
                 $('#string_number_GTC_' + index).val(json1.gstring[index].fields.string_number);
                 $('#note_GTC_' + index).val(json1.gstring[index].fields.note);
-    {#            $('#scale_length_GTC_' + index).val(json1.gstring[index].fields.scale_length);#}
                 $('#gauge_GTC_' + index).val(json1.gstring[index].fields.gauge);
                 $('#octave_GTC_' + index).val(json1.gstring[index].fields.octave);
                 $('#string_set_GTC_' + index).val(json1.gstring[index].fields.string_set);
                 $('#string_type_GTC_' + index).val(json1.gstring[index].fields.string_type);
                 $('#scale_length').val(json1.gstring[index].fields.scale_length);
-{#            }#}
         }
 
     </script>

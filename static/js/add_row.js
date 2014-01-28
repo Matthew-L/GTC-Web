@@ -1,3 +1,36 @@
+
+        function mattsCrap(){
+                    var numberOfRows = 1;
+        $("#insert-more").click(function () {
+            newRow()
+            resetBackgroundColor()
+            addChangeEvent()
+        });
+
+        var string_set_data = document.getElementById("string_number_GTC_0").value;
+        var json = "{{someDjangoVariable}}".replace(/&quot;/g, "\"")
+        var newJSON = json.replace("[", "{\"gstring\":[")
+        var newJSON1 = newJSON.replace("]", "]}")
+        json = json.slice(1);
+        json = json.substring(0, json.length - 1);
+        var json1 = JSON.stringify(eval("(" + newJSON1 + ")"));
+        var json1 = jQuery.parseJSON(newJSON1);
+        var keys = Object.keys(json1);
+
+
+        for (var index = 0; index < json1.gstring.length; index += 1){
+                newRow()
+                $('#string_number_GTC_' + index).val(json1.gstring[index].fields.string_number);
+                $('#note_GTC_' + index).val(json1.gstring[index].fields.note);
+                $('#gauge_GTC_' + index).val(json1.gstring[index].fields.gauge);
+                $('#octave_GTC_' + index).val(json1.gstring[index].fields.octave);
+                $('#string_set_GTC_' + index).val(json1.gstring[index].fields.string_set);
+                $('#string_type_GTC_' + index).val(json1.gstring[index].fields.string_type);
+                $('#scale_length').val(json1.gstring[index].fields.scale_length);
+        }
+        }
+
+
 //    $(document).ready(function() {
 //        mattsCrapCode()
 //    });

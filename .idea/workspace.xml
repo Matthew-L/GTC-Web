@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd70047a-2053-4756-9556-42ea27776a90" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage.db" afterPath="$PROJECT_DIR$/storage.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/add_row.js" afterPath="$PROJECT_DIR$/static/js/add_row.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/calculate.html" afterPath="$PROJECT_DIR$/templates/calculate.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/calculate.js" afterPath="$PROJECT_DIR$/static/js/calculate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pythonbackend/views.py" afterPath="$PROJECT_DIR$/pythonbackend/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GTC-Web.iws" />
@@ -34,19 +33,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="calculate.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="calculate.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/calculate.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="131" selection-start="1172" selection-end="1172" vertical-scroll-proportion="-5.974026" vertical-offset="118" max-vertical-offset="2703">
+            <state line="36" column="61" selection-start="1274" selection-end="1274" vertical-scroll-proportion="0.55" vertical-offset="238" max-vertical-offset="2686">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="calculate.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="calculate.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/calculate.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="8" selection-start="216" selection-end="216" vertical-scroll-proportion="0.20211361" vertical-offset="0" max-vertical-offset="4675">
+            <state line="7" column="47" selection-start="115" selection-end="151" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4675">
               <folding />
             </state>
           </provider>
@@ -55,10 +54,8 @@
       <file leaf-file-name="add_row.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/add_row.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="41" selection-start="3138" selection-end="3138" vertical-scroll-proportion="-25.0" vertical-offset="0" max-vertical-offset="2635">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+            <state line="11" column="24" selection-start="394" selection-end="394" vertical-scroll-proportion="-2.6666667" vertical-offset="51" max-vertical-offset="3196">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -88,6 +85,15 @@
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/bootstrap.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="40" selection-start="1399" selection-end="1399" vertical-scroll-proportion="7.1923075" vertical-offset="816" max-vertical-offset="2618">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -125,10 +131,10 @@
         <option value="$PROJECT_DIR$/calculator/guitarstring.py" />
         <option value="$PROJECT_DIR$/mangoDjango/settings.py" />
         <option value="$PROJECT_DIR$/pythonbackend/models.py" />
-        <option value="$PROJECT_DIR$/static/js/add_row.js" />
         <option value="$PROJECT_DIR$/pythonbackend/views.py" />
-        <option value="$PROJECT_DIR$/templates/calculate.html" />
         <option value="$PROJECT_DIR$/static/js/calculate.js" />
+        <option value="$PROJECT_DIR$/static/js/add_row.js" />
+        <option value="$PROJECT_DIR$/templates/calculate.html" />
       </list>
     </option>
   </component>
@@ -892,7 +898,11 @@
       <created>1390874842570</created>
       <updated>1390874842570</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="multiscale saves and loads along with desc">
+      <created>1390879017019</created>
+      <updated>1390879017019</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -927,7 +937,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="removed edit_string" />
     <MESSAGE value="added register button" />
     <MESSAGE value="fixing save button..." />
     <MESSAGE value="added more bootstrap and working on loading tension of entire set" />
@@ -952,7 +961,8 @@
     <MESSAGE value="validates on checkbox click now" />
     <MESSAGE value="made new db" />
     <MESSAGE value="fixing mscale load" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing mscale load" />
+    <MESSAGE value="multiscale saves and loads along with desc" />
+    <option name="LAST_COMMIT_MESSAGE" value="multiscale saves and loads along with desc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -995,13 +1005,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/bootstrap.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2618">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mangoDjango/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="141" column="38" selection-start="4989" selection-end="4989" vertical-scroll-proportion="-7.54902" vertical-offset="2012" max-vertical-offset="2975">
@@ -1019,13 +1022,6 @@
     <entry file="file://C:/Python33/Lib/unittest/case.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="390" column="37" selection-start="13455" selection-end="13455" vertical-scroll-proportion="1.9431968" vertical-offset="4989" max-vertical-offset="20570">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/guitarstring_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="0" selection-start="2497" selection-end="2497" vertical-scroll-proportion="0.2364597" vertical-offset="1147" max-vertical-offset="6069">
           <folding />
         </state>
       </provider>
@@ -1060,25 +1056,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/calculate.html">
+    <entry file="file://$PROJECT_DIR$/templates/bootstrap.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="131" selection-start="1172" selection-end="1172" vertical-scroll-proportion="-5.974026" vertical-offset="118" max-vertical-offset="2703">
+        <state line="37" column="40" selection-start="1399" selection-end="1399" vertical-scroll-proportion="7.1923075" vertical-offset="816" max-vertical-offset="2618">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/guitarstring_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="0" selection-start="2497" selection-end="2497" vertical-scroll-proportion="0.2364597" vertical-offset="1147" max-vertical-offset="6069">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/js/add_row.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="41" selection-start="3138" selection-end="3138" vertical-scroll-proportion="-25.0" vertical-offset="0" max-vertical-offset="2635">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state line="11" column="24" selection-start="394" selection-end="394" vertical-scroll-proportion="-2.6666667" vertical-offset="51" max-vertical-offset="3196">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/js/calculate.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="8" selection-start="216" selection-end="216" vertical-scroll-proportion="0.20211361" vertical-offset="0" max-vertical-offset="4675">
+        <state line="7" column="47" selection-start="115" selection-end="151" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4675">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/calculate.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="61" selection-start="1274" selection-end="1274" vertical-scroll-proportion="0.55" vertical-offset="238" max-vertical-offset="2686">
           <folding />
         </state>
       </provider>
