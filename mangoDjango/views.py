@@ -8,6 +8,9 @@ import csv
 import json
 from django.views.decorators.csrf import csrf_exempt
 
+def contact(request):
+    return render_to_response('contact.html')
+
 
 def set_users_login_status(request):
     context = {}
