@@ -120,16 +120,24 @@ def save_set(request):
         errors.append("Register and Log In to Save Sets!")
         context['errors'] = errors
         return render(request, 'save_set.html', context)
-    #check if stringset name exists already
-    if StringSet.objects.filter(name=name, user=user):
-        print(StringSet.objects.filter(name=name, user=user))
-        errors.append("You already used that String Set Name")
-        context['errors'] = errors
-        return render(request, 'save_set.html', context)
     if name == "":
         errors.append("You must give the String Set a name")
         context['errors'] = errors
         return render(request, 'save_set.html', context)
+    #if changing string name
+    #...
+    if request.method == 'GET':
+        old_name = str(request.GET['string_set_name'])
+        old_name_set = StringSet.objects.filter(name=old_name, user=user)
+        if old_name_set:
+            print(old_name_set)
+            old_name_set.all().delete()
+    #check if stringset name exists already
+    old_string_set = StringSet.objects.filter(name=name, user=user)
+    if old_string_set:
+        # print(StringSet.objects.filter(name=name, user=user))
+        #edit set
+        old_string_set.all().delete()
 
     # verify string parameters
     try:
@@ -171,8 +179,8 @@ def save_set(request):
     row_errors = 0
     i = 0
     while i < curr:
-        print(i)
-        print(number_of_strings)
+        # print(i)
+        # print(number_of_strings)
 
         try:
             string_number = request.GET['string_number_GTC_'+str(i)]
@@ -225,32 +233,35 @@ def save_set(request):
 
     return render(request, 'save_set.html', context)
 
-def deleteSet(request):
-    context = {}
-    errors = []
-    name = request.GET['string_set_name']
-    user = request.user
-    string_set = StringSet.objects.filter(name=name, user=user)
-    if string_set:
-        print(StringSet.objects.filter(name=name, user=user))
-        # errors.append("You already used that String Set Name")
-        # context['errors'] = errors
-        string_set.all().delete()
+def edit_set(request):
+    pass
 
-    else:
-        errors.append('You do not have '+str(string_set)+'in your profile.')
-    return render(request, 'delete_set.html', context)
+# def delete_set(request):
+#     context = {}
+#     errors = []
+#     name = request.GET['string_set_name']
+#     user = request.user
+#     string_set = StringSet.objects.filter(name=name, user=user)
+#     if string_set:
+#         print(StringSet.objects.filter(name=name, user=user))
+#         # errors.append("You already used that String Set Name")
+#         # context['errors'] = errors
+#         string_set.all().delete()
+#
+#     else:
+#         errors.append('You do not have '+str(string_set)+'in your profile.')
+#     return render(request, 'delete_set.html', context)
 
 @csrf_exempt
-def ajaxDeleteSet(request):
+def ajax_delete_set(request):
     if request.is_ajax() and request.method == "POST":
         name = request.POST['string_set_name']
         user = request.user
-        print(name)
+        # print(name)
 
         string_set = StringSet.objects.filter(name=name, user=user)
         if string_set:
-            print(StringSet.objects.filter(name=name, user=user))
+            # print(StringSet.objects.filter(name=name, user=user))
             # errors.append("You already used that String Set Name")
             # context['errors'] = errors
             string_set.all().delete()
