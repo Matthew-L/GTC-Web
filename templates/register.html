@@ -10,9 +10,35 @@
 
 {% block content %}
     <h2>Register</h2>
-    <form action="/accounts/register/" method="post">
+    <form class="navbar-form navbar-center" action="/accounts/register/" method="post">
         {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Register"/>
+
+        {{ form.username }}
+        {{ form.password1 }}
+        {{ form.password2 }}
+        <br>
+        <input type="submit" value="Register" class="btn btn-success"/>
     </form>
+<br>
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>#}
+{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>#}
+    
+
+    <script type="text/javascript">
+
+    function setPlaceholder()
+    {
+        document.getElementById("id_username").placeholder = "username";
+        document.getElementById("id_password1").placeholder = "password";
+        document.getElementById("id_password2").placeholder = "confirm password";
+
+    }
+{#    $('#id_username').tooltip(options)#}
+    setPlaceholder();
+    </script>
+
+
 {% endblock %}
