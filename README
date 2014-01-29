@@ -4,10 +4,11 @@ __STRINGULATOR__
 Stringulator to-do’s
 
 Major:
+add javascript / descriptions of appropriate inputs - matt
 fix csrf verification
-fix mini nav bar - matt
+fix mini nav bar
 add legit readme to github
-reload users last input on error on string set save
+ajax save string set
 change export sets file name
 
 
@@ -21,7 +22,7 @@ have a sort button to arrange strings by number
 fix adding rows color(always shows last color)
 
 Done
-add javascript / descriptions of appropriate inputs - matt
+
 calc tension on loading of saved set
 fix ajax verification
 add contact page
