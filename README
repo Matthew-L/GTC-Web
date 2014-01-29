@@ -4,7 +4,6 @@ __STRINGULATOR__
 Stringulator to-do’s
 
 Major:
-add javascript / descriptions of appropriate inputs - matt
 fix csrf verification
 fix mini nav bar - matt
 add legit readme to github
@@ -22,6 +21,7 @@ have a sort button to arrange strings by number
 fix adding rows color(always shows last color)
 
 Done
+add javascript / descriptions of appropriate inputs - matt
 calc tension on loading of saved set
 fix ajax verification
 add contact page
