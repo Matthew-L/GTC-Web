@@ -9,7 +9,7 @@ fix mini nav bar - matt
 add legit readme to github
 reload users last input on error on string set save
 change export sets file name
-validate character length of client side input
+
 
 Extra
 circle k’s string tension values (parse into usable array, add parameters to dropdowns)
@@ -31,3 +31,4 @@ fix info page -> change to link to our github
 fix register page - matt
 edit existing sets - micah
 ajax password check on register
+validate character length of client side input
