@@ -186,12 +186,14 @@ function validateScaleLength( scale_length){
         arr = scale_length.split("-", 2)
         if(scale_length == arr[0]+"-"+arr[1]){
             if( isFloat(arr[0]) && isFloat(arr[1]) ){
-                is_valid = true;
+                if(scale_length.length <= 30)
+                    is_valid = true;
             }
         }
     }else {
         if(isFloat(scale_length)){
-            is_valid = true;
+            if(scale_length.length <= 30)
+                is_valid = true;
         }
     }
     return is_valid;
@@ -202,7 +204,8 @@ function validateGauge(gauge) {
     var is_valid = false;
     if( isFloat(gauge) ){
         if( 0 < gauge && gauge < 1){
-            is_valid = true;
+            if(gauge.length <= 6)
+                is_valid = true;
         }
     }
     return is_valid;
@@ -218,12 +221,14 @@ function validateStringNumber(string_number) {
                 var number_of_strings = $("#number_of_strings").val();
                 if(isInt(number_of_strings)){
                     if(parseInt(number_of_strings) >= parseInt(string_number)){
-                        is_valid = true;
+                        if(string_number.length <= 2)
+                            is_valid = true;
                     }
                 }
             }
             else{
-                is_valid = true;
+                if(string_number.length <= 2)
+                    is_valid = true;
             }
 
         }
@@ -234,7 +239,8 @@ function validateStringNumber(string_number) {
 
 function validateNumberOfStrings(number_of_strings) {
     if( isInt(number_of_strings) )
-        return true;
+        if(number_of_strings.length <= 2)
+            return true;
     return false;
 }
 

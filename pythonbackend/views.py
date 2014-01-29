@@ -6,7 +6,7 @@ from pythonbackend.models import StringSet, String
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core import serializers
 import json
-
+from django.core.exceptions import ValidationError
 
 def calculate(request):
     context = {}
@@ -125,12 +125,8 @@ def save_set(request):
         context['errors'] = errors
         return render(request, 'save_set.html', context)
 
-    delete_set_flag = False
-    #if changing string name
-    #...
-    # print(name, "here!")
-    # old_name = 'old'+name
-    # print(name, old_name, request.GET)
+
+    #changing set name
     try:
         should_rename = False
         old_name = request.GET['save-set']
@@ -195,7 +191,13 @@ def save_set(request):
         old_string_set.all().delete()
 
     string_set = StringSet(name=name, user=request.user, desc=desc, is_mscale=is_mscale, number_of_strings=number_of_strings)
-    string_set.save()
+    try:
+        string_set.full_clean()
+        string_set.save()
+    except ValidationError:
+        errors.append("Could not validate String Set input!")
+        context['errors'] = errors
+        return render(request, 'save_set.html', context)
 
     number_of_parameters = 5
     row_errors = 0
@@ -250,6 +252,13 @@ def save_set(request):
             string = String(string_set=string_set, string_number=string_number, scale_length=scale_length,
                         note=note, octave=octave, gauge=gauge, string_type=string_type)
             string.save()
+            try:
+                string.full_clean()
+                string_set.save()
+            except ValidationError:
+                errors.append("Could not validate a guitar string input!")
+                context['errors'] = errors
+                return render(request, 'save_set.html', context)
 
     context['errors'] = errors
 

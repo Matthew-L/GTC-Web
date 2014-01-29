@@ -21,16 +21,11 @@ urlpatterns = patterns('',
 
     # functionality
     (r'^calculate/$', calculate),
-    (r'^delete-set/$', 'pythonbackend.views.delete_set'),
     (r'^download-set', 'mangoDjango.views.downloadStringSet'),
     (r'^search/$', 'mangoDjango.views.search'),
     (r'^ajax/$', 'pythonbackend.views.ajax_calculate'),
     (r'^ajax-delete/$', 'pythonbackend.views.ajax_delete_set'),
     (r'^save-set/$', 'pythonbackend.views.save_set'),
-    (r'^is-valid-scale-length/$', 'pythonbackend.views.isValidScaleLength'),
-    (r'^is-valid-gauge/$', 'pythonbackend.views.isValidGauge'),
-    (r'^is-valid-string-number/$', 'pythonbackend.views.isValidStringNumber'),
-    (r'^is-valid-number-of-strings/$', 'pythonbackend.views.isValidNumberOfStrings'),
     (r'^info/$','mangoDjango.views.info'),
 
     # user accounts
