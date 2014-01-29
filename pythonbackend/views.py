@@ -124,20 +124,38 @@ def save_set(request):
         errors.append("You must give the String Set a name")
         context['errors'] = errors
         return render(request, 'save_set.html', context)
+
+    delete_set_flag = False
     #if changing string name
     #...
-    if request.method == 'GET':
-        old_name = str(request.GET['string_set_name'])
-        old_name_set = StringSet.objects.filter(name=old_name, user=user)
-        if old_name_set:
-            print(old_name_set)
-            old_name_set.all().delete()
+    # print(name, "here!")
+    # old_name = 'old'+name
+    # print(name, old_name, request.GET)
+    try:
+        should_rename = False
+        old_name = request.GET['save-set']
+        if name != old_name:
+            old_string_set = StringSet.objects.filter(name=old_name, user=user)
+            # print(old_string_set, old_name)
+            # if old_string_set:
+                # old_string_set.all().delete()
+            should_rename = True
+    except:
+        pass
+
     #check if stringset name exists already
-    old_string_set = StringSet.objects.filter(name=name, user=user)
-    if old_string_set:
-        # print(StringSet.objects.filter(name=name, user=user))
-        #edit set
-        old_string_set.all().delete()
+    if should_rename:
+        renamed_to_existing_set = StringSet.objects.filter(name=name, user=user)
+        if renamed_to_existing_set:
+            errors.append("You already have a String Set named that! Delete or rename the set '"+name+"' first.")
+            context['errors'] = errors
+            return render(request, 'save_set.html', context)
+
+    #just updating, name stayed the same
+    revised_string_set = StringSet.objects.filter(name=name, user=user)
+    should_update = False
+    if revised_string_set:
+        should_update = True
 
     # verify string parameters
     try:
@@ -171,6 +189,10 @@ def save_set(request):
             return render(request, 'save_set.html', context)
         number_of_strings = 0
 
+    if should_update:
+        revised_string_set.all().delete()
+    elif should_rename:
+        old_string_set.all().delete()
 
     string_set = StringSet(name=name, user=request.user, desc=desc, is_mscale=is_mscale, number_of_strings=number_of_strings)
     string_set.save()
@@ -236,21 +258,6 @@ def save_set(request):
 def edit_set(request):
     pass
 
-# def delete_set(request):
-#     context = {}
-#     errors = []
-#     name = request.GET['string_set_name']
-#     user = request.user
-#     string_set = StringSet.objects.filter(name=name, user=user)
-#     if string_set:
-#         print(StringSet.objects.filter(name=name, user=user))
-#         # errors.append("You already used that String Set Name")
-#         # context['errors'] = errors
-#         string_set.all().delete()
-#
-#     else:
-#         errors.append('You do not have '+str(string_set)+'in your profile.')
-#     return render(request, 'delete_set.html', context)
 
 @csrf_exempt
 def ajax_delete_set(request):
@@ -268,3 +275,5 @@ def ajax_delete_set(request):
             response = {"name": name}
 
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
+
+

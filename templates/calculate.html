@@ -87,13 +87,18 @@
 {#        <button class="btn btn-success pull-right" type="submit">Save String Set</button>#}
     <table border="0">
     <tr>
-        <td><button class="btn btn-primary" id=insert-more type="button" >
+        <td><button class="btn btn-primary" id="insert-more" type="button" >
             <span class="glyphicon glyphicon-plus btn-divider"></span>
             Add String</button>
         </td>
-        <td> <button class="btn btn-success" type="submit">
-            <span class="glyphicon glyphicon-floppy-disk btn-divider"></span>
-            Save String Set</button> </td>
+
+            <td>
+                <button class="btn btn-success"  id="save-set" type="submit" name="save-set" value="{{ string_set_name }}">
+                    <span class="glyphicon glyphicon-floppy-disk btn-divider"></span>
+                    Save String Set
+                </button>
+            </td>
+
     </tr>
     </table>
     </form>
