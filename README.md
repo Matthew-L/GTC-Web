@@ -115,6 +115,7 @@ D'addario :
 - A heavy set averages 18 lbs
 - Try to keep all strings to a tension of +- 1 lb of the average tension, but do not let the tension keep you from experimenting with what feels natural.
 - When you are happy with your string tensions buy a set from a custom string set vendor such as [Circle K](http://circlekstrings.com/store/single_strings_guitar.html) or [La Bella](http://www.labella.com/products/hrs-custom/)
+
 ## What is Coming Next
 
 Major:
