@@ -101,14 +101,12 @@ Major:
 - add javascript / descriptions of appropriate inputs - matt
 - fix csrf verification
 - fix mini nav bar
-- add legit readme to github
 - ajax save string set
-- change export sets file name
+
 
 
 Extra:
 - circle k’s string tension values (parse into usable array, add parameters to dropdowns)
-- add paypal donate button
 - feedback on tension of set
 - have a sort button to arrange strings by number
 - fix adding rows color(always shows last color)
@@ -126,6 +124,9 @@ Recently Done:
 - validate character length of client side input
 - add favicon
 - search by description
+- add paypal donate button
+- change export sets file name
+- add legit readme to github
 
 ## Bugs and Feature Requests
 
