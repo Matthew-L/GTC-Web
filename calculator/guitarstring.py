@@ -102,12 +102,12 @@ class GuitarString():
         """
         high_scale_length, low_scale_length = self.sanitize_multiscale(scale_length)
 
-        if high_scale_length > low_scale_length:
+        if high_scale_length < low_scale_length:
             #InvalidScaleLengthError('Multi-scale scale_lengths must follow a format similar to \'26.5-30\' and the lower value comes first')
             temp = high_scale_length
             high_scale_length = low_scale_length
             low_scale_length = temp
-        #print(low_scale_length, high_scale_length)
+
         fan_distance = high_scale_length - low_scale_length
         if number_of_strings > 1:
             scale_constant = fan_distance/(number_of_strings-1)
@@ -307,7 +307,7 @@ class GuitarString():
 
     @staticmethod
     def sanitize_multiscale( scale_length):
-        low_scale_length, high_scale_length = scale_length.split('-')
+        low_scale_length, high_scale_length= scale_length.split('-')
         try:
             low_scale_length = float(low_scale_length)
             high_scale_length = float(high_scale_length)
