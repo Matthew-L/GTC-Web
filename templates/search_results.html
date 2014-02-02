@@ -33,15 +33,22 @@
                             <span> {{ result.user }}</span>
                         </div>
                     </a>
-
-                    <a href="/download-set?string_set_name={{ string_set.name }}" >
+                    <a href="/download-set?string_set_name={{ result.name }}&user={{ username }}" >
                         <div class="col-md-1 my-grid">
                             <span class="glyphicon glyphicon-floppy-save"></span>
                         </div>
                     </a>
+{#                    <a href="/download-set?string_set_name={{ string_set.name }}&user={{ result.user }}" >#}
+{#                        <div class="col-md-1 my-grid">#}
+{#                            <span class="glyphicon glyphicon-floppy-save"></span>#}
+{#                        </div>#}
+{#                    </a>#}
                 </div>
             {% endfor %}
         </ul>
+        {% else %}
+            No String Set Name Results!
+            <br>
         {% endif %}
 
         {% if search_desc_results %}
@@ -76,7 +83,7 @@
             {% endfor %}
         </ul>
         {% else %}
-            No Results!
+            No String Set Description Results!
         {% endif %}
     {% endif %}
 {% endblock %}

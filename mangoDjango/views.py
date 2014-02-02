@@ -116,9 +116,21 @@ def downloadStringSet(request):
     if request.method == 'GET':
         print(request.GET)
         string_set_name = str(request.GET['string_set_name'])
-        print(string_set_name)
+        user = str(request.GET['user'])
+        print(user)
         response['Content-Disposition'] = 'attachment;filename="' + string_set_name + ' export.csv"'
         context['string_set_name'] = string_set_name
+
+
+
+        string_set = StringSet.objects.filter(name=string_set_name)
+
+        for set in string_set:
+            print(set)
+            desc = set.desc
+            is_mscale = set.is_mscale
+            number_of_strings = set.number_of_strings
+
         strings = String.objects.all()
         user_set = []
         for string in strings:
@@ -126,6 +138,10 @@ def downloadStringSet(request):
                 user_set.append(string)
 
 
+    writer.writerow(["Name", string_set_name])
+    writer.writerow(["Description", desc])
+    writer.writerow(["Multiscale", is_mscale])
+    writer.writerow(["Total Number of Strings", number_of_strings])
     writer.writerow(["Scale Length", string.scale_length])
 
     writer.writerow(["Number", "Note", "Octave", "Gauge", "String Type", "Tension"])

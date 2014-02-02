@@ -122,7 +122,6 @@ Major:
 - fix csrf verification
 - fix mini nav bar
 - ajax save string set
-- fix export
 
 Extra:
 - feedback on tension of set
@@ -146,6 +145,7 @@ Recently Done:
 - change export sets file name
 - add legit readme to github
 - circle k’s string tension values (parse into usable array, add parameters to dropdowns)
+- fix export
 
 ## Bugs and Feature Requests
 

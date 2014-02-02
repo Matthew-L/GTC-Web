@@ -114,6 +114,7 @@ def save_set(request):
     # make new string set
     name = request.GET['string_set_name']
     user = request.user
+    print("user ",user)
     desc = request.GET['desc']
     if desc == '':
         desc = ' '
