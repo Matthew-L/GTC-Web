@@ -115,6 +115,8 @@ def save_set(request):
     name = request.GET['string_set_name']
     user = request.user
     desc = request.GET['desc']
+    if desc == '':
+        desc = ' '
     #check if user is logged in
     if user.is_anonymous():
         errors.append("Register and Log In to Save Sets!")

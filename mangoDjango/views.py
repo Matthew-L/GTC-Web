@@ -97,7 +97,8 @@ def search(request):
         elif len(q) > 50:
             errors.append('Please enter at most 50 characters.')
         else:
-            context['search_results'] = StringSet.objects.filter(name__icontains=q)
+            context['search_name_results'] = StringSet.objects.filter(name__icontains=q)
+            context['search_desc_results'] = StringSet.objects.filter(desc__icontains=q)
         context['errors'] = errors
 
     return render_to_response('search_results.html', context)
@@ -113,8 +114,10 @@ def downloadStringSet(request):
 
     context = {}
     if request.method == 'GET':
-        string_set_name = 'First Set'#str(request.GET['string_set_name'])
-        response['Content-Disposition'] = 'attachment;filename="' + string_set_name + 'export.csv"'
+        print(request.GET)
+        string_set_name = str(request.GET['string_set_name'])
+        print(string_set_name)
+        response['Content-Disposition'] = 'attachment;filename="' + string_set_name + ' export.csv"'
         context['string_set_name'] = string_set_name
         strings = String.objects.all()
         user_set = []
@@ -123,10 +126,11 @@ def downloadStringSet(request):
                 user_set.append(string)
 
 
+    writer.writerow(["Scale Length", string.scale_length])
 
-
+    writer.writerow(["Number", "Note", "Octave", "Gauge", "String Type", "Tension"])
     for string in user_set:
-        writer.writerow([string.note, string.octave, string.gauge, string.scale_length, string.string_type])
+        writer.writerow([string.string_number, string.note, string.octave, string.gauge, string.string_type])
 
     return response
 
