@@ -156,7 +156,7 @@ We would love to have you help us make a better guitar tension calculator! Conta
 
 
 
-## Copyright and license
+## License
 
 A Team #TripleYoloSwagMoney Creation. Code released under the Mit License.
 Stringulator to-do’s
