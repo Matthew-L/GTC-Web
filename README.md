@@ -108,10 +108,8 @@ Major:
 
 Extra:
 - circle k’s string tension values (parse into usable array, add parameters to dropdowns)
-- add favicon
 - add paypal donate button
 - feedback on tension of set
-- search by description
 - have a sort button to arrange strings by number
 - fix adding rows color(always shows last color)
 
@@ -126,7 +124,8 @@ Recently Done:
 - edit existing sets - micah
 - ajax password check on register
 - validate character length of client side input
-
+- add favicon
+- search by description
 
 ## Bugs and Feature Requests
 
