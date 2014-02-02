@@ -68,15 +68,10 @@ Check out an example set here: [8 String Multi-Scale Set](http://stringulator.he
 Example octaves from standard tuned 6 string:
 
 - String 1 e: Octave 4
-
 - String 2 B: Octave  3
-
 - String 3 G: Octave 3
-
 - String 4 D: Octave 3
-
 - String 5 A: Octave 2
-
 - String 6 E: Octave 2
 
 For more info on how octaves work check out wikipedia's entry: [Octave](http://en.wikipedia.org/wiki/Octave)
@@ -87,26 +82,31 @@ For more info on how octaves work check out wikipedia's entry: [Octave](http://e
 
 ### String Type
 - The string types can be selected from the drop-down menu.
+
+There are 17 available. If you have access to other unit tensions please let us know. We would be glad to add them!
+
 Circle K :
-Plain Steel with Guitar Style Ball End
-Wound Nickel/Steel Hybrid with Guitar Style Ball End
-Plain Steel with Bass Style Ball End
-Wound Nickel/Steel Hybrid with Bass Style Ball End
+
+- Plain Steel with Guitar Style Ball End
+- Wound Nickel/Steel Hybrid with Guitar Style Ball End
+- Plain Steel with Bass Style Ball End
+- Wound Nickel/Steel Hybrid with Bass Style Ball End
 
 D'addario :
-Plain Steel
-Phosphore Bronze Wound
-Nickel Wound
-Stainless Steel Wound
-Half Round Wound
-Chromes - Stainless steel Flat wound
-Flat Tops - Phosphore Bronze Polished
-80/20 Brass Round Wound
-Great American Bronze - 85/15 Brass Round Wound
-Nickel Plated Round Wound - Bass
-Half Round - Pure Nickel Half Round - Bass
-Chromes - Stainless Steel Flat Wound - Bass
-ProSteels - ProSteel Round Wound - Bass
+
+- Plain Steel
+- Phosphore Bronze Wound
+- Nickel Wound
+- Stainless Steel Wound
+- Half Round Wound
+- Chromes - Stainless steel Flat wound
+- Flat Tops - Phosphore Bronze Polished
+- 80/20 Brass Round Wound
+- Great American Bronze - 85/15 Brass Round Wound
+- Nickel Plated Round Wound - Bass
+- Half Round - Pure Nickel Half Round - Bass
+- Chromes - Stainless Steel Flat Wound - Bass
+- ProSteels - ProSteel Round Wound - Bass
 
 ## Understanding Your Tension
 - The basic idea is to get all of your strings tension as close as possible to the feel you want; obviously these fluctuate depending on the player but some general guidelines are:
@@ -114,7 +114,8 @@ ProSteels - ProSteel Round Wound - Bass
 - A medium set averages 16 lbs
 - A heavy set averages 18 lbs
 - Try to keep all strings to a tension of +- 1 lb of the average tension, but do not let the tension keep you from experimenting with what feels natural.
-- When you are happy with your string tensions buy a set from a custom string set vendor such as [Circle K](http://circlekstrings.com/store/single_strings_guitar.html) or [La Bella](http://www.labella.com/products/hrs-custom/)
+- When you are happy with your string tensions, you can buy a set from a custom string set vendor such as [Circle K](http://circlekstrings.com/store/single_strings_guitar.html) or [La Bella](http://www.labella.com/products/hrs-custom/).
+
 ## What is Coming Next
 
 Major:
