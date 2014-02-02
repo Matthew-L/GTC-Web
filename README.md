@@ -9,8 +9,8 @@ Check out an example set here: [8 String Multi-Scale Set](http://stringulator.he
  - [Getting Started](#getting-started)
  - [Making a String Set](#making-a-string-set)
  - [Valid Inputs](#valid-inputs)
- - [Understanding Your Tension](#understanding-your-tensions)
- - [What's Coming Next?](#what's-coming-next)
+ - [Understanding Your Tension](#understanding-your-tension)
+ - [What is Coming Next?](#what-is-coming-next)
  - [Bugs and Feature Requests](#bugs-and-feature-requests)
  - [Community](#community)
  - [Contribution](#contribution)
@@ -95,7 +95,7 @@ For more info on how octaves work check out wikipedia's entry: [Octave](http://e
 - A heavy set averages 18 lbs
 - Try to keep all strings to a tension of +- 1 lb of the average tension, but do not let the tension keep you from experimenting with what feels natural.
 
-## What's Coming Next
+## What is Coming Next
 
 Major:
 - add javascript / descriptions of appropriate inputs - matt
