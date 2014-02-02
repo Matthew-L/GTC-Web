@@ -86,7 +86,27 @@ For more info on how octaves work check out wikipedia's entry: [Octave](http://e
 - This is used to find the unit tension released by string manufacturers. If the string manufacturer did not release the unit tension for the gauge you input then the unit tension is approximated.
 
 ### String Type
-- The string types can be selected from the drop-down menu. Currently only DiMarzio's five basic types are availible, but more will be added soon (including Circle K).
+- The string types can be selected from the drop-down menu.
+Circle K :
+Plain Steel with Guitar Style Ball End
+Wound Nickel/Steel Hybrid with Guitar Style Ball End
+Plain Steel with Bass Style Ball End
+Wound Nickel/Steel Hybrid with Bass Style Ball End
+
+D'addario :
+Plain Steel
+Phosphore Bronze Wound
+Nickel Wound
+Stainless Steel Wound
+Half Round Wound
+Chromes - Stainless steel Flat wound
+Flat Tops - Phosphore Bronze Polished
+80/20 Brass Round Wound
+Great American Bronze - 85/15 Brass Round Wound
+Nickel Plated Round Wound - Bass
+Half Round - Pure Nickel Half Round - Bass
+Chromes - Stainless Steel Flat Wound - Bass
+ProSteels - ProSteel Round Wound - Bass
 
 ## Understanding Your Tension
 - The basic idea is to get all of your strings tension as close as possible to the feel you want; obviously these fluctuate depending on the player but some general guidelines are:
@@ -94,7 +114,7 @@ For more info on how octaves work check out wikipedia's entry: [Octave](http://e
 - A medium set averages 16 lbs
 - A heavy set averages 18 lbs
 - Try to keep all strings to a tension of +- 1 lb of the average tension, but do not let the tension keep you from experimenting with what feels natural.
-
+- When you are happy with your string tensions buy a set from a custom string set vendor such as [Circle K](http://circlekstrings.com/store/single_strings_guitar.html) or [La Bella](http://www.labella.com/products/hrs-custom/)
 ## What is Coming Next
 
 Major:
@@ -102,11 +122,9 @@ Major:
 - fix csrf verification
 - fix mini nav bar
 - ajax save string set
-
-
+- fix export
 
 Extra:
-- circle k’s string tension values (parse into usable array, add parameters to dropdowns)
 - feedback on tension of set
 - have a sort button to arrange strings by number
 - fix adding rows color(always shows last color)
@@ -127,6 +145,7 @@ Recently Done:
 - add paypal donate button
 - change export sets file name
 - add legit readme to github
+- circle k’s string tension values (parse into usable array, add parameters to dropdowns)
 
 ## Bugs and Feature Requests
 

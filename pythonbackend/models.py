@@ -7,8 +7,24 @@ from south.db import db
 NOTE_CHOICES = (('A', 'A'), ('A#/Bb', 'A#/Bb'), ('B', 'B'), ('C', 'C'), ('C#/Db', 'C#/Db'), ('D', 'D'),
                 ('D#/Eb','D#/Eb'), ('E','E'), ('F','F'), ('F#/Gb','F#/Gb'), ('G','G'), ('G#/Ab','G#/Ab'))
 OCTAVE_RANGE = 10
-STRING_TYPE = (("PL", "Plain"), ("PB", "Phosphorus Bronze"), ("NW", "Nickel Wound"), ("XS", "Stainless Steel"),
-               ("HR", "Half-Round"))
+STRING_TYPE =   (("CKPLG", "Plain Steel - CK"),
+                ("CKWNG", "Nickel/Steel Hybrid - CK"),
+                ("CKPLB", "Bass - Plain Steel - CK"),
+                ("CKWNB", "Bass - Nickel/Steel Hybrid - CK"),
+                ("DAPL", "Plain Steel - DA"),
+                ("DAPB", "Phosphore Bronze Wound - DA"),
+                ("DANW", "Nickel Wound - DA"),
+                ("DAXS", "Stainless Steel Wound - DA"),
+                ("DAHR", "Half-Round Wound - DA"),
+                ("DACG", "Chromes - Stainless Flat wound - DA"),
+                ("DAFT", "Flat Tops - Phosphore Bronze  - DA"),
+                ("DABW", "80/20 Brass Round Wound - DA"),
+                ("DAZW", "85/15 Great American Bronze - DA"),
+                ("DAXB", "Bass - Nickel Plated Round Wound - DA"),
+                ("DAHB", "Bass - Pure Nickel Half Round - DA"),
+                ("DABC", "Bass - Stainless Steel Flat Wound - DA"),
+                ("DABS", "Bass - ProSteel Round Wound - DA"))
+
 
 
 class StringSet(models.Model):
