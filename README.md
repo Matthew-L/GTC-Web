@@ -68,7 +68,7 @@ Check out an example set here: [8 String Multi-Scale Set](http://stringulator.he
 Example octaves from standard tuned 6 string:
 
 - String 1 e: Octave 4
-- String 2 B: Octave  3
+- String 2 B: Octave 3
 - String 3 G: Octave 3
 - String 4 D: Octave 3
 - String 5 A: Octave 2
@@ -119,15 +119,24 @@ D'addario :
 ## What is Coming Next
 
 Major:
-- add javascript / descriptions of appropriate inputs - matt
+- add tooltips/popovers on calculate page
 - fix csrf verification
 - fix mini nav bar
 - ajax save string set
+- validate character length of client side input
+- make custom 404, 500, and offline ajax errors
+- limit users to 100 sets
 
 Extra:
 - feedback on tension of set
 - have a sort button to arrange strings by number
 - fix adding rows color(always shows last color)
+- calculate gauge by tension
+- view profiles from search
+- search by profile
+- comment on string sets
+- rate string sets
+- force minimum of 3 dec. places on loading set
 
 Recently Done:
 - calc tension on loading of saved set
@@ -139,7 +148,6 @@ Recently Done:
 - fix register page - matt
 - edit existing sets - micah
 - ajax password check on register
-- validate character length of client side input
 - add favicon
 - search by description
 - add paypal donate button
@@ -174,8 +182,9 @@ We would love to have you help us make a better guitar tension calculator! Conta
 
 - <https://github.com/Matthew-L>
 
-
+## Disclaimer
+As with all string tension calculators, we make no guarantee that our calculations are correct and are not liable for damages to your instrument. We also reserve the right to delete any user accounts that misuse the site (including offensive usernames, misuse of saved data, etc.).
 
 ## License
 
-A Team #TripleYoloSwagMoney Creation. Code released under the Mit License.
+A Team #TripleYoloSwagMoney Creation. Code released under the MIT License.
