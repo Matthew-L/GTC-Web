@@ -28,7 +28,7 @@ def set_users_login_status(request):
 def login(request):
     context = set_users_login_status(request)
     context.update(csrf(request))
-    return render_to_response('login.html', context)
+    return render_to_response('login.html', context,  context_instance=RequestContext(request))
 
 
 def auth_view(request):
