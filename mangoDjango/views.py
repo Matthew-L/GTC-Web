@@ -9,9 +9,17 @@ import csv
 import json
 from mangoDjango import settings
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
+from calculator import guitarstring
 
 def contact(request):
-    return render_to_response('contact.html')
+    context = {}
+    if request.user.is_authenticated():
+        context['is_logged_in'] = True
+        context['username'] = request.user.get_username()
+    else:
+        context['is_logged_in'] = False
+    return render(request, 'contact.html', context)
 
 
 def set_users_login_status(request):
@@ -103,7 +111,7 @@ def search(request):
             context['search_name_results'] = StringSet.objects.filter(name__icontains=q)
             context['search_desc_results'] = StringSet.objects.filter(desc__icontains=q)
         context['errors'] = errors
-
+    print(request)
     return render_to_response('search_results.html', context, context_instance=RequestContext(request))
 
 def downloadStringSet(request):
@@ -149,7 +157,13 @@ def downloadStringSet(request):
 
     writer.writerow(["Number", "Note", "Octave", "Gauge", "String Type", "Tension"])
     for string in user_set:
-        writer.writerow([string.string_number, string.note, string.octave, string.gauge, string.string_type])
+        if is_mscale:
+            gs = guitarstring.GuitarString(string.scale_length, string.string_type, string.gauge, string.note,
+                                           string.octave, number_of_strings, string.string_number)
+            writer.writerow([string.string_number, string.note, string.octave, string.gauge, string.string_type, gs.calculate_tension()])
+        else:
+            gs = guitarstring.GuitarString(string.scale_length, string.string_type, string.gauge, string.note, string.octave)
+            writer.writerow([string.string_number, string.note, string.octave, string.gauge, string.string_type, gs.calculate_tension()])
 
     return response
 

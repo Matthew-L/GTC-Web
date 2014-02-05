@@ -1,7 +1,40 @@
 {% extends 'base.html' %}
 
+
+{% block breadcrumb %}
+    <li class="active"><a href="/calculate">Calculate</a></li>
+
+    {% if not is_logged_in %}
+        <li><a href="/accounts/register">Register</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block login %}
+         <ul class="nav navbar-nav pull-right">
+        {% if is_logged_in %}
+            <li  class="active"> <a href=/profile/><span class="glyphicon glyphicon-user">&nbsp </span>{{ username }}</a></li>
+            <li><a href="/accounts/logout/">Logout</a></li>
+        {% else %}
+          {% if form.errors %}
+            <p class="error">Sorry, that's not a valid username or password</p>
+          {% endif %}
+
+          <form class="navbar-form navbar-right"  action="/accounts/auth/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="username" value="" id="username" placeholder="Username" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" value="" id="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Log in</button>
+          </form>
+        {% endif %}
+          </ul>
+    {% endblock %}
+
 {% block content %}
- <h1>Contact Us</h1>
+<h1>Contact Us</h1>
     <p>
         Thank you for using Stringularity.  We are perpetually adding new features and fixing broken ones.  If you
         happen across a bug or error please send a description of what happened and a screenshot if possible.  If you
@@ -13,3 +46,4 @@
 
 </div>
 {% endblock %}
+

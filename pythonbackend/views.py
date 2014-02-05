@@ -24,23 +24,17 @@ def calculate(request):
         try:
             string_set_name = str(request.GET['string_set_name'])
             string_set = StringSet.objects.filter(name=string_set_name)
-
-            #print(context['fields']['scale_length'])
         except:
             return render(request, 'calculate.html', context)
 
         user_set = []
         # wont iterate any other way for some reason
         for set in string_set:
-            #user_set.append(set)
-            #user_set.append(set.desc)
-            #user_set.append(set.number_of_strings)
             context['is_mscale'] = set.is_mscale
             context['desc'] = set.desc
             context['number_of_strings'] = set.number_of_strings
 
         context['string_set_name'] = string_set_name
-
 
         strings = String.objects.all()
 
@@ -48,7 +42,7 @@ def calculate(request):
             if str(string.string_set.name) == str(string_set_name):
                 user_set.append(string)
         data = serializers.serialize("json", user_set)
-        #print(data)
+
         context['json_data'] = data
         context['someDjangoVariable'] = data
 
@@ -74,6 +68,7 @@ def ajax_calculate(request):
         gauge = request.POST['gauge']
         string_type = request.POST['string_type']
         print(string_number)
+        # has to use javascript booleans
         if is_mscale == 'true':
             gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
                                            octave, number_of_strings, string_number)
@@ -98,8 +93,6 @@ def save_set(request):
     else:
         context['is_logged_in'] = False
     if request.method == 'GET':
-        #for user_input in request.GET:
-        #    print(user_input)
         curr = 0
         try:
             while request.GET['gauge_GTC_'+str(curr)] is not None:
@@ -267,22 +260,15 @@ def save_set(request):
 
     return render(request, 'save_set.html', context)
 
-def edit_set(request):
-    pass
-
 
 @csrf_exempt
 def ajax_delete_set(request):
     if request.is_ajax() and request.method == "POST":
         name = request.POST['string_set_name']
         user = request.user
-        # print(name)
 
         string_set = StringSet.objects.filter(name=name, user=user)
         if string_set:
-            # print(StringSet.objects.filter(name=name, user=user))
-            # errors.append("You already used that String Set Name")
-            # context['errors'] = errors
             string_set.all().delete()
             response = {"name": name}
 
