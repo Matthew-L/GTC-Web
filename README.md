@@ -120,7 +120,6 @@ D'addario :
 
 Major:
 - add tooltips/popovers on calculate page
-- fix csrf verification
 - fix mini nav bar
 - ajax save string set
 - validate character length of client side input
@@ -155,6 +154,7 @@ Recently Done:
 - add legit readme to github
 - circle k’s string tension values (parse into usable array, add parameters to dropdowns)
 - fix export
+- fix csrf verification
 
 ## Bugs and Feature Requests
 

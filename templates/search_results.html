@@ -3,6 +3,7 @@
 {% block content %}
 
     <h1>Search Results</h1>
+    {{ debug }}
     {% if errors %}
         <ul>
             {% for error in errors %}
@@ -38,11 +39,6 @@
                             <span class="glyphicon glyphicon-floppy-save"></span>
                         </div>
                     </a>
-{#                    <a href="/download-set?string_set_name={{ string_set.name }}&user={{ result.user }}" >#}
-{#                        <div class="col-md-1 my-grid">#}
-{#                            <span class="glyphicon glyphicon-floppy-save"></span>#}
-{#                        </div>#}
-{#                    </a>#}
                 </div>
             {% endfor %}
         </ul>

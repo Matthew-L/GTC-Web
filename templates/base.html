@@ -5,8 +5,13 @@
         {% block title %}
             {% include "includes/header.html" %}
         {% endblock %}
-     <link rel="stylesheet" type="text/css" href="/static/css/default.css">
-{#            <link rel="stylesheet" type="text/css" href="http://mattlodes.com/static/css/default.css">#}
+
+         {% if debug %}
+            <link rel="stylesheet" type="text/css" href="{% static 'css/default.css'%}">
+         {% else %}
+            <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/default.css">
+         {% endif %}
+
     </head>
   <body>
 
@@ -78,6 +83,9 @@
 
       <div class="container">
         <h1>Welcome to Stringulator!</h1>
+     {% if debug %}
+         {{ debug }}
+     {% endif %}
         <p>This site allows you to create custom guitar string sets. After you build a set, you can save them to your profile to compare to other sets you've tried. Don't want to make your own String Set? Use the search bar to find custom sets other Stringulator users are rocking!</p>
         <p><a class="btn btn-primary btn-lg" role="button" href="https://github.com/Matthew-L/GTC-Web">Check out our GitHub!&raquo;</a></p>
       </div>
@@ -101,7 +109,7 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   
     <!--   <script src="../../dist/js/bootstrap.min.js"></script>-->
-    <script src="http://mattlodes.com/static/js/jquery-2.0.3.min.js" type="text/javascript"></script>
+    <script src="{% static 'js/jquery-2.0.3.min.js' %}" type="text/javascript"></script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 {% endblock %}

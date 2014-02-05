@@ -1,4 +1,5 @@
 from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import auth
 from django.core.context_processors import csrf
@@ -6,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from pythonbackend.models import StringSet, String
 import csv
 import json
+from mangoDjango import settings
 from django.views.decorators.csrf import csrf_exempt
 
 def contact(request):
@@ -14,6 +16,7 @@ def contact(request):
 
 def set_users_login_status(request):
     context = {}
+    context['debug'] = settings.DEBUG
     if request.user.is_authenticated():
         context['is_logged_in'] = True
         context['username'] = request.user.get_username()
@@ -50,7 +53,7 @@ def logout(request):
     context = set_users_login_status(request)
     context.update(csrf(request))
 
-    return render_to_response('logout.html')
+    return render_to_response('logout.html', {}, context_instance=RequestContext(request))
 
 ####################################
 def register_user(request):
@@ -80,7 +83,7 @@ def profile(request):
 
     string_sets = StringSet.objects.filter(user=request.user)
     context['string_sets'] = string_sets
-    return render_to_response('profile.html', context)
+    return render_to_response('profile.html', context, context_instance=RequestContext(request))
 
 def search(request):
     context = {}
@@ -101,7 +104,7 @@ def search(request):
             context['search_desc_results'] = StringSet.objects.filter(desc__icontains=q)
         context['errors'] = errors
 
-    return render_to_response('search_results.html', context)
+    return render_to_response('search_results.html', context, context_instance=RequestContext(request))
 
 def downloadStringSet(request):
     # get the response object, this can be used as a stream.

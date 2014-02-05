@@ -3,7 +3,7 @@
 import os
 ROOT_PATH = os.path.dirname(__file__)
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -57,29 +57,35 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = 'static/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = ''
-
+# if DEBUG:
+#     PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
+#     MEDIA_URL = os.path.join(PROJECT_PATH, '../static/')
+# else:
+MEDIA_URL = 'http://mattlodes.com/static/'
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 # Static asset configuration
 #import os
-PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
 
+PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
+STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_PATH, 'static'),
-    os.path.join(PROJECT_PATH, 'assets'),
+    os.path.join(PROJECT_PATH, '../static/'),
 )
 
-
+# PROJECT_PATH = 'http://mattlodes.com/static/'
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = (
+#     ('http://mattlodes.com/static/'),
+# )
+#
 
 
 #STATIC_ROOT = ''
@@ -117,8 +123,8 @@ TEMPLATE_LOADERS = (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
@@ -144,6 +150,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+
     'mangoDjango',
     'pythonbackend',
     'pythonbackend.templatetags',
@@ -181,3 +188,5 @@ LOGGING = {
         },
     }
 }
+
+INTERNAL_IPS = ("request.META['REMOTE_ADDR']", )

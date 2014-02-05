@@ -63,7 +63,11 @@
 
 {% block scripts %}
     {{ block.super }}
-        <script src="http://mattlodes.com/static/js/delete_set.js"></script>
+        {% if debug %}
+            <script src="{% static 'js/delete_set.js' %}"></script>
+        {% else %}
+            <script src="{{ MEDIA_URL }}js/delete.js"></script>
+        {% endif %}
 
 
 {% endblock %}
