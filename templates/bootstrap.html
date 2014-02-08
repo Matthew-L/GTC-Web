@@ -1,27 +1,49 @@
 {% extends 'base.html' %}
-{% load static %}
-{% block content %}
-    <p>
-<meta charset="utf-8"> 
-<title>Twitter Bootstrap Popover Example</title> 
-<meta name="description" content="Creating Modal Window with Twitter Bootstrap">
-    <link href="{% static 'bootstrap/docs/assets/css/bootstrap.css' %}" rel="stylesheet">
-</p>
-<body>
-<div class="container">
-<h2>Example of creating Modal with Twitter Bootstrap</h2>
-<div class="well">
-<a href="#" id="example" class="btn btn-danger" rel="popover" data-content="It's so simple to create a tooltop for my website!" data-original-title="Twitter Bootstrap Popover">hover for popover</a>
-</div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="{% static 'bootstrap/js/tooltip.js"' %}"></script>
-<script src="{% static 'bootstrap/js/popover.js' %}"></script>
-<script>
-$(function ()
-{ $("#example").popover();
-});
-</script>
-</body>
+
+
+{% block breadcrumb %}
+    <li class="active"><a href="/calculate">Calculate</a></li>
+
+    {% if not is_logged_in %}
+        <li><a href="/accounts/register">Register</a></li>
+    {% endif %}
 {% endblock %}
-            
+
+{% block login %}
+         <ul class="nav navbar-nav pull-right">
+        {% if is_logged_in %}
+            <li  class="active"> <a href=/profile/><span class="glyphicon glyphicon-user">&nbsp </span>{{ username }}</a></li>
+            <li><a href="/accounts/logout/">Logout</a></li>
+        {% else %}
+          {% if form.errors %}
+            <p class="error">Sorry, that's not a valid username or password</p>
+          {% endif %}
+
+          <form class="navbar-form navbar-right"  action="/accounts/auth/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="username" value="" id="username" placeholder="Username" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" value="" id="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Log in</button>
+          </form>
+        {% endif %}
+          </ul>
+    {% endblock %}
+
+{% block content %}
+<h1>Contact Us</h1>
+    <p>
+        Thank you for using Stringularity.  We are perpetually adding new features and fixing broken ones.  If you
+        happen across a bug or error please send a description of what happened and a screenshot if possible.  If you
+        any ideas or recommendations that you think would make the site better feel free to send those as well.
+    </p>
+
+    <h3>E-Mail: stringularity@gmail.com</h3>
+
+
+</div>
+{% endblock %}
+

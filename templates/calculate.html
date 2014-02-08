@@ -65,12 +65,12 @@
     <br>
     <table border="1" id="strings-tbl" >
         <tr>
-            <th>Number</th>
-            <th>Note</th>
-            <th>Octave</th>
-            <th>Gauge</th>
-            <th>String Type</th>
-            <th>Tension</th>
+            <th id="number">Number</th>
+            <th id="note">Note</th>
+            <th class="octave">Octave</th>
+            <th id="gauge">Gauge</th>
+            <th id="string-type">String Type</th>
+            <th id="Tension">Tension</th>
         </tr>
 
         {# New User String Form #}
@@ -111,15 +111,33 @@
     {% if debug %}
         <script src="{% static 'js/calculate.js' %}"></script>
         <script src="{% static 'js/calculate.js' %}" ></script>
+        <script src="{% static 'bootstrap/js/tooltip.js' %}"></script>
+        <script src="{% static 'bootstrap/js/popover.js' %}"></script>
     {% else %}
         <script src="{{ MEDIA_URL }}js/calculate.js"></script>
         <script src="{{ MEDIA_URL }}js/add_row.js" ></script>
+        <script src="{{ MEDIA_URL }}bootstrap/js/tooltip.js"></script>
+        <script src="{{ MEDIA_URL }}bootstrap/js/popover.js" ></script>
     {% endif %}
 
+<script>
+$(function ()
+{
+{#    $("#example").popover({ });#}
+{#     $("#octave").popover({container: 'octave'  trigger: "hover", title: 'Twitter Bootstrap Popover', content: "It's so simple to create a tooltop for my website!"});#}
+{#    $(".octave_input").popover({ placement: "top", animation:"true",  trigger: "hover", title: 'Twitter Bootstrap Popover', content: "It's so simple to create a tooltop for my website!"});#}
+{#    $(".octave_input").on(function () {#}
+        $(".octave").popover({ placement: "top", animation:"true",  trigger: "hover", title: 'Twitter Bootstrap Popover', content: "It's so simple to create a tooltop for my website!"});
 
-    
-    <script type="text/javascript"></script>
-    
+{#    mouseleave: function () {#}
+{#        //stuff to do on mouse leave#}
+{#    }#}
+
+{#    });#}
+});
+</script>
+{#<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>#}
+
     <script type="text/javascript">
 
         var numberOfRows = 1;
@@ -161,7 +179,14 @@
 
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="C:/Users/Micah/Desktop/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-tooltip.js"></script>
+<script src="C:/Users/Micah/Desktop/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-popover.js"></script>
+<script>
+$(function ()
+{ $("#example").popover({title: 'Twitter Bootstrap Popover', content: "It's so simple to create a tooltop for my website!"});
+});
+</script>
 
 
 
