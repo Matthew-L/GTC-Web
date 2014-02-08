@@ -66,7 +66,8 @@ MEDIA_ROOT = 'static/'
 #     PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 #     MEDIA_URL = os.path.join(PROJECT_PATH, '../static/')
 # else:
-MEDIA_URL = 'http://mattlodes.com/static/'
+MEDIA_URL = 'https://rawgithub.com/Matthew-L/GTC-Web/master/static/'
+# MEDIA_URL = 'http://mattlodes.com/static/'
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.

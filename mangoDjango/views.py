@@ -12,6 +12,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from calculator import guitarstring
 
+
+def bootstrap(request):
+    return render_to_response('bootstrap.html')
+
 def contact(request):
     context = {}
     if request.user.is_authenticated():

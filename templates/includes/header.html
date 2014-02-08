@@ -1,8 +1,17 @@
 <!DOCTYPE html>
+{% load static %}
 {% load get_range %}
 <html>
  <head>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+     {% if debug %}
+
+         <link href="{% static 'bootstrap\docs\dist\css\bootstrap.min.css' %}" rel="stylesheet" />
+    {% else %}
+
+         <link href="{{ MEDIA_URL }}bootstrap\docs\dist\css\bootstrap.min.css"  rel="stylesheet" />
+    {% endif %}
+{#     C:\Users\Micah\Dropbox\GTC-Web\static\bootstrap\docs\dist\css\bootstrap.min.css#}
+{#    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />#}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +22,17 @@
     <title>Stringulator</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.css" rel="stylesheet">
+{#    <link href="../../dist/css/bootstrap.css" rel="stylesheet">#}
 
     <!-- Custom styles for this template -->
     <link href="jumbotron.css" rel="stylesheet">
-
+{#     {% if debug %}#}
+{#        <script src="{% static 'bootstrap\docs\dist\css\bootstrap.min.css' %}"></script>#}
+{#         <link href="jumbotron.css" rel="stylesheet">#}
+{#    {% else %}#}
+{#        <script src="{{ MEDIA_URL }}bootstrap\docs\dist\css\bootstrap.min.css" ></script>#}
+{#         <link href="jumbotron.css" rel="stylesheet">#}
+{#    {% endif %}#}
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 

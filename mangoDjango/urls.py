@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     #url(r'^', include('favicon.urls')),
 
     # functionality
+
     (r'^calculate/$', calculate),
     (r'^download-set', 'mangoDjango.views.downloadStringSet'),
     (r'^search/$', 'mangoDjango.views.search'),
@@ -39,7 +40,7 @@ urlpatterns = patterns('',
     (r'^profile/$', 'mangoDjango.views.profile'),
 
     (r'^contact/$', 'mangoDjango.views.contact'),
-
+    (r'^bootstrap/$', 'mangoDjango.views.bootstrap'),
     # ios user accounts
     (r'^ios/login/$', 'mangoDjango.views.iosLogin'),
 
