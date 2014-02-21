@@ -13,6 +13,7 @@ from django.shortcuts import render
 from calculator import guitarstring
 
 
+
 def bootstrap(request):
     return render_to_response('bootstrap.html')
 

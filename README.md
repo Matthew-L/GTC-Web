@@ -119,7 +119,7 @@ D'addario :
 ## What is Coming Next
 
 Major:
-- add tooltips/popovers on calculate page
+- make popovers persist on selection of grid spaces
 - fix mini nav bar
 - ajax save string set
 - validate character length of client side input
@@ -127,7 +127,7 @@ Major:
 - limit users to 100 sets
 
 Extra:
-- feedback on tension of set
+- dynamic color feedback on tension of set
 - have a sort button to arrange strings by number
 - fix adding rows color(always shows last color)
 - calculate gauge by tension
@@ -138,14 +138,15 @@ Extra:
 - force minimum of 3 dec. places on loading set
 
 Recently Done:
+- add tooltips/popovers on calculate page
 - calc tension on loading of saved set
 - fix ajax verification
 - add contact page
 - add multiscale calculations (add description and total num as well) - micah
 - save and load multiscale -micah
 - fix info page -> change to link to our github
-- fix register page - matt
-- edit existing sets - micah
+- fix register page
+- edit existing sets
 - ajax password check on register
 - add favicon
 - search by description
@@ -158,7 +159,12 @@ Recently Done:
 
 ## Bugs and Feature Requests
 
+Known Bugs
+- Adding a row breaks multi-scale checkbox
+- mini-navbar is empty
+
 Have a bug or a feature request? Contact us at stringulator@gmail.com.
+
 
 ## Community
 
