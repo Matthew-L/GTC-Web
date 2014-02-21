@@ -30,6 +30,8 @@ def contact(request):
 def set_users_login_status(request):
     context = {}
     context['debug'] = settings.DEBUG
+    print("conDebug",context['debug'])
+
     if request.user.is_authenticated():
         context['is_logged_in'] = True
         context['username'] = request.user.get_username()

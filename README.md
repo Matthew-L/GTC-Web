@@ -40,7 +40,7 @@ Check out an example set here: [8 String Multi-Scale Set](http://stringulator.he
 
 ### Description
 - A description must be less then 1000 characters.
-- A description will be searchable in a future version of the site.
+- Users can get search results based on this description.
 
 ### Multiscale
 - Check the box if the string set is for a multi-scale scale length. This will reveal the box for Total Number of Strings.

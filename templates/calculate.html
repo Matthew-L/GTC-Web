@@ -11,21 +11,21 @@
 {% endblock %}
 
 {% block content %}
-
+    <h4>Hover over a fields header to get more information!</h4>
     <form method="get" action="/save-set/">
     {# Contains the json file for the strings in the string set #}
     <input type="hidden" id="string_data" name="variable" value='{{ json_data }}'>
     {# String Set Name #}
      <table border="1" >
         <tr>
-            <th><div id="string_set_name">String Set Name</div></th>
+            <th><div id="string_set_name" class="popover_header">String Set Name</div></th>
             <td><input name="string_set_name" class="string_set_name" type="text" name="scale_length" value="{{ string_set_name }}"></td>
 
         </tr>
          <tr>
-             <th><div id="desc">Description</div></th>
+             <th><div class="popover_header" id="desc">Description</div></th>
              <td>
-                <textarea id="desc" name="desc" cols="25" rows="1">{{ desc }}</textarea>
+                <textarea id="desc" name="desc" cols="50" rows="3">{{ desc }}</textarea>
             </td>
          </tr>
         <br>
@@ -33,8 +33,8 @@
          <table border="1" >
         <tr>
                 <th>
-                    <div id="mscale">
-                        Multiscale &nbsp<input type="checkbox" id="mscale_checkbox" name="is_mscale" value="True"
+                    <div class="popover_header" id="mscale">
+                        Multi-Scale &nbsp<input type="checkbox" id="mscale_checkbox" name="is_mscale" value="True"
                            {% if is_mscale %}
                                 checked="true"
                            {% else %}
@@ -47,7 +47,7 @@
 
          <tr id="number_of_strings_row" class="hidden_row" hidden = "hidden">
 
-            <th class="hidden_row" hidden = "hidden" ><div class="hidden_row" hidden = "hidden"><div id="number_of_strings_popover" >Total Number of Strings</div></th>
+            <th class="hidden_row" hidden = "hidden" ><div class="hidden_row" hidden = "hidden"><div class="popover_header" id="number_of_strings_popover" >Total Number of Strings</div></th>
             <td class="hidden_row" hidden = "hidden"><div class="hidden_row" hidden = "hidden">
                 <input name="number_of_strings" id="number_of_strings" class="number_of_strings_input user_input" type="text" name="number_of_strings" value="{{ number_of_strings }}">
             </div></td>
@@ -55,7 +55,7 @@
         </tr>
          <br>
         <tr>
-            <th><div id="scale_length_popover">Scale Length</div></th>
+            <th><div class="popover_header" id="scale_length_popover">Scale Length</div></th>
             <td><input name="scale_length" id="scale_length"  class="scale_length_input user_input" type="text" name="scale_length"></td>
         </tr>
     </table>
@@ -69,12 +69,12 @@
     <br>
     <table border="1" id="strings-tbl" >
         <tr>
-            <th><div id="number">Number</div></th>
-            <th><div id="note">Note</div></th>
-            <th><div id="octave">Octave</div></th>
-            <th><div id="gauge">Gauge</div></th>
-            <th><div id="string-type">String Type</div></th>
-            <th><div id="tension">Tension</div></th>
+            <th><div class="popover_header" id="number">Number</div></th>
+            <th><div class="popover_header" id="note">Note</div></th>
+            <th><div class="popover_header" id="octave">Octave</div></th>
+            <th><div class="popover_header" id="gauge">Gauge</div></th>
+            <th><div class="popover_header" id="string-type">String Type</div></th>
+            <th><div class="popover_header" id="tension">Tension</div></th>
         </tr>
 
         {# New User String Form #}

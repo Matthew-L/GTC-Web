@@ -7,9 +7,12 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core import serializers
 import json
 from django.core.exceptions import ValidationError
+from mangoDjango import settings
 
 def calculate(request):
     context = {}
+    context['debug'] = settings.DEBUG
+
     try:
         if request.user.is_authenticated():
             context['is_logged_in'] = True
