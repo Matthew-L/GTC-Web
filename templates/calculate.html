@@ -17,12 +17,12 @@
     {# String Set Name #}
      <table border="1" >
         <tr>
-            <th>String Set Name</th>
-            <td><input name="string_set_name" id="string_set_name" class="string_set_name" type="text" name="scale_length" value="{{ string_set_name }}"></td>
+            <th><div id="string_set_name">String Set Name</div></th>
+            <td><input name="string_set_name" class="string_set_name" type="text" name="scale_length" value="{{ string_set_name }}"></td>
 
         </tr>
          <tr>
-             <th>Description</th>
+             <th><div id="desc">Description</div></th>
              <td>
                 <textarea id="desc" name="desc" cols="25" rows="1">{{ desc }}</textarea>
             </td>
@@ -32,18 +32,21 @@
          <table border="1" >
         <tr>
                 <th>
-                    Multiscale &nbsp<input type="checkbox" id="mscale_checkbox" name="is_mscale" value="True"
-                                           {% if is_mscale %}
-                                                checked="true"
-                                           {% else %}
+                    <div id="mscale">
+                        Multiscale &nbsp<input type="checkbox" id="mscale_checkbox" name="is_mscale" value="True"
+                           {% if is_mscale %}
+                                checked="true"
+                           {% else %}
 
-                                           {% endif %}>
+                           {% endif %}>
+                        &nbsp
+                    </div>
                 </th>
         </tr>
 
          <tr id="number_of_strings_row" class="hidden_row" hidden = "hidden">
 
-            <th class="hidden_row" hidden = "hidden" ><div class="hidden_row" hidden = "hidden">Total Number of Strings</div></th>
+            <th class="hidden_row" hidden = "hidden" ><div class="hidden_row" hidden = "hidden"><div id="number_of_strings_popover" >Total Number of Strings</div></th>
             <td class="hidden_row" hidden = "hidden"><div class="hidden_row" hidden = "hidden">
                 <input name="number_of_strings" id="number_of_strings" class="number_of_strings_input user_input" type="text" name="number_of_strings" value="{{ number_of_strings }}">
             </div></td>
@@ -51,8 +54,8 @@
         </tr>
          <br>
         <tr>
-            <th>Scale Length</th>
-            <td><input name="scale_length" id="scale_length" class="scale_length_input user_input" type="text" name="scale_length"></td>
+            <th><div id="scale_length_popover">Scale Length</div></th>
+            <td><input name="scale_length" id="scale_length"  class="scale_length_input user_input" type="text" name="scale_length"></td>
         </tr>
     </table>
 
@@ -65,12 +68,12 @@
     <br>
     <table border="1" id="strings-tbl" >
         <tr>
-            <th id="number">Number</th>
-            <th id="note">Note</th>
-            <th class="octave">Octave</th>
-            <th id="gauge">Gauge</th>
-            <th id="string-type">String Type</th>
-            <th id="Tension">Tension</th>
+            <th><div id="number">Number</div></th>
+            <th><div id="note">Note</div></th>
+            <th><div id="octave">Octave</div></th>
+            <th><div id="gauge">Gauge</div></th>
+            <th><div id="string-type">String Type</div></th>
+            <th><div id="tension">Tension</div></th>
         </tr>
 
         {# New User String Form #}
@@ -108,35 +111,20 @@
 {% block scripts %}
     {{ block.super }}
 
+
     {% if debug %}
         <script src="{% static 'js/calculate.js' %}"></script>
-        <script src="{% static 'js/calculate.js' %}" ></script>
+        <script src="{% static 'js/add_row.js' %}" ></script>
         <script src="{% static 'bootstrap/js/tooltip.js' %}"></script>
         <script src="{% static 'bootstrap/js/popover.js' %}"></script>
+        <script src="{% static 'js/popover_header_info.js' %}" ></script>
     {% else %}
         <script src="{{ MEDIA_URL }}js/calculate.js"></script>
         <script src="{{ MEDIA_URL }}js/add_row.js" ></script>
         <script src="{{ MEDIA_URL }}bootstrap/js/tooltip.js"></script>
         <script src="{{ MEDIA_URL }}bootstrap/js/popover.js" ></script>
+        <script src="{{ MEDIA_URL }}js/popover_header_info.js" ></script>
     {% endif %}
-
-<script>
-$(function ()
-{
-{#    $("#example").popover({ });#}
-{#     $("#octave").popover({container: 'octave'  trigger: "hover", title: 'Twitter Bootstrap Popover', content: "It's so simple to create a tooltop for my website!"});#}
-{#    $(".octave_input").popover({ placement: "top", animation:"true",  trigger: "hover", title: 'Twitter Bootstrap Popover', content: "It's so simple to create a tooltop for my website!"});#}
-{#    $(".octave_input").on(function () {#}
-        $(".octave").popover({ placement: "top", animation:"true",  trigger: "hover", title: 'Twitter Bootstrap Popover', content: "It's so simple to create a tooltop for my website!"});
-
-{#    mouseleave: function () {#}
-{#        //stuff to do on mouse leave#}
-{#    }#}
-
-{#    });#}
-});
-</script>
-{#<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>#}
 
     <script type="text/javascript">
 
@@ -182,11 +170,3 @@ $(function ()
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="C:/Users/Micah/Desktop/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-tooltip.js"></script>
 <script src="C:/Users/Micah/Desktop/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-popover.js"></script>
-<script>
-$(function ()
-{ $("#example").popover({title: 'Twitter Bootstrap Popover', content: "It's so simple to create a tooltop for my website!"});
-});
-</script>
-
-
-
