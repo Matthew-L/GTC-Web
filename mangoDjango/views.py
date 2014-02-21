@@ -82,7 +82,7 @@ def register_user(request):
     context.update(csrf(request))
 
     context['form'] = UserCreationForm()
-    return render_to_response('register.html', context)
+    return render_to_response('register.html', context,  context_instance=RequestContext(request))
 
 
 def register_success(request):
