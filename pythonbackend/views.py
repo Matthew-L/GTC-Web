@@ -8,6 +8,7 @@ from django.core import serializers
 import json
 from django.core.exceptions import ValidationError
 from mangoDjango import settings
+from django.contrib.auth.models import User
 
 def calculate(request):
     context = {}
@@ -26,24 +27,39 @@ def calculate(request):
 
         try:
             string_set_name = str(request.GET['string_set_name'])
+            username = str(request.GET['users_set'])
+            print(string_set_name)
+            user = User.objects.get(username=username).pk
+            print(user)
             string_set = StringSet.objects.filter(name=string_set_name)
+            print(str(string_set))
         except:
             return render(request, 'calculate.html', context)
 
         user_set = []
         # wont iterate any other way for some reason
-        for set in string_set:
-            context['is_mscale'] = set.is_mscale
-            context['desc'] = set.desc
-            context['number_of_strings'] = set.number_of_strings
 
         context['string_set_name'] = string_set_name
 
         strings = String.objects.all()
 
-        for string in strings:
-            if str(string.string_set.name) == str(string_set_name):
-                user_set.append(string)
+        print('her', strings)
+
+
+        for set in string_set:
+            print('t',set.user, username)
+            if str(set.user) == 'xtreme1':
+                context['is_mscale'] = set.is_mscale
+                context['desc'] = set.desc
+                context['number_of_strings'] = set.number_of_strings
+                for string in strings:
+                    print(str(set.user), str(set.name))
+                    if str(string.string_set.name) == str(string_set_name):
+                        print(string)
+                        user_set.append(string)
+
+
+
         data = serializers.serialize("json", user_set)
 
         context['json_data'] = data
@@ -129,6 +145,7 @@ def save_set(request):
     try:
         should_rename = False
         old_name = request.GET['save-set']
+        print('changing set name')
         if name != old_name:
             old_string_set = StringSet.objects.filter(name=old_name, user=user)
             # print(old_string_set, old_name)

@@ -22,7 +22,7 @@
 
             {% for result in search_name_results %}
                 <div class="row">
-                    <a href="/calculate?string_set_name={{ result.name }}">
+                    <a href="/calculate?string_set_name={{ result.name }}&users_set={{ result.user }}">
                         <div class="col-md-3 col-md-offset-3 my-grid text-left">
                             {{ result.name }}
                         </div>

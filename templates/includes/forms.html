@@ -28,12 +28,9 @@
 <td >
 <select  id="octave_GTC_{{ forloop.counter0 }}" name="octave_GTC_{{ forloop.counter0 }}"
          class="row_input octave_input dropdown_input user_input">
+        <option value="-">-</option>
     {% for i in 10|get_range %}
-        {% if forloop.first %}
-            <option value="-">-</option>
-        {% else %}
             <option value="{{ i }}">{{ i }}</option>
-        {% endif %}
     {% endfor %}
 </select>
 </td>
