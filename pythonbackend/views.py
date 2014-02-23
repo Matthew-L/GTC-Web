@@ -99,69 +99,74 @@ def ajax_calculate(request):
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
 
 
+def user_login_context(context, request):
+    if request.user.is_authenticated():
+        context['is_logged_in'] = True
+        context['username'] = request.user.get_username()
+    else:
+        context['is_logged_in'] = False
+    return context
 
+
+def return_save_errors(context, errors, request):
+    context['errors'] = errors
+    return render(request, 'save_set.html', context)
+
+
+def renaming_set(name, request, user):
+
+    should_rename = False
+    try:
+        old_name = request.GET['save-set']
+        print('changing set name')
+        print(name, old_name)
+        if name != old_name:
+            old_string_set = StringSet.objects.filter(name=old_name, user=user)
+            # print(old_string_set, old_name)
+            # if old_string_set:
+            # old_string_set.all().delete()
+            should_rename = True
+    except:
+        pass
+
+    return old_string_set, should_rename
 
 
 def save_set(request):
     context = {}
     errors = []
 
-    if request.user.is_authenticated():
-        context['is_logged_in'] = True
-        context['username'] = request.user.get_username()
-    else:
-        context['is_logged_in'] = False
-    if request.method == 'GET':
-        curr = 0
-        try:
-            while request.GET['gauge_GTC_'+str(curr)] is not None:
-                print(request.GET['gauge_GTC_'+str(curr)])
-                curr += 1
-        except KeyError:
-            if curr == 0:
-                errors.append("Nothing Submitted! Are you trying to save nothing?!")
-                context['errors'] = errors
-                return render(request, 'save_set.html', context)
+    context = user_login_context(context, request)
+
+    curr = count_string_rows(request)
+    if curr == 0:
+        errors.append("Nothing Submitted!")
+        return return_save_errors(context, errors, request)
 
     # make new string set
     name = request.GET['string_set_name']
     user = request.user
-    print("user g",user)
+    #print("user g",user)
     desc = request.GET['desc']
     if desc == '':
         desc = ' '
     #check if user is logged in
-    if user.is_anonymous():
+    if is_anonymous(user):
         errors.append("Register and Log In to Save Sets!")
-        context['errors'] = errors
-        return render(request, 'save_set.html', context)
-    if name == "":
-        errors.append("You must give the String Set a name")
-        context['errors'] = errors
-        return render(request, 'save_set.html', context)
+        return return_save_errors(context, errors, request)
 
+    if is_valid_name(name):
+        errors.append("You must give the String Set a name")
+        return return_save_errors(context, errors, request)
 
     #changing set name
-    try:
-        should_rename = False
-        old_name = request.GET['save-set']
-        print('changing set name')
-        if name != old_name:
-            old_string_set = StringSet.objects.filter(name=old_name, user=user)
-            # print(old_string_set, old_name)
-            # if old_string_set:
-                # old_string_set.all().delete()
-            should_rename = True
-    except:
-        pass
-
+    old_string_set = ''
+    old_string_set, should_rename = renaming_set(name, request, user)
     #check if stringset name exists already
-    if should_rename:
-        renamed_to_existing_set = StringSet.objects.filter(name=name, user=user)
-        if renamed_to_existing_set:
-            errors.append("You already have a String Set named that! Delete or rename the set '"+name+"' first.")
-            context['errors'] = errors
-            return render(request, 'save_set.html', context)
+
+    if renamed_set_exists(should_rename, name, user):
+        errors.append("You already have a String Set named that! Delete or rename the set '"+name+"' first.")
+        return return_save_errors(context, errors, request)
 
     #just updating, name stayed the same
     revised_string_set = StringSet.objects.filter(name=name, user=user)
@@ -170,36 +175,8 @@ def save_set(request):
         should_update = True
 
     # verify string parameters
-    try:
-        is_mscale = request.GET["is_mscale"]
-        is_mscale = True
-    except:
-        is_mscale = False
-
-    if is_mscale:
-        try:
-            scale_length = request.GET['scale_length']
-            GuitarString.sanitize_multiscale(scale_length)
-        except:
-            errors.append("Invalid MultiScale Length!")
-            context['errors'] = errors
-            return render(request, 'save_set.html', context)
-        try:
-            number_of_strings = request.GET['number_of_strings']
-            GuitarString.sanitize_number_of_strings(number_of_strings)
-        except:
-            errors.append("Invalid Number of Strings!")
-            context['errors'] = errors
-            return render(request, 'save_set.html', context)
-    else:
-        try:
-            scale_length = request.GET['scale_length']
-            GuitarString.sanitize_scale_length(scale_length)
-        except:
-            errors.append("Invalid Scale Length!")
-            context['errors'] = errors
-            return render(request, 'save_set.html', context)
-        number_of_strings = 0
+    is_mscale, scale_length = is_valid_scale_length(context, request, errors)
+    number_of_strings = 0
 
     if should_update:
         revised_string_set.all().delete()
@@ -212,8 +189,7 @@ def save_set(request):
         string_set.save()
     except ValidationError:
         errors.append("Could not validate String Set input!")
-        context['errors'] = errors
-        return render(request, 'save_set.html', context)
+        return return_save_errors(context, errors, request)
 
     number_of_parameters = 5
     row_errors = 0
@@ -273,12 +249,9 @@ def save_set(request):
                 string_set.save()
             except ValidationError:
                 errors.append("Could not validate a guitar string input!")
-                context['errors'] = errors
-                return render(request, 'save_set.html', context)
+                return return_save_errors(context, errors, request)
 
-    context['errors'] = errors
-
-    return render(request, 'save_set.html', context)
+    return return_save_errors(context, errors, request)
 
 
 @csrf_exempt
@@ -295,3 +268,74 @@ def ajax_delete_set(request):
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
 
 
+#def print_set(string_set):
+#    for set in string_set:
+#            print('t',set.user, username)
+#            if str(set.user) == 'xtreme1':
+#                context['is_mscale'] = set.is_mscale
+#                context['desc'] = set.desc
+#                context['number_of_strings'] = set.number_of_strings
+#                for string in strings:
+#                    print(str(set.user), str(set.name))
+#                    if str(string.string_set.name) == str(string_set_name):
+#                        print(string)
+#                        user_set.append(string)
+
+def count_string_rows(request):
+    curr = 0
+    if request.method == 'GET':
+        try:
+            while request.GET['gauge_GTC_'+str(curr)] is not None:
+                print(request.GET['gauge_GTC_'+str(curr)])
+                curr += 1
+        except KeyError:
+            pass
+
+    return curr
+
+
+def is_anonymous(user):
+    if user.is_anonymous():
+        return True
+    return False
+
+def is_valid_name(name):
+    if name == "":
+       return True
+
+def is_valid_scale_length(context, request, errors):
+    try:
+        is_mscale = request.GET["is_mscale"]
+        is_mscale = True
+    except:
+        is_mscale = False
+
+    if is_mscale:
+        try:
+            scale_length = request.GET['scale_length']
+            GuitarString.sanitize_multiscale(scale_length)
+        except:
+            errors.append("Invalid MultiScale Length!")
+            return return_save_errors(context, errors, request)
+        try:
+            number_of_strings = request.GET['number_of_strings']
+            GuitarString.sanitize_number_of_strings(number_of_strings)
+        except:
+            errors.append("Invalid Number of Strings!")
+            return return_save_errors(context, errors, request)
+    else:
+        try:
+            scale_length = request.GET['scale_length']
+            GuitarString.sanitize_scale_length(scale_length)
+        except:
+            errors.append("Invalid Scale Length!")
+            return return_save_errors(context, errors, request)
+
+    return is_mscale, scale_length
+
+def renamed_set_exists(should_rename, name, user):
+    if should_rename:
+        renamed_to_existing_set = StringSet.objects.filter(name=name, user=user)
+        if renamed_to_existing_set:
+            return True
+    return False
