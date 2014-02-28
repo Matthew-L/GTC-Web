@@ -59,7 +59,8 @@ def auth_view(request):
 
 
 def invalid_login(request):
-    return render_to_response('invalid_login.html')
+    return render(request, 'invalid_login.html')
+    #return render_to_response('invalid_login.html')
 
 
 def logout(request):
