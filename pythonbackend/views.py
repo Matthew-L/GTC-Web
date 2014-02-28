@@ -29,8 +29,8 @@ def calculate(request):
             string_set_name = str(request.GET['string_set_name'])
             username = str(request.GET['users_set'])
             print(string_set_name)
-            user = User.objects.get(username=username).pk
-            print(user)
+            user_id = User.objects.get(username=username).pk
+            print(user_id)
             string_set = StringSet.objects.filter(name=string_set_name)
             print(str(string_set))
         except:
@@ -47,16 +47,16 @@ def calculate(request):
 
 
         for set in string_set:
-            print('t',set.user, username)
-            if str(set.user) == 'xtreme1':
+            print('username: ',set.user, username)
+            if str(set.user) ==  str(username):
                 context['is_mscale'] = set.is_mscale
                 context['desc'] = set.desc
                 context['number_of_strings'] = set.number_of_strings
                 for string in strings:
-                    print(str(set.user), str(set.name))
-                    if str(string.string_set.name) == str(string_set_name):
-                        print(string)
-                        user_set.append(string)
+                    if username == str(string.string_set.user):
+                        if str(string.string_set.name) == str(string_set_name):
+                            print(string)
+                            user_set.append(string)
 
 
 
@@ -161,7 +161,20 @@ def save_set(request):
 
     #changing set name
     old_string_set = ''
-    old_string_set, should_rename = renaming_set(name, request, user)
+    should_rename = False
+    try:
+        old_name = request.GET['save-set']
+        print('changing set name')
+        print(name, old_name)
+        if name != old_name:
+            old_string_set = StringSet.objects.filter(name=old_name, user=user)
+            # print(old_string_set, old_name)
+            # if old_string_set:
+            # old_string_set.all().delete()
+            should_rename = True
+    except:
+        pass
+    #old_string_set, should_rename = renaming_set(name, request, user)
     #check if stringset name exists already
 
     if renamed_set_exists(should_rename, name, user):
@@ -175,8 +188,7 @@ def save_set(request):
         should_update = True
 
     # verify string parameters
-    is_mscale, scale_length = is_valid_scale_length(context, request, errors)
-    number_of_strings = 0
+    is_mscale, scale_length, number_of_strings = is_valid_scale_length(context, request, errors)
 
     if should_update:
         revised_string_set.all().delete()
@@ -330,8 +342,8 @@ def is_valid_scale_length(context, request, errors):
         except:
             errors.append("Invalid Scale Length!")
             return return_save_errors(context, errors, request)
-
-    return is_mscale, scale_length
+        number_of_strings = 0
+    return is_mscale, scale_length, number_of_strings
 
 def renamed_set_exists(should_rename, name, user):
     if should_rename:
