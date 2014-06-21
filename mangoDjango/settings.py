@@ -57,7 +57,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = 'static/'
+MEDIA_ROOT = '/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -66,8 +66,9 @@ MEDIA_ROOT = 'static/'
 #     PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 #     MEDIA_URL = os.path.join(PROJECT_PATH, '../static/')
 # else:
-MEDIA_URL = 'https://rawgithub.com/Matthew-L/GTC-Web/master/static/'
+# MEDIA_URL = 'https://rawgithub.com/Matthew-L/GTC-Web/master/static/'
 # MEDIA_URL = 'http://mattlodes.com/static/'
+MEDIA_URL = 'https://s3-us-west-2.amazonaws.com/stringulator-bucket/'
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
@@ -76,7 +77,8 @@ MEDIA_URL = 'https://rawgithub.com/Matthew-L/GTC-Web/master/static/'
 #import os
 
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
-STATIC_URL = '/static/'
+# STATIC_URL = 'https://s3-us-west-2.amazonaws.com/stringulator-bucket/'
+STATIC_URL = 'https://s3-us-west-2.amazonaws.com/stringulator-bucket/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_PATH, '../static/'),
 )
