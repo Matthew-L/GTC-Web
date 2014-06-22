@@ -12,11 +12,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from calculator import guitarstring
 
-
-
-def bootstrap(request):
-    return render_to_response('bootstrap.html')
-
 def contact(request):
     context = {}
     if request.user.is_authenticated():
@@ -140,8 +135,6 @@ def downloadStringSet(request):
         response['Content-Disposition'] = 'attachment;filename="' + string_set_name + ' export.csv"'
         context['string_set_name'] = string_set_name
 
-
-
         string_set = StringSet.objects.filter(name=string_set_name)
 
         for set in string_set:
@@ -168,10 +161,13 @@ def downloadStringSet(request):
         if is_mscale:
             gs = guitarstring.GuitarString(string.scale_length, string.string_type, string.gauge, string.note,
                                            string.octave, number_of_strings, string.string_number)
-            writer.writerow([string.string_number, string.note, string.octave, string.gauge, string.string_type, gs.calculate_tension()])
+            writer.writerow([string.string_number, string.note, string.octave, string.gauge,
+                             string.string_type, gs.calculate_tension()])
         else:
-            gs = guitarstring.GuitarString(string.scale_length, string.string_type, string.gauge, string.note, string.octave)
-            writer.writerow([string.string_number, string.note, string.octave, string.gauge, string.string_type, gs.calculate_tension()])
+            gs = guitarstring.GuitarString(string.scale_length, string.string_type,
+                                           string.gauge, string.note, string.octave)
+            writer.writerow([string.string_number, string.note, string.octave, string.gauge, string.string_type,
+                             gs.calculate_tension()])
 
     return response
 
@@ -179,23 +175,23 @@ def info(request):
     return render_to_response('info.html')
 
 
-@csrf_exempt
-def iosLogin(request):
-    loginResult = {}
-    if (request.method == "POST"):
-        print("Method is post")
-        print(request.POST.keys())
-        print(request.POST['username'])
-
-        username = request.POST.get('username', '')
-        password = request.POST.get('password', '')
-        user = auth.authenticate(username=username, password=password)
-
-        if user is not None:
-            auth.login(request, user)
-            loginResult['username'] = username
-            loginResult['validLogin'] = 'true'
-            return HttpResponse(json.dumps(loginResult), content_type="application/json")
-
-    loginResult['validLogin'] = 'false'
-    return HttpResponse(json.dumps(loginResult), content_type="application/json")
+# @csrf_exempt
+# def iosLogin(request):
+#     loginResult = {}
+#     if (request.method == "POST"):
+#         print("Method is post")
+#         print(request.POST.keys())
+#         print(request.POST['username'])
+#
+#         username = request.POST.get('username', '')
+#         password = request.POST.get('password', '')
+#         user = auth.authenticate(username=username, password=password)
+#
+#         if user is not None:
+#             auth.login(request, user)
+#             loginResult['username'] = username
+#             loginResult['validLogin'] = 'true'
+#             return HttpResponse(json.dumps(loginResult), content_type="application/json")
+#
+#     loginResult['validLogin'] = 'false'
+#     return HttpResponse(json.dumps(loginResult), content_type="application/json")

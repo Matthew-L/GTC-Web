@@ -55,7 +55,7 @@ def calculate(request):
                 for string in strings:
                     if username == str(string.string_set.user):
                         if str(string.string_set.name) == str(string_set_name):
-                            print(string)
+                            print(string.gauge)
                             user_set.append(string)
 
 

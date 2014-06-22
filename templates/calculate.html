@@ -47,7 +47,7 @@
 
          <tr id="number_of_strings_row" class="hidden_row" hidden = "hidden">
 
-            <th class="hidden_row" hidden = "hidden" ><div class="hidden_row" hidden = "hidden"><div class="popover_header" id="number_of_strings_popover" >Total Number of Strings</div></th>
+            <th class="hidden_row" hidden = "hidden" ><div class="hidden_row" hidden = "hidden"><div class="popover_header" id="number_of_strings_popover" >Total Number of Strings</div></div></th>
             <td class="hidden_row" hidden = "hidden"><div class="hidden_row" hidden = "hidden">
                 <input name="number_of_strings" id="number_of_strings" class="number_of_strings_input user_input" type="text" name="number_of_strings" value="{{ number_of_strings }}">
             </div></td>
@@ -151,13 +151,23 @@
                 newRow()
                 $('#string_number_GTC_' + index).val(json1.gstring[index].fields.string_number);
                 $('#note_GTC_' + index).val(json1.gstring[index].fields.note);
-                $('#gauge_GTC_' + index).val(json1.gstring[index].fields.gauge);
+
+
+            var gauge = formatGauge(json1.gstring[index].fields.gauge.toString());
+{#            console.log(gauge);#}
+
+                $('#gauge_GTC_' + index).val(gauge);
                 $('#octave_GTC_' + index).val(json1.gstring[index].fields.octave);
                 $('#string_set_GTC_' + index).val(json1.gstring[index].fields.string_set);
                 $('#string_type_GTC_' + index).val(json1.gstring[index].fields.string_type);
                 $('#scale_length').val(json1.gstring[index].fields.scale_length);
         }
 
+
+        function formatGauge(gauge){
+           gauge = (parseFloat(gauge).toString()).replace(/^[0]+/gi, '');
+            return gauge;
+        }
     </script>
 
     <script type="text/javascript">

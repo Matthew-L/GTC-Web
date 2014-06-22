@@ -40,9 +40,9 @@ urlpatterns = patterns('',
     (r'^profile/$', 'mangoDjango.views.profile'),
 
     (r'^contact/$', 'mangoDjango.views.contact'),
-    (r'^bootstrap/$', 'mangoDjango.views.bootstrap'),
+    # (r'^bootstrap/$', 'mangoDjango.views.bootstrap'),
     # ios user accounts
-    (r'^ios/login/$', 'mangoDjango.views.iosLogin'),
+    # (r'^ios/login/$', 'mangoDjango.views.iosLogin'),
 
     #(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/images/favicon.ico'}),
 
