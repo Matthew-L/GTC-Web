@@ -13,10 +13,10 @@ ADMINS = (
 MANAGERS = ADMINS
 
 import dj_database_url
-# if DEBUG:
-DATABASES = {'default': dj_database_url.config(default='postgres://localhost/storage')}
-# else:
-#     DATABASES = {'default': dj_database_url.config(default='postgres://hxtnsxsmxkrgor:H5vYN7g2Nn0ZQCmWZeGiUzLvMC@ec2-54-204-21-178.compute-1.amazonaws.com:5432/dk5va592r6j0v')}
+if DEBUG:
+    DATABASES = {'default': dj_database_url.config(default='postgres://localhost/storage')}
+else:
+    DATABASES = {'default': dj_database_url.config(default='postgres://hxtnsxsmxkrgor:H5vYN7g2Nn0ZQCmWZeGiUzLvMC@ec2-54-204-21-178.compute-1.amazonaws.com:5432/dk5va592r6j0v')}
 #
 
 # import dj_database_url
