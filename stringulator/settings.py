@@ -155,6 +155,7 @@ INSTALLED_APPS = (
 
     'users',
     'calculator',
+    'calculator.guitarstring',
     #calculator
     'stringulator',
     'stringulator.templatetags',

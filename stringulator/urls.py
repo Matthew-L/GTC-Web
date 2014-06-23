@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
-from calculator.views import calculate
+# from calculator.views import calculate
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -23,7 +23,7 @@ urlpatterns = patterns('',
 
     # functionality
 
-    (r'^calculate/$', calculate),
+    (r'^calculate/$', 'calculator.views.calculate'),
     (r'^download-set', 'users.views.downloadStringSet'),
     (r'^search/$', 'users.views.search'),
     (r'^ajax/$', 'calculator.views.ajax_calculate'),

@@ -1,8 +1,5 @@
 from calculator.guitarstring import material_dicts
 
-__author__ = 'Micah'
-
-
 class InvalidScaleLengthError(ValueError): pass
 class InvalidNoteError(KeyError): pass
 class InvalidStringMaterialError(KeyError): pass

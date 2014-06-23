@@ -7,8 +7,7 @@ from django.core import serializers
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
-from calculator import guitarstring
-from calculator.guitarstring import GuitarString
+from calculator.guitarstring.guitar_string import GuitarString
 from calculator.models import StringSet, String
 
 
@@ -91,10 +90,10 @@ def ajax_calculate(request):
         print(string_number)
         # has to use javascript booleans
         if is_mscale == 'true':
-            gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
+            gs = GuitarString(scale_length, string_type, gauge, note,
                                            octave, number_of_strings, string_number)
         else:
-            gs = guitarstring.GuitarString(scale_length, string_type, gauge, note,
+            gs = GuitarString(scale_length, string_type, gauge, note,
                                            octave)
         tension = float("{0:.2f}".format(gs.tension))
         response = {"tension": tension}
