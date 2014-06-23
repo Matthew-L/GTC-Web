@@ -1,1 +1,1 @@
-web: gunicorn mangoDjango.wsgi
+web: gunicorn stringulator.wsgi
