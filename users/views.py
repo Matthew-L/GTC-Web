@@ -8,7 +8,7 @@ from django.core.context_processors import csrf
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 
-from pythonbackend.models import StringSet, String
+from calculator.models import StringSet, String
 from calculator import guitarstring
 
 

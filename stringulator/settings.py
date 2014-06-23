@@ -1,7 +1,7 @@
 import os
 ROOT_PATH = os.path.dirname(__file__)
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -129,7 +129,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'stringulator.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'users.wsgi.application'
+WSGI_APPLICATION = 'stringulator.wsgi.application'
 
 # TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '../../../../../..////', 'templates').replace('\\','/'),
 #                  os.path.join(os.path.dirname(__file__), '../../../../../..////', 'article/templates').replace('\\', '/'),)
@@ -154,7 +154,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 
     'users',
-    # 'pythonbackend',
+    'calculator',
+    #calculator
     'stringulator',
     'stringulator.templatetags',
     # 'favicon',

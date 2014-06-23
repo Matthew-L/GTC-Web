@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
-from pythonbackend.views import calculate
+from calculator.views import calculate
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -26,9 +26,9 @@ urlpatterns = patterns('',
     (r'^calculate/$', calculate),
     (r'^download-set', 'users.views.downloadStringSet'),
     (r'^search/$', 'users.views.search'),
-    (r'^ajax/$', 'pythonbackend.views.ajax_calculate'),
-    (r'^ajax-delete/$', 'pythonbackend.views.ajax_delete_set'),
-    (r'^save-set/$', 'pythonbackend.views.save_set'),
+    (r'^ajax/$', 'calculator.views.ajax_calculate'),
+    (r'^ajax-delete/$', 'calculator.views.ajax_delete_set'),
+    (r'^save-set/$', 'calculator.views.save_set'),
     (r'^info/$', 'users.views.info'),
 
     # user accounts

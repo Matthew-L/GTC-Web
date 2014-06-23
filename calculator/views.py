@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 from calculator import guitarstring
 from calculator.guitarstring import GuitarString
-from pythonbackend.models import StringSet, String
+from calculator.models import StringSet, String
 
 
 def calculate(request):

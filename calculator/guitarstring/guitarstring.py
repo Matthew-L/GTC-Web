@@ -1,6 +1,6 @@
-__author__ = 'Micah'
+from calculator.guitarstring import material_dicts
 
-from calculator import material_dicts
+__author__ = 'Micah'
 
 
 class InvalidScaleLengthError(ValueError): pass

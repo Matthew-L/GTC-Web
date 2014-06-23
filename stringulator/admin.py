@@ -2,7 +2,7 @@ __author__ = 'Micah'
 
 from django.contrib import admin
 
-from pythonbackend.models import StringSet, String
+from calculator.models import StringSet, String
 
 
 class StringSetAdmin(admin.ModelAdmin):
