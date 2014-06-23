@@ -1,5 +1,2 @@
-workspace.xml
-venv
-*.pyc
-staticfiles
+/venv
 *.idea
