@@ -160,7 +160,7 @@ INSTALLED_APPS = (
     'stringulator',
     'stringulator.templatetags',
     # 'favicon',
-    'south',
+    # 'south',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
