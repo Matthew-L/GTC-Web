@@ -1,5 +1,3 @@
-# Django settings for mangoDjango project.
-
 import os
 ROOT_PATH = os.path.dirname(__file__)
 
@@ -74,7 +72,7 @@ PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 # STATIC_URL = 'https://s3-us-west-2.amazonaws.com/stringulator-bucket/'
 STATIC_URL = 'https://s3-us-west-2.amazonaws.com/stringulator-bucket/'
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_PATH, '../static/'),
+    os.path.join(PROJECT_PATH, '../../../static/'),
 )
 
 # PROJECT_PATH = 'http://mattlodes.com/static/'
@@ -128,13 +126,19 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'mangoDjango.urls'
+ROOT_URLCONF = 'stringulator.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'mangoDjango.wsgi.application'
+WSGI_APPLICATION = 'users.wsgi.application'
 
-TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\','/'),
-                 os.path.join(os.path.dirname(__file__), '..', 'article/templates').replace('\\', '/'),)
+# TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '../../../../../..////', 'templates').replace('\\','/'),
+#                  os.path.join(os.path.dirname(__file__), '../../../../../..////', 'article/templates').replace('\\', '/'),)
+
+BASE_DIR = os.path.abspath('stringulator\\templates')
+
+TEMPLATE_DIRS = (
+    BASE_DIR,
+)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -149,9 +153,10 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 
-    'mangoDjango',
-    'pythonbackend',
-    'pythonbackend.templatetags',
+    'users',
+    # 'pythonbackend',
+    'stringulator',
+    'stringulator.templatetags',
     # 'favicon',
     'south',
 )

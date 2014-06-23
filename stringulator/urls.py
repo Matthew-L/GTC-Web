@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
+
 from pythonbackend.views import calculate
+
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -22,24 +24,24 @@ urlpatterns = patterns('',
     # functionality
 
     (r'^calculate/$', calculate),
-    (r'^download-set', 'mangoDjango.views.downloadStringSet'),
-    (r'^search/$', 'mangoDjango.views.search'),
+    (r'^download-set', 'users.views.downloadStringSet'),
+    (r'^search/$', 'users.views.search'),
     (r'^ajax/$', 'pythonbackend.views.ajax_calculate'),
     (r'^ajax-delete/$', 'pythonbackend.views.ajax_delete_set'),
     (r'^save-set/$', 'pythonbackend.views.save_set'),
-    (r'^info/$','mangoDjango.views.info'),
+    (r'^info/$', 'users.views.info'),
 
     # user accounts
-    (r'^$', 'mangoDjango.views.login'),
-    (r'^accounts/login/$', 'mangoDjango.views.login'),
-    (r'^accounts/auth/$', 'mangoDjango.views.auth_view'),
-    (r'^accounts/logout/$', 'mangoDjango.views.logout'),
-    (r'^accounts/invalid/$', 'mangoDjango.views.invalid_login'),
-    (r'^accounts/register/$', 'mangoDjango.views.register_user'),
-    (r'^accounts/register_success/$', 'mangoDjango.views.register_success'),
-    (r'^profile/$', 'mangoDjango.views.profile'),
+    (r'^$', 'users.views.login'),
+    (r'^accounts/login/$', 'users.views.login'),
+    (r'^accounts/auth/$', 'users.views.auth_view'),
+    (r'^accounts/logout/$', 'users.views.logout'),
+    (r'^accounts/invalid/$', 'users.views.invalid_login'),
+    (r'^accounts/register/$', 'users.views.register_user'),
+    (r'^accounts/register_success/$', 'users.views.register_success'),
+    (r'^profile/$', 'users.views.profile'),
 
-    (r'^contact/$', 'mangoDjango.views.contact'),
+    (r'^contact/$', 'users.views.contact'),
     # (r'^bootstrap/$', 'mangoDjango.views.bootstrap'),
     # ios user accounts
     # (r'^ios/login/$', 'mangoDjango.views.iosLogin'),

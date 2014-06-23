@@ -1,18 +1,20 @@
+import json
+
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core import serializers
+from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
+
 from calculator import guitarstring
 from calculator.guitarstring import GuitarString
 from pythonbackend.models import StringSet, String
-from django.http import HttpResponseRedirect, HttpResponse
-from django.core import serializers
-import json
-from django.core.exceptions import ValidationError
-from mangoDjango import settings
-from django.contrib.auth.models import User
+
 
 def calculate(request):
     context = {}
-    context['debug'] = settings.DEBUG
+    # context['debug'] = settings.DEBUG
 
     try:
         if request.user.is_authenticated():

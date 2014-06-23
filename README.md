@@ -135,9 +135,11 @@ Extra:
 - search by profile
 - comment on string sets
 - rate string sets
-- force minimum of 3 dec. places on loading set
+- forced minimum of 3 dec. places on loading set
 
 Recently Done:
+- migrated from sqlite to postgres database 
+- fixed database persistence issue
 - add tooltips/popovers on calculate page
 - calc tension on loading of saved set
 - fix ajax verification
