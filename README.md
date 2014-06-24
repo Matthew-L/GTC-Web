@@ -125,6 +125,7 @@ Major:
 - validate character length of client side input
 - make custom 404, 500, and offline ajax errors
 - limit users to 100 sets
+- UI overhaul
 
 Extra:
 - dynamic color feedback on tension of set
@@ -189,6 +190,12 @@ We would love to have you help us make a better guitar tension calculator! Conta
 **Matt Lodes**
 
 - <https://github.com/Matthew-L>
+
+**Kevin Restaino**
+
+- <http://www.kevinrestaino.com>
+- <http://github.com/krestaino>
+- <http://www.linkedin.com/in/kevinrestaino>
 
 ## Disclaimer
 As with all string tension calculators, we make no guarantee that our calculations are correct and are not liable for damages to your instrument. We also reserve the right to delete any user accounts that misuse the site (including offensive usernames, misuse of saved data, etc.).
