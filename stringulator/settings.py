@@ -1,7 +1,8 @@
 import os
+
 ROOT_PATH = os.path.dirname(__file__)
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -11,6 +12,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 import dj_database_url
+
 if DEBUG:
     DATABASE_URL = 'postgres://localhost/storage'
 else:
@@ -55,7 +57,7 @@ MEDIA_ROOT = '/'
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
 # if DEBUG:
-#     PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
+# PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 #     MEDIA_URL = os.path.join(PROJECT_PATH, '../static/')
 # else:
 # MEDIA_URL = 'https://rawgithub.com/Matthew-L/GTC-Web/master/static/'
@@ -67,12 +69,19 @@ MEDIA_URL = '/'
 # Example: "/var/www/example.com/static/"
 # Static asset configuration
 #import os
-
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
+
+if DEBUG:
+    STATIC_URL = '/static/'
+else:
+    STATIC_URL = 'https://s3-us-west-2.amazonaws.com/stringulator-bucket/'
+
+
 # STATIC_URL = 'https://s3-us-west-2.amazonaws.com/stringulator-bucket/'
-STATIC_URL = 'https://s3-us-west-2.amazonaws.com/stringulator-bucket/'
+STATIC_ROOT = os.path.abspath('static')
+
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_PATH, '../../../static/'),
+    os.path.abspath('stringulator\\static'),
 )
 
 # PROJECT_PATH = 'http://mattlodes.com/static/'
@@ -83,7 +92,7 @@ STATICFILES_DIRS = (
 #
 
 
-#STATIC_ROOT = ''
+
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -91,11 +100,11 @@ STATICFILES_DIRS = (
 
 # Additional locations of static files
 #STATICFILES_DIRS = (
-    #[os.path.join(ROOT_PATH, 'static')]
+#[os.path.join(ROOT_PATH, 'static')]
 #    ('assets', 'static'),
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+# Put strings here, like "/home/html/static" or "C:/www/django/static".
+# Always use forward slashes, even on Windows.
+# Don't forget to use absolute paths, not relative paths.
 #)
 
 # List of finder classes that know how to find static files in
@@ -103,7 +112,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -113,7 +122,7 @@ SECRET_KEY = '*gis)!8a&uptme_abhztm8o#c)n%v%euqs2&%!zaym7anjc^0*'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
