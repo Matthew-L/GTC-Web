@@ -1,0 +1,91 @@
+/* line 1, C:/Users/Kevin/PycharmProjects/Stringulator/stringulator/static/stylesheets/partials/_main.scss */
+body {
+  text-align: center;
+  background: url("../images/body-bg.jpg");
+}
+
+/* line 6, C:/Users/Kevin/PycharmProjects/Stringulator/stringulator/static/stylesheets/partials/_main.scss */
+.jumbotron {
+  max-width: 700px;
+  margin: 120px auto;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* line 12, C:/Users/Kevin/PycharmProjects/Stringulator/stringulator/static/stylesheets/partials/_main.scss */
+footer {
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* line 17, C:/Users/Kevin/PycharmProjects/Stringulator/stringulator/static/stylesheets/partials/_main.scss */
+#page {
+  width: 960px;
+  text-align: left;
+  margin: 10px auto 20px auto;
+  background-color: #0C0C0C;
+}
+
+/* line 24, C:/Users/Kevin/PycharmProjects/Stringulator/stringulator/static/stylesheets/partials/_main.scss */
+#sidebar {
+  float: right;
+  width: 200px;
+  border: 1px solid #000;
+  background-color: Green;
+}
+
+/* line 31, C:/Users/Kevin/PycharmProjects/Stringulator/stringulator/static/stylesheets/partials/_main.scss */
+#content {
+  float: right;
+  width: 600px;
+  border: 1px solid #F00;
+  padding: 10px;
+  background-color: #00ffe2;
+}
+
+/* line 39, C:/Users/Kevin/PycharmProjects/Stringulator/stringulator/static/stylesheets/partials/_main.scss */
+tr.table_row {
+  display: none;
+}
+
+/* line 43, C:/Users/Kevin/PycharmProjects/Stringulator/stringulator/static/stylesheets/partials/_main.scss */
+.btn-divider {
+  text-align: center;
+  padding: 1px 4px 4px 1px;
+  /*margin-right: 10px;*/
+  /*margin-left: 10px;*/
+  border-right: 1px solid #ffffff;
+}
+
+/* line 51, C:/Users/Kevin/PycharmProjects/Stringulator/stringulator/static/stylesheets/partials/_main.scss */
+.my-grid {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  /*background-color: #eee;*/
+  border: 1px solid #ddd;
+  background-color: rgba(124, 107, 111, 0.15);
+  border: 1px solid rgba(124, 123, 107, 0.2);
+}
+
+/* line 60, C:/Users/Kevin/PycharmProjects/Stringulator/stringulator/static/stylesheets/partials/_main.scss */
+.bs-social-buttons {
+  display: inline-block;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+/* line 67, C:/Users/Kevin/PycharmProjects/Stringulator/stringulator/static/stylesheets/partials/_main.scss */
+.bs-footer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 100px;
+  color: #777;
+  text-align: center;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* line 76, C:/Users/Kevin/PycharmProjects/Stringulator/stringulator/static/stylesheets/partials/_main.scss */
+.bs-social {
+  margin-bottom: 20px;
+  text-align: center;
+}

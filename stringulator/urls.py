@@ -39,4 +39,9 @@ urlpatterns = patterns('',
                        (r'^ajax-delete/$', 'calculator.views.ajax_delete_set'),
 
                        # Contact
-                       (r'^contact/$', 'contact.views.load_contact_page'), )
+                       (r'^contact/$', 'contact.views.load_contact_page'),
+
+                       # Test
+                       (r'^test/$', 'contact.views.load_test_page'),
+
+                       )
