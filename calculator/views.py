@@ -11,7 +11,7 @@ from calculator.guitarstring.guitar_string import GuitarString
 from calculator.models import StringSet, String
 
 
-def calculate(request):
+def load_calculate_page(request):
     context = {}
     # context['debug'] = settings.DEBUG
 

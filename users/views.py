@@ -12,33 +12,29 @@ from calculator.models import StringSet, String
 from calculator import guitarstring
 
 
-def contact(request):
+def authenticate_user(request):
     context = {}
+    context = set_is_logged_in(request, context)
+    context = set_session_username(request, context)
+    return context
+
+
+def set_is_logged_in(request, context):
+    is_logged_in = request.user.is_authenticated()
+    context['is_logged_in'] = is_logged_in
+    return context
+
+
+def set_session_username(request, context):
     if request.user.is_authenticated():
-        context['is_logged_in'] = True
         context['username'] = request.user.get_username()
-    else:
-        context['is_logged_in'] = False
-    return render(request, 'contact.html', context)
-
-
-def set_users_login_status(request):
-    context = {}
-    # context['debug'] = settings.DEBUG
-    # print("conDebug",context['debug'])
-
-    if request.user.is_authenticated():
-        context['is_logged_in'] = True
-        context['username'] = request.user.get_username()
-    else:
-        context['is_logged_in'] = False
     return context
 
 
 def login(request):
-    context = set_users_login_status(request)
+    context = authenticate_user(request)
     context.update(csrf(request))
-    return render_to_response('login.html', context,  context_instance=RequestContext(request))
+    return render_to_response('login.html', context, context_instance=RequestContext(request))
 
 
 def auth_view(request):
@@ -55,20 +51,20 @@ def auth_view(request):
 
 def invalid_login(request):
     return render(request, 'invalid_login.html')
-    #return render_to_response('invalid_login.html')
+    # return render_to_response('invalid_login.html')
 
 
 def logout(request):
-
     auth.logout(request)
-    context = set_users_login_status(request)
+    context = authenticate_user(request)
     context.update(csrf(request))
 
     return render_to_response('logout.html', {}, context_instance=RequestContext(request))
 
-####################################
+
+# ###################################
 def register_user(request):
-    context = set_users_login_status(request)
+    context = authenticate_user(request)
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -78,16 +74,16 @@ def register_user(request):
     context.update(csrf(request))
 
     context['form'] = UserCreationForm()
-    return render_to_response('register.html', context,  context_instance=RequestContext(request))
+    return render_to_response('register.html', context, context_instance=RequestContext(request))
 
 
 def register_success(request):
-    context = set_users_login_status(request)
+    context = authenticate_user(request)
     return render_to_response('register_success.html', context)
 
 
 def profile(request):
-    context = set_users_login_status(request)
+    context = authenticate_user(request)
     context.update(csrf(request))
     if not context['is_logged_in']:
         return render_to_response('login.html', context)
@@ -95,6 +91,7 @@ def profile(request):
     string_sets = StringSet.objects.filter(user=request.user)
     context['string_sets'] = string_sets
     return render_to_response('profile.html', context, context_instance=RequestContext(request))
+
 
 def search(request):
     context = {}
@@ -116,6 +113,7 @@ def search(request):
         context['errors'] = errors
     print(request)
     return render_to_response('search_results.html', context, context_instance=RequestContext(request))
+
 
 def downloadStringSet(request):
     # get the response object, this can be used as a stream.
@@ -149,7 +147,6 @@ def downloadStringSet(request):
             if str(string.string_set.name) == str(string_set_name):
                 user_set.append(string)
 
-
     writer.writerow(["Name", string_set_name])
     writer.writerow(["Description", desc])
     writer.writerow(["Multiscale", is_mscale])
@@ -170,28 +167,3 @@ def downloadStringSet(request):
                              gs.calculate_tension()])
 
     return response
-
-def info(request):
-    return render_to_response('info.html')
-
-
-# @csrf_exempt
-# def iosLogin(request):
-#     loginResult = {}
-#     if (request.method == "POST"):
-#         print("Method is post")
-#         print(request.POST.keys())
-#         print(request.POST['username'])
-#
-#         username = request.POST.get('username', '')
-#         password = request.POST.get('password', '')
-#         user = auth.authenticate(username=username, password=password)
-#
-#         if user is not None:
-#             auth.login(request, user)
-#             loginResult['username'] = username
-#             loginResult['validLogin'] = 'true'
-#             return HttpResponse(json.dumps(loginResult), content_type="application/json")
-#
-#     loginResult['validLogin'] = 'false'
-#     return HttpResponse(json.dumps(loginResult), content_type="application/json")
