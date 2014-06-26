@@ -27,7 +27,8 @@ urlpatterns = patterns('',
                        (r'^$', 'users.views.login'),
                        (r'^accounts/invalid/$', 'users.views.invalid_login'),
                        # Authorize user
-                       (r'^accounts/auth/$', 'users.views.auth_view'),
+                       (r'^authorize-account/$', 'users.views.auth_view'),
+                       (r'^login/$', 'users.views.auth_view'),
                        # Logout
                        (r'^accounts/logout/$', 'users.views.logout'),
                        # Register
@@ -43,5 +44,5 @@ urlpatterns = patterns('',
 
                        # Test
                        (r'^test/$', 'contact.views.load_test_page'),
-
+                       (r'^base-bak/$', 'contact.views.load_base_bak_page'),
                        )

@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-
 {% load get_range %}
-<html>
- <head>
+<head>
 
 
-         <link href="{{ STATIC_URL }}stylesheets/bootstrap.min.css"  rel="stylesheet" />
+    <link href="{{ STATIC_URL }}stylesheets/bootstrap.min.css" rel="stylesheet"/>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,25 +13,25 @@
 
     <title>Stringulator</title>
 
-    <!-- Bootstrap core CSS -->
-{#    <link href="../../dist/css/bootstrap.css" rel="stylesheet">#}
-
-    <!-- Custom styles for this template -->
     <link href="jumbotron.css" rel="stylesheet">
-{#     {% if debug %}#}
-{#        <script src="{% static 'bootstrap\docs\dist\css\bootstrap.min.css' %}"></script>#}
-{#         <link href="jumbotron.css" rel="stylesheet">#}
-{#    {% else %}#}
-{#        <script src="{{ MEDIA_URL }}bootstrap\docs\dist\css\bootstrap.min.css" ></script>#}
-{#         <link href="jumbotron.css" rel="stylesheet">#}
-{#    {% endif %}#}
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
- </head>
-</html>
+
+    {#  NEW  #}
+
+    <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Stringulator | Home</title>
+    <meta name="description" content="Stringulator allows you to create custom guitar string sets.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ STATIC_URL }}stylesheets/css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="{{ STATIC_URL }}stylesheets/css/component.css" rel="stylesheet" type="text/css">
+    <link href="{{ STATIC_URL }}stylesheets/css/content.css" rel="stylesheet" type="text/css">
+    <link href="{{ STATIC_URL }}stylesheets/css/buttons.css" rel="stylesheet" type="text/css">
+    <link href="{{ STATIC_URL }}stylesheets/css/animate.css" rel="stylesheet" type="text/css">
+    <link href="{{ STATIC_URL }}stylesheets/css/default.css" rel="stylesheet" type="text/css">
+    <script src="{{ STATIC_URL }}js/test/modernizr.custom.js"></script>
+
+</head>
