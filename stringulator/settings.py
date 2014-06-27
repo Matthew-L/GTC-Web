@@ -72,16 +72,17 @@ MEDIA_URL = '/'
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 if DEBUG:
-    STATIC_URL = '/static/'
+    # STATIC_URL = '/static/'
+    STATIC_URL = '/dist/'
 else:
     STATIC_URL = 'https://s3-us-west-2.amazonaws.com/stringulator-bucket/'
 
-
-# STATIC_URL = 'https://s3-us-west-2.amazonaws.com/stringulator-bucket/'
 STATIC_ROOT = os.path.abspath('static')
+# STATIC_ROOT = os.path.abspath('dist')
 
 STATICFILES_DIRS = (
     os.path.abspath('stringulator\\static'),
+    os.path.abspath('dist'),
 )
 
 # PROJECT_PATH = 'http://mattlodes.com/static/'
@@ -165,7 +166,7 @@ INSTALLED_APPS = (
     'users',
     'calculator',
     'calculator.guitarstring',
-    #calculator
+
     'stringulator',
     'stringulator.templatetags',
     # 'favicon',

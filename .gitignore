@@ -1,3 +1,5 @@
 /venv
 *.idea
 .sass-cache/
+/aws-keys
+/dist
