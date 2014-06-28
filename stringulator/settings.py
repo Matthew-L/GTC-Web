@@ -72,7 +72,6 @@ MEDIA_URL = '/'
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 if DEBUG:
-    # STATIC_URL = '/static/'
     STATIC_URL = '/dist/'
 else:
     STATIC_URL = 'https://s3-us-west-2.amazonaws.com/stringulator-bucket/'

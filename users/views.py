@@ -1,5 +1,4 @@
 import csv
-
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
@@ -7,16 +6,24 @@ from django.contrib import auth
 from django.core.context_processors import csrf
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
-
 from calculator.models import StringSet, String
 from calculator import guitarstring
+from stringulator import settings
 
-# Login
-def authenticate_user(request, context):
+
+def initialize_context():
+    context = {'debug': settings.DEBUG}
+    return context
+
+
+def authenticate_user(request):
+    context = initialize_context()
     context = set_is_logged_in(request, context)
     context = set_session_username(request, context)
     return context
 
+
+# Login
 
 def set_is_logged_in(request, context):
     is_logged_in = request.user.is_authenticated()
@@ -31,9 +38,10 @@ def set_session_username(request, context):
 
 
 def login(request):
-    context = authenticate_user(request, {})
+    context = authenticate_user(request)
     context.update(csrf(request))
     return render(request, 'login.html', context)
+
 
 def auth_view(request):
     username = request.POST.get('username', '')
@@ -55,7 +63,7 @@ def invalid_login(request):
 
 def logout(request):
     auth.logout(request)
-    context = authenticate_user(request, {})
+    context = authenticate_user(request)
     context.update(csrf(request))
 
     return render_to_response('logout.html', {}, context_instance=RequestContext(request))
@@ -63,7 +71,7 @@ def logout(request):
 
 # ###################################
 def register_user(request):
-    context = authenticate_user(request, {})
+    context = authenticate_user(request)
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -77,12 +85,12 @@ def register_user(request):
 
 
 def register_success(request):
-    context = authenticate_user(request, {})
+    context = authenticate_user(request)
     return render_to_response('register_success.html', context)
 
 
 def profile(request):
-    context = authenticate_user(request, {})
+    context = authenticate_user(request)
     context.update(csrf(request))
     if not context['is_logged_in']:
         return render_to_response('login.html', context)

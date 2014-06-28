@@ -55,7 +55,9 @@ module.exports = function (grunt) {
     jshint: {
       options: {
         jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
+        reporter: require('jshint-stylish'),
+        force: true
+
       },
       all: {
         src: [
@@ -161,18 +163,30 @@ module.exports = function (grunt) {
       }
     },
     uglify: {
-      dist: {
+//      head: {
+//        files: {
+//          '<%= stringulator.dist %>/scripts/head.min.js': [
+//            '.tmp/scripts/head.js'
+//          ]
+//        }
+//      },
+      body: {
         files: {
-          '<%= stringulator.dist %>/scripts/vendor.min.js': [
-            '.tmp/scripts/vendor.js'
+          '<%= stringulator.dist %>/scripts/stringulator.min.js': [
+            '.tmp/scripts/stringulator.js'
           ]
         }
       }
     },
     concat: {
-      js: {
-        src: ['<%= stringulator.static %>/scripts/**/*.js'],
-        dest: '.tmp/scripts/vendor.js'
+      head: {
+        src: ['<%= stringulator.static %>/scripts/head/*.js'],
+        dest: '<%= stringulator.dist %>/scripts/head.js'
+      },
+      body: {
+        src: ['<%= stringulator.static %>/scripts/**/*.js',
+        '!<%= stringulator.static %>/scripts/head/*.js'],
+        dest: '.tmp/scripts/stringulator.js'
       },
       css: {
         src: ['<%= stringulator.static %>/styles/**/*.css'],
@@ -243,10 +257,8 @@ module.exports = function (grunt) {
             cwd: '<%= stringulator.static %>',
             dest: '<%= stringulator.dist %>',
             src: [
-              '*.{ico,png,txt}',
-              'images/{,*/}*.{webp}',
-//              'scripts/**/*.js',
-              'fonts/*'
+              'admin/**/*',
+              'styles/fonts/**/*'
             ]
           },
           {
@@ -314,6 +326,7 @@ module.exports = function (grunt) {
     'concat',
     'cssmin',
     'uglify',
+    'copy',
     'clean:cleanup'
   ]);
 

@@ -9,11 +9,12 @@ from django.contrib.auth.models import User
 
 from calculator.guitarstring.guitar_string import GuitarString
 from calculator.models import StringSet, String
+from stringulator import settings
 
 
 def load_calculate_page(request):
     context = {}
-    # context['debug'] = settings.DEBUG
+    context['debug'] = settings.DEBUG
 
     try:
         if request.user.is_authenticated():

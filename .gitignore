@@ -1,6 +1,6 @@
 /venv
 *.idea
 .sass-cache/
-*.aws-keys.json
+aws-keys.json
 /dist
 /bower_components
