@@ -123,14 +123,21 @@
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}js/test/scripts.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}js/test/classie.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}js/test/uisearch.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}scripts/test/scripts.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}scripts/test/classie.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}scripts/test/uisearch.js"></script>
   <script>
     new UISearch(document.getElementById('sb-search'));
   </script>
-  <script type="text/javascript" src="{{ STATIC_URL }}js/test/uiMorphingButton_fixed.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}js/test/helpers.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}scripts/test/uiMorphingButton_fixed.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}scripts/test/helpers.js"></script>
+  <!-- calculate -->
+  <script src="{{ STATIC_URL }}scripts/calculate.js"></script>
+  <script src="{{ STATIC_URL }}scripts/add_row.js" ></script>
+  <script src="{{ STATIC_URL }}bootstrap/scripts/tooltip.js"></script>
+  <script src="{{ STATIC_URL }}bootstrap/scripts/popover.js" ></script>
+  <script src="{{ STATIC_URL }}scripts/popover_header_info.js" ></script>
+
     <!-- endblock -->
     <!-- endblock -->
 {% endblock %}

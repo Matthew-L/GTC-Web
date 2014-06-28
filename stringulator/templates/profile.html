@@ -58,13 +58,13 @@
     </div>
 {% endblock %}
 
-{% block scripts %}
-    {{ block.super }}
-        {% if debug %}
-            <script src="{% static 'js/delete_set.js' %}"></script>
-        {% else %}
-            <script src="{{ MEDIA_URL }}js/delete_set.js"></script>
-        {% endif %}
-
-
-{% endblock %}
+{#{% block scripts %}#}
+{#    {{ block.super }}#}
+{#        {% if debug %}#}
+{#            <script src="{{ STATIC_URL }}scripts/delete_set.js"></script>#}
+{#        {% else %}#}
+{#            <script src="{{ STATIC_URL }}scripts/delete_set.js"></script>#}
+{#        {% endif %}#}
+{##}
+{##}
+{#{% endblock %}#}

@@ -2,8 +2,8 @@
 
 # Set this to the root of your project when deployed:
 http_path = "/"
-css_dir = "stringulator/static/stylesheets/css"
-sass_dir = "stringulator/static/stylesheets"
+css_dir = "stringulator/static/styles/css"
+sass_dir = "stringulator/static/styles"
 images_dir = "stringulator/static/images"
 javascripts_dir = "stringulator/static/js"
 

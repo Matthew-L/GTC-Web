@@ -1,83 +1,73 @@
-var path = require('path');
-function createDjangoStaticConcatConfig(context, block) {
-  'use strict';
-  var cfg = {files: []};
-  var staticPattern = /\{\{\s*STATIC_URL\s*\}\}/;
+// Generated on 2014-06-26 using generator-angular 0.9.1
+'use strict';
 
-  block.dest = block.dest.replace(staticPattern, '');
-  var outfile = path.join(context.outDir, block.dest);
 
-  // Depending whether or not we're the last of the step we're not going to output the same thing
-  var files = {
-    dest: outfile,
-    src: []
-  };
-  context.inFiles.forEach(function (f) {
-    files.src.push(path.join(context.inDir, f.replace(staticPattern, '')));
-  });
-  cfg.files.push(files);
-  context.outFiles = [block.dest];
-  return cfg;
-}
-
+// # Globbing
+// for performance reasons we're only matching one level down:
+// 'test/spec/{,*/}*.js'
+// use this if you want to recursively match all subfolders:
+// 'test/spec/**/*.js'
 
 module.exports = function (grunt) {
-  'use strict';
+
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+
+  // Define the configuration for all the tasks
   grunt.initConfig({
 
-
-    pkg: grunt.file.readJSON('package.json'),
+    // Project settings
     stringulator: {
       root: 'stringulator',
       static: 'stringulator/static',
       dist: 'dist',
       templates: 'stringulator/templates'
     },
-    // add a preprocessor to modify the concat config to parse out {{STATIC_URL}} using the above method
-    useminPrepare: {
-      html: 'stringulator/templates/base.html',
-      options: {
-        dest: 'dist',
-        flow: {
-          steps: {
-            js: [
-              {
-                name: 'concat',
-                createConfig: createDjangoStaticConcatConfig
-              },
-              'uglifyjs'
-            ],
-            // also apply it to css files
-            css: [
-              {
-                name: 'cssmin',
-                createConfig: createDjangoStaticConcatConfig
-              }
-            ]
-          },
-          // this property is necessary
-          post: {}
-        }
+
+    // Watches files for changes and runs tasks based on the changed files
+    watch: {
+      bower: {
+        files: ['bower.json'],
+        tasks: ['wiredep']
+      },
+      js: {
+        files: ['<%= stringulator.static %>/scripts/**/{,*/}*.js'],
+        tasks: ['newer:jshint:all']
+      },
+      jsTest: {
+        files: ['test/spec/**/{,*/}*.js'],
+        tasks: ['newer:jshint:test', 'karma']
+      },
+      compass: {
+        files: ['<%= stringulator.static %>/styles/{,*/}*.{scss,sass}'],
+        tasks: ['autoprefixer']
+      },
+      gruntfile: {
+        files: ['Gruntfile.js']
       }
     },
 
-    // add a pattern to parse out the actual filename and remove the {{STATIC_URL}} bit
-    usemin: {
-      html: ['dist/{,*/}*.html'],
-      css: ['dist/styles/{,*/}*.css'],
+    // Make sure code styles are up to par and there are no obvious mistakes
+    jshint: {
       options: {
-        assetsDirs: ['dist'],
-        patterns: {
-          html: [
-            [/\{\{\s*STATIC_URL\s*\}\}([^'"]*)["']/mg, 'django static']
-          ]
-        }
+        jshintrc: '.jshintrc',
+        reporter: require('jshint-stylish')
+      },
+      all: {
+        src: [
+          'Gruntfile.js',
+          '<%= stringulator.static %>/scripts/{,*/}*.js'
+        ]
+      },
+      test: {
+        options: {
+          jshintrc: 'test/.jshintrc'
+        },
+        src: ['test/spec/{,*/}*.js']
       }
     },
 
@@ -94,27 +84,155 @@ module.exports = function (grunt) {
             ]
           }
         ]
+      },
+      cleanup: {
+        files: [
+          {
+            dot: true,
+            src: [
+              '.tmp'
+            ]
+          }
+        ]
       }
     },
-    concat: {
+
+    // Add vendor prefixed styles
+    autoprefixer: {
       options: {
-        separator: ';'
+        browsers: ['last 1 version']
       },
       dist: {
-        src: ['<%= stringulator.static %>/js/**/*.js'],
-        dest: '<%= stringulator.dist %>/static/js/vendor.js'
+        files: [
+          {
+            expand: true,
+            cwd: '.tmp/styles/',
+            src: '{,*/}*.css',
+            dest: '.tmp/styles/'
+          }
+        ]
+      }
+    },
+
+    // Automatically inject Bower components into the app
+    wiredep: {
+      options: {
+        cwd: '<%= stringulator.templates %>'
+      },
+      templates: {
+        src: ['<%= stringulator.templates %>/base.html'],
+        ignorePath: /..\//
+      },
+      sass: {
+        src: ['<%= stringulator.static %>/styles/{,*/}*.{scss,sass}'],
+        ignorePath: /(\.\.\/){1,2}bower_components\//
+      }
+    },
+
+    // Compiles Sass to CSS and generates necessary files if requested
+    compass: {
+      options: {
+        sassDir: '<%= stringulator.static %>/styles',
+        cssDir: '<%= stringulator.static %>/styles/css',
+        generatedImagesDir: '<%= stringulator.static %>/images/generated',
+        imagesDir: '<%= stringulator.static %>/images',
+        javascriptsDir: '<%= stringulator.static %>/scripts',
+        fontsDir: '<%= stringulator.static %>/styles/fonts',
+        importPath: 'bower_components',
+        httpImagesPath: '/images',
+        httpGeneratedImagesPath: '/images/generated',
+        httpFontsPath: '/styles/fonts',
+        relativeAssets: false,
+        assetCacheBuster: false,
+        raw: 'Sass::Script::Number.precision = 10\n'
+      },
+      dist: {
+        options: {
+          generatedImagesDir: '<%= stringulator.dist %>/images/generated'
+        }
+      },
+    },
+
+    cssmin: {
+      minify: {
+
+        src: '.tmp/styles/vendor.css',
+        dest: '<%= stringulator.dist %>/styles/vendor.min.css'
       }
     },
     uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
-      },
       dist: {
         files: {
-          '<%= stringulator.dist %>/static/js/vendor.min.js': ['<%= stringulator.dist %>/static/js/vendor.js']
+          '<%= stringulator.dist %>/scripts/vendor.min.js': [
+            '.tmp/scripts/vendor.js'
+          ]
         }
       }
     },
+    concat: {
+      js: {
+        src: ['<%= stringulator.static %>/scripts/**/*.js'],
+        dest: '.tmp/scripts/vendor.js'
+      },
+      css: {
+        src: ['<%= stringulator.static %>/styles/**/*.css'],
+        dest: '.tmp/styles/vendor.css'
+      }
+    },
+
+    imagemin: {
+      dist: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= stringulator.static %>/images',
+            src: '**/*.{png,jpg,jpeg,gif}',
+            dest: '<%= stringulator.dist %>/images'
+          }
+        ]
+      }
+    },
+
+    svgmin: {
+      dist: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= stringulator.static %>/images',
+            src: '{,*/}*.svg',
+            dest: '<%= stringulator.dist %>/images'
+          }
+        ]
+      }
+    },
+
+    htmlmin: {
+      dist: {
+        options: {
+          collapseWhitespace: true,
+          conservativeCollapse: true,
+          collapseBooleanAttributes: true,
+          removeCommentsFromCDATA: true,
+          removeOptionalTags: true
+        },
+        files: [
+          {
+            expand: true,
+            cwd: '<%= stringulator.dist %>',
+            src: ['*.html', 'templates/{,*/}*.html'],
+            dest: '<%= stringulator.dist %>'
+          }
+        ]
+      }
+    },
+
+    // Replace Google CDN references
+    cdnify: {
+      dist: {
+        html: ['<%= stringulator.templates %>/**/*.html']
+      }
+    },
+
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
@@ -122,149 +240,81 @@ module.exports = function (grunt) {
           {
             expand: true,
             dot: true,
-//          cwd: '<%= stringulator.root %>',
+            cwd: '<%= stringulator.static %>',
             dest: '<%= stringulator.dist %>',
             src: [
-//            '*.{ico,png,txt}',
-//            '*.html',
-//              '<%= stringulator.templates %>/**/{,*/}*.html'
-//            'images/{,*/}*.{webp}',
-//            'fonts/*'
+              '*.{ico,png,txt}',
+              'images/{,*/}*.{webp}',
+//              'scripts/**/*.js',
+              'fonts/*'
             ]
+          },
+          {
+            expand: true,
+            cwd: '.tmp/images',
+            dest: '<%= stringulator.dist %>/images',
+            src: ['generated/*']
           }
         ]
+      },
+      styles: {
+        expand: true,
+        cwd: '<%= stringulator.static %>/styles',
+        dest: '.tmp/styles/',
+        src: '{,*/}*.css'
       }
     },
 
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
-      },
-      all: {
-        src: [
-          'Gruntfile.js',
-          '<%= stringulator.static %>/scripts/{,*/}*.js'
-        ]
-      },
-      test: {
-        src: ['test/spec/{,*/}*.js']
-      }
+    // Run some tasks in parallel to speed up the build process
+    concurrent: {
+      test: [
+        'compass'
+      ],
+      dist: [
+        'compass:dist',
+        'imagemin',
+        'svgmin'
+      ]
     },
-    cssmin: {
-      dist: {
-        files: {
-          '<%= stringulator.dist %>/static/stylesheets/main.css': [
-            '<%= stringulator.static %>/stylesheets/**/{,*/}*.css'
-          ]
-        }
-      }
-    },
-//    uglify: {
-//      dist: {
-//        files: {
-//          '<%= yeoman.dist %>/scripts/scripts.js': [
-//            '<%= yeoman.dist %>/scripts/scripts.js'
-//          ]
-//        }
-//      }
-//    }
-//    concat: {
-//      dist: {}
-//    }
-
-    /*jshint camelcase: false */
-    aws_s33: {
-      options: {
-        accessKeyId: '<%= aws.AWSAccessKeyId %>', // Use the variables
-        secretAccessKey: '<%= aws.AWSSecretKey %>', // You can also use env variables
-        region: 'eu-west-1',
-        uploadConcurrency: 5, // 5 simultaneous uploads
-        downloadConcurrency: 5 // 5 simultaneous downloads
-      },
-      staging: {
-        options: {
-          bucket: 'my-wonderful-staging-bucket',
-          differential: true // Only uploads the files that have changed
-        },
-        files: [
-          {dest: 'app/', cwd: 'backup/staging/', action: 'download'},
-          {expand: true, cwd: 'dist/staging/scripts/', src: ['**'], dest: 'app/scripts/'},
-          {expand: true, cwd: 'dist/staging/styles/', src: ['**'], dest: 'app/styles/'},
-          {dest: 'src/app', action: 'delete'},
-        ]
-      },
-//      production: {
-//        options: {
-//          bucket: 'my-wonderful-production-bucket'
-//          params: {
-//            ContentEncoding: 'gzip' // applies to all the files!
-//          }
-//          mime: {
-//            'dist/assets/production/LICENCE': 'text/plain'
-//          }
-//        },
-//        files: [
-//          {expand: true, cwd: 'dist/production/', src: ['**'], dest: 'app/'},
-//          {expand: true, cwd: 'assets/prod/large', src: ['**'], dest: 'assets/large/', stream: true}, // enable stream to allow large files
-//          {expand: true, cwd: 'assets/prod/', src: ['**'], dest: 'assets/', params: {CacheControl: '2000'},
-//          // CacheControl only applied to the assets folder
-//          // LICENCE inside that folder will have ContentType equal to 'text/plain'
-//        ]
-//      },
-      cleanProduction: {
-        options: {
-          bucket: 'my-wonderful-production-bucket',
-          debug: true // Doesn't actually delete but shows log
-        },
-        files: [
-          {dest: 'app/', action: 'delete'},
-          {dest: 'assets/', exclude: '**/*.tgz', action: 'delete'}, // will not delete the tgz
-          {dest: 'assets/large/', exclude: '**/*copy*', flipExclude: true, action: 'delete'}, // will delete everything that has copy in the name
-        ]
-      },
-      downloadProduction: {
-        options: {
-          bucket: 'my-wonderful-production-bucket'
-        },
-        files: [
-          {dest: 'app/', cwd: 'backup/', action: 'download'}, // Downloads the content of app/ to backup/
-          {dest: 'assets/', cwd: 'backup-assets/', exclude: '**/*copy*', action: 'download'}, // Downloads everything which doesn't have copy in the name
-        ]
-      },
-      secret: {
-        options: {
-          bucket: 'my-wonderful-private-bucket',
-          access: 'private'
-        },
-        files: [
-          {expand: true, cwd: 'secret_garden/', src: ['*.key'], dest: 'secret/'},
-        ]
-      }
-    }
   });
 
 
-  grunt.registerTask('test', ['jshint']);
+  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
+    if (target === 'dist') {
+      return grunt.task.run(['build', 'connect:dist:keepalive']);
+    }
 
-  grunt.registerTask('build', [
-    'jshint',
-    'clean',
-//    'wiredep',
-//    'useminPrepare',
-    'concat',
-//    'uglify',
+    grunt.task.run([
+      'clean:server',
+      'wiredep',
+      'concurrent:server',
+      'autoprefixer',
+      'connect:livereload',
+      'watch'
+    ]);
+  });
 
-//    'copy',
-    'uglify',
-    'cssmin',
-//    'usemin'
+  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
+    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
+    grunt.task.run(['serve:' + target]);
+  });
+
+  grunt.registerTask('test', [
+    'clean:server',
+    'concurrent:test',
+    'autoprefixer',
+    'connect:test',
+    'karma'
   ]);
 
-  grunt.registerTask('deploy-static', [
-    'test',
-    'build',
-    'aws_s3'
+  grunt.registerTask('build', [
+    'clean:dist',
+    'concurrent:dist',
+    'autoprefixer',
+    'concat',
+    'cssmin',
+    'uglify',
+    'clean:cleanup'
   ]);
 
   grunt.registerTask('default', [
@@ -273,4 +323,3 @@ module.exports = function (grunt) {
     'build'
   ]);
 };
-
