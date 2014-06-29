@@ -64,13 +64,7 @@ module.exports = function (grunt) {
           'Gruntfile.js',
           '<%= stringulator.static %>/scripts/{,*/}*.js'
         ]
-      },
-//      test: {
-//        options: {
-//          jshintrc: 'test/.jshintrc'
-//        },
-//        src: ['test/spec/{,*/}*.js']
-//      }
+      }
     },
 
     // Empties folders to start fresh
@@ -158,18 +152,11 @@ module.exports = function (grunt) {
     cssmin: {
       minify: {
 
-        src: '.tmp/styles/vendor.css',
-        dest: '<%= stringulator.dist %>/styles/vendor.min.css'
+        src: '.tmp/styles/stringulator.css',
+        dest: '<%= stringulator.dist %>/styles/stringulator.min.css'
       }
     },
     uglify: {
-//      head: {
-//        files: {
-//          '<%= stringulator.dist %>/scripts/head.min.js': [
-//            '.tmp/scripts/head.js'
-//          ]
-//        }
-//      },
       body: {
         files: {
           '<%= stringulator.dist %>/scripts/stringulator.min.js': [
@@ -190,7 +177,7 @@ module.exports = function (grunt) {
       },
       css: {
         src: ['<%= stringulator.static %>/styles/**/*.css'],
-        dest: '.tmp/styles/vendor.css'
+        dest: '.tmp/styles/stringulator.css'
       }
     },
 
@@ -279,9 +266,6 @@ module.exports = function (grunt) {
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
-//      test: [
-//        'compass'
-//      ],
       dist: [
         'compass:dist',
         'imagemin',
@@ -291,14 +275,15 @@ module.exports = function (grunt) {
     aws: grunt.file.readJSON('aws-keys.json'),
     s3: {
       options: {
-        accessKeyId: "<%= aws.accessKeyId %>",
-        secretAccessKey: "<%= aws.secretAccessKey %>",
-        bucket: "stringulator.example"
+        accessKeyId: '<%= aws.accessKeyId %>',
+        secretAccessKey: '<%= aws.secretAccessKey %>',
+        bucket: 'stringulator-production',
+        access: 'public-read'
       },
       deploy_static: {
-        cwd: "dist/",
-        src: "**",
-        dest: 'dist/'
+        cwd: 'dist/',
+        src: '**',
+        dest: 'static/'
       }
     }
   });
@@ -310,7 +295,6 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
-//      'clean:server',
       'wiredep',
       'concurrent:server',
       'autoprefixer',
@@ -324,14 +308,6 @@ module.exports = function (grunt) {
     grunt.task.run(['serve:' + target]);
   });
 
-//  grunt.registerTask('test', [
-////    'clean:server',
-//    'concurrent:test',
-//    'autoprefixer',
-////    'connect:test',
-////    'karma'
-//  ]);
-
   grunt.registerTask('build', [
     'clean:dist',
     'concurrent:dist',
@@ -339,8 +315,7 @@ module.exports = function (grunt) {
     'concat',
     'cssmin',
     'uglify',
-    'copy',
-
+    'copy'
   ]);
 
   grunt.registerTask('deploy-static', [

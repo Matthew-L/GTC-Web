@@ -1,5 +1,8 @@
 @import 'compass';
-//
+$debug: false;
+
+@import "partials/variables";
+
 @import "partials/main";
 @import "partials/header";
 @import "partials/test";

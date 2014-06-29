@@ -1,0 +1,6 @@
+$STATIC_URL: '';
+@if $debug {
+  $STATIC_URL: '/static/';
+} @else {
+  $STATIC_URL: 'https://s3.amazonaws.com/stringulator-production/static/';
+}

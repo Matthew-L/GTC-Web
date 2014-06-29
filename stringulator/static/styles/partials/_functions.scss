@@ -1,0 +1,5 @@
+@import 'variables';
+@function static-url($relative-url){
+  $relative-url : url(unquote($STATIC_URL)+$relative-url);
+  @return $relative-url;
+}

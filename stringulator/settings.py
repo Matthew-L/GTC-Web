@@ -3,6 +3,7 @@ import os
 ROOT_PATH = os.path.dirname(__file__)
 
 DEBUG = True
+
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -72,12 +73,12 @@ MEDIA_URL = '/'
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 if DEBUG:
-    STATIC_URL = '/dist/'
+    STATIC_URL = '/static/'
 else:
-    STATIC_URL = 'https://s3-us-west-2.amazonaws.com/stringulator-bucket/'
+    STATIC_URL = 'https://s3.amazonaws.com/stringulator-production/static/'
 
 STATIC_ROOT = os.path.abspath('static')
-# STATIC_ROOT = os.path.abspath('dist')
+COMPRESS_ROOT = os.path.abspath('static')
 
 STATICFILES_DIRS = (
     os.path.abspath('stringulator\\static'),
@@ -112,7 +113,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -153,23 +154,16 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    # 'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # Uncomment the next line to enable the admin:
+    "compressor",
+    'bootstrap_sass',
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
-
     'users',
     'calculator',
     'calculator.guitarstring',
-
     'stringulator',
     'stringulator.templatetags',
-    # 'favicon',
-    # 'south',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
