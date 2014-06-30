@@ -7,7 +7,10 @@
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
+var isDirty = false;
+function toggleDebug(){
 
+}
 module.exports = function (grunt) {
 
   // Load grunt tasks automatically
@@ -280,33 +283,95 @@ module.exports = function (grunt) {
         bucket: 'stringulator-production',
         access: 'public-read'
       },
-      deploy_static: {
+      deployStatic: {
         cwd: 'dist/',
         src: '**',
         dest: 'static/'
       }
+    },
+    replace: {
+      django: {
+        options: {
+          patterns: [
+            {
+              match: 'DEBUG = False',
+              replacement: function () {
+                isDirty = true;
+                return 'DEBUG = True';
+              }
+            },
+            {
+              match: 'DEBUG = True',
+              replacement: function () {
+                if(isDirty) {
+                  return 'DEBUG = True';
+                }
+                isDirty = false;
+                return 'DEBUG = False';
+              }
+            }
+          ],
+          usePrefix: false
+        },
+        files: [
+          {expand: true, flatten: true,
+            src: ['<%= stringulator.root %>/settings.py'],
+            dest: '<%= stringulator.root %>/'
+          }
+        ]
+      },
+      sass: {
+        options: {
+          patterns: [
+            {
+              match: 'debug: false',
+              replacement: function () {
+                isDirty = true;
+                return 'debug: true';
+              }
+            },
+            {
+              match: 'debug: true',
+              replacement: function () {
+                if(isDirty) {
+                  return 'debug: true';
+                }
+                return 'debug: false';
+              }
+            }
+          ],
+          usePrefix: false
+        },
+        files: [
+          {expand: true, flatten: true,
+            src: ['<%= stringulator.root %>/static/styles/default.scss'],
+            dest: '<%= stringulator.root %>/static/styles/'
+          }
+        ]
+      }
+
     }
   });
 
 
-  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
-    if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
-    }
-
-    grunt.task.run([
-      'wiredep',
-      'concurrent:server',
-      'autoprefixer',
-      'connect:livereload',
-      'watch'
-    ]);
-  });
-
-  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve:' + target]);
-  });
+//  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
+//    if (target === 'dist') {
+//      return grunt.task.run(['build', 'connect:dist:keepalive']);
+//    }
+//
+//    grunt.task.run([
+//      'wiredep',
+//      'concurrent:server',
+//      'autoprefixer',
+//      'connect:livereload',
+//      'watch'
+//    ]);
+//  });
+//
+//  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
+//    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
+//    grunt.task.run(['serve:' + target]);
+//  });
 
   grunt.registerTask('build', [
     'clean:dist',
@@ -330,4 +395,9 @@ module.exports = function (grunt) {
     'build',
     'clean:cleanup'
   ]);
+
+  grunt.registerTask('toggle-debug', [
+    'replace'
+  ]);
+
 };
