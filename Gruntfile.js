@@ -8,7 +8,7 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 var isDirty = false;
-function toggleDebug(){
+function toggleDebug() {
 
 }
 module.exports = function (grunt) {
@@ -41,10 +41,6 @@ module.exports = function (grunt) {
         files: ['<%= stringulator.static %>/scripts/**/{,*/}*.js'],
         tasks: ['newer:jshint:all']
       },
-//      jsTest: {
-//        files: ['test/spec/**/{,*/}*.js'],
-//        tasks: ['newer:jshint:test', 'karma']
-//      },
       compass: {
         files: ['<%= stringulator.static %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['autoprefixer']
@@ -60,7 +56,6 @@ module.exports = function (grunt) {
         jshintrc: '.jshintrc',
         reporter: require('jshint-stylish'),
         force: true
-
       },
       all: {
         src: [
@@ -273,6 +268,14 @@ module.exports = function (grunt) {
         'compass:dist',
         'imagemin',
         'svgmin'
+      ],
+      debugFalse: [
+        'replace:djangoFalse',
+        'replace:sassFalse'
+      ],
+      debugToggle: [
+        'replace:djangoToggle',
+        'replace:sassToggle'
       ]
     },
     aws: grunt.file.readJSON('aws-keys.json'),
@@ -303,7 +306,7 @@ module.exports = function (grunt) {
             {
               match: 'DEBUG = True',
               replacement: function () {
-                if(isDirty) {
+                if (isDirty) {
                   return 'DEBUG = True';
                 }
                 isDirty = false;
@@ -333,7 +336,52 @@ module.exports = function (grunt) {
             {
               match: 'debug: true',
               replacement: function () {
-                if(isDirty) {
+                if (isDirty) {
+                  return 'debug: true';
+                }
+                return 'debug: false';
+              }
+            }
+          ],
+          usePrefix: false
+        },
+        files: [
+          {expand: true, flatten: true,
+            src: ['<%= stringulator.root %>/static/styles/default.scss'],
+            dest: '<%= stringulator.root %>/static/styles/'
+          }
+        ]
+      },
+      djangoFalse: {
+        options: {
+          patterns: [
+            {
+              match: 'DEBUG = True',
+              replacement: function () {
+                if (isDirty) {
+                  return 'DEBUG = True';
+                }
+                isDirty = false;
+                return 'DEBUG = False';
+              }
+            }
+          ],
+          usePrefix: false
+        },
+        files: [
+          {expand: true, flatten: true,
+            src: ['<%= stringulator.root %>/settings.py'],
+            dest: '<%= stringulator.root %>/'
+          }
+        ]
+      },
+      sassFalse: {
+        options: {
+          patterns: [
+            {
+              match: 'debug: true',
+              replacement: function () {
+                if (isDirty) {
                   return 'debug: true';
                 }
                 return 'debug: false';
@@ -353,14 +401,24 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.registerTask('debug-toggle', [
+    'concurrent:debugFalse'
+  ]);
+
+  grunt.registerTask('debug-false', [
+    'concurrent:debugToggle'
+  ]);
+
   grunt.registerTask('build', [
     'clean:dist',
+    'debug-false',
     'concurrent:dist',
     'autoprefixer',
     'concat',
     'cssmin',
     'uglify',
-    'copy'
+    'copy',
+    'debug-toggle'
   ]);
 
   grunt.registerTask('deploy-static', [
@@ -376,8 +434,5 @@ module.exports = function (grunt) {
     'clean:cleanup'
   ]);
 
-  grunt.registerTask('toggle-debug', [
-    'replace'
-  ]);
 
 };
