@@ -8,8 +8,6 @@ NOTE_CHOICES = (('A', 'A'), ('A#/Bb', 'A#/Bb'), ('B', 'B'), ('C', 'C'), ('C#/Db'
 OCTAVE_RANGE = 10
 STRING_TYPE = (("CKPLG", "Plain Steel - CK"),
                ("CKWNG", "Nickel/Steel Hybrid - CK"),
-               ("CKPLB", "Bass - Plain Steel - CK"),
-               ("CKWNB", "Bass - Nickel/Steel Hybrid - CK"),
                ("DAPL", "Plain Steel - DA"),
                ("DAPB", "Phosphore Bronze Wound - DA"),
                ("DANW", "Nickel Wound - DA"),

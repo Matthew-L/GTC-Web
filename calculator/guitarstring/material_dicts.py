@@ -1,63 +1,28 @@
-__author__ = 'Micah'
-#Circle K :
-#ckplg  plain steel with guitar style ball end
-#ckwng wound nickel/steel hybrid with guitar style ball
-#ckplb  plain steel with bass style ball end
-#ckwnb wound nickel/steel hybrid with bass style ball e
-#D'addario :
-#dapl plain steel
-#dapb phosphore bronze wound
-#danw nickel wound
-#daxs stainless steel wound
-#dahr half round wound
-#dacg Chromes - Stainless steel Flat wound
-#daft Flat Tops - Phosphore Bronze Polished
-#dabw 80-20 S- 80/20 Brass Round Wound
-#dazw Great American Bronze - 85/15 Brass Round W
-#daxb Bass - Nickplated Round Wound
-#dahb Bass - Half Round - Pure Nickel Half Round
-#dabc Bass - Chromes - Stainless Steel Flat Wound
-#dabs Bass - ProSteels - ProSteel Round Wound
+"""
+UNIT TENSIONS
 
-#Circle K :
-#ckplg  plain steel with guitar style ball end
-#ckwng wound nickel/steel hybrid with guitar style ball
-#ckplb  plain steel with bass style ball end
-#ckwnb wound nickel/steel hybrid with bass style ball e
-#D'addario :
-#dapl plain steel
-#dapb phosphore bronze wound
-#danw nickel wound
-#daxs stainless steel wound
-#dahr half round wound
-#dacg Chromes - Stainless steel Flat wound
-#daft Flat Tops - Phosphore Bronze Polished
-#dabw 80-20 S- 80/20 Brass Round Wound
-#dazw Great American Bronze - 85/15 Brass Round W
-#daxb Bass - Nickplated Round Wound
-#dahb Bass - Half Round - Pure Nickel Half Round
-#dabc Bass - Chromes - Stainless Steel Flat Wound
-#dabs Bass - ProSteels - ProSteel Round Wound
+These can only be obtained from the guitar string provider.
+If you have more unit tensions let me know and I can add them.
 
+Kalium :
+CKPLG: plain steel
+CKWNG: wound nickel/steel hybrid
 
-CKPLB = {
-    .023: .000117702,
-    .022: .000107666,
-    .021: .000098155,
-    .020: .000089031,
-    .019: .000080360,
-    .018: .000072088,
-    .017: .000064300,
-    .016: .000056961,
-    .015: .000050050,
-    .014: .000043607,
-    .013: .000037605,
-    .012: .000032039,
-    .011: .000026925,
-    .010: .000022252,
-    .009: .000018022,
-    .008: .000014240
-}
+D'addario :
+DAPL: plain steel
+DAPB: phosphore bronze wound
+DANW: nickel wound
+DAXSG: stainless steel wound
+DAHRG: half round wound
+DACG: Chromes - Stainless steel Flat wound
+DAFT: Flat Tops - Phosphore Bronze Polished
+DABW: 80-20 S- 80/20 Brass Round Wound
+DAZW: Great American Bronze - 85/15 Brass Round W
+DAXB: Bass - Nickplated Round Wound
+DAHB: Bass - Half Round - Pure Nickel Half Round
+DABC: Bass - Chromes - Stainless Steel Flat Wound
+DABS: Bass - ProSteels - ProSteel Round Wound
+"""
 
 CKPLG = {
     .022: .000107666,
@@ -135,62 +100,6 @@ CKWNG = {
     .023: .000113985,
     .022: .000103500,
     .021: .000093873
-}
-
-CKWNB = {
-    .254: .011787319,
-    .244: .010907182,
-    .232: .009888443,
-    .222: .009091287,
-    .210: .008037439,
-    .200: .007311717,
-    .190: .006605072,
-    .182: .006071822,
-    .174: .005469937,
-    .166: .005078724,
-    .158: .004375389,
-    .150: .004051506,
-    .142: .003741715,
-    .136: .003441822,
-    .130: .003154996,
-    .124: .002880915,
-    .118: .002616406,
-    .112: .002367064,
-    .106: .002127413,
-    .102: .001986524,
-    .098: .001831487,
-    .094: .001677765,
-    .090: .001544107,
-    .086: .001416131,
-    .082: .001293598,
-    .079: .001188974,
-    .076: .001110192,
-    .073: .001021518,
-    .070: .000939851,
-    .067: .000870707,
-    .065: .000821116,
-    .063: .000765973,
-    .061: .000720293,
-    .059: .000679149,
-    .057: .000625704,
-    .055: .000584407,
-    .053: .000551898,
-    .051: .000512645,
-    .049: .000475438,
-    .047: .000447408,
-    .045: .000404956,
-    .043: .000366357,
-    .041: .000334965,
-    .039: .000304788,
-    .037: .000276237,
-    .035: .000249034,
-    .033: .000223217,
-    .031: .000198902,
-    .029: .000178551,
-    .028: .000161203,
-    .027: .000153146,
-    .026: .000144691,
-    .025: .000124568
 }
 
 DAPL = {
@@ -498,208 +407,30 @@ DABS = {
     .032: .00020465
 }
 
+unit_tensions = {'CKPLG': CKPLG,
+                 'CKWNG': CKWNG,
+                 'DAPL': DAPL,
+                 'DAPB': DAPB,
+                 'DANW': DANW,
+                 'DACG': DACG,
+                 'DAFT': DAFT,
+                 'DABW': DABW,
+                 'DAZW': DAZW,
+                 'DAXB': DAXB,
+                 'DAHB': DAHB,
+                 'DABC': DABC,
+                 'DABS': DABS}
 
-
-#PL = {
-#    .026: .00014975,
-#    .024: .00012760,
-#    .022: .00010722,
-#    .020: .00008861,
-#    .019: .00007997,
-#    .018: .00007177,
-#    .017: .00006402,
-#    .016: .00005671,
-#    .015: .00004984,
-#    .014: .00004342,
-#    .0135: .00004037,
-#    .013: .00003744,
-#    .012: .00003190,
-#    .0115: .00002930,
-#    .011: .00002680,
-#    .0105: .00002442,
-#    .010: .00002215,
-#    .0095: .00001999,
-#    .009: .00001794,
-#    .0085: .00001601,
-#    .008: .00001418,
-#    .007: .00001085}
-#
-#PB = {
-#    .059: .00070535,
-#    .056: .00063477,
-#    .053: .00056962,
-#    .052: .00055223,
-#    .049: .00049151,
-#    .047: .00045289,
-#    .045: .00041751,
-#    .042: .00036722,
-#    .039: .00031124,
-#    .036: .00026824,
-#    .035: .00025365,
-#    .034: .00023887,
-#    .032: .00021018,
-#    .030: .00018660,
-#    .029: .00017381,
-#    .027: .00014834,
-#    .026: .00013640,
-#    .025: .00012686,
-#    .024: .00011682,
-#    .023: .00010801,
-#    .022: .00009876,
-#    .021: .00008944,
-#    .020: .00008106
-#}
-#
-#XS = {
-#    .070: .00087444,
-#    .056: .00056317,
-#    .054: .00052667,
-#    .052: .00047056,
-#    .050: .00043726,
-#    .048: .00040523,
-#    .046: .00037449,
-#    .042: .00031685,
-#    .040: .00028995,
-#    .038: .00025969,
-#    .036: .00023535,
-#    .034: .00021229,
-#    .032: .00019052,
-#    .030: .00017002,
-#    .028: .00014471,
-#    .026: .00012533,
-#    .024: .00010742,
-#    .022: .00009089,
-#    .021: .00008195,
-#    .020: .00007396,
-#    .018: .00006153
-#}
-#
-#NW = {
-#    .080: .00115011,
-#    .074: .00098869,
-#    .072: .00094124,
-#    .070: .00089304,
-#    .068: .00084614,
-#    .066: .00079889,
-#    .064: .00074984,
-#    .062: .00070697,
-#    .060: .00066542,
-#    .059: .00064191,
-#    .056: .00057598,
-#    .052: .00048109,
-#    .049: .00043014,
-#    .048: .00041382,
-#    .046: .00038216,
-#    .044: .00035182,
-#    .042: .00032279,
-#    .039: .00027932,
-#    .038: .00026471,
-#    .036: .00023964,
-#    .034: .00021590,
-#    .032: .00019347,
-#    .030: .00017236,
-#    .028: .00014666,
-#    .026: .00012671,
-#    .024: .00010857,
-#    .022: .00009184,
-#    .021: .00008293,
-#    .020: .00007495,
-#    .019: .00006947,
-#    .018: .00006215,
-#    .017: .00005524
-#}
-#
-#HR = {
-#    .056: .00062758,
-#    .052: .00054432,
-#    .046: .00043534,
-#    .042: .00036404,
-#    .039: .00032045,
-#    .036: .00027556,
-#    .032: .00022329,
-#    .030: .00019916,
-#    .026: .00015224,
-#    .024: .00013139,
-#    .022: .00011271
-#}
 
 def get_material_dict(string_material):
     """
-    used to retrieve one of the hardcoded dictionaries
-    the dictionaries follow the form: gauge: unit_weight
-    PL: Plain
-    PB: Phosphor Bronze
-    NW: Nickel Wound
-    XS: Stainless Steel
-    HR: Half-Round Wound
+    Used to retrieve one of the hardcoded unit tension dictionaries the dictionaries follow the form: gauge: unit_weight
+
     @param string_material: the type of material the string is made of determines which dictionary to pass back
     @return: the dictionary corresponding to the string
     """
-    #if string_material == 'PL':
-    #    return PL
-    #elif string_material == 'PB':
-    #    return PB
-    #elif string_material == 'XS':
-    #    return XS
-    #elif string_material == 'NW':
-    #    return NW
-    #elif string_material == 'HR':
-    #    return HR
-    #else:
-    #    return 'Invalid'
 
-#ckplg  plain steel with guitar style ball end
-#ckwng wound nickel/steel hybrid with guitar style ball
-#ckplb  plain steel with bass style ball end
-#ckwnb wound nickel/steel hybrid with bass style ball e
-#D'addario :
-#dapl plain steel
-#dapb phosphore bronze wound
-#danw nickel wound
-#daxs stainless steel wound
-#dahr half round wound
-#dacg Chromes - Stainless steel Flat wound
-#daft Flat Tops - Phosphore Bronze Polished
-#dabw 80-20 S- 80/20 Brass Round Wound
-#dazw Great American Bronze - 85/15 Brass Round W
-#daxb Bass - Nickplated Round Wound
-#dahb Bass - Half Round - Pure Nickel Half Round
-#dabc Bass - Chromes - Stainless Steel Flat Wound
-#dabs Bass - ProSteels - ProSteel Round Wound
-
-    if string_material == 'CKPLG':
-        return CKPLG
-    elif string_material == 'CKWNG':
-        return CKWNG
-    elif string_material == 'CKPLB':
-        return CKPLB
-    elif string_material == 'CKWNB':
-        return CKWNB
-    elif string_material == 'DAPL':
-        return DAPL
-    elif string_material == 'DAPB':
-        return DAPB
-    elif string_material == 'DANW':
-        return DANW
-    elif string_material == 'DAXS':
-        return DAXS
-    elif string_material == 'DAHR':
-        return DAHR
-    elif string_material == 'DACG':
-        return DACG
-    elif string_material == 'DAFT':
-        return DAFT
-    elif string_material == 'DABW':
-        return DABW
-    elif string_material == 'DAZW':
-        return DAZW
-    elif string_material == 'DAXB':
-        return DAXB
-    elif string_material == 'DAHB':
-        return DAHB
-    elif string_material == 'DABC':
-        return DABC
-    elif string_material == 'DABS':
-        return DABS
-    else:
+    try:
+        return unit_tensions[string_material]
+    except KeyError:
         return 'Invalid'

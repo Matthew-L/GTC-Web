@@ -1,5 +1,3 @@
-__author__ = 'Micah'
-
 import unittest
 from calculator.guitarstring.guitar_string import GuitarString, InvalidScaleLengthError, OutOfRangeError, \
     InvalidNoteError, InvalidStringMaterialError, InvalidOctaveError, InvalidGaugeError
@@ -75,9 +73,8 @@ class MyTestCase(unittest.TestCase):
         self.assertRaises(OutOfRangeError, GuitarString, 26.5, 'DAPL', 0, 'E', 4)
 
     def test_multiscale_tension(self):
-
-        #26.5-30 DAPL 0.009 A 1 2 1
-        #26.5-3 DAPL 0.001 C 1 0 1
+        # 26.5-30 DAPL 0.009 A 1 2 1
+        # 26.5-3 DAPL 0.001 C 1 0 1
         calc = GuitarString('26.5-30', 'DAPL', .009, 'A', 1, '2', 1)
         tension = float("{0:.2f}".format(calc.tension))
         print("1 A: " + str(tension))
@@ -85,135 +82,135 @@ class MyTestCase(unittest.TestCase):
         calc = GuitarString('30-26.5', 'DAPL', .009, 'A', 1, '2', 1)
         tension = float("{0:.2f}".format(calc.tension))
         print("1 A: " + str(tension))
-        #calc = GuitarString('27-28.625', 'DAPL', .009, 'E', 4, 8, 1)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("1 E: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DAPL', .009, 'E', 4, 8, 1)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("1 E: " + str(tension))
         #
-        #calc = GuitarString('27-28.625', 'DAPL', .013, 'B', 3, 8, 2)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("2 B: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DAPL', .013, 'B', 3, 8, 2)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("2 B: " + str(tension))
         #
-        #calc = GuitarString('27-28.625', 'DAPL', .017, 'G', 3, 8, 3)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("3 G: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DAPL', .017, 'G', 3, 8, 3)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("3 G: " + str(tension))
         #
-        #calc = GuitarString('27-28.625', 'DANW', .023, 'D', 3, 8, 4)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("4 D: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DANW', .023, 'D', 3, 8, 4)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("4 D: " + str(tension))
         #
-        #calc = GuitarString('27-28.625', 'DANW', .031, 'A', 2, 8, 5)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("5 A: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DANW', .031, 'A', 2, 8, 5)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("5 A: " + str(tension))
         #
-        #calc = GuitarString('27-28.625', 'DANW', .043, 'E', 2, 8, 6)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("6 E: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DANW', .043, 'E', 2, 8, 6)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("6 E: " + str(tension))
         #
-        #calc = GuitarString('27-28.625', 'DANW', .059, 'B', 1, 8, 7)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("7 B: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DANW', .059, 'B', 1, 8, 7)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("7 B: " + str(tension))
         #
-        #calc = GuitarString('27-28.625', 'DANW', .079, 'E', 1, 8, 8)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("8 E: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DANW', .079, 'E', 1, 8, 8)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("8 E: " + str(tension))
 
 
-        #calc = GuitarString('27-28.625', 'DAPL', .009, 'E', 4, 8, 1)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("1 E: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DAPL', .009, 'E', 4, 8, 1)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("1 E: " + str(tension))
         #
-        #calc = GuitarString('27-28.625', 'DAPL', .012, 'B', 3, 8, 2)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("2 B: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DAPL', .012, 'B', 3, 8, 2)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("2 B: " + str(tension))
         #
-        #calc = GuitarString('27-28.625', 'DAPL', .015, 'G', 3, 8, 3)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("3 G: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DAPL', .015, 'G', 3, 8, 3)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("3 G: " + str(tension))
         #
-        #calc = GuitarString('27-28.625', 'DAPL', .020, 'D', 3, 8, 4)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("4 D: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DAPL', .020, 'D', 3, 8, 4)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("4 D: " + str(tension))
         #
-        #calc = GuitarString('27-28.625', 'DANW', .028, 'A', 2, 8, 5)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("5 A: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DANW', .028, 'A', 2, 8, 5)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("5 A: " + str(tension))
         #
-        #calc = GuitarString('27-28.625', 'DANW', .038, 'E', 2, 8, 6)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("6 E: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DANW', .038, 'E', 2, 8, 6)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("6 E: " + str(tension))
         #
-        #calc = GuitarString('27-28.625', 'DANW', .050, 'B', 1, 8, 7)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("7 B: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DANW', .050, 'B', 1, 8, 7)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("7 B: " + str(tension))
         #
-        #calc = GuitarString('27-28.625', 'DANW', .074, 'E', 1, 8, 8)
-        #tension = float("{0:.2f}".format(calc.tension))
-        #print("8 E: " + str(tension))
+        # calc = GuitarString('27-28.625', 'DANW', .074, 'E', 1, 8, 8)
+        # tension = float("{0:.2f}".format(calc.tension))
+        # print("8 E: " + str(tension))
         #
 
-        #len 26.5"
-        #E .009" DAPL == 14.18#
-        #calc = GuitarString(26.5, 'DAPL', .009, 'E', 4)
-        #tension = float("{0:.2f}".format(calc.calculate_tension()))
-        #calc_m = GuitarString('26.5-30', 'DAPL', .009, 'E', 4, 8, 1)
-        #tension_m = float("{0:.2f}".format(calc_m.tension))
-        #self.assertEqual(tension_m, tension)
+        # len 26.5"
+        # E .009" DAPL == 14.18#
+        # calc = GuitarString(26.5, 'DAPL', .009, 'E', 4)
+        # tension = float("{0:.2f}".format(calc.calculate_tension()))
+        # calc_m = GuitarString('26.5-30', 'DAPL', .009, 'E', 4, 8, 1)
+        # tension_m = float("{0:.2f}".format(calc_m.tension))
+        # self.assertEqual(tension_m, tension)
         #
-        ##len 27"
-        ##B, .012" DAPL == 14.69#
-        #calc = GuitarString(27, 'DAPL', .012, 'B', 3)
-        #tension = float("{0:.2f}".format(calc.calculate_tension()))
-        #calc_m = GuitarString('26.5-30', 'DAPL', .012, 'B', 3, 8, 2)
-        #tension_m = float("{0:.2f}".format(calc_m.tension))
-        #self.assertEqual(tension_m, tension)
+        # #len 27"
+        # #B, .012" DAPL == 14.69#
+        # calc = GuitarString(27, 'DAPL', .012, 'B', 3)
+        # tension = float("{0:.2f}".format(calc.calculate_tension()))
+        # calc_m = GuitarString('26.5-30', 'DAPL', .012, 'B', 3, 8, 2)
+        # tension_m = float("{0:.2f}".format(calc_m.tension))
+        # self.assertEqual(tension_m, tension)
         #
-        ##len 27.5"
-        ##G, .015" DAPL == 15.0#
-        #calc = GuitarString(27.5, 'DAPL', .015, 'G', 3)
-        #tension = float("{0:.2f}".format(calc.calculate_tension()))
-        #calc_m = GuitarString('26.5-30', 'DAPL', .015, 'G', 3, 8, 3)
-        #tension_m = float("{0:.2f}".format(calc_m.tension))
-        #self.assertEqual(tension_m, tension)
+        # #len 27.5"
+        # #G, .015" DAPL == 15.0#
+        # calc = GuitarString(27.5, 'DAPL', .015, 'G', 3)
+        # tension = float("{0:.2f}".format(calc.calculate_tension()))
+        # calc_m = GuitarString('26.5-30', 'DAPL', .015, 'G', 3, 8, 3)
+        # tension_m = float("{0:.2f}".format(calc_m.tension))
+        # self.assertEqual(tension_m, tension)
         #
-        ##len 28"
-        ##D, .022" DANW == 16.08#
-        #calc = GuitarString(28, 'DANW', .022, 'D', 3)
-        #tension = float("{0:.2f}".format(calc.calculate_tension()))
-        #calc_m = GuitarString('26.5-30', 'DANW', .022, 'D', 3, 8, 4)
-        #tension_m = float("{0:.2f}".format(calc_m.tension))
-        #self.assertEqual(tension_m, tension)
+        # #len 28"
+        # #D, .022" DANW == 16.08#
+        # calc = GuitarString(28, 'DANW', .022, 'D', 3)
+        # tension = float("{0:.2f}".format(calc.calculate_tension()))
+        # calc_m = GuitarString('26.5-30', 'DANW', .022, 'D', 3, 8, 4)
+        # tension_m = float("{0:.2f}".format(calc_m.tension))
+        # self.assertEqual(tension_m, tension)
         #
-        ##len 28.5"
-        ##A,, .030" DANW == 17.55#
-        #calc = GuitarString(28.5, 'DANW', .030, 'A', 2)
-        #tension = float("{0:.2f}".format(calc.calculate_tension()))
-        #calc_m = GuitarString('26.5-30', 'DANW', .030, 'A', 2, 8, 5)
-        #tension_m = float("{0:.2f}".format(calc_m.tension))
-        #self.assertEqual(tension_m, tension)
+        # #len 28.5"
+        # #A,, .030" DANW == 17.55#
+        # calc = GuitarString(28.5, 'DANW', .030, 'A', 2)
+        # tension = float("{0:.2f}".format(calc.calculate_tension()))
+        # calc_m = GuitarString('26.5-30', 'DANW', .030, 'A', 2, 8, 5)
+        # tension_m = float("{0:.2f}".format(calc_m.tension))
+        # self.assertEqual(tension_m, tension)
         #
-        ##len 29"
-        ##E,, .040 DANW == 17.39#
-        #calc = GuitarString(29, 'DANW', .040, 'E', 2)
-        #tension = float("{0:.2f}".format(calc.calculate_tension()))
-        #calc_m = GuitarString('26.5-30', 'DANW', .040, 'E', 2, 8, 6)
-        #tension_m = float("{0:.2f}".format(calc_m.tension))
-        #self.assertEqual(tension_m, tension)
+        # #len 29"
+        # #E,, .040 DANW == 17.39#
+        # calc = GuitarString(29, 'DANW', .040, 'E', 2)
+        # tension = float("{0:.2f}".format(calc.calculate_tension()))
+        # calc_m = GuitarString('26.5-30', 'DANW', .040, 'E', 2, 8, 6)
+        # tension_m = float("{0:.2f}".format(calc_m.tension))
+        # self.assertEqual(tension_m, tension)
         #
-        ##len 29.5"
-        ##B,,, .054 DANW == 18.16#
-        #calc = GuitarString(29.5, 'DANW', .054, 'B', 1)
-        #tension = float("{0:.2f}".format(calc.calculate_tension()))
-        #calc_m = GuitarString('26.5-30', 'DANW', .054, 'B', 1, 8, 7)
-        #tension_m = float("{0:.2f}".format(calc_m.tension))
-        #self.assertEqual(tension_m, tension)
+        # #len 29.5"
+        # #B,,, .054 DANW == 18.16#
+        # calc = GuitarString(29.5, 'DANW', .054, 'B', 1)
+        # tension = float("{0:.2f}".format(calc.calculate_tension()))
+        # calc_m = GuitarString('26.5-30', 'DANW', .054, 'B', 1, 8, 7)
+        # tension_m = float("{0:.2f}".format(calc_m.tension))
+        # self.assertEqual(tension_m, tension)
         #
-        ##len 30"
-        ##E,,, .074 DANW == 15.65#
-        #calc = GuitarString(30, 'DANW', .074, 'E', 1)
-        #tension = float("{0:.2f}".format(calc.calculate_tension()))
-        #calc_m = GuitarString('26.5-30', 'DANW', .074, 'E', 1, 8, 8)
-        #tension_m = float("{0:.2f}".format(calc_m.tension))
-        #self.assertEqual(tension_m, tension)
+        # #len 30"
+        # #E,,, .074 DANW == 15.65#
+        # calc = GuitarString(30, 'DANW', .074, 'E', 1)
+        # tension = float("{0:.2f}".format(calc.calculate_tension()))
+        # calc_m = GuitarString('26.5-30', 'DANW', .074, 'E', 1, 8, 8)
+        # tension_m = float("{0:.2f}".format(calc_m.tension))
+        # self.assertEqual(tension_m, tension)
 
     def test_calculate_tension(self):
         """
@@ -222,40 +219,44 @@ class MyTestCase(unittest.TestCase):
 
         """
 
-        #test converting lowercase notes to uppercase
+        # test converting lowercase notes to uppercase
         calc1 = GuitarString(26.5, 'DAPL', .009, 'A#/Bb', 4)
         calc2 = GuitarString(26.5, 'DAPL', .009, 'a#/bb', 4)
         self.assertEqual(calc2.tension, calc1.tension)
 
-        #E .009" DAPL == 14.18#
+        calc = GuitarString(26.5, 'CKPLG', .009, 'E', 4)
+        tension = float("{0:.2f}".format(calc.calculate_tension()))
+        self.assertEqual(14.24, tension)
+
+        # E .009" DAPL == 14.18#
         calc = GuitarString(26.5, 'DAPL', .009, 'E', 4)
         tension = float("{0:.2f}".format(calc.calculate_tension()))
         self.assertEqual(14.17, tension)
-        #B, .012" DAPL == 14.15#
+        # B, .012" DAPL == 14.15#
         calc = GuitarString(26.5, 'DAPL', .012, 'B', 3)
         tension = float("{0:.2f}".format(calc.calculate_tension()))
         self.assertEqual(14.14, tension)
-        #G, .015" DAPL == 13.93#
+        # G, .015" DAPL == 13.93#
         calc = GuitarString(26.5, 'DAPL', .015, 'G', 3)
         tension = float("{0:.2f}".format(calc.calculate_tension()))
         self.assertEqual(13.92, tension)
-        #D, .022" DANW == 14.41#
+        # D, .022" DANW == 14.41#
         calc = GuitarString(26.5, 'DANW', .022, 'D', 3)
         tension = float("{0:.2f}".format(calc.calculate_tension()))
         self.assertEqual(14.39, tension)
-        #A,, .030" DANW == 15.17#
+        # A,, .030" DANW == 15.17#
         calc = GuitarString(26.5, 'DANW', .030, 'A', 2)
         tension = float("{0:.2f}".format(calc.calculate_tension()))
         self.assertEqual(15.16, tension)
-        #E,, .040 DANW == 14.52#
+        # E,, .040 DANW == 14.52#
         calc = GuitarString(26.5, 'DANW', .040, 'E', 2)
         tension = float("{0:.2f}".format(calc.calculate_tension()))
         self.assertEqual(14.50, tension)
-        #B,,, .054 DANW == 14.66#
+        # B,,, .054 DANW == 14.66#
         calc = GuitarString(26.5, 'DANW', .054, 'B', 1)
         tension = float("{0:.2f}".format(calc.calculate_tension()))
         self.assertEqual(14.64, tension)
-        #E,,, .074 DANW == 12.21#
+        # E,,, .074 DANW == 12.21#
         calc = GuitarString(26.5, 'DANW', .074, 'E', 1)
         tension = float("{0:.2f}".format(calc.calculate_tension()))
         self.assertEqual(12.2, tension)
@@ -310,11 +311,11 @@ class MyTestCase(unittest.TestCase):
         calc = GuitarString(26.5, 'DANW', .074, 'G', 1)
         self.assertEqual(.00098869, calc.unit_weight)
 
-        #G,,  .027" DAPL == 10.38#
+        # G,,  .027" DAPL == 10.38#
         calc = GuitarString(25.5, 'DAPL', .027, 'G', 2)
         tension = float("{0:.2f}".format(calc.calculate_tension()))
         self.assertEqual(10.37, tension)
-        #G,,  .060" DAPL == 33.08#
+        # G,,  .060" DAPL == 33.08#
         calc = GuitarString(25.5, 'DAPL', .060, 'G', 2)
         tension = float("{0:.2f}".format(calc.calculate_tension()))
         self.assertEqual(33.05, tension)
@@ -325,12 +326,10 @@ class MyTestCase(unittest.TestCase):
         calc = GuitarString(1, 'DAPL', .007, 'C#/Db', 0)
         self.assertEqual(.00001085, calc.unit_weight)
 
-        #B,  .0165" DAPL == 24.8#
+        # B,  .0165" DAPL == 24.8#
         calc = GuitarString(25.5, 'DAPL', .0165, 'B', 3)
         tension = float("{0:.2f}".format(calc.calculate_tension()))
         self.assertEqual(24.78, tension)
-
-
 
 
     def test_convert_to_halfsteps(self):
@@ -348,6 +347,7 @@ class MyTestCase(unittest.TestCase):
         calc = GuitarString(1, 'DAPL', .008, 'C#/Db', 0)
         wt = calc.convert_to_unit_weight('DAPL', .007)
         self.assertEqual(.00001085, wt)
+
 
 if __name__ == '__main__':
     unittest.main()
