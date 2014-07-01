@@ -2,23 +2,22 @@
 /* line 1, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
 body {
   text-align: center;
-  background: url("../images/body-bg.jpg");
 }
 
-/* line 6, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 5, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
 .jumbotron {
   max-width: 700px;
   margin: 120px auto;
   background: rgba(255, 255, 255, 0.85);
 }
 
-/* line 12, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 11, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
 footer {
   padding: 25px;
   background: rgba(255, 255, 255, 0.85);
 }
 
-/* line 17, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 16, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
 #page {
   width: 960px;
   text-align: left;
@@ -26,7 +25,7 @@ footer {
   background-color: #0C0C0C;
 }
 
-/* line 24, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 23, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
 #sidebar {
   float: right;
   width: 200px;
@@ -34,7 +33,7 @@ footer {
   background-color: Green;
 }
 
-/* line 31, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 30, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
 #content {
   float: right;
   width: 600px;
@@ -43,12 +42,12 @@ footer {
   background-color: #00ffe2;
 }
 
-/* line 39, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 38, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
 tr.table_row {
   display: none;
 }
 
-/* line 43, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 42, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
 .btn-divider {
   text-align: center;
   padding: 1px 4px 4px 1px;
@@ -57,7 +56,7 @@ tr.table_row {
   border-right: 1px solid #ffffff;
 }
 
-/* line 51, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 50, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
 .my-grid {
   padding-top: 5px;
   padding-bottom: 5px;
@@ -67,7 +66,7 @@ tr.table_row {
   border: 1px solid rgba(124, 123, 107, 0.2);
 }
 
-/* line 60, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 59, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
 .bs-social-buttons {
   display: inline-block;
   margin-bottom: 0;
@@ -75,7 +74,7 @@ tr.table_row {
   list-style: none;
 }
 
-/* line 67, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 66, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
 .bs-footer {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -85,7 +84,7 @@ tr.table_row {
   border-top: 1px solid #e5e5e5;
 }
 
-/* line 76, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 75, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
 .bs-social {
   margin-bottom: 20px;
   text-align: center;
@@ -100,14 +99,14 @@ tr.table_row {
   font-weight: normal;
   font-style: normal;
   font-family: 'codropsicons';
-  src: url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/codropsicons/codropsicons.eot);
-  src: url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/codropsicons/codropsicons.eot?#iefix) format("embedded-opentype"), url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/codropsicons/codropsicons.woff) format("woff"), url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/codropsicons/codropsicons.ttf) format("truetype"), url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/codropsicons/codropsicons.svg#codropsicons) format("svg");
+  src: url(/static/styles/fonts/codropsicons/codropsicons.eot);
+  src: url(/static/styles/fonts/codropsicons/codropsicons.eot?#iefix) format("embedded-opentype"), url(/static/styles/fonts/codropsicons/codropsicons.woff) format("woff"), url(/static/styles/fonts/codropsicons/codropsicons.ttf) format("truetype"), url(/static/styles/fonts/codropsicons/codropsicons.svg#codropsicons) format("svg");
 }
 
 @font-face {
   font-family: 'Blokk';
-  src: url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/blokk/BLOKKRegular.eot);
-  src: url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/blokk/BLOKKRegular.eot?#iefix) format("embedded-opentype"), url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/blokk/BLOKKRegular.woff) format("woff"), url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/blokk/BLOKKRegular.svg#BLOKKRegular) format("svg");
+  src: url(/static/styles/fonts/blokk/BLOKKRegular.eot);
+  src: url(/static/styles/fonts/blokk/BLOKKRegular.eot?#iefix) format("embedded-opentype"), url(/static/styles/fonts/blokk/BLOKKRegular.woff) format("woff"), url(/static/styles/fonts/blokk/BLOKKRegular.svg#BLOKKRegular) format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -127,7 +126,7 @@ html, body {
 
 /* line 35, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
 body {
-  background: #111111 url(https://s3.amazonaws.com/stringulator-production/static/images/body-bg.jpg) no-repeat fixed center center;
+  background: #111111 url(/static/images/body-bg.jpg) no-repeat fixed center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
