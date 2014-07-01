@@ -1,5 +1,4 @@
 from calculator.guitarstring import material_dicts
-
 class InvalidScaleLengthError(ValueError): pass
 class InvalidNoteError(KeyError): pass
 class InvalidStringMaterialError(KeyError): pass
@@ -7,6 +6,20 @@ class InvalidOctaveError(ValueError): pass
 class InvalidGaugeError(ValueError): pass
 class OutOfRangeError(ValueError): pass
 class InvalidStringNumberError(ValueError): pass
+
+
+note_dict = {'C': 0,
+             'C#/Db': 1,
+             'D': 2,
+             'D#/Eb': 3,
+             'E': 4,
+             'F': 5,
+             'F#/Gb': 6,
+             'G': 7,
+             'G#/Ab': 8,
+             'A': 9,
+             'A#/Bb': 10,
+             'B': 11}
 
 
 class GuitarString():
@@ -26,18 +39,7 @@ class GuitarString():
     note = 'Unknown'
     gauge = 0
     tension_constant = 386.4
-    note_dict = {'C':       0,
-                 'C#/Db':   1,
-                 'D':       2,
-                 'D#/Eb':   3,
-                 'E':       4,
-                 'F':       5,
-                 'F#/Gb':   6,
-                 'G':       7,
-                 'G#/Ab':   8,
-                 'A':       9,
-                 'A#/Bb':   10,
-                 'B':       11}
+
 
     def __init__(self, scale_length, string_material, gauge, note, octave, number_of_strings=None, string_number=None):
         """
@@ -74,7 +76,8 @@ class GuitarString():
             if self.string_number > self.number_of_strings:
                 raise OutOfRangeError(' string_number must be less than number_of_strings')
 
-            self.scale_length = self.convert_multiscale_to_scale_length(scale_length, self.number_of_strings, self.string_number)
+            self.scale_length = self.convert_multiscale_to_scale_length(scale_length, self.number_of_strings,
+                                                                        self.string_number)
         else:
             self.scale_length = self.sanitize_scale_length(scale_length)
 
@@ -100,25 +103,25 @@ class GuitarString():
         high_scale_length, low_scale_length = self.sanitize_multiscale(scale_length)
 
         if high_scale_length < low_scale_length:
-            #InvalidScaleLengthError('Multi-scale scale_lengths must follow a format similar to \'26.5-30\' and the lower value comes first')
+            # InvalidScaleLengthError('Multi-scale scale_lengths must follow a format similar to \'26.5-30\' and the lower value comes first')
             temp = high_scale_length
             high_scale_length = low_scale_length
             low_scale_length = temp
 
         fan_distance = high_scale_length - low_scale_length
         if number_of_strings > 1:
-            scale_constant = fan_distance/(number_of_strings-1)
+            scale_constant = fan_distance / (number_of_strings - 1)
         else:
             scale_constant = 0
 
-        return low_scale_length + (string_number-1) * scale_constant
+        return low_scale_length + (string_number - 1) * scale_constant
 
     def calculate_tension(self):
         """
         Method of tension calculation provided by D'Addario
         @return: the calculated tension using  (UnitWeight x (2 x ScaleLength x Frequency)^2)/TensionConstant
         """
-        tension = (self.unit_weight * (2*self.scale_length*self.freq)**2)/self.tension_constant
+        tension = (self.unit_weight * (2 * self.scale_length * self.freq) ** 2) / self.tension_constant
         return tension
 
     def convert_to_halfsteps(self, note, octave):
@@ -130,8 +133,8 @@ class GuitarString():
         """
         offset = 3
         base_octave = 5  # based off of C5
-        octave_offset = (octave - base_octave)*12
-        note_offset = self.note_dict[note]
+        octave_offset = (octave - base_octave) * 12
+        note_offset = note_dict[note]
         return offset + octave_offset + note_offset
 
     def convert_to_freq(self, note, octave):
@@ -145,8 +148,8 @@ class GuitarString():
         """
         half_steps = self.convert_to_halfsteps(note, octave)
         A4_freq = 440
-        return A4_freq*(2**(1/12))**half_steps
-    
+        return A4_freq * (2 ** (1 / 12)) ** half_steps
+
     @staticmethod
     def convert_to_unit_weight(string_material, gauge):
         """
@@ -163,7 +166,7 @@ class GuitarString():
         max_gauge_index = gauge_keys.index(max(gauge_keys))
 
         if gauge > max(gauge_keys):
-            low_gauge = gauge_keys[max_gauge_index-2]
+            low_gauge = gauge_keys[max_gauge_index - 2]
             high_gauge = max(gauge_keys)
         elif gauge < min(gauge_keys):
             low_gauge = gauge_keys[0]
@@ -174,14 +177,14 @@ class GuitarString():
                 if gauge < matched_gauge:
                     break
                 gauge_index += 1
-            low_gauge = gauge_keys[gauge_index-1]
+            low_gauge = gauge_keys[gauge_index - 1]
             high_gauge = gauge_keys[gauge_index]
 
         low_unit_weight = material_dict[low_gauge]
         high_unit_weight = material_dict[high_gauge]
 
         unit_weight = low_unit_weight + ((high_unit_weight - low_unit_weight) * (gauge - low_gauge)
-                                                                            / (high_gauge - low_gauge))
+                                         / (high_gauge - low_gauge))
         return unit_weight
 
     @staticmethod
@@ -212,8 +215,8 @@ class GuitarString():
 
     # @staticmethod
     # def is_valid_string_number_and_number_of_strings(string_number, number_of_strings):
-    #     if string_number > number_of_strings:
-    #         raise OutOfRangeError(' string_number must be less than number_of_strings')
+    # if string_number > number_of_strings:
+    # raise OutOfRangeError(' string_number must be less than number_of_strings')
 
     @staticmethod
     def is_valid_string_material(string_material):
@@ -225,25 +228,15 @@ class GuitarString():
         if material_dicts.get_material_dict(string_material) == 'Invalid':
             raise InvalidStringMaterialError('string_material does not match predefined string materials')
         return True
+
     @staticmethod
-    def sanitize_note( note):
+    def sanitize_note(note):
         """
         checks validity of note
         @param note:
         @return: @raise InvalidNoteError:
         """
-        note_dict = {'C':       0,
-                     'C#/Db':   1,
-                     'D':       2,
-                     'D#/Eb':   3,
-                     'E':       4,
-                     'F':       5,
-                     'F#/Gb':   6,
-                     'G':       7,
-                     'G#/Ab':   8,
-                     'A':       9,
-                     'A#/Bb':   10,
-                     'B':       11}
+
         try:
             if len(note) == 5:
                 note = note[0].upper() + '#/' + note[3].upper() + 'b'
@@ -253,7 +246,7 @@ class GuitarString():
         except (KeyError, TypeError):
             raise InvalidNoteError('note does not match specified format')
         return note
-    
+
     @staticmethod
     def sanitize_octave(octave):
         """
@@ -269,7 +262,7 @@ class GuitarString():
             raise OutOfRangeError('octave must be fall between 0 and 9 (inclusive)')
 
         return octave
-    
+
     @staticmethod
     def sanitize_gauge(gauge):
         """
@@ -285,7 +278,7 @@ class GuitarString():
         if gauge <= 0:
             raise OutOfRangeError('gauge must be a positive number')
         return gauge
-    
+
     @staticmethod
     def sanitize_scale_length(scale_length):
         """
@@ -303,8 +296,8 @@ class GuitarString():
         return scale_length
 
     @staticmethod
-    def sanitize_multiscale( scale_length):
-        low_scale_length, high_scale_length= scale_length.split('-')
+    def sanitize_multiscale(scale_length):
+        low_scale_length, high_scale_length = scale_length.split('-')
         try:
             low_scale_length = float(low_scale_length)
             high_scale_length = float(high_scale_length)
