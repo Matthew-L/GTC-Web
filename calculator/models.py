@@ -48,30 +48,3 @@ class String(models.Model):
 
     class Meta:
         ordering = ['string_number']
-
-#
-# class StringForm(ModelForm):
-#     def __init__(self, user, *args, **kwargs):
-#         super(StringForm, self).__init__(*args, **kwargs)
-#         if user is None:
-#             self.fields['string_set'] = forms.CharField()
-#         else:
-#             string_set_list = []
-#             for set in StringSet.objects.all():
-#                 if str(set.user) == str(user):
-#                     string_set_list.append(str(set.name))
-#             set_tuple = zip(string_set_list, string_set_list)
-#             set_tuple = tuple(set_tuple)
-#             self.fields['string_set'] = forms.ChoiceField(set_tuple)
-#
-#     class Meta:
-#         model = String
-#
-# class StringSetForm(ModelForm):
-#     def __init__(self, *args, **kwargs):
-#         super(StringSetForm, self).__init__(*args, **kwargs)
-#         self.fields['user'].widget.attrs['hidden'] = True
-#
-#     class Meta:
-#         model = StringSet
-#         fields = ['name', 'user', 'desc', 'is_mscale', 'number_of_strings']
