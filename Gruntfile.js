@@ -7,10 +7,6 @@
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
-var isDirty = false;
-function toggleDebug() {
-
-}
 module.exports = function (grunt) {
 
   // Load grunt tasks automatically
@@ -273,9 +269,9 @@ module.exports = function (grunt) {
         'replace:djangoFalse',
         'replace:sassFalse'
       ],
-      debugToggle: [
-        'replace:djangoToggle',
-        'replace:sassToggle'
+      debugTrue: [
+        'replace:djangoTrue',
+        'replace:sassTrue'
       ]
     },
     aws: grunt.file.readJSON('aws-keys.json'),
@@ -293,24 +289,13 @@ module.exports = function (grunt) {
       }
     },
     replace: {
-      djangoToggle: {
+      djangoTrue: {
         options: {
           patterns: [
             {
               match: 'DEBUG = False',
               replacement: function () {
-                isDirty = true;
                 return 'DEBUG = True';
-              }
-            },
-            {
-              match: 'DEBUG = True',
-              replacement: function () {
-                if (isDirty) {
-                  return 'DEBUG = True';
-                }
-                isDirty = false;
-                return 'DEBUG = False';
               }
             }
           ],
@@ -323,23 +308,13 @@ module.exports = function (grunt) {
           }
         ]
       },
-      sassToggle: {
+      sassTrue: {
         options: {
           patterns: [
             {
               match: 'debug: false',
               replacement: function () {
-                isDirty = true;
                 return 'debug: true';
-              }
-            },
-            {
-              match: 'debug: true',
-              replacement: function () {
-                if (isDirty) {
-                  return 'debug: true';
-                }
-                return 'debug: false';
               }
             }
           ],
@@ -358,10 +333,6 @@ module.exports = function (grunt) {
             {
               match: 'DEBUG = True',
               replacement: function () {
-                if (isDirty) {
-                  return 'DEBUG = True';
-                }
-                isDirty = false;
                 return 'DEBUG = False';
               }
             }
@@ -381,9 +352,6 @@ module.exports = function (grunt) {
             {
               match: 'debug: true',
               replacement: function () {
-                if (isDirty) {
-                  return 'debug: true';
-                }
                 return 'debug: false';
               }
             }
@@ -401,12 +369,12 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('debug-toggle', [
-    'concurrent:debugFalse'
+  grunt.registerTask('debug-true', [
+    'concurrent:debugTrue'
   ]);
 
   grunt.registerTask('debug-false', [
-    'concurrent:debugToggle'
+    'concurrent:debugFalse'
   ]);
 
   grunt.registerTask('build', [
@@ -418,7 +386,7 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'copy',
-    'debug-toggle'
+    'debug-true'
   ]);
 
   grunt.registerTask('deploy-static', [
