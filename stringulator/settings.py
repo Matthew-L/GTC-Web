@@ -59,7 +59,7 @@ MEDIA_ROOT = '/'
 # Examples: "http://example.com/media/", "http://media.example.com/"
 # if DEBUG:
 # PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
-#     MEDIA_URL = os.path.join(PROJECT_PATH, '../static/')
+# MEDIA_URL = os.path.join(PROJECT_PATH, '../static/')
 # else:
 # MEDIA_URL = 'https://rawgithub.com/Matthew-L/GTC-Web/master/static/'
 # MEDIA_URL = 'http://mattlodes.com/static/'
@@ -69,7 +69,7 @@ MEDIA_URL = '/'
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 # Static asset configuration
-#import os
+# import os
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 if DEBUG:
@@ -88,7 +88,7 @@ STATICFILES_DIRS = (
 # PROJECT_PATH = 'http://mattlodes.com/static/'
 # STATIC_URL = '/static/'
 # STATICFILES_DIRS = (
-#     ('http://mattlodes.com/static/'),
+# ('http://mattlodes.com/static/'),
 # )
 #
 
@@ -97,7 +97,7 @@ STATICFILES_DIRS = (
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-#STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
 # Additional locations of static files
 #STATICFILES_DIRS = (
