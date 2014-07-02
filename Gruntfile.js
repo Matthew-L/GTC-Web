@@ -84,12 +84,25 @@ module.exports = function (grunt) {
           }
         ]
       },
-      cleanup: {
+      temporary: {
         files: [
           {
             dot: true,
             src: [
               '.tmp'
+            ]
+          }
+        ]
+      },
+      all: {
+        files: [
+          {
+            dot: true,
+            src: [
+              '.tmp',
+              '.sass-cache',
+              '<%= stringulator.root %>/.sass-cache',
+              'dist'
             ]
           }
         ]
@@ -131,24 +144,7 @@ module.exports = function (grunt) {
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
       options: {
-        sassDir: '<%= stringulator.static %>/styles',
-        cssDir: '<%= stringulator.static %>/styles/css',
-        generatedImagesDir: '<%= stringulator.static %>/images/generated',
-        imagesDir: '<%= stringulator.static %>/images',
-        javascriptsDir: '<%= stringulator.static %>/scripts',
-        fontsDir: '<%= stringulator.static %>/styles/fonts',
-        importPath: 'bower_components',
-        httpImagesPath: '/images',
-        httpGeneratedImagesPath: '/images/generated',
-        httpFontsPath: '/styles/fonts',
-        relativeAssets: false,
-        assetCacheBuster: false,
-        raw: 'Sass::Script::Number.precision = 10\n'
-      },
-      dist: {
-        options: {
-          generatedImagesDir: '<%= stringulator.dist %>/images/generated'
-        }
+        config: 'stringulator/config.rb'
       }
     },
 
@@ -272,7 +268,7 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       dist: [
-        'compass:dist',
+        'compass',
         'imagemin',
         'svgmin'
       ],
@@ -390,6 +386,10 @@ module.exports = function (grunt) {
     'concurrent:debugFalse'
   ]);
 
+  grunt.registerTask('clean-all', [
+    'clean:all'
+  ]);
+
   grunt.registerTask('build', [
     'clean:dist',
     'debug-false',
@@ -399,13 +399,14 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'copy',
+    'clean:temporary',
     'debug-true'
   ]);
 
   grunt.registerTask('deploy-static', [
     'build',
     's3',
-    'clean:cleanup'
+    'clean:temporary'
   ]);
 
   grunt.registerTask('default', [
