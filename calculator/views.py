@@ -1,15 +1,13 @@
-import json
-
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core import serializers
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
-
-from calculator.guitarstring.guitar_string import GuitarString
-from calculator.models import StringSet, String
+import json
 from stringulator import settings
+from .guitarstring.guitar_string import GuitarString
+from .models import StringSet, String
 
 
 def load_calculate_page(request):

@@ -1,4 +1,5 @@
-from calculator.guitarstring import material_dicts
+from .material_dicts import get_material_dict
+
 class InvalidScaleLengthError(ValueError): pass
 class InvalidNoteError(KeyError): pass
 class InvalidStringMaterialError(KeyError): pass
@@ -161,7 +162,7 @@ class GuitarString():
         @param gauge: the desired gauge, used to find the unit weight in the material_dict
         @return: the closest matched unit_weight to the gauge of the given material
         """
-        material_dict = material_dicts.get_material_dict(string_material)
+        material_dict = get_material_dict(string_material)
         gauge_keys = sorted(material_dict.keys())
         max_gauge_index = gauge_keys.index(max(gauge_keys))
 
@@ -225,7 +226,7 @@ class GuitarString():
         @param string_material:
         @return: @raise InvalidStringMaterialError:
         """
-        if material_dicts.get_material_dict(string_material) == 'Invalid':
+        if get_material_dict(string_material) == 'Invalid':
             raise InvalidStringMaterialError('string_material does not match predefined string materials')
         return True
 

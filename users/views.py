@@ -1,4 +1,3 @@
-import csv
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
@@ -6,9 +5,11 @@ from django.contrib import auth
 from django.core.context_processors import csrf
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
+import csv
+
+from stringulator import settings
 from calculator.models import StringSet, String
 from calculator import guitarstring
-from stringulator import settings
 
 
 def initialize_context():
