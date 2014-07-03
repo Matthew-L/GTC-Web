@@ -1,7 +1,4 @@
-__author__ = 'Micah'
-
 from django.contrib import admin
-
 from calculator.models import StringSet, String
 
 
