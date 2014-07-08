@@ -173,6 +173,7 @@ module.exports = function (grunt) {
       },
       body: {
         src: ['<%= stringulator.static %>/scripts/**/*.js',
+          '<%= stringulator.static %>/testing/**/*.js',
           '!<%= stringulator.static %>/scripts/head/*.js'],
         dest: '.tmp/scripts/stringulator.js'
       },
@@ -246,6 +247,7 @@ module.exports = function (grunt) {
             dest: '<%= stringulator.dist %>',
             src: [
               'admin/**/*',
+//              'testing/**',
               'styles/fonts/**/*'
             ]
           },
@@ -399,7 +401,7 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'copy',
-    'clean:temporary',
+//    'clean:temporary',
     'debug-true'
   ]);
 

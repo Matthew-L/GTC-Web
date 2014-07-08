@@ -10,17 +10,16 @@
 
   <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
   {% if debug %}
-    {% load compress %}
 
-    <link href="{{ STATIC_URL }}styles/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+{#    <link href="{{ STATIC_URL }}styles/css/bootstrap.min.css" rel="stylesheet" type="text/css">#}
     <link href="{{ STATIC_URL }}styles/css/normalize.css" rel="stylesheet" type="text/css">
     <link href="{{ STATIC_URL }}styles/css/component.css" rel="stylesheet" type="text/css">
     <link href="{{ STATIC_URL }}styles/css/content.css" rel="stylesheet" type="text/css">
     <link href="{{ STATIC_URL }}styles/css/buttons.css" rel="stylesheet" type="text/css">
     <link href="{{ STATIC_URL }}styles/css/animate.css" rel="stylesheet" type="text/css">
-    {% compress css %}
-      <link href="{{ STATIC_URL }}styles/css/default.css" rel="stylesheet" type="text/css">
-    {% endcompress %}
+
+    <link href="{{ STATIC_URL }}styles/css/default.css" rel="stylesheet" type="text/css">
     <script src="{{ STATIC_URL }}scripts/head/modernizr.custom.js"></script>
   {% else %}
     <link href="{{ STATIC_URL }}styles/stringulator.min.css" rel="stylesheet" type="text/css">
