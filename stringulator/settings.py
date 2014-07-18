@@ -85,20 +85,6 @@ STATICFILES_DIRS = (
     os.path.abspath('dist'),
 )
 
-# PROJECT_PATH = 'http://mattlodes.com/static/'
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = (
-# ('http://mattlodes.com/static/'),
-# )
-#
-
-
-
-
-# URL prefix for static files.
-# Example: "http://example.com/static/", "http://static.example.com/"
-# STATIC_URL = '/static/'
-
 # Additional locations of static files
 #STATICFILES_DIRS = (
 #[os.path.join(ROOT_PATH, 'static')]
