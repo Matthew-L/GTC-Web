@@ -2,7 +2,7 @@ import os
 
 ROOT_PATH = os.path.dirname(__file__)
 
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -82,7 +82,7 @@ COMPRESS_ROOT = os.path.abspath('static')
 
 STATICFILES_DIRS = (
     os.path.abspath('stringulator\\static'),
-    os.path.abspath('dist'),
+    # os.path.abspath('dist'),
 )
 
 # Additional locations of static files
