@@ -102,6 +102,7 @@ def profile(request):
 
 
 def search(request):
+    print('search')
     context = {}
     if request.user.is_authenticated():
         context['is_logged_in'] = True
@@ -109,15 +110,15 @@ def search(request):
     else:
         context['is_logged_in'] = False
     errors = []
-    if 'q' in request.GET:
-        q = request.GET['q']
-        if not q:
+    if 'search' in request.GET:
+        query = request.GET['search']
+        if not query:
             errors.append('Enter a search term.')
-        elif len(q) > 50:
+        elif len(query) > 50:
             errors.append('Please enter at most 50 characters.')
         else:
-            context['search_name_results'] = StringSet.objects.filter(name__icontains=q)
-            context['search_desc_results'] = StringSet.objects.filter(desc__icontains=q)
+            context['search_name_results'] = StringSet.objects.filter(name__icontains=query)
+            context['search_desc_results'] = StringSet.objects.filter(desc__icontains=query)
         context['errors'] = errors
     print(request)
     return render_to_response('search_results.html', context, context_instance=RequestContext(request))
