@@ -132,7 +132,7 @@ WSGI_APPLICATION = 'stringulator.wsgi.application'
 
 
 
-BASE_DIR = os.path.abspath('stringulator\\templates')
+BASE_DIR = os.path.abspath('stringulator/templates')
 
 TEMPLATE_DIRS = (
     BASE_DIR,
