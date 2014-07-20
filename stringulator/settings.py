@@ -2,7 +2,7 @@ import os
 
 ROOT_PATH = os.path.dirname(__file__)
 
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -136,9 +136,9 @@ BASE_DIR = os.path.abspath('stringulator\\templates')
 
 TEMPLATE_DIRS = (
     BASE_DIR,
-    BASE_DIR + '\\users',
-    BASE_DIR + '\\calculator',
-    BASE_DIR + '\\search',
+    BASE_DIR + '/users',
+    BASE_DIR + '/calculator',
+    BASE_DIR + '/search',
 )
 
 INSTALLED_APPS = (
