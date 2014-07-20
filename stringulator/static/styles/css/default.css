@@ -99,14 +99,14 @@ tr.table_row {
   font-weight: normal;
   font-style: normal;
   font-family: 'codropsicons';
-  src: url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/codropsicons/codropsicons.eot);
-  src: url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/codropsicons/codropsicons.eot?#iefix) format("embedded-opentype"), url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/codropsicons/codropsicons.woff) format("woff"), url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/codropsicons/codropsicons.ttf) format("truetype"), url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/codropsicons/codropsicons.svg#codropsicons) format("svg");
+  src: url(/static/styles/fonts/codropsicons/codropsicons.eot);
+  src: url(/static/styles/fonts/codropsicons/codropsicons.eot?#iefix) format("embedded-opentype"), url(/static/styles/fonts/codropsicons/codropsicons.woff) format("woff"), url(/static/styles/fonts/codropsicons/codropsicons.ttf) format("truetype"), url(/static/styles/fonts/codropsicons/codropsicons.svg#codropsicons) format("svg");
 }
 
 @font-face {
   font-family: 'Blokk';
-  src: url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/blokk/BLOKKRegular.eot);
-  src: url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/blokk/BLOKKRegular.eot?#iefix) format("embedded-opentype"), url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/blokk/BLOKKRegular.woff) format("woff"), url(https://s3.amazonaws.com/stringulator-production/static/styles/fonts/blokk/BLOKKRegular.svg#BLOKKRegular) format("svg");
+  src: url(/static/styles/fonts/blokk/BLOKKRegular.eot);
+  src: url(/static/styles/fonts/blokk/BLOKKRegular.eot?#iefix) format("embedded-opentype"), url(/static/styles/fonts/blokk/BLOKKRegular.woff) format("woff"), url(/static/styles/fonts/blokk/BLOKKRegular.svg#BLOKKRegular) format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -126,7 +126,7 @@ html, body {
 
 /* line 35, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
 body {
-  background: #111111 url(https://s3.amazonaws.com/stringulator-production/static/images/body-bg.jpg) no-repeat fixed center center;
+  background: #111111 url(/static/images/body-bg.jpg) no-repeat fixed center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -160,7 +160,7 @@ body {
 }
 
 /* line 67, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
-.content {
+.homepage {
   background: rgba(255, 255, 255, 0.9);
   max-width: 500px;
   padding: 40px;
@@ -169,12 +169,30 @@ body {
 }
 
 /* line 75, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
-.content h1 {
+.calculate {
+  background: rgba(255, 255, 255, 0.9);
+  max-width: 800px;
+  padding: 40px;
+  margin: 80px auto;
+  margin-bottom: 0;
+}
+
+/* line 83, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+.profile {
+  background: rgba(255, 255, 255, 0.9);
+  max-width: 800px;
+  padding: 40px;
+  margin: 80px auto;
+  margin-bottom: 0;
+}
+
+/* line 91, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+.homepage h1 {
   margin-top: 0;
   font-weight: 100;
 }
 
-/* line 80, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 96, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
 .footer {
   max-width: 500px;
   margin: 0 auto;
@@ -183,36 +201,36 @@ body {
   font-size: 13px;
 }
 
-/* line 88, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 104, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
 .license {
   float: left;
 }
 
-/* line 92, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 108, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
 .contributors {
   float: right;
 }
 
 @media all and (min-width: 650px) {
-  /* line 98, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 114, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .morph-button {
     display: inline-block !important;
   }
 }
 @media all and (max-width: 650px) {
-  /* line 114, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 130, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   body {
     background: #eee;
   }
 
-  /* line 118, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 134, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .container-640px {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  /* line 123, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
-  .content {
+  /* line 139, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  .homepage {
     background: #eee;
     max-width: initial;
     margin: 0 auto;
@@ -220,7 +238,7 @@ body {
     padding: 20px;
   }
 
-  /* line 131, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 147, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .footer {
     max-width: initial;
     margin: 0 auto;
@@ -231,72 +249,72 @@ body {
     width: 100%;
   }
 
-  /* line 141, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 157, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .morph-button {
     margin: 10px 5px !important;
   }
 
-  /* line 145, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 161, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .morph-button-fixed {
     width: 70px;
     font-size: 70%;
   }
 
-  /* line 150, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 166, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .sb-search {
     margin-right: 0;
   }
 }
 @media all and (max-width: 480px) {
-  /* line 158, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 174, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   body {
     background: #eee;
   }
 
-  /* line 162, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 178, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .logo {
     width: 100px;
     margin-top: 15px;
   }
 
-  /* line 167, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 183, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .sb-search {
     margin-right: 0px;
     margin-left: 5px;
   }
 
-  /* line 172, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 188, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .morph-button {
     margin: 10px 5px !important;
   }
 
-  /* line 176, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 192, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .morph-button-fixed {
     width: 70px;
     font-size: 70%;
   }
 
-  /* line 181, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 197, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .content-style-form .icon-close {
     top: 15px;
     right: 15px;
     font-size: 80%;
   }
 
-  /* line 187, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
-  .content {
+  /* line 203, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  .hompeage {
     background: none;
     max-width: initial;
     margin: 0 auto;
     width: 100%;
   }
 
-  /* line 194, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 210, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .padding-bottom-10 {
     padding-bottom: 0;
   }
 
-  /* line 198, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 214, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .footer {
     max-width: initial;
     margin: 0 auto;
@@ -307,7 +325,7 @@ body {
     width: 100%;
   }
 
-  /* line 208, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 224, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .footer span {
     display: block;
     width: 100%;

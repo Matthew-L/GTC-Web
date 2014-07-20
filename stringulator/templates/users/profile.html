@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="profile">
+    <h1>{{ username }}'s Profile</h1>
+    <h2>String Sets {{ username }} Made</h2>
+
+    <div>
+      {% for string_set in string_sets %}
+        <div class="row" id="row-{{ forloop.counter0 }}">
+          <a href="/calculate?string_set_name={{ string_set.name }}&users_set={{ user }}">
+            <div class="col-md-4 col-md-offset-3 my-grid text-left" id={{ string_set.name }}>
+              {{ string_set.name }}
+            </div>
+          </a>
+
+          <a href="/download-set?string_set_name={{ string_set.name }}&user={{ username }}">
+            <div class="col-md-1 my-grid">
+              <span class="glyphicon glyphicon-floppy-save"></span>
+            </div>
+          </a>
+
+          <a>
+            <div class="col-md-1 my-grid delete-set-btn" id="del-{{ string_set }}" num={{ forloop.counter0 }}>
+              <span class="glyphicon glyphicon-trash"></span>
+            </div>
+          </a>
+
+        </div>
+      {% empty %}
+        <p><a href="/calculate/">You have not made any string sets.</a></p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

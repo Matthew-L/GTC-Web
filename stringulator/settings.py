@@ -2,7 +2,7 @@ import os
 
 ROOT_PATH = os.path.dirname(__file__)
 
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -86,7 +86,7 @@ STATICFILES_DIRS = (
 )
 
 # Additional locations of static files
-#STATICFILES_DIRS = (
+# STATICFILES_DIRS = (
 #[os.path.join(ROOT_PATH, 'static')]
 #    ('assets', 'static'),
 # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -130,10 +130,15 @@ WSGI_APPLICATION = 'stringulator.wsgi.application'
 # TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '../../../../../..////', 'templates').replace('\\','/'),
 #                  os.path.join(os.path.dirname(__file__), '../../../../../..////', 'article/templates').replace('\\', '/'),)
 
+
+
 BASE_DIR = os.path.abspath('stringulator\\templates')
 
 TEMPLATE_DIRS = (
     BASE_DIR,
+    BASE_DIR + '\\users',
+    BASE_DIR + '\\calculator',
+    BASE_DIR + '\\search',
 )
 
 INSTALLED_APPS = (

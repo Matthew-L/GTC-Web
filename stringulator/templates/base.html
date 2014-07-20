@@ -3,29 +3,25 @@
 <html class="no-js">
 <head>
   {% block title %}
-    {% include "includes/header.html" %}
+    {% include "homepage/header.html" %}
   {% endblock %}
 </head>
 
 <body class="home">
 <div class="wrapper">
   <div class="header">
-
     <div class="container-640px">
       <a href="/"><img class="logo" src="{{ STATIC_URL }}images/logo.svg"></a>
-
       <div id="sb-search" class="sb-search">
         <form action="/search/" role="search">
-          <input class="sb-search-input" placeholder="Find string sets!" type="text" value="" name="search"
+          <input class="sb-search-input" placeholder="Find string sets!" type="text" value="" name="query"
                  id="search">
           <input class="sb-search-submit" type="submit" value="">
           <span class="sb-icon-search"></span>
         </form>
       </div>
 
-
       <div class="morph-button morph-button-modal morph-button-modal-2 morph-button-fixed">
-
         {% if is_logged_in %}
           <button type="button">
             <a href=/profile/>
@@ -95,24 +91,24 @@
     </div>
   </div>
 
-  <div class="content">
     {% block content %}
-      <h1>Welcome!</h1>
+      <div class="homepage">
+        <h1>Welcome!</h1>
 
-      <p><b>Stringulator</b> allows you to create custom guitar string sets. After you build a set, you can save them to
-        your profile to compare to other sets you've tried. Don't want to make your own String Set? Use the search bar
-        to find custom sets other Stringulator users are rocking! If you have questions on how to use the site
-        check out the GitHub Readme or use the Contact Us page to send us a message.</p>
+        <p><b>Stringulator</b> allows you to create custom guitar string sets. After you build a set, you can save them to
+          your profile to compare to other sets you've tried. Don't want to make your own String Set? Use the search bar
+          to find custom sets other Stringulator users are rocking! If you have questions on how to use the site
+          check out the GitHub Readme or use the Contact Us page to send us a message.</p>
 
-      <p class="padding-bottom-10">
-        <a class="button-1" href="calculate/?string_set_name=8%20string%20set&users_set=micah">
-          Check out an example set!
-        </a>
-      </p>
+        <p class="padding-bottom-10">
+          <a class="button-1" href="calculate/?string_set_name=8%20string%20set&users_set=micah">
+            Check out an example set!
+          </a>
+        </p>
 
-      <p><a class="button-1" href="https://github.com/gajewsk2/Stringulator">Check out our GitHub!</a></p>
+        <p><a class="button-1" href="https://github.com/gajewsk2/Stringulator">Check out our GitHub!</a></p>
+      </div>
     {% endblock %}
-  </div>
 
   <div class="footer"><span class="license">Licensed under MIT 2014</span><span class="contributors">Micah Gajewski | Kevin Restaino</span>
   </div>

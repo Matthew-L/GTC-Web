@@ -64,7 +64,7 @@ body {
   overflow: hidden;
 }
 
-.content {
+.homepage {
   background: rgba(255,255,255,.9);
   max-width: 500px;
   padding: 40px;
@@ -72,7 +72,23 @@ body {
   margin-bottom: 0;
 }
 
-.content h1 {
+.calculate {
+  background: rgba(255,255,255,.9);
+  max-width: 800px;
+  padding: 40px;
+  margin: 80px auto;
+  margin-bottom: 0;
+}
+
+.profile {
+  background: rgba(255,255,255,.9);
+  max-width: 800px;
+  padding: 40px;
+  margin: 80px auto;
+  margin-bottom: 0;
+}
+
+.homepage h1 {
   margin-top: 0;
   font-weight: 100;
 }
@@ -120,7 +136,7 @@ body {
     padding-right: 20px;
   }
 
-  .content {
+  .homepage {
     background: #eee;
     max-width: initial;
     margin: 0 auto;
@@ -184,7 +200,7 @@ body {
     font-size: 80%;
   }
 
-  .content {
+  .hompeage {
     background: none;
     max-width: initial;
     margin: 0 auto;

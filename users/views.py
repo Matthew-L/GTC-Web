@@ -102,16 +102,18 @@ def profile(request):
 
 
 def search(request):
+    context = authenticate_user(request)
+    context.update(csrf(request))
     print('search')
-    context = {}
+    # context = {}
     if request.user.is_authenticated():
         context['is_logged_in'] = True
         context['username'] = request.user.get_username()
     else:
         context['is_logged_in'] = False
     errors = []
-    if 'search' in request.GET:
-        query = request.GET['search']
+    if 'query' in request.GET:
+        query = request.GET['query']
         if not query:
             errors.append('Enter a search term.')
         elif len(query) > 50:
@@ -122,7 +124,7 @@ def search(request):
         context['errors'] = errors
     print(request)
     return render_to_response('search_results.html', context, context_instance=RequestContext(request))
-
+    # return render(request, 'search_results.html', context)
 
 def downloadStringSet(request):
     # get the response object, this can be used as a stream.
