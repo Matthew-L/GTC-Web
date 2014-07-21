@@ -10,6 +10,7 @@ urlpatterns = patterns('',
                        # Calculate
                        # TODO redo asynchronously
                        (r'^calculate/$', 'calculator.views.load_calculate_page'),
+                       (r'^pretty-calculate/$', 'calculator.views.load_pretty_calculate_page'),
                        (r'^ajax/$', 'calculator.views.ajax_calculate'),
                        (r'^save-set/$', 'calculator.views.save_set'),
 

@@ -12,6 +12,7 @@
   <div class="header">
     <div class="container-640px">
       <a href="/"><img class="logo" src="{{ STATIC_URL }}images/logo.svg"></a>
+
       <div id="sb-search" class="sb-search">
         <form action="/search/" role="search">
           <input class="sb-search-input" placeholder="Find string sets!" type="text" value="" name="query"
@@ -91,24 +92,30 @@
     </div>
   </div>
 
-    {% block content %}
-      <div class="homepage">
-        <h1>Welcome!</h1>
+  {% block content %}
+    <div class="homepage">
+      <h1>Welcome!</h1>
 
-        <p><b>Stringulator</b> allows you to create custom guitar string sets. After you build a set, you can save them to
-          your profile to compare to other sets you've tried. Don't want to make your own String Set? Use the search bar
-          to find custom sets other Stringulator users are rocking! If you have questions on how to use the site
-          check out the GitHub Readme or use the Contact Us page to send us a message.</p>
+      <p><b>Stringulator</b> allows you to create custom guitar string sets. After you build a set, you can save them to
+        your profile to compare to other sets you've tried. Don't want to make your own String Set? Use the search bar
+        to find custom sets other Stringulator users are rocking! If you have questions on how to use the site
+        check out the GitHub Readme or use the Contact Us page to send us a message.</p>
 
-        <p class="padding-bottom-10">
-          <a class="button-1" href="calculate/?string_set_name=8%20string%20set&users_set=micah">
-            Check out an example set!
-          </a>
-        </p>
+      <p class="padding-bottom-10">
+        <a class="button-1" href="calculate/?string_set_name=8%20string%20set&users_set=micah">
+          Check out an example set!
+        </a>
+      </p>
 
-        <p><a class="button-1" href="https://github.com/gajewsk2/Stringulator">Check out our GitHub!</a></p>
-      </div>
-    {% endblock %}
+      <p class="padding-bottom-10">
+        <a class="button-1" href="pretty-calculate/?string_set_name=8%20string%20set&users_set=micah">
+          Check out the new calculate page!
+        </a>
+      </p>
+
+      <p><a class="button-1" href="https://github.com/gajewsk2/Stringulator">Check out our GitHub!</a></p>
+    </div>
+  {% endblock %}
 
   <div class="footer"><span class="license">Licensed under MIT 2014</span><span class="contributors">Micah Gajewski | Kevin Restaino</span>
   </div>
@@ -131,14 +138,14 @@
     <!-- calculate -->
     <script src="{{ STATIC_URL }}scripts/calculate/calculate.js"></script>
     <script src="{{ STATIC_URL }}scripts/calculate/add_row.js"></script>
-{#    <script src="{{ STATIC_URL }}scripts/bootstrap/tooltip.js"></script>#}
-{#    <script src="{{ STATIC_URL }}scripts/bootstrap/popover.js"></script>#}
+    {#    <script src="{{ STATIC_URL }}scripts/bootstrap/tooltip.js"></script>#}
+    {#    <script src="{{ STATIC_URL }}scripts/bootstrap/popover.js"></script>#}
     <script src="{{ STATIC_URL }}scripts/calculate/popover_header_info.js"></script>
 
   {% else %}
     <script src="{{ STATIC_URL }}scripts/stringulator.min.js"></script>
     <script>
-    new UISearch(document.getElementById('sb-search'));
+      new UISearch(document.getElementById('sb-search'));
     </script>
     <script type="text/javascript" src="{{ STATIC_URL }}testing/uiMorphingButton_fixed.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}testing/helpers.js"></script>

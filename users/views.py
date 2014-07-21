@@ -123,7 +123,7 @@ def search(request):
             context['search_desc_results'] = StringSet.objects.filter(desc__icontains=query)
         context['errors'] = errors
     print(request)
-    return render_to_response('search_results.html', context, context_instance=RequestContext(request))
+    return render_to_response('search-results.html', context, context_instance=RequestContext(request))
     # return render(request, 'search_results.html', context)
 
 def downloadStringSet(request):

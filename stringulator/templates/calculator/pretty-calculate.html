@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% load get_range %}
+
+{% block breadcrumb %}
+  <li class="active"><a href="/calculate">Calculate</a></li>
+
+  {% if not is_logged_in %}
+    <li><a href="/accounts/register">Register</a></li>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="calculate">
+    <form method="get" action="/save-set/">
+      <div>
+        <label for="string-set-name">String Set Name</label>
+        <input id="string-set-name" type="text" value="{{ string_set_name }}">
+      </div>
+      <div>
+        <label for="description">Description</label>
+        <textarea id="description" cols="50" rows="3">{{ desc }}</textarea>
+      </div>
+      <br>
+
+      <div>
+        <label for="scale-length">Scale Length</label>
+        <input id="scale-length" type="text">
+      </div>
+      <br>
+
+      <div id="strings-tbl">
+        <div>
+          <span>
+            <span class="popover_header" id="number">Number</span>
+          </span>
+          <span>
+            <span class="popover_header" id="note">Note</span>
+          </span>
+          <span>
+            <span class="popover_header" id="octave">Octave</span>
+          </span>
+          <span>
+            <span class="popover_header" id="gauge">Gauge</span>
+          </span>
+          <span>
+            <span class="popover_header" id="string-type">String Type</span>
+          </span>
+          <span>
+            <span class="popover_header" id="tension">Tension</span>
+          </span>
+        </div>
+        {# New User String Form #}
+        {% for i in 1|get_range %}
+          <div id="string_row{{ forloop.counter0 }}">
+            {% include "pretty-forms.html" %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <div>
+        <div>
+          <span>
+            <button class="btn btn-primary" id="insert-more" type="button">
+              <span class="glyphicon glyphicon-plus btn-divider"></span>
+              Add String
+            </button>
+          </span>
+          <span>
+            <button class="btn btn-success" id="save-set" type="submit" name="save-set" value="{{ string_set_name }}">
+              <span class="glyphicon glyphicon-floppy-disk btn-divider"></span>
+              Save String Set
+            </button>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}
+{% block scripts %}
+  {{ block.super }}
+
+  <script type="text/javascript">
+
+    var numberOfRows = 1;
+    $("#insert-more").click(function () {
+      newRow()
+      resetBackgroundColor()
+      addChangeEvent()
+    });
+
+    var string_set_data = document.getElementById("string_number_GTC_0").value;
+    var json = "{{someDjangoVariable}}".replace(/&quot;/g, "\"")
+    var newJSON = json.replace("[", "{\"gstring\":[")
+    var newJSON1 = newJSON.replace("]", "]}")
+    json = json.slice(1);
+    json = json.substring(0, json.length - 1);
+    var json1 = JSON.stringify(eval("(" + newJSON1 + ")"));
+    var json1 = jQuery.parseJSON(newJSON1);
+    var keys = Object.keys(json1);
+
+
+    for (var index = 0; index < json1.gstring.length; index += 1) {
+      newRow()
+      $('#string_number_GTC_' + index).val(json1.gstring[index].fields.string_number);
+      $('#note_GTC_' + index).val(json1.gstring[index].fields.note);
+
+
+      var gauge = formatGauge(json1.gstring[index].fields.gauge.toString());
+      {#            console.log(gauge);#}
+
+      $('#gauge_GTC_' + index).val(gauge);
+      $('#octave_GTC_' + index).val(json1.gstring[index].fields.octave);
+      $('#string_set_GTC_' + index).val(json1.gstring[index].fields.string_set);
+      $('#string_type_GTC_' + index).val(json1.gstring[index].fields.string_type);
+      $('#scale_length').val(json1.gstring[index].fields.scale_length);
+    }
+
+
+    function formatGauge(gauge) {
+      gauge = (parseFloat(gauge).toString()).replace(/^[0]+/gi, '');
+      return gauge;
+    }
+  </script>
+
+{% endblock %}

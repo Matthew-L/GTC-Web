@@ -9,6 +9,62 @@ from stringulator import settings
 from .guitarstring.guitar_string import GuitarString
 from .models import StringSet, String
 
+def load_pretty_calculate_page(request):
+    context = {'debug': settings.DEBUG}
+
+    try:
+        if request.user.is_authenticated():
+            context['is_logged_in'] = True
+            context['username'] = request.user.get_username()
+        else:
+            context['is_logged_in'] = False
+    except:
+        HttpResponseRedirect('/accounts/login')
+
+    if request.method == 'GET':
+
+        try:
+            string_set_name = str(request.GET['string_set_name'])
+            username = str(request.GET['users_set'])
+            print(string_set_name)
+            user_id = User.objects.get(username=username).pk
+            print(user_id)
+            string_set = StringSet.objects.filter(name=string_set_name)
+            print(str(string_set))
+        except:
+            return render(request, 'calculate.html', context)
+
+        user_set = []
+        # wont iterate any other way for some reason
+
+        context['string_set_name'] = string_set_name
+
+        strings = String.objects.all()
+
+        print('her', strings)
+
+
+        for set in string_set:
+            print('username: ',set.user, username)
+            if str(set.user) ==  str(username):
+                context['is_mscale'] = set.is_mscale
+                context['desc'] = set.desc
+                context['number_of_strings'] = set.number_of_strings
+                for string in strings:
+                    if username == str(string.string_set.user):
+                        if str(string.string_set.name) == str(string_set_name):
+                            print(string.gauge)
+                            user_set.append(string)
+
+
+
+        data = serializers.serialize("json", user_set)
+
+        context['json_data'] = data
+        context['someDjangoVariable'] = data
+
+    return render(request, 'pretty-calculate.html', context)
+
 
 def load_calculate_page(request):
     context = {}
