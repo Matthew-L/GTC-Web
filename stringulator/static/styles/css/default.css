@@ -132,7 +132,7 @@ body {
   -o-background-size: cover;
   background-size: cover;
   color: #444;
-  /*font-size: 110%;*/
+  font-size: 110%;
   font-weight: 300;
   font-family: 'Lato', Arial, sans-serif;
   line-height: 1.5em;
@@ -302,7 +302,7 @@ body {
   }
 
   /* line 203, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
-  .hompeage {
+  .hompepage {
     background: none;
     max-width: initial;
     margin: 0 auto;
