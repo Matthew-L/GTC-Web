@@ -29,18 +29,7 @@ class GuitarString():
     using the parameters: scale_length, string_material, gauge, note, octave.
     These parameters are defined in the constructor.
     """
-    number_of_strings = 0
-    string_number = 0
-    scale_length = 0
-    unit_weight = 0
-    freq = 0
-    tension = 0
-    string_material = 'Unknown'
-    octave = 0
-    note = 'Unknown'
-    gauge = 0
-    tension_constant = 386.4
-
+    TENSION_CONSTANT = 386.4
 
     def __init__(self, scale_length, string_material, gauge, note, octave, number_of_strings=None, string_number=None):
         """
@@ -122,7 +111,7 @@ class GuitarString():
         Method of tension calculation provided by D'Addario
         @return: the calculated tension using  (UnitWeight x (2 x ScaleLength x Frequency)^2)/TensionConstant
         """
-        tension = (self.unit_weight * (2 * self.scale_length * self.freq) ** 2) / self.tension_constant
+        tension = (self.unit_weight * (2 * self.scale_length * self.freq) ** 2) / self.TENSION_CONSTANT
         return tension
 
     def convert_to_halfsteps(self, note, octave):
