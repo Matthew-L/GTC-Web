@@ -72,7 +72,6 @@ class ScientificPitch():
         @param note:
         @return: @raise InvalidNoteError:
         """
-
         try:
             if len(note) == 5:
                 note = note[0].upper() + '#/' + note[3].upper() + 'b'

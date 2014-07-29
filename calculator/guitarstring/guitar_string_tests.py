@@ -1,7 +1,7 @@
 import unittest
 from calculator.guitarstring.guitar_string import GuitarString, InvalidScaleLengthError, OutOfRangeError, \
     InvalidNoteError, InvalidStringMaterialError, InvalidOctaveError, InvalidGaugeError
-
+# from .guitar_string import GuitarString
 """
 source code values used for comparison
 len 25.5"
