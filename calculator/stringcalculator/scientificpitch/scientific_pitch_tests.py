@@ -6,8 +6,10 @@ from calculator.stringcalculator.scientificpitch.scientific_pitch import Scienti
 # InvalidNoteError, InvalidStringMaterialError, InvalidOctaveError, InvalidGaugeError
 
 class TestScientificPitch(unittest.TestCase):
-    def test_out_of_range_octave_input(self):
-        self.assertRaises(OutOfRangeError, ScientificPitch.sanitize_octave, -1)
+    def test_out_of_range_octave_upper_bound_input(self):
+        self.assertRaises(OutOfRangeError, ScientificPitch.sanitize_octave, 11)
+
+    def test_out_of_range_octave_lower_bound_input(self):
         self.assertRaises(OutOfRangeError, ScientificPitch.sanitize_octave, -1)
 
     def test_invalid_note_input(self):
