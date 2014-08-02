@@ -8,7 +8,7 @@ urlpatterns = patterns('',
                        url(r'^admin/', include(admin.site.urls)),
 
                        # Calculate
-                       # TODO redo asynchronously
+
                        (r'^calculate/$', 'calculator.views.load_calculate_page'),
                        (r'^pretty-calculate/$', 'calculator.views.load_pretty_calculate_page'),
                        (r'^ajax/$', 'calculator.views.ajax_calculate'),
@@ -21,7 +21,7 @@ urlpatterns = patterns('',
                        (r'^search/$', 'users.views.search'),
 
                        # USERS
-                       # TODO redo asynchronously
+
                        # Login
                        (r'^accounts/login/$', 'users.views.login'),
                        (r'^$', 'users.views.login'),
