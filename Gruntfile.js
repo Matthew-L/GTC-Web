@@ -252,10 +252,10 @@ module.exports = function (grunt) {
           {
             expand: true,
             dot: true,
-            cwd: '<%= stringulator.static %>',
-            dest: '<%= stringulator.dist %>/fonts',
+            cwd: '<%= stringulator.static %>/styles',
+            dest: '<%= stringulator.dist %>',
             src: [
-              'styles/fonts/**/*'
+              'fonts/**/*'
             ]
           },
           {

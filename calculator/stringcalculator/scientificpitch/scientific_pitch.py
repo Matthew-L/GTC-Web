@@ -21,9 +21,9 @@ class ScientificPitch():
     def __init__(self, note, octave):
         self.note = self.sanitize_note(note)
         self.octave = self.sanitize_octave(octave)
-        self.freq = self.convert_to_freq(self.note, self.octave)
+        self.frequency = self.convert_to_frequency(self.note, self.octave)
 
-    def convert_to_freq(self, note, octave):
+    def convert_to_frequency(self, note, octave):
         """
         Needs to be rewritten...
         uses note and octave to calculate the frequency by using the dictionary of base frequencies
@@ -32,11 +32,12 @@ class ScientificPitch():
         @param octave: the octave of the note being converted to a frequency
         @return: the frequency of the note and octave
         """
-        half_steps = self.convert_to_halfsteps(note, octave)
-        A4_freq = 440
-        return A4_freq * (2 ** (1 / 12)) ** half_steps
+        half_steps = self.convert_to_half_steps(note, octave)
+        A4_frequency = 440
+        return A4_frequency * (2 ** (1.0 / 12.0)) ** half_steps
 
-    def convert_to_halfsteps(self, note, octave):
+    @staticmethod
+    def convert_to_half_steps(note, octave):
         """
         Calculates the number of half-steps between any given note and A4
         @param note: the note which is having its half-steps calculated
@@ -60,7 +61,7 @@ class ScientificPitch():
             octave = int(octave)
         except ValueError:
             raise InvalidOctaveError('octave must be an integer')
-        if not (0 <= octave <= 9):
+        if not (0 <= octave <= 10):
             raise OutOfRangeError('octave must be fall between 0 and 9 (inclusive)')
 
         return octave
