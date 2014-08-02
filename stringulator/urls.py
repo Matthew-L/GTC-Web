@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.views.generic import RedirectView
 
 admin.autodiscover()
 urlpatterns = patterns('',
@@ -8,7 +9,8 @@ urlpatterns = patterns('',
                        url(r'^admin/', include(admin.site.urls)),
 
                        # Calculate
-
+                       url(r'^herokuapp.com/$',
+                           RedirectView.as_view(url='http://www.stringulator.com', permanent=True)),
                        (r'^calculate/$', 'calculator.views.load_calculate_page'),
                        (r'^pretty-calculate/$', 'calculator.views.load_pretty_calculate_page'),
                        (r'^ajax/$', 'calculator.views.ajax_calculate'),
@@ -45,4 +47,4 @@ urlpatterns = patterns('',
                        # Test
                        (r'^test/$', 'contact.views.load_test_page'),
                        (r'^base-bak/$', 'contact.views.load_base_bak_page'),
-                       )
+)
