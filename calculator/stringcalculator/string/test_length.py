@@ -30,8 +30,8 @@ class TestLength(unittest.TestCase):
     """test sanitize_multiscale"""
     def test_valid_multi_scale_length_input(self):
         high_scale_length, low_scale_length = Length.sanitize_multiscale('27-28.625')
-        self.assertEquals(27, low_scale_length)
-        self.assertEquals(28.625, high_scale_length)
+        self.assertEqual(27, low_scale_length)
+        self.assertEqual(28.625, high_scale_length)
 
     def test_not_a_number_multi_scale_length_input(self):
         self.assertRaises(InvalidScaleLengthError, Length.sanitize_multiscale, 'a-z')
