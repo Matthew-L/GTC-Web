@@ -1,9 +1,9 @@
 import unittest
-from calculator.stringcalculator.guitarstring.length import Length, OutOfRangeError, InvalidScaleLengthError, \
+from calculator.stringcalculator.string.length import Length, OutOfRangeError, InvalidScaleLengthError, \
     InvalidStringNumberError
 
 
-class TestScientificPitch(unittest.TestCase):
+class TestLength(unittest.TestCase):
     """test sanitize_scale_length"""
     def test_not_a_number_scale_length_input(self):
         self.assertRaises(InvalidScaleLengthError, Length.sanitize_scale_length, 'a')

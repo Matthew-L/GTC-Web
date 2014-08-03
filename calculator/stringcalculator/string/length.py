@@ -1,9 +1,5 @@
 class InvalidScaleLengthError(ValueError): pass
-
-
 class OutOfRangeError(ValueError): pass
-
-
 class InvalidStringNumberError(ValueError): pass
 
 
