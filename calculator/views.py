@@ -9,6 +9,7 @@ from stringulator import settings
 from .guitarstring.guitar_string import GuitarString
 from .models import StringSet, String
 
+
 def load_pretty_calculate_page(request):
     context = {'debug': settings.DEBUG}
 
@@ -43,10 +44,9 @@ def load_pretty_calculate_page(request):
 
         print('her', strings)
 
-
         for set in string_set:
-            print('username: ',set.user, username)
-            if str(set.user) ==  str(username):
+            print('username: ', set.user, username)
+            if str(set.user) == str(username):
                 context['is_mscale'] = set.is_mscale
                 context['desc'] = set.desc
                 context['number_of_strings'] = set.number_of_strings
@@ -55,8 +55,6 @@ def load_pretty_calculate_page(request):
                         if str(string.string_set.name) == str(string_set_name):
                             print(string.gauge)
                             user_set.append(string)
-
-
 
         data = serializers.serialize("json", user_set)
 
@@ -101,10 +99,9 @@ def load_calculate_page(request):
 
         print('her', strings)
 
-
         for set in string_set:
-            print('username: ',set.user, username)
-            if str(set.user) ==  str(username):
+            print('username: ', set.user, username)
+            if str(set.user) == str(username):
                 context['is_mscale'] = set.is_mscale
                 context['desc'] = set.desc
                 context['number_of_strings'] = set.number_of_strings
@@ -114,16 +111,12 @@ def load_calculate_page(request):
                             print(string.gauge)
                             user_set.append(string)
 
-
-
         data = serializers.serialize("json", user_set)
 
         context['json_data'] = data
         context['someDjangoVariable'] = data
 
     return render(request, 'calculate.html', context)
-
-
 
 
 @csrf_exempt
@@ -146,10 +139,10 @@ def ajax_calculate(request):
         # has to use javascript booleans
         if is_mscale == 'true':
             gs = GuitarString(scale_length, string_type, gauge, note,
-                                           octave, number_of_strings, string_number)
+                              octave, number_of_strings, string_number)
         else:
             gs = GuitarString(scale_length, string_type, gauge, note,
-                                           octave)
+                              octave)
         tension = float("{0:.2f}".format(gs.tension))
         response = {"tension": tension}
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
@@ -170,7 +163,6 @@ def return_save_errors(context, errors, request):
 
 
 def renaming_set(name, request, user):
-
     should_rename = False
     try:
         old_name = request.GET['save-set']
@@ -202,7 +194,7 @@ def save_set(request):
     # make new string set
     name = request.GET['string_set_name']
     user = request.user
-    #print("user g",user)
+    # print("user g",user)
     desc = request.GET['desc']
     if desc == '':
         desc = ' '
@@ -234,7 +226,7 @@ def save_set(request):
     #check if stringset name exists already
 
     if renamed_set_exists(should_rename, name, user):
-        errors.append("You already have a String Set named that! Delete or rename the set '"+name+"' first.")
+        errors.append("You already have a String Set named that! Delete or rename the set '" + name + "' first.")
         return return_save_errors(context, errors, request)
 
     #just updating, name stayed the same
@@ -251,7 +243,8 @@ def save_set(request):
     elif should_rename:
         old_string_set.all().delete()
 
-    string_set = StringSet(name=name, user=request.user, desc=desc, is_mscale=is_mscale, number_of_strings=number_of_strings)
+    string_set = StringSet(name=name, user=request.user, desc=desc, is_mscale=is_mscale,
+                           number_of_strings=number_of_strings)
     try:
         string_set.full_clean()
         string_set.save()
@@ -267,35 +260,35 @@ def save_set(request):
         # print(number_of_strings)
 
         try:
-            string_number = request.GET['string_number_GTC_'+str(i)]
+            string_number = request.GET['string_number_GTC_' + str(i)]
             GuitarString.sanitize_string_number(string_number)
         except:
             row_errors += 1
             errors.append('Invalid String Number in Row' + str(i))
 
         try:
-            note = request.GET['note_GTC_'+str(i)]
+            note = request.GET['note_GTC_' + str(i)]
             GuitarString.sanitize_note(note)
         except:
             row_errors += 1
             errors.append('Invalid Note in Row' + str(i))
 
         try:
-            octave = request.GET['octave_GTC_'+str(i)]
+            octave = request.GET['octave_GTC_' + str(i)]
             GuitarString.sanitize_octave(octave)
         except:
             row_errors += 1
             errors.append('Invalid Octave in Row' + str(i))
 
         try:
-            gauge = request.GET['gauge_GTC_'+str(i)]
+            gauge = request.GET['gauge_GTC_' + str(i)]
             GuitarString.sanitize_gauge(gauge)
         except:
             row_errors += 1
             errors.append('Invalid Gauge in Row' + str(i))
 
         try:
-            string_type = request.GET['string_type_GTC_'+str(i)]
+            string_type = request.GET['string_type_GTC_' + str(i)]
             GuitarString.is_valid_string_material(string_type)
         except:
             row_errors += 1
@@ -310,7 +303,7 @@ def save_set(request):
         else:
             row_errors = 0
             string = String(string_set=string_set, string_number=string_number, scale_length=scale_length,
-                        note=note, octave=octave, gauge=gauge, string_type=string_type)
+                            note=note, octave=octave, gauge=gauge, string_type=string_type)
             string.save()
             try:
                 string.full_clean()
@@ -336,7 +329,7 @@ def ajax_delete_set(request):
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
 
 
-#def print_set(string_set):
+# def print_set(string_set):
 #    for set in string_set:
 #            print('t',set.user, username)
 #            if str(set.user) == 'xtreme1':
@@ -353,8 +346,8 @@ def count_string_rows(request):
     curr = 0
     if request.method == 'GET':
         try:
-            while request.GET['gauge_GTC_'+str(curr)] is not None:
-                print(request.GET['gauge_GTC_'+str(curr)])
+            while request.GET['gauge_GTC_' + str(curr)] is not None:
+                print(request.GET['gauge_GTC_' + str(curr)])
                 curr += 1
         except KeyError:
             pass
@@ -367,9 +360,11 @@ def is_anonymous(user):
         return True
     return False
 
+
 def is_valid_name(name):
     if name == "":
-       return True
+        return True
+
 
 def is_valid_scale_length(context, request, errors):
     try:
@@ -400,6 +395,7 @@ def is_valid_scale_length(context, request, errors):
             return return_save_errors(context, errors, request)
         number_of_strings = 0
     return is_mscale, scale_length, number_of_strings
+
 
 def renamed_set_exists(should_rename, name, user):
     if should_rename:

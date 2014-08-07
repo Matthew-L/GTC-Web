@@ -138,12 +138,25 @@
       </table>
     </form>
 
-  </div>
 {% endblock %}
 {% block scripts %}
   {{ block.super }}
 
   <script type="text/javascript">
+      $('#user a').editable({
+           url: '/post',
+           type: 'text',
+           pk: 1,
+           name: 'username',
+           title: 'Enter username'
+    });
+    $('#username').editable({
+           url: '/post',
+           type: 'text',
+           pk: 1,
+           name: 'username',
+           title: 'Enter username'
+    });
 
     var numberOfRows = 1;
     $("#insert-more").click(function () {

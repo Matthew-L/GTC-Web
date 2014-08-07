@@ -1,28 +1,15 @@
 language: python
-services:
-  - postgresql
-addons:
-  postgresql: "9.3
 python:
   - 3.4.1
-env:
-  - DJANGO="django==1.6.5"
-branches:
-  only:
-    - master
-# command to install requirements
-install:
-  - pip install $DJANGO
-  - pip install -r requirements.txt --use-mirrors
-  - pip install coverage coveralls --use-mirrors
-  - python setup.py install
+addons:
+  postgresql: "9.3"
 before_script:
-  - psql template1 -c 'CREATE EXTENSION default;'
-  - psql -U postgres -c 'CREATE DATABASE default;'
-  - python manage.py syncdb --noinput
-  - python manage.py migrate --noinput
-# command to run tests, e.g. python setup.py test
+- psql -U postgres -c "create extension postgis"
+  - psql -c 'create database travis_ci_test;' -U postgres
+install:
+  - pip install -r requirements.txt
+  - pip install coveralls
 script:
-  - coverage run --source=calculator manage.py test
+  coverage run --source=calculator manage.py test
 after_success:
   coveralls

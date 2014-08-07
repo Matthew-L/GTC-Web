@@ -13,19 +13,24 @@
 {% block content %}
   <div class="calculate">
     <form method="get" action="/save-set/">
-      <div>
-        <label for="string-set-name">String Set Name</label>
-        <input id="string-set-name" type="text" value="{{ string_set_name }}">
+      <div id="string-set-name">
+{#        <label for="string-set-name">String Set Name</label>#}
+        <a href="#" data-type="text" data-pk="1">{{ string_set_name }}</a>
+{#        <input id="string-set-name" type="text" value="{{ string_set_name }}">#}
       </div>
-      <div>
+
+      <div id="description" {% comment %}class="table table-bordered table-condensed  table-striped"{% endcomment %}>
         <label for="description">Description</label>
-        <textarea id="description" cols="50" rows="3">{{ desc }}</textarea>
+        <a href="#" data-pk="2">{{ desc }}</a>
+        {#<textarea id="description" cols="50" rows="3">{{ desc }}</textarea>#}
       </div>
+
+
       <br>
 
-      <div>
-        <label for="scale-length">Scale Length</label>
-        <input id="scale-length" type="text">
+      <div id="scale-length">
+        Scale Length
+        <a href="#" data-pk="3">{{ scale_length }}</a>
       </div>
       <br>
 
@@ -77,11 +82,11 @@
     </form>
   </div>
 {% endblock %}
+
 {% block scripts %}
   {{ block.super }}
 
   <script type="text/javascript">
-
     var numberOfRows = 1;
     $("#insert-more").click(function () {
       newRow()

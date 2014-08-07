@@ -125,6 +125,9 @@
 {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   {% if debug %}
+    <script type="text/javascript" src="{{ STATIC_URL }}scripts/bootstrap/bootstrap.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+
     <script type="text/javascript" src="{{ STATIC_URL }}scripts/homepage/scripts.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}scripts/homepage/classie.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}scripts/homepage/uisearch.js"></script>
@@ -136,12 +139,14 @@
 
 
     <!-- calculate -->
+    <script src="{{ STATIC_URL }}scripts/calculate/demo.js"></script>
+{#    <script src="{{ STATIC_URL }}scripts/bootstrap/bootstrap/popover.js"></script>#}
     <script src="{{ STATIC_URL }}scripts/calculate/calculate.js"></script>
     <script src="{{ STATIC_URL }}scripts/calculate/add_row.js"></script>
     {#    <script src="{{ STATIC_URL }}scripts/bootstrap/tooltip.js"></script>#}
     {#    <script src="{{ STATIC_URL }}scripts/bootstrap/popover.js"></script>#}
     <script src="{{ STATIC_URL }}scripts/calculate/popover_header_info.js"></script>
-
+    <script src="{{ STATIC_URL }}scripts/calculate/bootstrap-editable.js"></script>
   {% else %}
     <script src="{{ STATIC_URL }}scripts/stringulator.min.js"></script>
     <script>

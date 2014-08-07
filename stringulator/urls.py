@@ -15,6 +15,7 @@ urlpatterns = patterns('',
                        (r'^pretty-calculate/$', 'calculator.views.load_pretty_calculate_page'),
                        (r'^ajax/$', 'calculator.views.ajax_calculate'),
                        (r'^save-set/$', 'calculator.views.save_set'),
+                       (r'^test/$', 'contact.views.test'),
 
                        # Download
                        (r'^download-set', 'users.views.downloadStringSet'),
