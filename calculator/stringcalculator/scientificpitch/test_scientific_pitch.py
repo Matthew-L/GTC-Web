@@ -1,10 +1,10 @@
-import unittest
+from django.test import TestCase
 from calculator.stringcalculator.scientificpitch.scientific_pitch import ScientificPitch, OutOfRangeError, \
     InvalidNoteError, \
     InvalidOctaveError
 
 
-class TestScientificPitch(unittest.TestCase):
+class TestScientificPitch(TestCase):
     """ sanitize_octave()"""
 
     def test_out_of_range_octave_upper_bound_input(self):
@@ -14,7 +14,7 @@ class TestScientificPitch(unittest.TestCase):
         self.assertRaises(OutOfRangeError, ScientificPitch.sanitize_octave, -1)
 
     def test_invalid_octave_input(self):
-        self.assertRaises(ValueError, ScientificPitch.sanitize_octave, 'e')
+        self.assertRaises(InvalidOctaveError, ScientificPitch.sanitize_octave, 'e')
 
     def test_valid_octave_input(self):
         for x in range(0, 11):

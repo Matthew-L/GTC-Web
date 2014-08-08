@@ -13,7 +13,7 @@ urlpatterns = patterns('',
                        #     RedirectView.as_view(url='http://www.stringulator.com', permanent=True)),
                        (r'^calculate/$', 'calculator.views.load_calculate_page'),
                        (r'^pretty-calculate/$', 'calculator.views.load_pretty_calculate_page'),
-                       (r'^ajax/$', 'calculator.views.ajax_calculate'),
+                       (r'^calculate-tension/$', 'calculator.views.convert_input_to_tension'),
                        (r'^save-set/$', 'calculator.views.save_set'),
                        (r'^test/$', 'contact.views.test'),
 

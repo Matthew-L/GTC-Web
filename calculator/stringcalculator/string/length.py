@@ -4,30 +4,30 @@ class InvalidStringNumberError(ValueError): pass
 
 
 class Length():
-    def __init__(self, scale_length, string_total=None, string_index=None):
+    def __init__(self, scale_length, total_strings=None, string_number=None):
         if str(scale_length).find('-') != -1:
-            if string_total is None or string_index is None:
+            if total_strings is None or string_number is None:
                 raise InvalidScaleLengthError("Multi-scale scale_lengths (scale_lengths containing \'-\'"
-                                              " must specify the number of strings and string_index")
-            self.string_total = self.sanitize_number(string_total)
-            self.string_index = self.sanitize_number(string_index)
-            if self.string_index > self.string_total:
-                raise OutOfRangeError(' string_index must be less than string_total')
+                                              " must specify the number of strings and string_number")
+            self.total_strings = self.sanitize_number(total_strings)
+            self.string_number = self.sanitize_number(string_number)
+            if self.string_number > self.total_strings:
+                raise OutOfRangeError(' string_number must be less than total_strings')
 
-            self.scale_length = self.convert_multiscale_to_scale_length(scale_length, self.string_total,
-                                                                        self.string_index)
+            self.scale_length = self.convert_multiscale_to_scale_length(scale_length, self.total_strings,
+                                                                        self.string_number)
         else:
             self.scale_length = self.sanitize_scale_length(scale_length)
 
-    def convert_multiscale_to_scale_length(self, scale_length, string_total, string_index):
+    def convert_multiscale_to_scale_length(self, scale_length, total_strings, string_number):
         """
         Takes the scale_length as a str and transforms it into the scale length range (two separate values)
-        By using the total number of strings and the current string's string_index the current strings
+        By using the total number of strings and the current string's string_number the current strings
         scale_length is calculated.
 
         @param scale_length: a string containing two floats separated by a hyphen
-        @param string_total: the total numbers of strings the multi-scale neck spans
-        @param string_index: the current strings number (the higher the string typically the lower the number)
+        @param total_strings: the total numbers of strings the multi-scale neck spans
+        @param string_number: the current strings number (the higher the string typically the lower the number)
                                 high e on standard would be a 1
                                 low E on standard would be a 6
         @return: the current strings scale_length
@@ -41,10 +41,10 @@ class Length():
 
         fan_distance = high_scale_length - low_scale_length
         scale_constant = 0
-        if string_total > 1:
-            scale_constant = fan_distance / (string_total - 1)
+        if total_strings > 1:
+            scale_constant = fan_distance / (total_strings - 1)
 
-        return low_scale_length + (string_index - 1) * scale_constant
+        return low_scale_length + (string_number - 1) * scale_constant
 
     @staticmethod
     def sanitize_scale_length(scale_length):
@@ -79,8 +79,8 @@ class Length():
     def sanitize_number(number):
         """
         converts both parameters to an int and raises an appropriate error on failure
-        @param string_total:
-        @param string_index:
+        @param total_strings:
+        @param string_number:
         @return: @raise InvalidStringNumberError:
         """
         try:

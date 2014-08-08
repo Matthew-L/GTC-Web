@@ -9,10 +9,10 @@ class GuitarString():
         self.is_valid_string_material(string_material)
         self.string_material = string_material
         self.gauge = self.sanitize_gauge(gauge)
-        self.unit_weight = self.convert_to_unit_weight(self.string_material, self.gauge)
+        self.unit_weight = self.convert_to_unit_weight(self.gauge, self.string_material)
 
     @staticmethod
-    def convert_to_unit_weight(string_material, gauge):
+    def convert_to_unit_weight(gauge, string_material):
         """
         Needs to be rewritten...
         cycles through an array of the appropriate string materials, comparing each entry to the gauge

@@ -1,9 +1,9 @@
-import unittest
+from django.test import TestCase
 from calculator.stringcalculator.string.guitar_string import GuitarString, OutOfRangeError, InvalidGaugeError, \
     InvalidStringMaterialError
 
 
-class TestGuitarString(unittest.TestCase):
+class TestGuitarString(TestCase):
     """test sanitize_gauge"""
 
     def test_not_a_number_gauge_input(self):
@@ -31,10 +31,10 @@ class TestGuitarString(unittest.TestCase):
 
     """test convert_to_unit_weight()"""
     def test_gauge_less_than_min(self):
-        self.assertEqual(1.0233999999999999e-05, GuitarString.convert_to_unit_weight('CKPLG', .007))
+        self.assertEqual(GuitarString.convert_to_unit_weight(.007, 'CKPLG'), 1.0233999999999999e-05)
 
     def test_gauge_matches(self):
-        self.assertEqual(.000014240, GuitarString.convert_to_unit_weight('CKPLG', .008))
+        self.assertEqual(GuitarString.convert_to_unit_weight(.008, 'CKPLG'), .000014240)
 
     def test_gauge_greater_than_min(self):
-        self.assertEqual(0.0008344310000000007, GuitarString.convert_to_unit_weight('CKPLG', .100))
+        self.assertEqual(GuitarString.convert_to_unit_weight(.100, 'CKPLG'), 0.0008344310000000007)

@@ -6,8 +6,14 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 import json
 from stringulator import settings
-from .guitarstring.guitar_string import GuitarString
+from .guitarstring.guitar_string import GuitarString as GuSt
 from .models import StringSet, String
+
+# new calculate
+from calculator.stringcalculator.string.length import Length
+from calculator.stringcalculator.string.guitar_string import GuitarString
+from calculator.stringcalculator.scientificpitch.scientific_pitch import ScientificPitch
+from calculator.stringcalculator.string_calculator import calculate_tension
 
 
 def load_pretty_calculate_page(request):
@@ -120,32 +126,25 @@ def load_calculate_page(request):
 
 
 @csrf_exempt
-def ajax_calculate(request):
+def convert_input_to_tension(request):
     """
     Takes a request that contains all the information posted necessary to calculate a strings tension.
-    @param request: a request object containing a dictionary of GuitarString parameters
+    @param request: a request object containing a dictionary of GuSt parameters
     @return: the calculated tension rouned off to 2 decimal places
     """
+    tension = 0
+    print(request.POST)
     if request.is_ajax() and request.method == "POST":
-        scale_length = request.POST['scale_length']
-        number_of_strings = request.POST['number_of_strings']
-        is_mscale = request.POST['is_mscale']
-        string_number = request.POST['string_number']
-        note = request.POST['note']
-        octave = request.POST['octave']
-        gauge = request.POST['gauge']
-        string_type = request.POST['string_type']
-        print(string_number)
-        # has to use javascript booleans
-        if is_mscale == 'true':
-            gs = GuitarString(scale_length, string_type, gauge, note,
-                              octave, number_of_strings, string_number)
-        else:
-            gs = GuitarString(scale_length, string_type, gauge, note,
-                              octave)
-        tension = float("{0:.2f}".format(gs.tension))
-        response = {"tension": tension}
-        return HttpResponse(json.dumps(response), mimetype='application/javascript')
+        tension_input = request.POST
+        length = Length(tension_input['scale_length'], tension_input['total_strings'], tension_input['string_number'])
+        pitch = ScientificPitch(tension_input['note'], tension_input['octave'])
+        string = GuitarString(tension_input['gauge'], tension_input['string_material'])
+
+        tension = calculate_tension(length, pitch, string)
+
+    tension = float("{0:.2f}".format(tension))
+    response = {"tension": tension}
+    return HttpResponse(json.dumps(response), content_type='application/javascript')
 
 
 def user_login_context(context, request):
@@ -198,7 +197,7 @@ def save_set(request):
     desc = request.GET['desc']
     if desc == '':
         desc = ' '
-    #check if user is logged in
+    # check if user is logged in
     if is_anonymous(user):
         errors.append("Register and Log In to Save Sets!")
         return return_save_errors(context, errors, request)
@@ -261,35 +260,35 @@ def save_set(request):
 
         try:
             string_number = request.GET['string_number_GTC_' + str(i)]
-            GuitarString.sanitize_string_number(string_number)
+            GuSt.sanitize_string_number(string_number)
         except:
             row_errors += 1
             errors.append('Invalid String Number in Row' + str(i))
 
         try:
             note = request.GET['note_GTC_' + str(i)]
-            GuitarString.sanitize_note(note)
+            GuSt.sanitize_note(note)
         except:
             row_errors += 1
             errors.append('Invalid Note in Row' + str(i))
 
         try:
             octave = request.GET['octave_GTC_' + str(i)]
-            GuitarString.sanitize_octave(octave)
+            GuSt.sanitize_octave(octave)
         except:
             row_errors += 1
             errors.append('Invalid Octave in Row' + str(i))
 
         try:
             gauge = request.GET['gauge_GTC_' + str(i)]
-            GuitarString.sanitize_gauge(gauge)
+            GuSt.sanitize_gauge(gauge)
         except:
             row_errors += 1
             errors.append('Invalid Gauge in Row' + str(i))
 
         try:
             string_type = request.GET['string_type_GTC_' + str(i)]
-            GuitarString.is_valid_string_material(string_type)
+            GuSt.is_valid_string_material(string_type)
         except:
             row_errors += 1
             errors.append('Invalid String Type in Row' + str(i))
@@ -329,19 +328,6 @@ def ajax_delete_set(request):
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
 
 
-# def print_set(string_set):
-#    for set in string_set:
-#            print('t',set.user, username)
-#            if str(set.user) == 'xtreme1':
-#                context['is_mscale'] = set.is_mscale
-#                context['desc'] = set.desc
-#                context['number_of_strings'] = set.number_of_strings
-#                for string in strings:
-#                    print(str(set.user), str(set.name))
-#                    if str(string.string_set.name) == str(string_set_name):
-#                        print(string)
-#                        user_set.append(string)
-
 def count_string_rows(request):
     curr = 0
     if request.method == 'GET':
@@ -376,20 +362,20 @@ def is_valid_scale_length(context, request, errors):
     if is_mscale:
         try:
             scale_length = request.GET['scale_length']
-            GuitarString.sanitize_multiscale(scale_length)
+            GuSt.sanitize_multiscale(scale_length)
         except:
             errors.append("Invalid MultiScale Length!")
             return return_save_errors(context, errors, request)
         try:
             number_of_strings = request.GET['number_of_strings']
-            GuitarString.sanitize_number_of_strings(number_of_strings)
+            GuSt.sanitize_number_of_strings(number_of_strings)
         except:
             errors.append("Invalid Number of Strings!")
             return return_save_errors(context, errors, request)
     else:
         try:
             scale_length = request.GET['scale_length']
-            GuitarString.sanitize_scale_length(scale_length)
+            GuSt.sanitize_scale_length(scale_length)
         except:
             errors.append("Invalid Scale Length!")
             return return_save_errors(context, errors, request)

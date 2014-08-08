@@ -1,9 +1,9 @@
-import unittest
+from django.test import TestCase
 from calculator.stringcalculator.string.length import Length, OutOfRangeError, InvalidScaleLengthError, \
     InvalidStringNumberError
 
 
-class TestLength(unittest.TestCase):
+class TestLength(TestCase):
     """test sanitize_scale_length"""
     def test_not_a_number_scale_length_input(self):
         self.assertRaises(InvalidScaleLengthError, Length.sanitize_scale_length, 'a')

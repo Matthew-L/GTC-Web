@@ -115,16 +115,16 @@ function countValidRows() {
 function ajaxCalculate(is_mscale, scale_length, string_number, note, octave, gauge, string_type, number_of_strings, curr) {
   $.ajax({
     type: "POST",
-    url: "/ajax/",
+    url: "/calculate-tension/",
     data: {
-      is_mscale: is_mscale,
+//      is_mscale: is_mscale,
       scale_length: scale_length,
       string_number: string_number,
       note: note,
       octave: octave,
       gauge: gauge,
-      string_type: string_type,
-      number_of_strings: number_of_strings
+      string_material: string_type,
+      total_strings: number_of_strings
     },
     dataType: "json",
     success: function (response) {
