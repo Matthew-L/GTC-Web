@@ -125,6 +125,18 @@ def load_calculate_page(request):
     return render(request, 'calculate.html', context)
 
 
+def get_tension(request, tension_input):
+    length = Length(tension_input['scale_length'], tension_input['total_strings'], tension_input['string_number'])
+    pitch = ScientificPitch(tension_input['note'], tension_input['octave'])
+    string = GuitarString(tension_input['gauge'], tension_input['string_material'])
+    tension = calculate_tension(length, pitch, string)
+    return round_tension(tension)
+
+
+def round_tension(tension):
+    return float("{0:.2f}".format(tension))
+
+
 @csrf_exempt
 def convert_input_to_tension(request):
     """
@@ -133,16 +145,8 @@ def convert_input_to_tension(request):
     @return: the calculated tension rouned off to 2 decimal places
     """
     tension = 0
-    print(request.POST)
     if request.is_ajax() and request.method == "POST":
-        tension_input = request.POST
-        length = Length(tension_input['scale_length'], tension_input['total_strings'], tension_input['string_number'])
-        pitch = ScientificPitch(tension_input['note'], tension_input['octave'])
-        string = GuitarString(tension_input['gauge'], tension_input['string_material'])
-
-        tension = calculate_tension(length, pitch, string)
-
-    tension = float("{0:.2f}".format(tension))
+        tension = get_tension(request, request.POST)
     response = {"tension": tension}
     return HttpResponse(json.dumps(response), content_type='application/javascript')
 
@@ -206,7 +210,7 @@ def save_set(request):
         errors.append("You must give the String Set a name")
         return return_save_errors(context, errors, request)
 
-    #changing set name
+    # changing set name
     old_string_set = ''
     should_rename = False
     try:
@@ -221,7 +225,7 @@ def save_set(request):
             should_rename = True
     except:
         pass
-    #old_string_set, should_rename = renaming_set(name, request, user)
+    # old_string_set, should_rename = renaming_set(name, request, user)
     #check if stringset name exists already
 
     if renamed_set_exists(should_rename, name, user):

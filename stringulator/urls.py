@@ -46,6 +46,6 @@ urlpatterns = patterns('',
                        (r'^contact/$', 'contact.views.load_contact_page'),
 
                        # Test
-                       (r'^test/$', 'contact.views.load_test_page'),
+                       # (r'^test/$', 'contact.views.load_test_page'),
                        (r'^base-bak/$', 'contact.views.load_base_bak_page'),
 )
