@@ -142,12 +142,14 @@
     <script src="{{ STATIC_URL }}scripts/calculate/demo.js"></script>
 {#    <script src="{{ STATIC_URL }}scripts/bootstrap/bootstrap/popover.js"></script>#}
     <script src="{{ STATIC_URL }}scripts/calculate/calculate.js"></script>
+    <script src="{{ STATIC_URL }}scripts/calculate/new_calculate.js"></script>
     <script src="{{ STATIC_URL }}scripts/calculate/add_row.js"></script>
     {#    <script src="{{ STATIC_URL }}scripts/bootstrap/tooltip.js"></script>#}
     {#    <script src="{{ STATIC_URL }}scripts/bootstrap/popover.js"></script>#}
     <script src="{{ STATIC_URL }}scripts/calculate/popover_header_info.js"></script>
-    <script src="{{ STATIC_URL }}scripts/calculate/bootstrap-editable.js"></script>
-    <script src='{{ STATIC_URL }}scripts/calculate/jquery-sortable.js'></script>
+    <script src="{{ STATIC_URL }}scripts/dependencies/bootstrap-editable.js"></script>
+    <script src='{{ STATIC_URL }}scripts/dependencies/jquery-sortable.js'></script>
+    <script src='{{ STATIC_URL }}scripts/calculate/sortable-calculate.js'></script>
   {% else %}
     <script src="{{ STATIC_URL }}scripts/stringulator.min.js"></script>
     <script>

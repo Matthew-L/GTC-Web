@@ -409,7 +409,7 @@ module.exports = function (grunt) {
     'uglify',
     'copy',
 //    'clean:temporary',
-    'debug-true'
+//    'debug-true'
   ]);
 
   grunt.registerTask('deploy-static', [
