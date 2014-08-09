@@ -3,8 +3,8 @@
 
 {% block content %}
   <div class="profile">
-    <h1>{{ username }}'s Profile</h1>
-    <h2>String Sets {{ username }} Made</h2>
+    <h1>{{ user.username }}'s Profile</h1>
+    <h2>String Sets {{ user.username }} Made</h2>
 
     <div>
       {% for string_set in string_sets %}
@@ -15,7 +15,7 @@
             </div>
           </a>
 
-          <a href="/download-set?string_set_name={{ string_set.name }}&user={{ username }}">
+          <a href="/download-set?string_set_name={{ string_set.name }}&user={{ user.username }}">
             <div class="col-sm-1 my-grid">
               <span class="glyphicon glyphicon-floppy-save"></span>
             </div>

@@ -22,14 +22,17 @@
         </form>
       </div>
 
-      <div class="morph-button morph-button-modal morph-button-modal-2 morph-button-fixed">
-        {% if is_logged_in %}
+      {% if user.is_authenticated %}
+        <div class="morph-button morph-button-modal morph-button-modal-2 morph-button-fixed">
+
           <button type="button">
             <a href=/profile/>
-              {{ username }}
+              {{ user.username }}
             </a>
           </button>
-        {% else %}
+        </div>
+      {% else %}
+        <div class="morph-button morph-button-modal morph-button-modal-2 morph-button-fixed">
           <button type="button">Login</button>
           <div class="morph-content" style="left: 625.59375px; top: 446.234375px;">
             <div>
@@ -57,14 +60,11 @@
               </div>
             </div>
           </div>
-        {% endif %}
-
-      </div>
+        </div>
+      {% endif %}
 
 
       <div class="morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
-
-
         <button type="button">Signup</button>
         <div class="morph-content">
           <div>
@@ -126,7 +126,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   {% if debug %}
     <script type="text/javascript" src="{{ STATIC_URL }}scripts/bootstrap/bootstrap.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+    <script
+        src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 
     <script type="text/javascript" src="{{ STATIC_URL }}scripts/homepage/scripts.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}scripts/homepage/classie.js"></script>
@@ -140,7 +141,7 @@
 
     <!-- calculate -->
     <script src="{{ STATIC_URL }}scripts/calculate/demo.js"></script>
-{#    <script src="{{ STATIC_URL }}scripts/bootstrap/bootstrap/popover.js"></script>#}
+    {#    <script src="{{ STATIC_URL }}scripts/bootstrap/bootstrap/popover.js"></script>#}
     <script src="{{ STATIC_URL }}scripts/calculate/calculate.js"></script>
     <script src="{{ STATIC_URL }}scripts/calculate/new_calculate.js"></script>
     <script src="{{ STATIC_URL }}scripts/calculate/add_row.js"></script>

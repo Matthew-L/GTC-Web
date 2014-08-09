@@ -5,7 +5,7 @@ from django.core import serializers
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 import json
-from stringulator import settings
+
 from .guitarstring.guitar_string import GuitarString as GuSt
 from .models import StringSet, String
 
@@ -72,7 +72,7 @@ def load_pretty_calculate_page(request):
 
 def load_calculate_page(request):
     context = {}
-    context['debug'] = settings.DEBUG
+    # context['debug'] = settings.DEBUG
 
     try:
         if request.user.is_authenticated():

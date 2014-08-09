@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.views.generic import RedirectView
 
+
 admin.autodiscover()
 urlpatterns = patterns('',
                        # Admin
@@ -27,13 +28,13 @@ urlpatterns = patterns('',
 
                        # Login
                        (r'^accounts/login/$', 'users.views.login'),
-                       (r'^$', 'users.views.login'),
+                       # (r'^$', 'users.views.login'),
                        (r'^accounts/invalid/$', 'users.views.invalid_login'),
                        # Authorize user
                        (r'^authorize-account/$', 'users.views.auth_view'),
                        (r'^login/$', 'users.views.auth_view'),
                        # Logout
-                       (r'^accounts/logout/$', 'users.views.logout'),
+                       (r'^logout/$', 'users.views.logout'),
                        # Register
                        (r'^accounts/register_success/$', 'users.views.register_success'),
                        (r'^accounts/register/$', 'users.views.register_user'),
@@ -48,4 +49,5 @@ urlpatterns = patterns('',
                        # Test
                        # (r'^test/$', 'contact.views.load_test_page'),
                        (r'^base-bak/$', 'contact.views.load_base_bak_page'),
+                       (r'^$', 'stringulator.views.load_homepage'),
 )

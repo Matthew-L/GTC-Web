@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from users.views import authenticate_user
+# from users.views import authenticate_user
 
 
 def load_contact_page(request):

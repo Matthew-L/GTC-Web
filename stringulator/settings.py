@@ -201,5 +201,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-    'stringulator.context_processor.debug',
+    'stringulator.context_processors.debug',
+    # 'users.context_processors.login',
 )
