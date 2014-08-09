@@ -17,7 +17,7 @@ from calculator.stringcalculator.string_calculator import calculate_tension
 
 
 def load_pretty_calculate_page(request):
-    context = {'debug': settings.DEBUG}
+    context = {}
 
     try:
         if request.user.is_authenticated():

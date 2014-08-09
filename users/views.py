@@ -13,7 +13,7 @@ from calculator import guitarstring
 
 
 def initialize_context():
-    context = {'debug': settings.DEBUG}
+    context = {}
     return context
 
 
