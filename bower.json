@@ -8,5 +8,7 @@
     "bootstrap-sass-official": "~3.1.1",
     "x-editable": "~1.5.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "jquery-sortable": "~0.9.12"
+  }
 }

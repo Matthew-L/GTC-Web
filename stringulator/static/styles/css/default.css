@@ -91,7 +91,7 @@ tr.table_row {
 }
 
 /* line 2, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
-.u {
+.user {
   width: 100% !important;
 }
 
@@ -336,4 +336,27 @@ body {
     width: 100%;
     float: none;
   }
+}
+/* line 1, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_jquery-sortable.scss */
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+/* line 5, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_jquery-sortable.scss */
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+/* line 11, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_jquery-sortable.scss */
+ol.example li.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+
+/* line 15, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_jquery-sortable.scss */
+ol.example li.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
 }

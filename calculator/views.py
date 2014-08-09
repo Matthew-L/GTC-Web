@@ -183,6 +183,11 @@ def renaming_set(name, request, user):
     return old_string_set, should_rename
 
 
+def asynchronous_save_set(request):
+    response = {}
+    return HttpResponse(json.dumps(response), content_type='application/javascript')
+
+
 def save_set(request):
     context = {}
     errors = []
