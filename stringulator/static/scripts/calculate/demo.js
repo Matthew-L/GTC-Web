@@ -1,11 +1,11 @@
 $(function () {
   'use strict';
   $.fn.editable.defaults.mode = 'inline';
-  $.fn.editable.defaults.anim = 'true';
+//  $.fn.editable.defaults.anim = 'true';
   $.fn.editable.defaults.onblur = 'submit';
 
-//  $.fn.editable.defaults.url = '/post';
-  $.fn.editableform.buttons = '';
+  $.fn.editable.defaults.url = '/post';
+//  $.fn.editableform.buttons = '';
   $('#string-set-name').editable({
     type: 'text'
   });
@@ -21,44 +21,48 @@ $(function () {
 
   $('.note a').editable({
     type: 'select',
+    showbuttons: false,
     source: [
-      { text: 'A'},
-      { text: 'A#/Bb'},
-      { text: 'B'},
-      { text: 'C'},
-      { text: 'C#/Db'},
-      { text: 'D'},
-      { text: 'D#/Eb'},
-      { text: 'E'},
-      { text: 'F'},
-      { text: 'F#/Gb'},
-      { text: 'G'},
-      { text: 'G#/Ab'}
+      {value: 'A', text: 'A'},
+      {value: 'A#/Bb', text: 'A#/Bb'},
+      {value: 'B', text: 'B'},
+      {value: 'C', text: 'C'},
+      {value: 'C#/Db', text: 'C#/Db'},
+      {value: 'D', text: 'D'},
+      {value: 'D#/Eb', text: 'D#/Eb'},
+      {value: 'E', text: 'E'},
+      {value: 'F', text: 'F'},
+      {value: 'F#/Gb', text: 'F#/Gb'},
+      {value: 'G', text: 'G'},
+      {value: 'G#/Ab', text: 'G#/Ab'}
     ]
   });
 
   $('.octave a').editable({
     type: 'select',
+    showbuttons: false,
     source: [
-      { text: '0'},
-      { text: '1'},
-      { text: '2'},
-      { text: '3'},
-      { text: '4'},
-      { text: '5'},
-      { text: '6'},
-      { text: '7'},
-      { text: '8'},
-      { text: '9'}
+      {value: '0', text: '0'},
+      {value: '1', text: '1'},
+      {value: '2', text: '2'},
+      {value: '3', text: '3'},
+      {value: '4', text: '4'},
+      {value: '5', text: '5'},
+      {value: '6', text: '6'},
+      {value: '7', text: '7'},
+      {value: '8', text: '8'},
+      {value: '9', text: '9'}
     ]
   });
 
   $('.gauge a').editable({
-    type: 'text'
+    type: 'text',
+    showbuttons: false
   });
 
-  $('.string-material a').editable({
+  $('.string-type a').editable({
     type: 'select',
+    showbuttons: false,
     source: [
       { text: 'Kalium',
         children: [

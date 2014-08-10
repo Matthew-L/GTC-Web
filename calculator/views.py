@@ -39,7 +39,7 @@ def load_pretty_calculate_page(request):
             string_set = StringSet.objects.filter(name=string_set_name)
             print(str(string_set))
         except:
-            return render(request, 'calculate.html', context)
+            return render(request, 'pretty-calculate.html', context)
 
         user_set = []
         # wont iterate any other way for some reason
@@ -54,8 +54,8 @@ def load_pretty_calculate_page(request):
             print('username: ', set.user, username)
             if str(set.user) == str(username):
                 context['is_mscale'] = set.is_mscale
-                context['desc'] = set.desc
-                context['number_of_strings'] = set.number_of_strings
+                context['description'] = set.desc
+                context['total_strings'] = set.number_of_strings
                 for string in strings:
                     if username == str(string.string_set.user):
                         if str(string.string_set.name) == str(string_set_name):

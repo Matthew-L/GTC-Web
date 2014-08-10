@@ -3,7 +3,6 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 
 
-admin.autodiscover()
 urlpatterns = patterns('',
                        # Admin
                        url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -12,8 +11,9 @@ urlpatterns = patterns('',
                        # Calculate
                        # url(r'^herokuapp.com/$',
                        #     RedirectView.as_view(url='http://www.stringulator.com', permanent=True)),
-                       (r'^calculate/$', 'calculator.views.load_calculate_page'),
                        (r'^pretty-calculate/$', 'calculator.views.load_pretty_calculate_page'),
+                       (r'^calculate/$', 'calculator.views.load_calculate_page'),
+
                        (r'^calculate-tension/$', 'calculator.views.convert_input_to_tension'),
                        (r'^save-set/$', 'calculator.views.save_set'),
                        (r'^test/$', 'contact.views.test'),
@@ -51,3 +51,4 @@ urlpatterns = patterns('',
                        (r'^base-bak/$', 'contact.views.load_base_bak_page'),
                        (r'^$', 'stringulator.views.load_homepage'),
 )
+admin.autodiscover()

@@ -7,16 +7,35 @@ function formatGauge(gauge) {
   return gauge;
 }
 
-function loadRow(guitarString) {
+function addRow(index) {
   'use strict';
-  addRow();
-  $('#scale-length a').text(guitarString.scale_length);
-  console.log('test');
-//  $('#string-set-name a').text('setValue', '')
+  var row = $('#strings-table tr:last');
+  var clone = row.clone();
+  clone.attr('id', 'string-row-' + index);
+  row.after(clone);
+  $('#strings-table tr:last > td > .string-number').text(index);
 }
 
-function addRow() {
+function loadRow(guitarString) {
+  'use strict';
+  var index = guitarString.string_number;
+  if (index !== 1) {
+    addRow(index);
+  } else {
+    $('#scale-length a').text(guitarString.scale_length);
+  }
+  var row = '#string-row-' + index;
 
+  $.each(guitarString, function (key, value) {
+    if(key === 'string_type'){
+      $(row + '> td > .'+'string-type > a').text(value);
+    }else if(key === 'gauge'){
+      $(row + '> td > .'+key + '> a').text(formatGauge(value));
+    }
+    else{
+      $(row + '> td > .'+key + '> a').text(value);
+    }
+  });
 }
 
 function iterateGuitarString(string) {
@@ -24,7 +43,6 @@ function iterateGuitarString(string) {
   var stringDict = {};
   $.each(string, function (key, value) {
     stringDict[key] = value;
-    console.log(key + stringDict[key]);
   });
   return stringDict;
 }
@@ -37,3 +55,10 @@ function loadStringSet(json) {
     loadRow(guitarString);
   }
 }
+
+$('#insert-more').click(function () {
+  'use strict';
+  var index = parseInt($('#strings-table tr:last').attr('id').split('-')[2]);
+  console.log('split' + index);
+  addRow(index + 1);
+});
