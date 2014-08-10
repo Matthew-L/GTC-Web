@@ -1,68 +1,23 @@
-/*exported loadStringSet*/
-/*jshint camelcase: false */
-$(document).ready(function () {
+/*globals addRow*/
+/*jshint latedef: false*/
+function setAddRowListener() {
   'use strict';
-
-  setListeners();
-});
-
-function formatGauge(gauge) {
-  'use strict';
-  gauge = (parseFloat(gauge).toString()).replace(/^[0]+/gi, '');
-  return gauge;
-}
-
-function addRow(index) {
-  'use strict';
-  var row = $('#strings-table tr:last');
-  var clone = row.clone();
-  clone.attr('id', 'string-row-' + index);
-  row.after(clone);
-  $('#strings-table tr:last > td > .string-number').text(index);
-  return(row);
-}
-
-function loadRow(guitarString) {
-  'use strict';
-  var index = guitarString.string_number;
-  if (index !== 1) {
-    addRow(index);
-  } else {
-    $('#scale-length a').text(guitarString.scale_length);
-  }
-  var row = '#string-row-' + index;
-
-  $.each(guitarString, function (key, value) {
-    if (key === 'string_type') {
-      $(row + '> td > .' + 'string-type > a').attr('data-value', value);
-    } else if (key === 'gauge') {
-      $(row + '> td > .' + key + '> a').attr('data-value', formatGauge(value));
-    }
-    else {
-      $(row + '> td > .' + key + '> a').attr('data-value', value);
-    }
+  $('#insert-more').click(function () {
+    var index = parseInt($('#strings-table').find('tr:last').attr('id').split('-')[2]);
+    console.log('split' + index);
+    addRow(index + 1);
+    setRowListeners();
   });
 }
 
-function iterateGuitarString(string) {
+function setRowListeners() {
   'use strict';
-  var stringDict = {};
-  $.each(string, function (key, value) {
-    stringDict[key] = value;
-  });
-  return stringDict;
+
+  setDeleteRowListeners();
+  setEditableListeners();
 }
 
-function loadStringSet(json) {
-  'use strict';
-  for (var i = 0, len = json.length; i < len; ++i) {
-    var guitarString = json[i].fields;
-    guitarString = iterateGuitarString(guitarString);
-    loadRow(guitarString);
-  }
-}
-
-function setEditables() {
+function setEditableListeners() {
   'use strict';
   $.fn.editable.defaults.mode = 'inline';
   $.fn.editable.defaults.anim = 'true';
@@ -145,7 +100,7 @@ function setEditables() {
           { value: 'DACG', text: 'Chromes - Stainless Flat Wound'},
           { value: 'DAFT', text: 'Flat Tops - Phosphore Bronze'},
           { value: 'DABW', text: '80/20 Brass Round Wound'},
-          { value: 'DAZW', text: '85/15 Great American Bronze'},
+          { value: 'DAZW', text: '85/15 Great American Bronze'}
         ]
       },
       { text: 'D\'Addario Bass',
@@ -160,21 +115,26 @@ function setEditables() {
   });
 }
 
-
-function setListeners() {
+function setDeleteRowListeners() {
   'use strict';
-
   $('.delete').click(function () {
     console.log('here');
-    $(this).closest('tr').remove();
+    var row = $(this).closest('tr');
+    $('#delete-alert').removeClass('hidden');
+    $('#confirm-delete').click(function () {
+      $('#delete-alert').addClass('hidden');
+      row.remove();
+    });
+    $('#cancel-delete').click(function () {
+      $('#delete-alert').addClass('hidden');
+    });
   });
-
-  $('#insert-more').click(function () {
-    'use strict';
-    var index = parseInt($('#strings-table').find('tr:last').attr('id').split('-')[2]);
-    console.log('split' + index);
-    addRow(index + 1);
-    setListeners();
-  });
-  setEditables();
 }
+
+$(document).ready(function () {
+  'use strict';
+  setRowListeners();
+  setAddRowListener();
+});
+
+

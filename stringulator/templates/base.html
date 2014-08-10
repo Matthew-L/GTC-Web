@@ -13,14 +13,23 @@
     <div class="container-640px">
       <a href="/"><img class="logo" src="{{ STATIC_URL }}images/logo.svg"></a>
 
-      <div id="sb-search" class="sb-search">
-        <form action="/search/" role="search">
-          <input class="sb-search-input" placeholder="Find string sets!" type="text" value="" name="query"
+      <form class="navbar-form navbar-right" action="/search/" role="search">
+        <div class="form-group">
+          <input placeholder="Find string sets!" type="text" value="" name="query"
                  id="search">
-          <input class="sb-search-submit" type="submit" value="">
-          <span class="sb-icon-search"></span>
-        </form>
-      </div>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+
+      {#      <div id="sb-search" class="sb-search">#}
+      {#        <form action="/search/" role="search">#}
+      {#          <input class="sb-search-input" placeholder="Find string sets!" type="text" value="" name="query"#}
+      {#                 id="search">#}
+      {#          <input class="sb-search-submit" type="submit" value="">#}
+      {#          <span class="sb-icon-search"></span>#}
+      {#        </form>#}
+      {#      </div>#}
       <div class="morph-button morph-button-modal morph-button-modal-2 morph-button-fixed">
         <button type="button">
           <a href=/calculate/>
@@ -153,11 +162,13 @@
 
 
     <!-- calculate -->
-    <script src="{{ STATIC_URL }}scripts/calculate/demo.js"></script>
-    {#    <script src="{{ STATIC_URL }}scripts/bootstrap/bootstrap/popover.js"></script>#}
-{#    <script src="{{ STATIC_URL }}scripts/calculate/calculate.js"></script>#}
-    <script src="{{ STATIC_URL }}scripts/calculate/new-calculate.js"></script>
-{#    <script src="{{ STATIC_URL }}scripts/calculate/add_row.js"></script>#}
+    <script src="{{ STATIC_URL }}scripts/dependencies/bootstrap/popover.js"></script>
+    {#    <script src="{{ STATIC_URL }}scripts/dependencies/bootstrap/alert.js"></script>#}
+    {#    <script src="{{ STATIC_URL }}scripts/calculate/calculate.js"></script>#}
+    <script src="{{ STATIC_URL }}scripts/calculate/load-set.js"></script>
+    <script src="{{ STATIC_URL }}scripts/calculate/listeners.js"></script>
+    <script src="{{ STATIC_URL }}scripts/calculate/calculate-set.js"></script>
+    {#    <script src="{{ STATIC_URL }}scripts/calculate/add_row.js"></script>#}
     {#    <script src="{{ STATIC_URL }}scripts/bootstrap/tooltip.js"></script>#}
     {#    <script src="{{ STATIC_URL }}scripts/bootstrap/popover.js"></script>#}
     <script src="{{ STATIC_URL }}scripts/calculate/popover_header_info.js"></script>
@@ -169,12 +180,12 @@
     {#    <script>#}
     {#      new UISearch(document.getElementById('sb-search'));#}
     {#    </script>#}
-{#    <script type="text/javascript" src="{{ STATIC_URL }}scripts/uiMorphingButton_fixed.js"></script>#}
-{#    <script type="text/javascript" src="{{ STATIC_URL }}scripts/helpers.js"></script>#}
-{#    <script src="{{ STATIC_URL }}scripts/calculate/popover_header_info.js"></script>#}
-{#    <script src="{{ STATIC_URL }}scripts/dependencies/bootstrap-editable.js"></script>#}
-{#    <script src='{{ STATIC_URL }}scripts/dependencies/jquery-sortable.js'></script>#}
-{#    <script src='{{ STATIC_URL }}scripts/calculate/sortable-calculate.js'></script>#}
+    {#    <script type="text/javascript" src="{{ STATIC_URL }}scripts/uiMorphingButton_fixed.js"></script>#}
+    {#    <script type="text/javascript" src="{{ STATIC_URL }}scripts/helpers.js"></script>#}
+    {#    <script src="{{ STATIC_URL }}scripts/calculate/popover_header_info.js"></script>#}
+    {#    <script src="{{ STATIC_URL }}scripts/dependencies/bootstrap-editable.js"></script>#}
+    {#    <script src='{{ STATIC_URL }}scripts/dependencies/jquery-sortable.js'></script>#}
+    {#    <script src='{{ STATIC_URL }}scripts/calculate/sortable-calculate.js'></script>#}
   {% endif %}
 {% endblock %}
 </body>

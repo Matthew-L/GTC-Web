@@ -43,35 +43,31 @@
             </th>
           </tr>
 
-          {# New User String Form #}
-{#          {% for i in 1|get_range %}#}
-            <tr id="string-row-1">
-              {% include "pretty-forms.html" %}
-            </tr>
-{#          {% endfor %}#}
-
+          <tr id="string-row-1">
+            {% include "pretty-forms.html" %}
+          </tr>
         </table>
       </div>
-      {#        <button id=insert-more type="button" class="btn btn-primary pull-left">Add String</button>#}
-      {#        <button class="btn btn-success pull-right" type="submit">Save String Set</button>#}
-      <table border="0">
-        <tr>
-          <td>
-            <button class="btn btn-primary" id="insert-more" type="button">
-              <span class="glyphicon glyphicon-plus btn-divider"></span>
-              Add String
-            </button>
-          </td>
 
-          <td>
-            <button class="btn btn-success" id="save-set" type="submit" name="save-set" value="{{ string_set_name }}">
-              <span class="glyphicon glyphicon-floppy-disk btn-divider"></span>
-              Save String Set
-            </button>
-          </td>
+      <div id="delete-alert" class="hidden alert alert-danger fade in" role="alert">
+        <h4>Are you sure you want to delete the string row?</h4>
 
-        </tr>
-      </table>
+        <p>
+          <button id="confirm-delete" type="button" class="btn btn-danger">Delete String Row</button>
+          <button id="cancel-delete" type="button" class="btn btn-default">Cancel</button>
+        </p>
+      </div>
+
+      <div>
+        <button class="btn btn-primary" id="insert-more" type="button">
+          <span class="glyphicon glyphicon-plus btn-divider"></span>
+          Add String
+        </button>
+        <button class="btn btn-success" id="save-set" type="submit" name="save-set" value="{{ string_set_name }}">
+          <span class="glyphicon glyphicon-floppy-disk btn-divider"></span>
+          Save String Set
+        </button>
+      </div>
     </form>
   </div>
 {% endblock %}
