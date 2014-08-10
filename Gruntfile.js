@@ -173,7 +173,6 @@ module.exports = function (grunt) {
       },
       body: {
         src: ['<%= stringulator.static %>/scripts/**/*.js',
-          '<%= stringulator.static %>/testing/**/*.js',
           '!<%= stringulator.static %>/scripts/head/*.js'],
         dest: '.tmp/scripts/stringulator.js'
       },
@@ -407,7 +406,7 @@ module.exports = function (grunt) {
     'concat',
     'cssmin',
     'uglify',
-    'copy',
+    'copy'
 //    'clean:temporary',
 //    'debug-true'
   ]);

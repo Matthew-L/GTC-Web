@@ -19,14 +19,14 @@ from calculator.stringcalculator.string_calculator import calculate_tension
 def load_pretty_calculate_page(request):
     context = {}
 
-    try:
-        if request.user.is_authenticated():
-            context['is_logged_in'] = True
-            context['username'] = request.user.get_username()
-        else:
-            context['is_logged_in'] = False
-    except:
-        HttpResponseRedirect('/accounts/login')
+    # try:
+    #     if request.user.is_authenticated():
+    #         context['is_logged_in'] = True
+    #         context['username'] = request.user.get_username()
+    #     else:
+    #         context['is_logged_in'] = False
+    # except:
+    #     HttpResponseRedirect('/accounts/login')
 
     if request.method == 'GET':
 
@@ -66,6 +66,7 @@ def load_pretty_calculate_page(request):
 
         context['json_data'] = data
         context['someDjangoVariable'] = data
+        context['json_dump'] = data
 
     return render(request, 'pretty-calculate.html', context)
 
