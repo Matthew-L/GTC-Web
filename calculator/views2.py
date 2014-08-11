@@ -1,33 +1,30 @@
-import json
-
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core import serializers
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+import json
 
 from .guitarstring.guitar_string import GuitarString as GuSt
 from .models import StringSet, String
 
-
 # new calculate
-from calculator.stringcalculator.string.length import Length, InvalidStringNumberError
+from calculator.stringcalculator.string.length import Length
 from calculator.stringcalculator.string.guitar_string import GuitarString
 from calculator.stringcalculator.scientificpitch.scientific_pitch import ScientificPitch
 from calculator.stringcalculator.string_calculator import calculate_tension
 
-ERRORS = []
 
-error = {
-    InvalidStringNumberError: 'invalid string number'
-}
+def calculate_string_tension(request):
+    get_tension()
 
 
-def load_calculate_page(request):
+def load_pretty_calculate_page(request):
     context = {}
 
     if request.method == 'GET':
+
         try:
             string_set_name = str(request.GET['string_set_name'])
             username = str(request.GET['users_set'])
@@ -41,13 +38,8 @@ def load_calculate_page(request):
 
         user_set = []
         # wont iterate any other way for some reason
-
         context['string_set_name'] = string_set_name
-
         strings = String.objects.all()
-
-        print('her', strings)
-
         for set in string_set:
             print('username: ', set.user, username)
             if str(set.user) == str(username):
@@ -62,8 +54,8 @@ def load_calculate_page(request):
 
         data = serializers.serialize("json", user_set)
 
-        context['json_data'] = data
-        context['someDjangoVariable'] = data
+        # context['json_data'] = data
+        # context['someDjangoVariable'] = data
         context['json_dump'] = data
 
     return render(request, 'pretty-calculate.html', context)
@@ -74,7 +66,6 @@ def get_tension(tension_input):
     pitch = ScientificPitch(tension_input['note'], tension_input['octave'])
     string = GuitarString(tension_input['gauge'], tension_input['string_material'])
     tension = calculate_tension(length, pitch, string)
-
     return round_tension(tension)
 
 
@@ -89,15 +80,10 @@ def convert_input_to_tension(request):
     @param request: a request object containing a dictionary of GuSt parameters
     @return: the calculated tension rouned off to 2 decimal places
     """
-    response = {}
     tension = 0
     if request.is_ajax() and request.method == "POST":
-        try:
-            tension = get_tension(request.POST)
-        except:
-            response['error'] = 'There was an error when processing string ' + str(request.POST['string_number'])
-            return HttpResponseBadRequest(json.dumps(response), content_type='application/json')
-    response['tension'] = tension
+        tension = get_tension(request.POST)
+    response = {"tension": tension}
     return HttpResponse(json.dumps(response), content_type='application/javascript')
 
 
@@ -286,65 +272,120 @@ def ajax_delete_set(request):
 
         return HttpResponse(json.dumps(response), mimetype='application/javascript')
 
-
-def count_string_rows(request):
-    curr = 0
-    if request.method == 'GET':
-        try:
-            while request.GET['gauge_GTC_' + str(curr)] is not None:
-                print(request.GET['gauge_GTC_' + str(curr)])
-                curr += 1
-        except KeyError:
-            pass
-
-    return curr
-
-
-def is_anonymous(user):
-    if user.is_anonymous():
-        return True
-    return False
-
-
-def is_valid_name(name):
-    if name == "":
-        return True
-
-
-def is_valid_scale_length(context, request, errors):
-    try:
-        is_mscale = request.GET["is_mscale"]
-        is_mscale = True
-    except:
-        is_mscale = False
-
-    if is_mscale:
-        try:
-            scale_length = request.GET['scale_length']
-            GuSt.sanitize_multiscale(scale_length)
-        except:
-            errors.append("Invalid MultiScale Length!")
-            return return_save_errors(context, errors, request)
-        try:
-            number_of_strings = request.GET['number_of_strings']
-            GuSt.sanitize_number_of_strings(number_of_strings)
-        except:
-            errors.append("Invalid Number of Strings!")
-            return return_save_errors(context, errors, request)
-    else:
-        try:
-            scale_length = request.GET['scale_length']
-            GuSt.sanitize_scale_length(scale_length)
-        except:
-            errors.append("Invalid Scale Length!")
-            return return_save_errors(context, errors, request)
-        number_of_strings = 0
-    return is_mscale, scale_length, number_of_strings
-
-
-def renamed_set_exists(should_rename, name, user):
-    if should_rename:
-        renamed_to_existing_set = StringSet.objects.filter(name=name, user=user)
-        if renamed_to_existing_set:
-            return True
-    return False
+#
+# def count_string_rows(request):
+#     curr = 0
+#     if request.method == 'GET':
+#         try:
+#             while request.GET['gauge_GTC_' + str(curr)] is not None:
+#                 print(request.GET['gauge_GTC_' + str(curr)])
+#                 curr += 1
+#         except KeyError:
+#             pass
+#
+#     return curr
+#
+#
+# def is_anonymous(user):
+#     if user.is_anonymous():
+#         return True
+#     return False
+#
+#
+# def is_valid_name(name):
+#     if name == "":
+#         return True
+#
+#
+# def is_valid_scale_length(context, request, errors):
+#     try:
+#         is_mscale = request.GET["is_mscale"]
+#         is_mscale = True
+#     except:
+#         is_mscale = False
+#
+#     if is_mscale:
+#         try:
+#             scale_length = request.GET['scale_length']
+#             GuSt.sanitize_multiscale(scale_length)
+#         except:
+#             errors.append("Invalid MultiScale Length!")
+#             return return_save_errors(context, errors, request)
+#         try:
+#             number_of_strings = request.GET['number_of_strings']
+#             GuSt.sanitize_number_of_strings(number_of_strings)
+#         except:
+#             errors.append("Invalid Number of Strings!")
+#             return return_save_errors(context, errors, request)
+#     else:
+#         try:
+#             scale_length = request.GET['scale_length']
+#             GuSt.sanitize_scale_length(scale_length)
+#         except:
+#             errors.append("Invalid Scale Length!")
+#             return return_save_errors(context, errors, request)
+#         number_of_strings = 0
+#     return is_mscale, scale_length, number_of_strings
+#
+#
+# def renamed_set_exists(should_rename, name, user):
+#     if should_rename:
+#         renamed_to_existing_set = StringSet.objects.filter(name=name, user=user)
+#         if renamed_to_existing_set:
+#             return True
+#     return False
+#
+#
+# def load_calculate_page(request):
+#     context = {}
+#     # context['debug'] = settings.DEBUG
+#
+#     try:
+#         if request.user.is_authenticated():
+#             context['is_logged_in'] = True
+#             context['username'] = request.user.get_username()
+#         else:
+#             context['is_logged_in'] = False
+#     except:
+#         HttpResponseRedirect('/accounts/login')
+#
+#     if request.method == 'GET':
+#
+#         try:
+#             string_set_name = str(request.GET['string_set_name'])
+#             username = str(request.GET['users_set'])
+#             print(string_set_name)
+#             user_id = User.objects.get(username=username).pk
+#             print(user_id)
+#             string_set = StringSet.objects.filter(name=string_set_name)
+#             print(str(string_set))
+#         except:
+#             return render(request, 'calculate.html', context)
+#
+#         user_set = []
+#         # wont iterate any other way for some reason
+#
+#         context['string_set_name'] = string_set_name
+#
+#         strings = String.objects.all()
+#
+#         print('her', strings)
+#
+#         for set in string_set:
+#             print('username: ', set.user, username)
+#             if str(set.user) == str(username):
+#                 context['is_mscale'] = set.is_mscale
+#                 context['desc'] = set.desc
+#                 context['number_of_strings'] = set.number_of_strings
+#                 for string in strings:
+#                     if username == str(string.string_set.user):
+#                         if str(string.string_set.name) == str(string_set_name):
+#                             print(string.gauge)
+#                             user_set.append(string)
+#
+#         data = serializers.serialize("json", user_set)
+#
+#         context['json_data'] = data
+#         context['someDjangoVariable'] = data
+#
+#     return render(request, 'calculate.html', context)

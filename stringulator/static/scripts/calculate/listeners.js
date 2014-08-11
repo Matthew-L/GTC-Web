@@ -25,23 +25,49 @@ function setEditableListeners() {
 
   $.fn.editable.defaults.url = '/post';
 //  $.fn.editableform.buttons = '';
-  $('#string-set-name').editable({
-    type: 'text'
+  $('#string-set-name').find('a').editable({
+    type: 'text',
+    success: function (response, newValue) {
+//      setColorValidation($(this), validateName(newValue));
+    },
+    validate: function (value) {
+      if ($.trim(value) == '') {
+        return 'This field is required';
+      }
+    }
   });
 
   $('#description').find('a').editable({
-    type: 'textarea'
+    type: 'textarea',
+    success: function (response, newValue) {
+//      setColorValidation(note, newValue);
+    },
+    validate: function (value) {
+      if ($.trim(value) == '') {
+        return 'This field is required';
+      }
+    }
   });
 
   $('#scale-length').find('a').editable({
-    type: 'text'
+    type: 'text',
+    success: function (response, newValue) {
+//      setColorValidation(note, newValue);
+    },
+    validate: function (value) {
+      if ($.trim(value) == '') {
+        return 'This field is required';
+      }
+    }
   });
 
 
   $('.note a').editable({
     type: 'select',
     showbuttons: false,
-//    selector: 'tr',
+    success: function (response, newValue) {
+//      setColorValidation($(this), newValue);
+    },
     source: [
       {value: 'A', text: 'A'},
       {value: 'A#/Bb', text: 'A#/Bb'},
@@ -55,12 +81,20 @@ function setEditableListeners() {
       {value: 'F#/Gb', text: 'F#/Gb'},
       {value: 'G', text: 'G'},
       {value: 'G#/Ab', text: 'G#/Ab'}
-    ]
+    ],
+    validate: function (value) {
+      if ($.trim(value) == '') {
+        return 'This field is required';
+      }
+    }
   });
 
   $('.octave a').editable({
     type: 'select',
     showbuttons: false,
+    success: function (response, newValue) {
+//      setColorValidation(note, newValue);
+    },
     source: [
       {value: '0', text: '0'},
       {value: '1', text: '1'},
@@ -72,17 +106,33 @@ function setEditableListeners() {
       {value: '7', text: '7'},
       {value: '8', text: '8'},
       {value: '9', text: '9'}
-    ]
+    ],
+    validate: function (value) {
+      if ($.trim(value) == '') {
+        return 'This field is required';
+      }
+    }
   });
 
   $('.gauge a').editable({
     type: 'text',
-    showbuttons: false
+    success: function (response, newValue) {
+//      setColorValidation(note, newValue);
+    },
+    showbuttons: false,
+    validate: function (value) {
+      if ($.trim(value) == '') {
+        return 'This field is required';
+      }
+    }
   });
 
   $('.string-type a').editable({
     type: 'select',
     showbuttons: false,
+    success: function (response, newValue) {
+//      setColorValidation(note, newValue);
+    },
     source: [
       { text: 'Kalium',
         children: [
@@ -111,7 +161,12 @@ function setEditableListeners() {
           { value: 'DABS', text: 'ProSteel Round Wound'}
         ]
       }
-    ]
+    ],
+    validate: function (value) {
+      if ($.trim(value) == '') {
+        return 'This field is required';
+      }
+    }
   });
 }
 

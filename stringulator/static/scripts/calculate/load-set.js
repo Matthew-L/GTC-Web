@@ -14,7 +14,7 @@ function addRow(index) {
   var clone = row.clone();
   clone.attr('id', 'string-row-' + index);
   row.after(clone);
-  $('#strings-table tr:last > td > .string-number').text(index);
+  $('#strings-table').find('tr:last > td > .string-number').text(index);
   return(row);
 }
 
@@ -24,7 +24,7 @@ function loadRow(guitarString) {
   if (index !== 1) {
     addRow(index);
   } else {
-    $('#scale-length a').text(guitarString.scale_length);
+    $('#scale-length').find('a').text(guitarString.scale_length);
   }
   var row = '#string-row-' + index;
 
@@ -38,6 +38,7 @@ function loadRow(guitarString) {
       $(row + '> td > .' + key + '> a').attr('data-value', value);
     }
   });
+  calculateString(guitarString);
 }
 
 function iterateGuitarString(string) {
