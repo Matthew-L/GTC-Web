@@ -76,7 +76,8 @@ PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 if DEBUG:
     STATIC_URL = '/static/'
 else:
-    STATIC_URL = 'https://s3.amazonaws.com/stringulator-production/static/'
+    # STATIC_URL = 'https://s3.amazonaws.com/stringulator-production/static/'
+    STATIC_URL = 'https://s3.amazonaws.com/stringulator-dev/static/'
 
 STATIC_ROOT = os.path.abspath('static')
 COMPRESS_ROOT = os.path.abspath('static')

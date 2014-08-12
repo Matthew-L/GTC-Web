@@ -146,15 +146,10 @@
 
 {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-  {% if debug %}
-    {#    <script type="text/javascript" src="{{ STATIC_URL }}scripts/bootstrap/bootstrap.js"></script>#}
-        <script
-            src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-{#    <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>#}
-{#<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">#}
-{#<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>#}
-{#<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">#}
-{##}
+{#  {% if debug %}#}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js">
+    </script>
+
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
     <script src="{{ STATIC_URL }}scripts/dependencies/summernote.js"></script>
 
@@ -162,30 +157,23 @@
     <script type="text/javascript" src="{{ STATIC_URL }}scripts/homepage/scripts.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}scripts/homepage/classie.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}scripts/homepage/uisearch.js"></script>
-    {#    <script>#}
-    {#      new UISearch(document.getElementById('sb-search'));#}
-    {#    </script>#}
+
     <script type="text/javascript" src="{{ STATIC_URL }}scripts/dependencies/uiMorphingButton_fixed.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}scripts/dependencies/helpers.js"></script>
 
 
     <!-- calculate -->
-    <script src="{{ STATIC_URL }}scripts/dependencies/bootstrap/popover.js"></script>
-    {#    <script src="{{ STATIC_URL }}scripts/dependencies/bootstrap/alert.js"></script>#}
-    {#    <script src="{{ STATIC_URL }}scripts/calculate/calculate.js"></script>#}
     <script src="{{ STATIC_URL }}scripts/calculate/load-set.js"></script>
     <script src="{{ STATIC_URL }}scripts/calculate/validate.js"></script>
     <script src="{{ STATIC_URL }}scripts/calculate/listeners.js"></script>
     <script src="{{ STATIC_URL }}scripts/calculate/calculate-set.js"></script>
-    {#    <script src="{{ STATIC_URL }}scripts/calculate/add_row.js"></script>#}
-    {#    <script src="{{ STATIC_URL }}scripts/bootstrap/tooltip.js"></script>#}
-    {#    <script src="{{ STATIC_URL }}scripts/bootstrap/popover.js"></script>#}
+
     <script src="{{ STATIC_URL }}scripts/calculate/popover_header_info.js"></script>
     <script src="{{ STATIC_URL }}scripts/dependencies/bootstrap-editable.js"></script>
     <script src='{{ STATIC_URL }}scripts/dependencies/jquery-sortable.js'></script>
-    <script src='{{ STATIC_URL }}scripts/calculate/sortable-calculate.js'></script>
-  {% else %}
-    <script src="{{ STATIC_URL }}scripts/stringulator.min.js"></script>
+
+{#  {% else %}#}
+{#    <script src="{{ STATIC_URL }}scripts/stringulator.min.js"></script>#}
     {#    <script>#}
     {#      new UISearch(document.getElementById('sb-search'));#}
     {#    </script>#}
@@ -195,7 +183,7 @@
     {#    <script src="{{ STATIC_URL }}scripts/dependencies/bootstrap-editable.js"></script>#}
     {#    <script src='{{ STATIC_URL }}scripts/dependencies/jquery-sortable.js'></script>#}
     {#    <script src='{{ STATIC_URL }}scripts/calculate/sortable-calculate.js'></script>#}
-  {% endif %}
+{#  {% endif %}#}
 {% endblock %}
 </body>
 </html>
