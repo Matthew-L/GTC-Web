@@ -11,10 +11,11 @@
 
   <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
   {% if debug %}
-{#    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>#}
+{#        <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>#}
     <link href="{{ STATIC_URL }}styles/css/bootstrap.css" rel="stylesheet" type="text/css">
-
-{#    <link href="{{ STATIC_URL }}styles/css/bootstrap.min.css" rel="stylesheet" type="text/css">#}
+{#    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">#}
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    {#    <link href="{{ STATIC_URL }}styles/css/bootstrap.min.css" rel="stylesheet" type="text/css">#}
     <link href="{{ STATIC_URL }}styles/css/normalize.css" rel="stylesheet" type="text/css">
     <link href="{{ STATIC_URL }}styles/css/component.css" rel="stylesheet" type="text/css">
     <link href="{{ STATIC_URL }}styles/css/content.css" rel="stylesheet" type="text/css">
@@ -23,7 +24,11 @@
     <link href="{{ STATIC_URL }}styles/css/bootstrap-editable.css" rel="stylesheet" type="text/css">
 
     <link href="{{ STATIC_URL }}styles/css/default.css" rel="stylesheet" type="text/css">
+
+    <link href="{{ STATIC_URL }}styles/css/summernote.css"/>
+
     <script src="{{ STATIC_URL }}scripts/head/modernizr.custom.js"></script>
+
   {% else %}
     <link href="{{ STATIC_URL }}styles/stringulator.min.css" rel="stylesheet" type="text/css">
     <script src="{{ STATIC_URL }}scripts/head.js"></script>

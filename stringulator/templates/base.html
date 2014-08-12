@@ -147,20 +147,16 @@
 {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   {% if debug %}
-    <script type="text/javascript" src="{{ STATIC_URL }}scripts/bootstrap/bootstrap.js"></script>
-    <script
-        src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-    <!-- wysihtml5 parser rules -->
-    <script src="{{ STATIC_URL }}scripts/dependencies/advanced.js"></script>
-    <!-- Library -->
-    <script src="{{ STATIC_URL }}scripts/dependencies/wysihtml5-0.3.0_rc2.js"></script>
-
-    <script>
-      var editor = new wysihtml5.Editor("wysihtml5-textarea", { // id of textarea element
-        toolbar: "wysihtml5-toolbar", // id of toolbar element
-        parserRules: wysihtml5ParserRules // defined in parser rules set
-      });
-    </script>
+    {#    <script type="text/javascript" src="{{ STATIC_URL }}scripts/bootstrap/bootstrap.js"></script>#}
+        <script
+            src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+{#    <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>#}
+{#<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">#}
+{#<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>#}
+{#<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">#}
+{##}
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}scripts/dependencies/summernote.js"></script>
 
 
     <script type="text/javascript" src="{{ STATIC_URL }}scripts/homepage/scripts.js"></script>

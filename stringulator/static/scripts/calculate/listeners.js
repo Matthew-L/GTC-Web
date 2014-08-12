@@ -31,7 +31,7 @@ function setEditableListeners() {
 //      setColorValidation($(this), validateName(newValue));
     },
     validate: function (value) {
-      if ($.trim(value) == '') {
+      if ($.trim(value) === '') {
         return 'This field is required';
       }
     }
@@ -43,7 +43,7 @@ function setEditableListeners() {
 //      setColorValidation(note, newValue);
     },
     validate: function (value) {
-      if ($.trim(value) == '') {
+      if ($.trim(value) === '') {
         return 'This field is required';
       }
     }
@@ -55,8 +55,11 @@ function setEditableListeners() {
 //      setColorValidation(note, newValue);
     },
     validate: function (value) {
-      if ($.trim(value) == '') {
+      var length = $.trim(value)
+      if (length === '') {
         return 'This field is required';
+      }else if(!isValidScaleLength(length)){
+        return 'Invalid Scale Length';
       }
     }
   });
@@ -95,6 +98,11 @@ function setEditableListeners() {
     success: function (response, newValue) {
 //      setColorValidation(note, newValue);
     },
+    validate: function (value) {
+      if ($.trim(value) == '') {
+        return 'This field is required';
+      }
+    },
     source: [
       {value: '0', text: '0'},
       {value: '1', text: '1'},
@@ -106,12 +114,7 @@ function setEditableListeners() {
       {value: '7', text: '7'},
       {value: '8', text: '8'},
       {value: '9', text: '9'}
-    ],
-    validate: function (value) {
-      if ($.trim(value) == '') {
-        return 'This field is required';
-      }
-    }
+    ]
   });
 
   $('.gauge a').editable({
@@ -121,8 +124,11 @@ function setEditableListeners() {
     },
     showbuttons: false,
     validate: function (value) {
-      if ($.trim(value) == '') {
+      var gauge = $.trim(value);
+      if (gauge === '') {
         return 'This field is required';
+      }else if(!isValidGauge(gauge)){
+        return 'Invalid Gauge';
       }
     }
   });
@@ -132,6 +138,11 @@ function setEditableListeners() {
     showbuttons: false,
     success: function (response, newValue) {
 //      setColorValidation(note, newValue);
+    },
+    validate: function (value) {
+      if ($.trim(value) === '') {
+        return 'This field is required';
+      }
     },
     source: [
       { text: 'Kalium',
@@ -161,12 +172,7 @@ function setEditableListeners() {
           { value: 'DABS', text: 'ProSteel Round Wound'}
         ]
       }
-    ],
-    validate: function (value) {
-      if ($.trim(value) == '') {
-        return 'This field is required';
-      }
-    }
+    ]
   });
 }
 
@@ -188,6 +194,19 @@ function setDeleteRowListeners() {
 
 $(document).ready(function () {
   'use strict';
+  $('#summernote').summernote();
+  $('.summernote').summernote({
+    toolbar: [
+      //[groupname, [button list]]
+
+      ['style', ['bold', 'italic', 'underline', 'clear']],
+      ['font', ['strikethrough']],
+      ['fontsize', ['fontsize']],
+      ['color', ['color']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['height', ['height']],
+    ]
+  });
   setRowListeners();
   setAddRowListener();
 });
