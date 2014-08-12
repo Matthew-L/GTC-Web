@@ -92,11 +92,12 @@ def convert_input_to_tension(request):
     response = {}
     tension = 0
     if request.is_ajax() and request.method == "POST":
-        try:
-            tension = get_tension(request.POST)
-        except:
-            response['error'] = 'There was an error when processing string ' + str(request.POST['string_number'])
-            return HttpResponseBadRequest(json.dumps(response), content_type='application/json')
+        print(request.POST)
+        # try:
+        tension = get_tension(request.POST)
+        # except:
+        #     response['error'] = 'There was an error when processing string ' + str(request.POST['string_number'])
+        #     return HttpResponseBadRequest(json.dumps(response), content_type='application/json')
     response['tension'] = tension
     return HttpResponse(json.dumps(response), content_type='application/javascript')
 

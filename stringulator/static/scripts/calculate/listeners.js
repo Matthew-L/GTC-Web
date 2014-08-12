@@ -68,8 +68,8 @@ function setEditableListeners() {
   $('.note a').editable({
     type: 'select',
     showbuttons: false,
-    success: function (response, newValue) {
-//      setColorValidation($(this), newValue);
+    success: function () {
+      getRowInputs($(this));
     },
     source: [
       {value: 'A', text: 'A'},

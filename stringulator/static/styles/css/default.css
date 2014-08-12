@@ -90,6 +90,11 @@ tr.table_row {
   text-align: center;
 }
 
+/* line 1, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
+.table th {
+  text-align: center;
+}
+
 /* line 1, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_header.scss */
 .navbar {
   background: rgba(255, 255, 255, 0.85);
