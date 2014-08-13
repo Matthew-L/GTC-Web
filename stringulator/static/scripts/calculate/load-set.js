@@ -1,6 +1,6 @@
 /*exported loadStringSet*/
 /*jshint camelcase: false */
-
+/*exported getRowInputs*/
 
 function formatGauge(gauge) {
   'use strict';
@@ -59,18 +59,18 @@ function loadStringSet(json) {
   }
 }
 
-//function makeRowDict(scale_length, string_number, note, octave, gauge, string_type, total_strings) {
-//  'use strict';
-//  return {
-//    scale_length: scale_length,
-//    string_number: string_number,
-//    note: note,
-//    octave: octave,
-//    gauge: gauge,
-//    string_material: string_type,
-//    total_strings: total_strings
-//  };
-//}
+function makeRowDict(scale_length, string_number, note, octave, gauge, string_type, total_strings) {
+  'use strict';
+  return {
+    scale_length: scale_length,
+    string_number: string_number,
+    note: note,
+    octave: octave,
+    gauge: gauge,
+    string_material: string_type,
+    total_strings: total_strings
+  };
+}
 
 function getRowDataValue(row, key){
   'use strict';
@@ -90,15 +90,12 @@ function getRowInputs(input) {
   'use strict';
 
   var row = input.closest('tr').attr('id');
-  var guitarString = {
-    scale_length: $('#scale-length > a').text(),
+  return {
+    scale_length: $('#scale-length').find('> a').text(),
     string_number: $('#' + row + '> td > .string-number').text(),
-    note: getRowDataValue(row, '.note'),
-    octave: getRowDataValue(row, '.octave'),
+    note: getRowText(row, '.note'),
+    octave: getRowText(row, '.octave'),
     gauge: getRowText(row, '.gauge'),
     string_type: getRowDataValue(row, '.string-type'),
-    total_strings: getTotalStrings()
   };
-
-  calculateString(guitarString);
 }

@@ -1,5 +1,52 @@
 /*globals addRow*/
+/* global getRowInputs, calculateString */
 /*jshint latedef: false*/
+
+function postTension(key, value, rowKey){
+  'use strict';
+  var guitarString = getRowInputs(rowKey);
+  guitarString[key] = value;
+  calculateString(guitarString);
+}
+
+function setColorValidation(element, valid) {
+  'use strict';
+  if (valid) {
+    $(element).css('border-bottom', 'solid 1px #5cb85c');
+  } else {
+    $(element).css('border-bottom', 'solid 1px #d2322d');
+  }
+}
+
+function isFloat(input) {
+  'use strict';
+  var floatRegex = /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/;
+  return !!floatRegex.test(input);
+}
+
+function isValidScaleLength(length) {
+  'use strict';
+  var lengths = length.split('-', 2);
+  if (lengths.length === 2) {
+    if (lengths[0] + '-' + lengths[1] !== length) {
+      return false;
+    }
+  }
+  for (var i = 0; i < lengths.length; ++i) {
+    console.log(lengths[i]);
+    if (!isFloat(lengths[i]) && lengths.length <= 30) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function isValidGauge(gauge) {
+  'use strict';
+  return !!(isFloat(gauge) && 0 < gauge && gauge < 1 && gauge.length <= 6);
+}
+
+
 function setAddRowListener() {
   'use strict';
   $('#insert-more').click(function () {
@@ -22,7 +69,6 @@ function setEditableListeners() {
   $.fn.editable.defaults.mode = 'inline';
   $.fn.editable.defaults.anim = 'true';
   $.fn.editable.defaults.onblur = 'submit';
-
   $.fn.editable.defaults.url = '/post';
 //  $.fn.editableform.buttons = '';
   $('#string-set-name').find('a').editable({
@@ -52,13 +98,13 @@ function setEditableListeners() {
   $('#scale-length').find('a').editable({
     type: 'text',
     success: function (response, newValue) {
-//      setColorValidation(note, newValue);
+      postTension('scale_length', newValue, $(this));
     },
     validate: function (value) {
       var length = $.trim(value)
       if (length === '') {
         return 'This field is required';
-      }else if(!isValidScaleLength(length)){
+      } else if (!isValidScaleLength(length)) {
         return 'Invalid Scale Length';
       }
     }
@@ -68,8 +114,8 @@ function setEditableListeners() {
   $('.note a').editable({
     type: 'select',
     showbuttons: false,
-    success: function () {
-      getRowInputs($(this));
+    success: function (response, newValue) {
+      postTension('note', newValue, $(this));
     },
     source: [
       {value: 'A', text: 'A'},
@@ -86,7 +132,7 @@ function setEditableListeners() {
       {value: 'G#/Ab', text: 'G#/Ab'}
     ],
     validate: function (value) {
-      if ($.trim(value) == '') {
+      if ($.trim(value) === '') {
         return 'This field is required';
       }
     }
@@ -96,10 +142,10 @@ function setEditableListeners() {
     type: 'select',
     showbuttons: false,
     success: function (response, newValue) {
-//      setColorValidation(note, newValue);
+      postTension('octave', newValue, $(this));
     },
     validate: function (value) {
-      if ($.trim(value) == '') {
+      if ($.trim(value) === '') {
         return 'This field is required';
       }
     },
@@ -120,14 +166,14 @@ function setEditableListeners() {
   $('.gauge a').editable({
     type: 'text',
     success: function (response, newValue) {
-//      setColorValidation(note, newValue);
+      postTension('gauge', newValue, $(this));
     },
     showbuttons: false,
     validate: function (value) {
       var gauge = $.trim(value);
       if (gauge === '') {
         return 'This field is required';
-      }else if(!isValidGauge(gauge)){
+      } else if (!isValidGauge(gauge)) {
         return 'Invalid Gauge';
       }
     }
@@ -137,7 +183,8 @@ function setEditableListeners() {
     type: 'select',
     showbuttons: false,
     success: function (response, newValue) {
-//      setColorValidation(note, newValue);
+      $(this).attr('data-value', newValue);
+      postTension('string_material', newValue, $(this));
     },
     validate: function (value) {
       if ($.trim(value) === '') {
@@ -210,5 +257,8 @@ $(document).ready(function () {
   setRowListeners();
   setAddRowListener();
 });
+
+
+
 
 
