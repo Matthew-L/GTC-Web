@@ -2,12 +2,17 @@
 /* global getRowInputs, calculateString */
 /*jshint latedef: false*/
 
-function postTension(key, value, rowKey){
+function postSingleTension(key, value, rowField){
   'use strict';
-  var guitarString = getRowInputs(rowKey);
+  var row = rowField.closest('tr').attr('id');
+  var guitarString = getRowInputs(row);
   guitarString[key] = value;
-  calculateString(guitarString);
+  calculateSingleString(guitarString);
 }
+
+//function postAllTensions('scale_length', newValue){
+//
+//}
 
 function setColorValidation(element, valid) {
   'use strict';
@@ -98,10 +103,10 @@ function setEditableListeners() {
   $('#scale-length').find('a').editable({
     type: 'text',
     success: function (response, newValue) {
-      postTension('scale_length', newValue, $(this));
+      calculateAllRows(newValue);
     },
     validate: function (value) {
-      var length = $.trim(value)
+      var length = $.trim(value);
       if (length === '') {
         return 'This field is required';
       } else if (!isValidScaleLength(length)) {
@@ -115,7 +120,7 @@ function setEditableListeners() {
     type: 'select',
     showbuttons: false,
     success: function (response, newValue) {
-      postTension('note', newValue, $(this));
+      postSingleTension('note', newValue, $(this));
     },
     source: [
       {value: 'A', text: 'A'},
@@ -142,7 +147,7 @@ function setEditableListeners() {
     type: 'select',
     showbuttons: false,
     success: function (response, newValue) {
-      postTension('octave', newValue, $(this));
+      postSingleTension('octave', newValue, $(this));
     },
     validate: function (value) {
       if ($.trim(value) === '') {
@@ -166,7 +171,7 @@ function setEditableListeners() {
   $('.gauge a').editable({
     type: 'text',
     success: function (response, newValue) {
-      postTension('gauge', newValue, $(this));
+      postSingleTension('gauge', newValue, $(this));
     },
     showbuttons: false,
     validate: function (value) {
@@ -184,7 +189,7 @@ function setEditableListeners() {
     showbuttons: false,
     success: function (response, newValue) {
       $(this).attr('data-value', newValue);
-      postTension('string_material', newValue, $(this));
+      postSingleTension('string_material', newValue, $(this));
     },
     validate: function (value) {
       if ($.trim(value) === '') {
@@ -251,7 +256,7 @@ $(document).ready(function () {
       ['fontsize', ['fontsize']],
       ['color', ['color']],
       ['para', ['ul', 'ol', 'paragraph']],
-      ['height', ['height']],
+      ['height', ['height']]
     ]
   });
   setRowListeners();

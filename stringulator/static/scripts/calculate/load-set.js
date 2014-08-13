@@ -72,30 +72,45 @@ function makeRowDict(scale_length, string_number, note, octave, gauge, string_ty
   };
 }
 
-function getRowDataValue(row, key){
+function getRowDataValue(row, key) {
   'use strict';
-  return $('#' + row + '> td > '+ key + ' > a').attr('data-value');
+  return $('#' + row + '> td > ' + key + ' > a').attr('data-value');
 }
 
-function getRowText(row, key){
+function getRowText(row, key) {
   'use strict';
-  return $('#' + row + '> td > '+ key + ' > a').text();
+  return $('#' + row + '> td > ' + key + ' > a').text();
 }
 
-function getTotalStrings(){
+function getTotalStrings() {
   return $('#strings-table').find('tr:last > td > .string-number').text();
 }
 
-function getRowInputs(input) {
+function getRowInputs(row) {
   'use strict';
 
-  var row = input.closest('tr').attr('id');
+
   return {
-    scale_length: $('#scale-length').find('> a').text(),
     string_number: $('#' + row + '> td > .string-number').text(),
     note: getRowText(row, '.note'),
     octave: getRowText(row, '.octave'),
     gauge: getRowText(row, '.gauge'),
-    string_type: getRowDataValue(row, '.string-type'),
+    string_type: getRowDataValue(row, '.string-type')
   };
+}
+
+
+function calculateSingleString(guitarString) {
+  'use strict';
+  guitarString.scale_length = $('#scale-length').find('> a').text();
+  calculateString(guitarString);
+}
+
+function calculateAllRows(scaleLength) {
+  'use strict';
+  for (var i = 1; i <= getTotalStrings(); ++i) {
+    var guitarString = getRowInputs('string-row-' + i);
+    guitarString.scale_length = scaleLength;
+    calculateString(guitarString);
+  }
 }
