@@ -1,23 +1,23 @@
 @import url(http://styles/fonts.googleapis.com/css?family=Lato:300,400,700|Merriweather+Sans:800);
-/* line 1, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 1, ../partials/_main.scss */
 body {
   text-align: center;
 }
 
-/* line 5, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 5, ../partials/_main.scss */
 .jumbotron {
   max-width: 700px;
   margin: 120px auto;
   background: rgba(255, 255, 255, 0.85);
 }
 
-/* line 11, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 11, ../partials/_main.scss */
 footer {
   padding: 25px;
   background: rgba(255, 255, 255, 0.85);
 }
 
-/* line 16, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 16, ../partials/_main.scss */
 #page {
   width: 960px;
   text-align: left;
@@ -25,7 +25,7 @@ footer {
   background-color: #0C0C0C;
 }
 
-/* line 23, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 23, ../partials/_main.scss */
 #sidebar {
   float: right;
   width: 200px;
@@ -33,7 +33,7 @@ footer {
   background-color: Green;
 }
 
-/* line 30, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 30, ../partials/_main.scss */
 #content {
   float: right;
   width: 600px;
@@ -42,12 +42,12 @@ footer {
   background-color: #00ffe2;
 }
 
-/* line 38, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 38, ../partials/_main.scss */
 tr.table_row {
   display: none;
 }
 
-/* line 42, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 42, ../partials/_main.scss */
 .btn-divider {
   text-align: center;
   padding: 1px 4px 4px 1px;
@@ -56,7 +56,7 @@ tr.table_row {
   border-right: 1px solid #ffffff;
 }
 
-/* line 50, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 50, ../partials/_main.scss */
 .my-grid {
   padding-top: 5px;
   padding-bottom: 5px;
@@ -66,7 +66,7 @@ tr.table_row {
   border: 1px solid rgba(124, 123, 107, 0.2);
 }
 
-/* line 59, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 59, ../partials/_main.scss */
 .bs-social-buttons {
   display: inline-block;
   margin-bottom: 0;
@@ -74,7 +74,7 @@ tr.table_row {
   list-style: none;
 }
 
-/* line 66, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 66, ../partials/_main.scss */
 .bs-footer {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -84,18 +84,18 @@ tr.table_row {
   border-top: 1px solid #e5e5e5;
 }
 
-/* line 75, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+/* line 75, ../partials/_main.scss */
 .bs-social {
   margin-bottom: 20px;
   text-align: center;
 }
 
-/* line 1, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
+/* line 1, ../partials/_calculate.scss */
 .table th {
   text-align: center;
 }
 
-/* line 1, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_header.scss */
+/* line 1, ../partials/_header.scss */
 .navbar {
   background: rgba(255, 255, 255, 0.85);
 }
@@ -116,20 +116,20 @@ tr.table_row {
   font-style: normal;
 }
 
-/* line 24, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 24, ../partials/_test.scss */
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-/* line 30, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 30, ../partials/_test.scss */
 html, body {
   padding: 0;
   margin: 0;
 }
 
-/* line 35, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 35, ../partials/_test.scss */
 body {
   background: #111111 url(/static/images/body-bg.jpg) no-repeat fixed center center;
   -webkit-background-size: cover;
@@ -143,7 +143,7 @@ body {
   line-height: 1.5em;
 }
 
-/* line 49, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 49, ../partials/_test.scss */
 .container-640px {
   max-width: 960px;
   margin: 0 auto;
@@ -151,12 +151,12 @@ body {
   padding-right: 10px;
 }
 
-/* line 56, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 56, ../partials/_test.scss */
 .padding-bottom-10 {
   padding-bottom: 10px;
 }
 
-/* line 60, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 60, ../partials/_test.scss */
 .header {
   background: rgba(255, 255, 255, 0.85);
   height: 70px;
@@ -164,16 +164,16 @@ body {
   overflow: hidden;
 }
 
-/* line 67, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 67, ../partials/_test.scss */
 .homepage {
   background: rgba(255, 255, 255, 0.9);
-  max-width: 800px;
+  max-width: 500px;
   padding: 40px;
   margin: 80px auto;
   margin-bottom: 0;
 }
 
-/* line 75, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 75, ../partials/_test.scss */
 .calculate {
   background: rgba(255, 255, 255, 0.9);
   max-width: 800px;
@@ -182,7 +182,7 @@ body {
   margin-bottom: 0;
 }
 
-/* line 83, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 83, ../partials/_test.scss */
 .profile {
   background: rgba(255, 255, 255, 0.9);
   max-width: 800px;
@@ -191,52 +191,50 @@ body {
   margin-bottom: 0;
 }
 
-/* line 91, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 91, ../partials/_test.scss */
 .homepage h1 {
   margin-top: 0;
   font-weight: 100;
-  font-size: 32px;
 }
 
-/* line 96, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 96, ../partials/_test.scss */
 .footer {
-  max-width: 800px;
+  max-width: 500px;
   margin: 0 auto;
   text-align: center;
   color: #ddd;
   font-size: 13px;
-  padding-top: 10px;
 }
 
-/* line 104, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 104, ../partials/_test.scss */
 .license {
   float: left;
 }
 
-/* line 108, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+/* line 108, ../partials/_test.scss */
 .contributors {
   float: right;
 }
 
 @media all and (min-width: 650px) {
-  /* line 114, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 114, ../partials/_test.scss */
   .morph-button {
     display: inline-block !important;
   }
 }
 @media all and (max-width: 650px) {
-  /* line 130, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 130, ../partials/_test.scss */
   body {
     background: #eee;
   }
 
-  /* line 134, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 134, ../partials/_test.scss */
   .container-640px {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  /* line 139, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 139, ../partials/_test.scss */
   .homepage {
     background: #eee;
     max-width: initial;
@@ -245,7 +243,7 @@ body {
     padding: 20px;
   }
 
-  /* line 147, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 147, ../partials/_test.scss */
   .footer {
     max-width: initial;
     margin: 0 auto;
@@ -256,59 +254,59 @@ body {
     width: 100%;
   }
 
-  /* line 157, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 157, ../partials/_test.scss */
   .morph-button {
     margin: 10px 5px !important;
   }
 
-  /* line 161, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 161, ../partials/_test.scss */
   .morph-button-fixed {
     width: 70px;
     font-size: 70%;
   }
 
-  /* line 166, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 166, ../partials/_test.scss */
   .sb-search {
     margin-right: 0;
   }
 }
 @media all and (max-width: 480px) {
-  /* line 174, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 174, ../partials/_test.scss */
   body {
     background: #eee;
   }
 
-  /* line 178, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 178, ../partials/_test.scss */
   .logo {
     width: 100px;
     margin-top: 15px;
   }
 
-  /* line 183, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 183, ../partials/_test.scss */
   .sb-search {
     margin-right: 0px;
     margin-left: 5px;
   }
 
-  /* line 188, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 188, ../partials/_test.scss */
   .morph-button {
     margin: 10px 5px !important;
   }
 
-  /* line 192, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 192, ../partials/_test.scss */
   .morph-button-fixed {
     width: 70px;
     font-size: 70%;
   }
 
-  /* line 197, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 197, ../partials/_test.scss */
   .content-style-form .icon-close {
     top: 15px;
     right: 15px;
     font-size: 80%;
   }
 
-  /* line 203, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 203, ../partials/_test.scss */
   .hompepage {
     background: none;
     max-width: initial;
@@ -316,12 +314,12 @@ body {
     width: 100%;
   }
 
-  /* line 210, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 210, ../partials/_test.scss */
   .padding-bottom-10 {
     padding-bottom: 0;
   }
 
-  /* line 214, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 214, ../partials/_test.scss */
   .footer {
     max-width: initial;
     margin: 0 auto;
@@ -332,73 +330,33 @@ body {
     width: 100%;
   }
 
-  /* line 224, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 224, ../partials/_test.scss */
   .footer span {
     display: block;
     width: 100%;
     float: none;
   }
 }
-/* line 1, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_jquery-sortable.scss */
+/* line 1, ../partials/_jquery-sortable.scss */
 body.dragging, body.dragging * {
   cursor: move !important;
 }
 
-/* line 5, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_jquery-sortable.scss */
+/* line 5, ../partials/_jquery-sortable.scss */
 .dragged {
   position: absolute;
   opacity: 0.5;
   z-index: 2000;
 }
 
-/* line 11, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_jquery-sortable.scss */
+/* line 11, ../partials/_jquery-sortable.scss */
 ol.example li.placeholder {
   position: relative;
   /** More li styles **/
 }
 
-/* line 15, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_jquery-sortable.scss */
+/* line 15, ../partials/_jquery-sortable.scss */
 ol.example li.placeholder:before {
   position: absolute;
   /** Define arrowhead **/
-}
-
-/*Kevin's changes*/
-
-.homepage a:hover {
-  text-decoration: none;
-}
-
-.header a {
-  color: #444;
-}
-
-.header .morph-button button:hover {
-  text-decoration: underline;
-}
-
-.header #search {
-  height: 40px;
-  font-size: 14px;
-  padding: 8px;
-  border: 1px solid #ccc;
-}
-
-.navbar-form {
-  margin: 10px 15px;
-  padding: 0;
-}
-
-.btn-default {
-  height: 40px;
-  border-radius: 0;
-}
-
-.content-style-form label {
-  font-size: 10px;
-}
-
-p {
-  font-size: 16px;
-  line-height: 24px;
 }

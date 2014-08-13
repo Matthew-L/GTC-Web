@@ -2,7 +2,7 @@
 /* global getRowInputs, calculateString */
 /*jshint latedef: false*/
 
-function postSingleTension(key, value, rowField){
+function postSingleTension(key, value, rowField) {
   'use strict';
   var row = rowField.closest('tr').attr('id');
   var guitarString = getRowInputs(row);
@@ -258,6 +258,12 @@ $(document).ready(function () {
       ['para', ['ul', 'ol', 'paragraph']],
       ['height', ['height']]
     ]
+  });
+
+  $('.sortable-table').sortable({
+    containerSelector: 'table',
+    itemPath: '> tbody',
+    itemSelector: 'tr'
   });
   setRowListeners();
   setAddRowListener();
