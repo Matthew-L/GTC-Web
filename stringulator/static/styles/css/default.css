@@ -167,7 +167,7 @@ body {
 /* line 67, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
 .homepage {
   background: rgba(255, 255, 255, 0.9);
-  max-width: 500px;
+  max-width: 800px;
   padding: 40px;
   margin: 80px auto;
   margin-bottom: 0;
@@ -195,15 +195,17 @@ body {
 .homepage h1 {
   margin-top: 0;
   font-weight: 100;
+  font-size: 32px;
 }
 
 /* line 96, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
 .footer {
-  max-width: 500px;
+  max-width: 800px;
   margin: 0 auto;
   text-align: center;
   color: #ddd;
   font-size: 13px;
+  padding-top: 10px;
 }
 
 /* line 104, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
@@ -359,4 +361,44 @@ ol.example li.placeholder {
 ol.example li.placeholder:before {
   position: absolute;
   /** Define arrowhead **/
+}
+
+/*Kevin's changes*/
+
+.homepage a:hover {
+  text-decoration: none;
+}
+
+.header a {
+  color: #444;
+}
+
+.header .morph-button button:hover {
+  text-decoration: underline;
+}
+
+.header #search {
+  height: 40px;
+  font-size: 14px;
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+.navbar-form {
+  margin: 10px 15px;
+  padding: 0;
+}
+
+.btn-default {
+  height: 40px;
+  border-radius: 0;
+}
+
+.content-style-form label {
+  font-size: 10px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 24px;
 }
