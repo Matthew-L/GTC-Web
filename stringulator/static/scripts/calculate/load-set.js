@@ -100,9 +100,13 @@ function getRowInputs(row) {
 }
 
 
+function getScaleLength() {
+  'use strict';
+  return $('#scale-length').find('> a').text();
+}
 function calculateSingleString(guitarString) {
   'use strict';
-  guitarString.scale_length = $('#scale-length').find('> a').text();
+  guitarString.scale_length = getScaleLength();
   calculateString(guitarString);
 }
 
@@ -113,4 +117,18 @@ function calculateAllRows(scaleLength) {
     guitarString.scale_length = scaleLength;
     calculateString(guitarString);
   }
+}
+
+function updateStringNumber(row, index) {
+  'use strict';
+  row.id = 'string-row-' + (index + 1);
+  $('#' + row.id + ' > td > .string-number').text(index + 1);
+}
+function updateAllStringNumbers() {
+  'use strict';
+  var rows = $('.sortable-row');
+  for (var i = 0; i < rows.length; ++i) {
+    updateStringNumber(rows[i], i);
+  }
+  calculateAllRows(getScaleLength());
 }

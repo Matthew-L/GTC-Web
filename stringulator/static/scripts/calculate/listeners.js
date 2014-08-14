@@ -244,6 +244,20 @@ function setDeleteRowListeners() {
   });
 }
 
+
+function setSortableListener() {
+  'use strict';
+  $('.sortable-table').sortable({
+    containerSelector: 'table',
+    itemPath: '> tbody',
+    itemSelector: '.sortable-row',
+    onDrop: function ($item, container, _super) {
+      updateAllStringNumbers($item);
+      _super($item);
+    }
+  });
+}
+
 $(document).ready(function () {
   'use strict';
   $('#summernote').summernote();
@@ -260,11 +274,7 @@ $(document).ready(function () {
     ]
   });
 
-  $('.sortable-table').sortable({
-    containerSelector: 'table',
-    itemPath: '> tbody',
-    itemSelector: 'tr'
-  });
+  setSortableListener();
   setRowListeners();
   setAddRowListener();
 });
