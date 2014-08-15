@@ -255,7 +255,8 @@ function setSortableListener() {
       updateAllStringNumbers($item);
       _super($item);
     },
-    tolerence: 100
+    tolerence: 100,
+    placeholder: '<tr class="placeholder"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'
   });
 }
 
