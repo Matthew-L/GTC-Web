@@ -254,7 +254,8 @@ function setSortableListener() {
     onDrop: function ($item, container, _super) {
       updateAllStringNumbers($item);
       _super($item);
-    }
+    },
+    tolerence: 100
   });
 }
 

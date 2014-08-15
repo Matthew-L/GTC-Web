@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.views.generic import RedirectView
 
-
+admin.autodiscover()
 urlpatterns = patterns('',
                        # Admin
                        url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -16,13 +16,12 @@ urlpatterns = patterns('',
 
                        (r'^calculate-tension/$', 'calculator.views.convert_input_to_tension'),
                        (r'^save-set/$', 'calculator.views.save_set'),
-                       (r'^test/$', 'contact.views.test'),
 
                        # Download
-                       (r'^download-set', 'users.views.downloadStringSet'),
+                       (r'^download-set', 'profile.views.downloadStringSet'),
 
                        # Search
-                       (r'^search/$', 'users.views.search'),
+                       (r'^search/$', 'search.views.search'),
 
                        # USERS
 
@@ -40,8 +39,8 @@ urlpatterns = patterns('',
                        (r'^accounts/register/$', 'users.views.register_user'),
 
                        # Profile
-                       (r'^profile/$', 'users.views.profile'),
-                       (r'^ajax-delete/$', 'calculator.views.ajax_delete_set'),
+                       (r'^profile/$', 'profile.views.profile'),
+                       (r'^ajax-delete/$', 'profile.views.ajax_delete_set'),
 
                        # Contact
                        (r'^contact/$', 'contact.views.load_contact_page'),
@@ -51,4 +50,4 @@ urlpatterns = patterns('',
                        (r'^base-bak/$', 'contact.views.load_base_bak_page'),
                        (r'^$', 'stringulator.views.load_homepage'),
 )
-admin.autodiscover()
+

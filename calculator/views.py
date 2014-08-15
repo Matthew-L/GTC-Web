@@ -93,11 +93,11 @@ def convert_input_to_tension(request):
     tension = 0
     if request.is_ajax() and request.method == "POST":
         print(request.POST)
-        # try:
-        tension = get_tension(request.POST)
-        # except:
-        #     response['error'] = 'There was an error when processing string ' + str(request.POST['string_number'])
-        #     return HttpResponseBadRequest(json.dumps(response), content_type='application/json')
+        try:
+            tension = get_tension(request.POST)
+        except:
+            response['error'] = 'There was an error when processing string ' + str(request.POST['string_number'])
+            return HttpResponseBadRequest(json.dumps(response), content_type='application/json')
     response['tension'] = tension
     return HttpResponse(json.dumps(response), content_type='application/javascript')
 
@@ -272,20 +272,6 @@ def save_set(request):
                 return return_save_errors(context, errors, request)
 
     return return_save_errors(context, errors, request)
-
-
-@csrf_exempt
-def ajax_delete_set(request):
-    if request.is_ajax() and request.method == "POST":
-        name = request.POST['string_set_name']
-        user = request.user
-
-        string_set = StringSet.objects.filter(name=name, user=user)
-        if string_set:
-            string_set.all().delete()
-            response = {"name": name}
-
-        return HttpResponse(json.dumps(response), mimetype='application/javascript')
 
 
 def count_string_rows(request):

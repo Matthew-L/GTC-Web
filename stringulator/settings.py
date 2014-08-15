@@ -153,12 +153,17 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "compressor",
+    'suit',
     'django.contrib.admin',
     'users',
     'calculator',
     'calculator.guitarstring',
     'stringulator',
     'stringulator.templatetags',
+    'profile',
+    'search',
+
+
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -203,5 +208,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
     'stringulator.context_processors.debug',
+    'django.core.context_processors.request',
     # 'users.context_processors.login',
 )

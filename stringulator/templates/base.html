@@ -85,24 +85,48 @@
           </div>
         </div>
         <div class="morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
-          <button type="button">Signup</button>
+          <button type="button">Register</button>
           <div class="morph-content">
             <div>
               <div class="content-style-form content-style-form-2">
                 <span class="icon icon-close">Close the dialog</span>
 
-                <h2>Sign Up</h2>
+                <h2>Register</h2>
+                {##}
+                {#                <form action="/accounts/register/" method="post">#}
+                {#                  {% csrf_token %}#}
+                {#                  <p><label>Username</label><input value="{{ form.username }}" type="text"></p>#}
+                {##}
+                {#                  <p><label>Password</label><input value="{{ form.password1 }}" type="password"></p>#}
+                {##}
+                {#                  <p><label>Repeat Password</label><input value="{{ form.password2 }}" type="password"></p>#}
+                {##}
+                {#                  <p>#}
+                {#                    <button>Register</button>#}
+                {#                  </p>#}
+                {#                </form>#}
+                {#                <h2>Register</h2>#}
 
-                <form>
-                  <p><label>Username</label><input type="text"></p>
+                <form class="navbar-form navbar-center" action="/accounts/register/" method="post">
+                  {% csrf_token %}
+                  <p><label>Username</label><input id="id_username" maxlength="30" name="username" type="text"
+                                                   placeholder="Username"
+                                                   title="Enter a valid username"></p>
 
-                  <p><label>Password</label><input type="password"></p>
+                  <p><label>Email</label><input id="id_email" maxlength="50" name="email" type="text"
+                                                   placeholder="Email"
+                                                   title="Enter a valid email"></p>
 
-                  <p><label>Repeat Password</label><input type="password"></p>
+                  <p><label>Password</label><input id="id_password1" name="password1" type="password"
+                                                   placeholder="Password"
+                                                   title="Enter a password"></p>
 
-                  <p>
-                    <button>Sign Up</button>
-                  </p>
+                  <p><label>Confirm Password</label><input id="id_password2" name="password2" type="password"
+                                                           placeholder="Confirm Password"
+                                                           title="Re-Type Password"></p>
+
+                  <button>Register</button>
+                  {#    <input type="submit" value="Register">#}
                 </form>
               </div>
             </div>
@@ -146,44 +170,44 @@
 
 {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-{#  {% if debug %}#}
-    <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js">
-    </script>
+  {#  {% if debug %}#}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js">
+  </script>
 
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
-    <script src="{{ STATIC_URL }}scripts/dependencies/summernote.js"></script>
-
-
-    <script type="text/javascript" src="{{ STATIC_URL }}scripts/homepage/scripts.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}scripts/homepage/classie.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}scripts/homepage/uisearch.js"></script>
-
-    <script type="text/javascript" src="{{ STATIC_URL }}scripts/dependencies/uiMorphingButton_fixed.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}scripts/dependencies/helpers.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+  <script src="{{ STATIC_URL }}scripts/dependencies/summernote.js"></script>
 
 
-    <!-- calculate -->
-    <script src="{{ STATIC_URL }}scripts/calculate/load-set.js"></script>
-    <script src="{{ STATIC_URL }}scripts/calculate/validate.js"></script>
-    <script src="{{ STATIC_URL }}scripts/calculate/listeners.js"></script>
-    <script src="{{ STATIC_URL }}scripts/calculate/calculate-set.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}scripts/homepage/scripts.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}scripts/homepage/classie.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}scripts/homepage/uisearch.js"></script>
 
-    <script src="{{ STATIC_URL }}scripts/calculate/popover_header_info.js"></script>
-    <script src="{{ STATIC_URL }}scripts/dependencies/bootstrap-editable.js"></script>
-    <script src='{{ STATIC_URL }}scripts/dependencies/jquery-sortable.js'></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}scripts/dependencies/uiMorphingButton_fixed.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}scripts/dependencies/helpers.js"></script>
 
-{#  {% else %}#}
-{#    <script src="{{ STATIC_URL }}scripts/stringulator.min.js"></script>#}
-    {#    <script>#}
-    {#      new UISearch(document.getElementById('sb-search'));#}
-    {#    </script>#}
-    {#    <script type="text/javascript" src="{{ STATIC_URL }}scripts/uiMorphingButton_fixed.js"></script>#}
-    {#    <script type="text/javascript" src="{{ STATIC_URL }}scripts/helpers.js"></script>#}
-    {#    <script src="{{ STATIC_URL }}scripts/calculate/popover_header_info.js"></script>#}
-    {#    <script src="{{ STATIC_URL }}scripts/dependencies/bootstrap-editable.js"></script>#}
-    {#    <script src='{{ STATIC_URL }}scripts/dependencies/jquery-sortable.js'></script>#}
-    {#    <script src='{{ STATIC_URL }}scripts/calculate/sortable-calculate.js'></script>#}
-{#  {% endif %}#}
+
+  <!-- calculate -->
+  <script src="{{ STATIC_URL }}scripts/calculate/load-set.js"></script>
+  <script src="{{ STATIC_URL }}scripts/calculate/validate.js"></script>
+  <script src="{{ STATIC_URL }}scripts/calculate/listeners.js"></script>
+  <script src="{{ STATIC_URL }}scripts/calculate/calculate-set.js"></script>
+
+  <script src="{{ STATIC_URL }}scripts/calculate/popover_header_info.js"></script>
+  <script src="{{ STATIC_URL }}scripts/dependencies/bootstrap-editable.js"></script>
+  <script src='{{ STATIC_URL }}scripts/dependencies/jquery-sortable.js'></script>
+
+  {#  {% else %}#}
+  {#    <script src="{{ STATIC_URL }}scripts/stringulator.min.js"></script>#}
+  {#    <script>#}
+  {#      new UISearch(document.getElementById('sb-search'));#}
+  {#    </script>#}
+  {#    <script type="text/javascript" src="{{ STATIC_URL }}scripts/uiMorphingButton_fixed.js"></script>#}
+  {#    <script type="text/javascript" src="{{ STATIC_URL }}scripts/helpers.js"></script>#}
+  {#    <script src="{{ STATIC_URL }}scripts/calculate/popover_header_info.js"></script>#}
+  {#    <script src="{{ STATIC_URL }}scripts/dependencies/bootstrap-editable.js"></script>#}
+  {#    <script src='{{ STATIC_URL }}scripts/dependencies/jquery-sortable.js'></script>#}
+  {#    <script src='{{ STATIC_URL }}scripts/calculate/sortable-calculate.js'></script>#}
+  {#  {% endif %}#}
 {% endblock %}
 </body>
 </html>
