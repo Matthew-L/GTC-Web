@@ -50,6 +50,17 @@ class TestCalculatorViews(TestCase):
     def test_load_calculate_without_get_input(self):
         url = reverse('calculator.views.load_calculate_page')
         response = self.client.post(url, {}, **self.kwargs)
+
         self.assertEqual(200, response.status_code)
         self.assertTemplateUsed(response, 'calculate.html')
-        self.assertContains(response, '<a href="#" class="editable editable-click editable-empty">Empty</a>')
+        self.assertContains(response, '<div id="string-set-name">')
+        self.assertRaises(KeyError, lambda: response['string_set_name'])
+
+    # def test_load_calculate_with_valid_get_input(self):
+    #     url = reverse('calculator.views.load_calculate_page')
+    #     response = self.client.get(url, {'string_set_name': '8 string set', 'users_set': 'micah'}, **self.kwargs)
+    #     self.assertEqual(200, response.status_code)
+    #     self.assertTemplateUsed(response, 'calculate.html')
+    #     self.assertContains(response, '<div id="string-set-name">')
+    #
+    #     self.assertContains(response, '8 string set')

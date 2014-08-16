@@ -22,53 +22,49 @@ error = {
     InvalidStringNumberError: 'invalid string number'
 }
 
+
 def get_user_id(username):
     return User.objects.get(username=username).pk
 
+
 def get_string_set(string_set_name):
     return StringSet.objects.filter(name=string_set_name)
+
+
+def getUsersStrings(string_set_name, strings, user_set, username):
+    for string in strings:
+        if username == str(string.string_set.user):
+            if str(string.string_set.name) == str(string_set_name):
+                # print(string.gauge)
+                user_set.append(string)
+    return user_set
+
+
+def getUsersStringSet(context, request):
+    username = str(request.GET['users_set'])
+    get_user_id(username)
+    string_set_name = str(request.GET['string_set_name'])
+    string_set = StringSet.objects.filter(name=string_set_name)
+    user_set = []
+    context['string_set_name'] = string_set_name
+    strings = String.objects.all()
+    for set in string_set:
+        # print('username: ', set.user, username)
+        if str(set.user) == str(username):
+            context['description'] = set.desc
+            context['total_strings'] = set.number_of_strings
+            user_set = getUsersStrings(string_set_name, strings, user_set, username)
+    context['json_string_set'] = serializers.serialize("json", user_set)
+    return user_set, context
+
 
 def load_calculate_page(request):
     context = {}
     if request.method == 'GET':
         try:
-            string_set_name = str(request.GET['string_set_name'])
-            username = str(request.GET['users_set'])
-            print(string_set_name)
-            user_id = User.objects.get(username=username).pk
-            print(user_id)
-            string_set = StringSet.objects.filter(name=string_set_name)
-            print(str(string_set))
+            user_set, context = getUsersStringSet(context, request)
         except:
-            return render(request, 'calculate.html', context)
-
-        user_set = []
-        # wont iterate any other way for some reason
-
-        context['string_set_name'] = string_set_name
-
-        strings = String.objects.all()
-
-        print('her', strings)
-
-        for set in string_set:
-            print('username: ', set.user, username)
-            if str(set.user) == str(username):
-                context['is_mscale'] = set.is_mscale
-                context['description'] = set.desc
-                context['total_strings'] = set.number_of_strings
-                for string in strings:
-                    if username == str(string.string_set.user):
-                        if str(string.string_set.name) == str(string_set_name):
-                            print(string.gauge)
-                            user_set.append(string)
-
-        data = serializers.serialize("json", user_set)
-
-        context['json_data'] = data
-        context['someDjangoVariable'] = data
-        context['json_dump'] = data
-
+            pass
     return render(request, 'calculate.html', context)
 
 
@@ -190,7 +186,7 @@ def save_set(request):
         errors.append("You already have a String Set named that! Delete or rename the set '" + name + "' first.")
         return return_save_errors(context, errors, request)
 
-    #just updating, name stayed the same
+    # just updating, name stayed the same
     revised_string_set = StringSet.objects.filter(name=name, user=user)
     should_update = False
     if revised_string_set:

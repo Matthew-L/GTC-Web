@@ -5,7 +5,7 @@
 {% block content %}
   <div class="calculate">
     <form method="get" action="/save-set/">
-      <input type="hidden" id="string_data" name="variable" value='{{ json_dump }}'>
+{#      <input type="hidden" id="string_data" name="variable" value='{{ json_string_set }}'>#}
 
       <div id="string-set-name">
         <label for="description">Name</label>
@@ -84,7 +84,7 @@
   {{ block.super }}
 
   <script type="text/javascript">
-    loadStringSet(JSON.parse("{{ json_dump | escapejs}}"));
+    loadStringSet(JSON.parse("{{ json_string_set | escapejs}}"));
   </script>
 
 {% endblock %}
