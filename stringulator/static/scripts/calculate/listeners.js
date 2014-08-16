@@ -256,7 +256,7 @@ function setSortableListener() {
       _super($item);
     },
     tolerence: 100,
-    placeholder: '<tr class="placeholder"><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'
+    placeholder: '<tr class="placeholder"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td></tr>'
   });
 }
 

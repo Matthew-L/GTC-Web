@@ -3,18 +3,20 @@ from django.core.urlresolvers import reverse
 from calculator.views import *
 from calculator.stringcalculator.string.length import InvalidScaleLengthError
 
+
 def decode_json(response):
     return json.loads(response.content.decode('utf8'))
 
 
 class TestCalculatorViews(TestCase):
     def setUp(self):
-        pass
+        self.client = Client()
+        self.kwargs = {'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest',
+                       'HTTP_HOST': 'stringulator.com'}
 
     """test convert_input_to_tenstion"""
 
     def test_valid_tension_input(self):
-        client = Client()
         url = reverse('calculator.views.convert_input_to_tension')
         user_input = {'scale_length': '25.5',
                       'total_strings': '',
@@ -23,17 +25,13 @@ class TestCalculatorViews(TestCase):
                       'octave': '4',
                       'gauge': '.012',
                       'string_material': 'CKPLG'}
-        kwargs = {'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest',
-                  'HTTP_HOST': 'stringulator.com'}
-        response = client.post(url, user_input, **kwargs)
 
+        response = self.client.post(url, user_input, **self.kwargs)
         self.assertEqual(200, response.status_code)
         decoded = decode_json(response)
         self.assertEqual(23.43, decoded['tension'])
 
     def test_invalid_tension_input(self):
-        client = Client()
-
         url = reverse('calculator.views.convert_input_to_tension')
         user_input = {'scale_length': '',
                       'total_strings': '',
@@ -42,7 +40,16 @@ class TestCalculatorViews(TestCase):
                       'octave': '4',
                       'gauge': '.012',
                       'string_material': 'CKPLG'}
-        kwargs = {'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest',
-                  'HTTP_HOST': 'stringulator.com'}
+        response = self.client.post(url, user_input, **self.kwargs)
+        self.assertEqual(400, response.status_code)
+        decoded = decode_json(response)
+        self.assertEqual('There was an error while processing a string.', decoded['error'])
 
-        self.assertRaises(InvalidScaleLengthError, client.post, url, user_input, **kwargs)
+    """ test load_calculate_page """
+
+    def test_load_calculate_without_get_input(self):
+        url = reverse('calculator.views.load_calculate_page')
+        response = self.client.post(url, {}, **self.kwargs)
+        self.assertEqual(200, response.status_code)
+        self.assertTemplateUsed(response, 'calculate.html')
+        self.assertContains(response, '<a href="#" class="editable editable-click editable-empty">Empty</a>')

@@ -92,21 +92,6 @@
                 <span class="icon icon-close">Close the dialog</span>
 
                 <h2>Register</h2>
-                {##}
-                {#                <form action="/accounts/register/" method="post">#}
-                {#                  {% csrf_token %}#}
-                {#                  <p><label>Username</label><input value="{{ form.username }}" type="text"></p>#}
-                {##}
-                {#                  <p><label>Password</label><input value="{{ form.password1 }}" type="password"></p>#}
-                {##}
-                {#                  <p><label>Repeat Password</label><input value="{{ form.password2 }}" type="password"></p>#}
-                {##}
-                {#                  <p>#}
-                {#                    <button>Register</button>#}
-                {#                  </p>#}
-                {#                </form>#}
-                {#                <h2>Register</h2>#}
-
                 <form class="navbar-form navbar-center" action="/accounts/register/" method="post">
                   {% csrf_token %}
                   <p><label>Username</label><input id="id_username" maxlength="30" name="username" type="text"
@@ -124,9 +109,7 @@
                   <p><label>Confirm Password</label><input id="id_password2" name="password2" type="password"
                                                            placeholder="Confirm Password"
                                                            title="Re-Type Password"></p>
-
                   <button>Register</button>
-                  {#    <input type="submit" value="Register">#}
                 </form>
               </div>
             </div>
@@ -150,12 +133,6 @@
       <p class="padding-bottom-10">
         <a class="button-1" href="calculate/?string_set_name=8%20string%20set&users_set=micah">
           Check out an example set!
-        </a>
-      </p>
-
-      <p class="padding-bottom-10">
-        <a class="button-1" href="pretty-calculate/?string_set_name=8%20string%20set&users_set=micah">
-          Check out the new calculate page!
         </a>
       </p>
 

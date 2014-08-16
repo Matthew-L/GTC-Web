@@ -18,15 +18,18 @@ from calculator.stringcalculator.scientificpitch.scientific_pitch import Scienti
 from calculator.stringcalculator.string_calculator import calculate_tension
 
 ERRORS = []
-
 error = {
     InvalidStringNumberError: 'invalid string number'
 }
 
+def get_user_id(username):
+    return User.objects.get(username=username).pk
+
+def get_string_set(string_set_name):
+    return StringSet.objects.filter(name=string_set_name)
 
 def load_calculate_page(request):
     context = {}
-
     if request.method == 'GET':
         try:
             string_set_name = str(request.GET['string_set_name'])
@@ -37,7 +40,7 @@ def load_calculate_page(request):
             string_set = StringSet.objects.filter(name=string_set_name)
             print(str(string_set))
         except:
-            return render(request, 'pretty-calculate.html', context)
+            return render(request, 'calculate.html', context)
 
         user_set = []
         # wont iterate any other way for some reason
@@ -66,7 +69,7 @@ def load_calculate_page(request):
         context['someDjangoVariable'] = data
         context['json_dump'] = data
 
-    return render(request, 'pretty-calculate.html', context)
+    return render(request, 'calculate.html', context)
 
 
 def get_tension(tension_input):
@@ -74,7 +77,6 @@ def get_tension(tension_input):
     pitch = ScientificPitch(tension_input['note'], tension_input['octave'])
     string = GuitarString(tension_input['gauge'], tension_input['string_material'])
     tension = calculate_tension(length, pitch, string)
-
     return round_tension(tension)
 
 
@@ -96,7 +98,7 @@ def convert_input_to_tension(request):
         try:
             tension = get_tension(request.POST)
         except:
-            response['error'] = 'There was an error when processing string ' + str(request.POST['string_number'])
+            response['error'] = 'There was an error while processing a string.'
             return HttpResponseBadRequest(json.dumps(response), content_type='application/json')
     response['tension'] = tension
     return HttpResponse(json.dumps(response), content_type='application/javascript')

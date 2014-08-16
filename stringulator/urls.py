@@ -11,7 +11,6 @@ urlpatterns = patterns('',
                        # Calculate
                        # url(r'^herokuapp.com/$',
                        #     RedirectView.as_view(url='http://www.stringulator.com', permanent=True)),
-                       (r'^pretty-calculate/$', 'calculator.views.load_calculate_page'),
                        (r'^calculate/$', 'calculator.views.load_calculate_page'),
 
                        (r'^calculate-tension/$', 'calculator.views.convert_input_to_tension'),
