@@ -100,13 +100,13 @@ def convert_input_to_tension(request):
     return HttpResponse(json.dumps(response), content_type='application/javascript')
 
 
-def user_login_context(context, request):
-    if request.user.is_authenticated():
-        context['is_logged_in'] = True
-        context['username'] = request.user.get_username()
-    else:
-        context['is_logged_in'] = False
-    return context
+# def user_login_context(context, request):
+#     if request.user.is_authenticated():
+#         context['is_logged_in'] = True
+#         context['username'] = request.user.get_username()
+#     else:
+#         context['is_logged_in'] = False
+#     return context
 
 
 def return_save_errors(context, errors, request):
@@ -141,7 +141,7 @@ def save_set(request):
     context = {}
     errors = []
 
-    context = user_login_context(context, request)
+    # context = user_login_context(context, request)
 
     curr = count_string_rows(request)
     if curr == 0:
@@ -151,7 +151,7 @@ def save_set(request):
     # make new string set
     name = request.GET['string_set_name']
     user = request.user
-    # print("user g",user)
+
     desc = request.GET['desc']
     if desc == '':
         desc = ' '
