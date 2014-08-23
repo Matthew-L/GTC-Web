@@ -134,7 +134,9 @@ def renaming_set(name, request, user):
 
 def asynchronous_save_set(request):
     response = {}
-    return HttpResponse(json.dumps(response), content_type='application/javascript')
+    if request.is_ajax() and request.method == "POST":
+        print(request)
+        return HttpResponse(json.dumps(response), content_type='application/javascript')
 
 
 def save_set(request):

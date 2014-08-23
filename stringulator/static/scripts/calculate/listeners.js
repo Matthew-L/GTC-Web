@@ -249,14 +249,24 @@ function setSortableListener() {
   'use strict';
   $('.sortable-table').sortable({
     containerSelector: 'table',
-    itemPath: '> tbody',
+//    itemPath: '.string-row',
+    handle: '.string-number',
     itemSelector: '.sortable-row',
     onDrop: function ($item, container, _super) {
       updateAllStringNumbers($item);
       _super($item);
     },
-    tolerence: 100,
+    tolerence: 0,
     placeholder: '<tr class="placeholder"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td></tr>'
+  });
+}
+
+function setSaveSetListener() {
+  'use strict';
+  $('#save-set').on('click', function (event) {
+    event.preventDefault();
+    console.log($('#string_data').serialize());
+
   });
 }
 
@@ -279,6 +289,7 @@ $(document).ready(function () {
   setSortableListener();
   setRowListeners();
   setAddRowListener();
+  setSaveSetListener();
 });
 
 
