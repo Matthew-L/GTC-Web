@@ -14,7 +14,7 @@ urlpatterns = patterns('',
                        (r'^calculate/$', 'calculator.views.load_calculate_page'),
 
                        (r'^calculate-tension/$', 'calculator.views.convert_input_to_tension'),
-                       (r'^save-set/$', 'calculator.views.save_set'),
+                       (r'^save-set/$', 'calculator.views.asynchronous_save_set'),
 
                        # Download
                        (r'^download-set', 'profile.views.downloadStringSet'),

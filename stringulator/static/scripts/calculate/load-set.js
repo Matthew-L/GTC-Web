@@ -88,8 +88,6 @@ function getTotalStrings() {
 
 function getRowInputs(row) {
   'use strict';
-
-
   return {
     string_number: $('#' + row + '> td > .string-number').text(),
     note: getRowText(row, '.note'),
@@ -124,6 +122,7 @@ function updateStringNumber(row, index) {
   row.id = 'string-row-' + (index + 1);
   $('#' + row.id + ' > td > .string-number').text(index + 1);
 }
+
 function updateAllStringNumbers() {
   'use strict';
   var rows = $('.sortable-row');
@@ -131,4 +130,32 @@ function updateAllStringNumbers() {
     updateStringNumber(rows[i], i);
   }
   calculateAllRows(getScaleLength());
+}
+
+function getSetName() {
+  'use strict';
+  return $('#string-set-name').find('> a').text();
+}
+
+function getSetDescription() {
+  'use strict';
+  return '';
+}
+
+function saveAllStrings() {
+  'use strict';
+  var totalRows = $('.sortable-row').length;
+  var rows = {};
+  for (var i = 1; i-1 < totalRows; ++i) {
+    rows[i] = getRowInputs('string-row-' + (i));
+  }
+  var set = {
+    rows : rows,
+    name : getSetName(),
+    desc : getSetDescription(),
+    scale_length: getScaleLength()
+  };
+//  console.log(set);
+  saveStringSet(set);
+//  calculateAllRows(getScaleLength());
 }

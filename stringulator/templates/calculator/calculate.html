@@ -5,7 +5,7 @@
 {% block content %}
   <div class="calculate">
     <form method="get" action="/save-set/">
-{#      <input type="hidden" id="string_data" name="variable" value='{{ json_string_set }}'>#}
+      {#      <input type="hidden" id="string_data" name="variable" value='{{ json_string_set }}'>#}
 
       <div id="string-set-name">
         <label for="description">Name</label>
@@ -16,7 +16,7 @@
       {#        <label for="description">Description</label>#}
       {#        <a href="#">{{ description }}</a>#}
       {#      </div>#}
-{#      <div id="summernote">Hello Summernote</div>#}
+      {#      <div id="summernote">Hello Summernote</div>#}
 
       <div id="scale-length">
         Scale Length
@@ -47,10 +47,11 @@
 
             </th>
           </tr>
-
-          <tr id="string-row-1" class="sortable-row">
-            {% include "pretty-forms.html" %}
-          </tr>
+          <tbody>
+            <tr id="string-row-1" class="sortable-row">
+              {% include "pretty-forms.html" %}
+            </tr>
+          </tbody>
         </table>
       </div>
 
@@ -62,15 +63,24 @@
           <button id="cancel-delete" type="button" class="btn btn-default">Cancel</button>
         </p>
       </div>
-      <div id="string-error-alert" class="hidden alert alert-danger fade in" role="alert">
+      <div id="calculate-error-alert" class="hidden alert alert-danger fade in" role="alert">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Error!</strong> A problem has occurred while submitting your data.
+        <strong>Error!</strong> A problem has occurred while calculating your string row input.
+      </div>
+
+      <div id="save-error-alert" class="hidden alert alert-danger fade in" role="alert">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Error!</strong> A problem has occurred while calculating your string row input.
       </div>
 
       <div>
         <button class="btn btn-primary" id="insert-more" type="button">
           <span class="glyphicon glyphicon-plus btn-divider"></span>
           Add String
+        </button>
+        <button class="btn btn-info" id="enable-drag-drop" type="button">
+          <span class="glyphicon glyphicon-sort btn-divider"></span>
+          <span id="drag-enable-message">Toggle Drag/Drop</span>
         </button>
         <button class="btn btn-success" id="save-set" type="submit" name="save-set" value="{{ string_set_name }}">
           <span class="glyphicon glyphicon-floppy-disk btn-divider"></span>

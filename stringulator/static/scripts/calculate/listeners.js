@@ -249,25 +249,47 @@ function setSortableListener() {
   'use strict';
   $('.sortable-table').sortable({
     containerSelector: 'table',
-//    itemPath: '.string-row',
-    handle: '.string-number',
+    itemPath: '> tbody',
     itemSelector: '.sortable-row',
     onDrop: function ($item, container, _super) {
       updateAllStringNumbers($item);
       _super($item);
     },
-    tolerence: 0,
+    tolerence: 100,
     placeholder: '<tr class="placeholder"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td></tr>'
   });
+}
+
+function setDisableSortableListener() {
+  'use strict';
+  $('.sortable-table').sortable('destroy');
+  setDragDropButton();
+  $('#enable-drag-drop').removeClass('btn-warning');
+  $('#enable-drag-drop').addClass('btn-info');
+
 }
 
 function setSaveSetListener() {
   'use strict';
   $('#save-set').on('click', function (event) {
     event.preventDefault();
-    console.log($('#string_data').serialize());
 
+    saveAllStrings();
   });
+}
+
+function setDragDropButton() {
+  'use strict';
+  $('#enable-drag-drop').on('click', function () {
+    setSortableListener();
+    $(this).off();
+    $(this).on('click', function () {
+      setDisableSortableListener();
+    });
+//    $(this).removeClass('btn-info');
+    $(this).addClass('btn-warning');
+  });
+
 }
 
 $(document).ready(function () {
@@ -286,7 +308,8 @@ $(document).ready(function () {
     ]
   });
 
-  setSortableListener();
+  setDragDropButton();
+//  setSortableListener();
   setRowListeners();
   setAddRowListener();
   setSaveSetListener();

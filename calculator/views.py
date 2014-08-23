@@ -131,11 +131,17 @@ def renaming_set(name, request, user):
 
     return old_string_set, should_rename
 
-
+@csrf_exempt
 def asynchronous_save_set(request):
     response = {}
     if request.is_ajax() and request.method == "POST":
-        print(request)
+        print(request.POST)
+        print(request.POST['row[4][note]'])
+        print(request.POST['name'])
+        # print(request.POST['description'])
+        print(request.POST['total_strings'])
+        print(request.POST['scale_length'])
+
         return HttpResponse(json.dumps(response), content_type='application/javascript')
 
 
