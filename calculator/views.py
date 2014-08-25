@@ -1,11 +1,14 @@
 import json
 
 from django.shortcuts import render
+from django.utils.datastructures import MultiValueDictKeyError
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.core import serializers
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+from django.views.generic import View
 
 from .guitarstring.guitar_string import GuitarString as GuSt
 from .models import StringSet, String
@@ -31,7 +34,7 @@ def get_string_set(string_set_name):
     return StringSet.objects.filter(name=string_set_name)
 
 
-def getUsersStrings(string_set_name, strings, user_set, username):
+def get_users_strings(string_set_name, strings, user_set, username):
     for string in strings:
         if username == str(string.string_set.user):
             if str(string.string_set.name) == str(string_set_name):
@@ -40,7 +43,7 @@ def getUsersStrings(string_set_name, strings, user_set, username):
     return user_set
 
 
-def getUsersStringSet(context, request):
+def get_users_string_set(context, request):
     username = str(request.GET['users_set'])
     get_user_id(username)
     string_set_name = str(request.GET['string_set_name'])
@@ -53,7 +56,7 @@ def getUsersStringSet(context, request):
         if str(set.user) == str(username):
             context['description'] = set.desc
             context['total_strings'] = set.number_of_strings
-            user_set = getUsersStrings(string_set_name, strings, user_set, username)
+            user_set = get_users_strings(string_set_name, strings, user_set, username)
     context['json_string_set'] = serializers.serialize("json", user_set)
     return user_set, context
 
@@ -62,7 +65,7 @@ def load_calculate_page(request):
     context = {}
     if request.method == 'GET':
         try:
-            user_set, context = getUsersStringSet(context, request)
+            user_set, context = get_users_string_set(context, request)
         except:
             pass
     return render(request, 'calculate.html', context)
@@ -101,10 +104,10 @@ def convert_input_to_tension(request):
 
 
 # def user_login_context(context, request):
-#     if request.user.is_authenticated():
-#         context['is_logged_in'] = True
-#         context['username'] = request.user.get_username()
-#     else:
+# if request.user.is_authenticated():
+# context['is_logged_in'] = True
+# context['username'] = request.user.get_username()
+# else:
 #         context['is_logged_in'] = False
 #     return context
 
@@ -131,10 +134,103 @@ def renaming_set(name, request, user):
 
     return old_string_set, should_rename
 
+
+""" Save Error Handling """
+
+
+class SaveSet(View):
+    response = {}
+    errors = []
+
+    def validate_name(self, name):
+        print(name == 'Empty')
+        if name == 'Empty' or name == '':
+            self.errors.append('Name your string set to save it.')
+
+    def validate_description(self, description):
+        pass
+
+    def validate_user_status(self, user):
+        if is_anonymous(user):
+            self.errors.append("Log in to save sets.")
+
+    def validate_total_strings(self, total):
+        if total == '' or total == 0:
+            self.errors.append("Add at least one string.")
+
+    def validate_rows(self, request):
+        total = int(request.POST['total_strings'])
+
+        for i in range(1, total + 1):
+            try:
+                tension_input = {
+                    'scale_length': request.POST['scale_length'],
+                    'total_strings': request.POST['total_strings'],
+                    'string_number': i,
+                    'note': self.get_row_input(request, i, 'note'),
+                    'octave': self.get_row_input(request, i, 'octave'),
+                    'gauge': self.get_row_input(request, i, 'gauge'),
+                    'string_material': self.get_row_input(request, i, 'string_type')
+                }
+                print(get_tension(tension_input))
+            except:
+                self.errors.append("An error occured saving string " + str(i) + ".")
+
+    def get_row_input(self, request, number, input):
+        return request.POST['row[' + str(number) + '][' + input + ']']
+
+    def post(self, request):
+        print(request.POST)
+        self.errors = []
+        if request.is_ajax():
+            # User Validation
+            user = request.user
+            self.validate_user_status(user)
+
+            # Name Validation
+            name = request.POST['name']
+            self.validate_name(name)
+
+            # Description Validation
+            try:
+                description = request.POST['description']
+                if description == '':
+                    description = ' '
+                self.validate_description(description)
+            except MultiValueDictKeyError:
+                description = ' '
+
+            # Total Strings Validation
+            self.validate_total_strings(request.POST['total_strings'])
+            if len(self.errors) != 0:
+                self.response['errors'] = self.errors
+                return HttpResponseBadRequest(json.dumps(self.response), content_type='application/json')
+
+            self.validate_rows(request)
+
+            if len(self.errors) == 0:
+                return HttpResponse(json.dumps(self.response), content_type='application/javascript')
+
+        # Return Errors
+        self.response['errors'] = self.errors
+        return HttpResponseBadRequest(json.dumps(self.response), content_type='application/json')
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(SaveSet, self).dispatch(*args, **kwargs)
+
+
+# def check_string_submitted():
+#     pass
+
 @csrf_exempt
 def asynchronous_save_set(request):
     response = {}
     if request.is_ajax() and request.method == "POST":
+        errors = []
+        # if no_string_submitted(errors)
+
+
         print(request.POST)
         print(request.POST['row[4][note]'])
         print(request.POST['name'])
@@ -143,6 +239,9 @@ def asynchronous_save_set(request):
         print(request.POST['scale_length'])
 
         return HttpResponse(json.dumps(response), content_type='application/javascript')
+
+
+"""End Async save"""
 
 
 def save_set(request):

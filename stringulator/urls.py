@@ -1,20 +1,20 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from calculator.views import SaveSet
 from django.views.generic import RedirectView
 
 admin.autodiscover()
+
 urlpatterns = patterns('',
                        # Admin
                        url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
                        url(r'^admin/', include(admin.site.urls)),
 
                        # Calculate
-                       # url(r'^herokuapp.com/$',
-                       #     RedirectView.as_view(url='http://www.stringulator.com', permanent=True)),
                        (r'^calculate/$', 'calculator.views.load_calculate_page'),
-
                        (r'^calculate-tension/$', 'calculator.views.convert_input_to_tension'),
-                       (r'^save-set/$', 'calculator.views.asynchronous_save_set'),
+                       # (r'^save-set/$', 'calculator.views.asynchronous_save_set'),
+                       (r'^save-set/', SaveSet.as_view()),
 
                        # Download
                        (r'^download-set', 'profile.views.downloadStringSet'),

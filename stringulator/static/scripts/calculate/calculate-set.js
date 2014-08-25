@@ -54,7 +54,8 @@ function saveStringSet(set){
     /* jshint camelcase: true*/
     dataType: 'json',
     success: function (response) {
-      console.log(response)
+      console.log(response);
+      alert(response.debug);
 //      var tension = response.tension;
 //      if (tension < 0) {
 //        tension = 0;
@@ -64,8 +65,8 @@ function saveStringSet(set){
     },
     error: function (response, error) {
       var json = JSON.parse(response.responseText);
-      console.log(json.error);
-      $('#save-error-alert').removeClass('hidden');
+      console.log(json.errors);
+      $('#save-error-alert').removeClass('hidden').text(json.errors);
     }
   });
 }
