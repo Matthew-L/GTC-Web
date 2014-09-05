@@ -32,7 +32,7 @@
       {#      </div>#}
       <div class="morph-button morph-button-modal morph-button-modal-2 morph-button-fixed">
         <button type="button">
-          <a href=/calculate/>
+          <a class="header-button" href=/calculate/>
             Calculate
           </a>
         </button>
@@ -92,6 +92,7 @@
                 <span class="icon icon-close">Close the dialog</span>
 
                 <h2>Register</h2>
+
                 <form class="navbar-form navbar-center" action="/accounts/register/" method="post">
                   {% csrf_token %}
                   <p><label>Username</label><input id="id_username" maxlength="30" name="username" type="text"
@@ -99,8 +100,8 @@
                                                    title="Enter a valid username"></p>
 
                   <p><label>Email</label><input id="id_email" maxlength="50" name="email" type="text"
-                                                   placeholder="Email"
-                                                   title="Enter a valid email"></p>
+                                                placeholder="Email"
+                                                title="Enter a valid email"></p>
 
                   <p><label>Password</label><input id="id_password1" name="password1" type="password"
                                                    placeholder="Password"
@@ -140,7 +141,14 @@
     </div>
   {% endblock %}
 
-  <div class="footer"><span class="license">Licensed under MIT 2014</span><span class="contributors">Micah Gajewski | Kevin Restaino</span>
+  <div class="footer">
+    <span class="contributors left"><a href="https://www.linkedin.com/in/micahgajewski/">Micah Gajewski</a></span>
+    <form class="donate-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+      <input type="hidden" name="cmd" value="_s-xclick" display="inline">
+      <input type="hidden" name="hosted_button_id" value="62ZVBQ4ZEZTBA">
+      <button type="submit" class="donate">Donate</button>
+    </form>
+
   </div>
 </div>
 
