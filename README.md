@@ -1,6 +1,5 @@
 # [Stringulator](http://stringulator.herokuapp.com/)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
-[![Coverage Status](https://img.shields.io/coveralls/gajewsk2/Stringulator.svg)](https://coveralls.io/r/gajewsk2/Stringulator)
 
 When it comes to guitar and bass strings, balanced tension is crucial to speed and accuracy. Stringulator is a much-needed, modernized guitar string tension calculator. By using a tension calculator musicians can create custom tunings and tension "feels" for their particular instruments -- even for the most exotic of extended range guitars. It was originally based on [Bangzero's String Gauge Calculator](http://www.bangzero.org/stringtension/), which is a great tool, but beginning to feel dated. Our site allows for users to save string sets to their profiles for later reference and editing, view others string set creations, and is one of the only calculators available to handle multi-scale extended range instruments. 
 
