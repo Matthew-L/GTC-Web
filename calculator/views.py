@@ -141,11 +141,53 @@ def renaming_set(name, request, user):
 class SaveSet(View):
     response = {}
     errors = []
+    valid_strings = []
 
-    def validate_name(self, name):
-        print(name == 'Empty')
+    def renamed_set_exists(should_rename, name, user):
+        if should_rename:
+            renamed_to_existing_set = StringSet.objects.filter(name=name, user=user)
+            if renamed_to_existing_set:
+                return True
+        return False
+
+    def rename_set(self, old_name, name):
+        # changing set name
+        old_string_set = ''
+        should_rename = False
+        # try:
+        #     print('changing set name')
+        #     print(name, old_name)
+        #     if name != old_name:
+        #         old_string_set = StringSet.objects.filter(name=old_name, user=user)
+        #         # print(old_string_set, old_name)
+        #         # if old_string_set:
+        #         # old_string_set.all().delete()
+        #         # should_rename = True
+        #         renamed_to_existing_set = StringSet.objects.filter(name=name, user=user)
+        #         if renamed_to_existing_set:
+        #             self.errors.append("You already have a String Set named that! Delete or rename the set '" + name + "' first.")
+        #
+        # except:
+        #     pass
+        # # old_string_set, should_rename = renaming_set(name, request, user)
+        # # check if stringset name exists already
+        #
+        #
+        # # if self.renamed_set_exists(should_rename, name, user):
+        # #     self.errors.append("You already have a String Set named that! Delete or rename the set '" + name + "' first.")
+        #
+        #
+        # # just updating, name stayed the same
+        # revised_string_set = StringSet.objects.filter(name=name, user=user)
+        # should_update = False
+        # if revised_string_set:
+        #     should_update = True
+
+    def validate_name(self, old_name, name, user):
         if name == 'Empty' or name == '':
             self.errors.append('Name your string set to save it.')
+        self.rename_set(old_name, name)
+
 
     def validate_description(self, description):
         pass
@@ -173,6 +215,8 @@ class SaveSet(View):
                     'string_material': self.get_row_input(request, i, 'string_type')
                 }
                 print(get_tension(tension_input))
+                self.valid_strings.append(tension_input)
+                print(self.valid_strings)
             except:
                 self.errors.append("An error occured saving string " + str(i) + ".")
 
@@ -187,10 +231,6 @@ class SaveSet(View):
             user = request.user
             self.validate_user_status(user)
 
-            # Name Validation
-            name = request.POST['name']
-            self.validate_name(name)
-
             # Description Validation
             try:
                 description = request.POST['description']
@@ -202,14 +242,21 @@ class SaveSet(View):
 
             # Total Strings Validation
             self.validate_total_strings(request.POST['total_strings'])
-            if len(self.errors) != 0:
-                self.response['errors'] = self.errors
-                return HttpResponseBadRequest(json.dumps(self.response), content_type='application/json')
 
+            # Validate Rows with Model
             self.validate_rows(request)
 
+            # Name Validation
+            name = request.POST['name']
+            old_name = request.POST['old_name']
+            self.validate_name(old_name, name, user)
+
             if len(self.errors) == 0:
+                self.response['successMessage'] = 'String set has been saved successfully.'
                 return HttpResponse(json.dumps(self.response), content_type='application/javascript')
+            elif len(self.errors) != 0:
+                self.response['errors'] = self.errors
+                return HttpResponseBadRequest(json.dumps(self.response), content_type='application/json')
 
         # Return Errors
         self.response['errors'] = self.errors

@@ -86,6 +86,11 @@ function getTotalStrings() {
   return $('#strings-table').find('tr:last > td > .string-number').text();
 }
 
+function getOldName(){
+  'use strict';
+  return $('#string-set-name').data('originalName');
+}
+
 function getRowInputs(row) {
   'use strict';
   return {

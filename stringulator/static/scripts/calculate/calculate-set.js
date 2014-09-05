@@ -45,6 +45,7 @@ function saveStringSet(set){
     url: '/save-set/',
 
     data: {
+      old_name: getOldName(),
       name: set.name,
       description: set.description,
       scale_length: set.scale_length,
@@ -55,7 +56,7 @@ function saveStringSet(set){
     dataType: 'json',
     success: function (response) {
       console.log(response);
-      alert(response.debug);
+      alert(response.successMessage);
 //      var tension = response.tension;
 //      if (tension < 0) {
 //        tension = 0;

@@ -7,7 +7,7 @@
     <form method="get" action="/save-set/">
       {#      <input type="hidden" id="string_data" name="variable" value='{{ json_string_set }}'>#}
 
-      <div id="string-set-name">
+      <div id="string-set-name" data-original-name="{{ string_set_name }}">
         <label for="description">Name</label>
         <a href="#">{{ string_set_name }}</a>
       </div>
