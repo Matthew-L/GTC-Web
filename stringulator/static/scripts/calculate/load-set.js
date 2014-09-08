@@ -67,7 +67,7 @@ function makeRowDict(scale_length, string_number, note, octave, gauge, string_ty
     note: note,
     octave: octave,
     gauge: gauge,
-    string_material: string_type,
+    string_type: string_type,
     total_strings: total_strings
   };
 }

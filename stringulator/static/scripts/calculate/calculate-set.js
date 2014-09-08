@@ -13,7 +13,7 @@ function calculateString(row) {
       note: row.note,
       octave: row.octave,
       gauge: row.gauge,
-      string_material: row.string_type,
+      string_type: row.string_type,
       total_strings: getTotalStrings()
     },
     /* jshint camelcase: true*/

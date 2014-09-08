@@ -54,8 +54,8 @@ def get_users_string_set(context, request):
     for set in string_set:
         # print('username: ', set.user, username)
         if str(set.user) == str(username):
-            context['description'] = set.desc
-            context['total_strings'] = set.number_of_strings
+            context['description'] = set.description
+            # context['total_strings'] = set.number_of_strings
             user_set = get_users_strings(string_set_name, strings, user_set, username)
     context['json_string_set'] = serializers.serialize("json", user_set)
     return user_set, context
@@ -64,17 +64,17 @@ def get_users_string_set(context, request):
 def load_calculate_page(request):
     context = {}
     if request.method == 'GET':
-        try:
-            user_set, context = get_users_string_set(context, request)
-        except:
-            pass
+        # try:
+        user_set, context = get_users_string_set(context, request)
+        # except:
+        #     pass
     return render(request, 'calculate.html', context)
 
 
 def get_tension(tension_input):
     length = Length(tension_input['scale_length'], tension_input['total_strings'], tension_input['string_number'])
     pitch = ScientificPitch(tension_input['note'], tension_input['octave'])
-    string = GuitarString(tension_input['gauge'], tension_input['string_material'])
+    string = GuitarString(tension_input['gauge'], tension_input['string_type'])
     tension = calculate_tension(length, pitch, string)
     return round_tension(tension)
 
@@ -108,7 +108,7 @@ def convert_input_to_tension(request):
 # context['is_logged_in'] = True
 # context['username'] = request.user.get_username()
 # else:
-#         context['is_logged_in'] = False
+# context['is_logged_in'] = False
 #     return context
 
 
@@ -117,22 +117,22 @@ def return_save_errors(context, errors, request):
     return render(request, 'save_set.html', context)
 
 
-def renaming_set(name, request, user):
-    should_rename = False
-    try:
-        old_name = request.GET['save-set']
-        print('changing set name')
-        print(name, old_name)
-        if name != old_name:
-            old_string_set = StringSet.objects.filter(name=old_name, user=user)
-            # print(old_string_set, old_name)
-            # if old_string_set:
-            # old_string_set.all().delete()
-            should_rename = True
-    except:
-        pass
-
-    return old_string_set, should_rename
+# def renaming_set(name, request, user):
+#     should_rename = False
+#     try:
+#         old_name = request.GET['save-set']
+#         print('changing set name')
+#         print(name, old_name)
+#         if name != old_name:
+#             old_string_set = StringSet.objects.filter(name=old_name, user=user)
+#             # print(old_string_set, old_name)
+#             # if old_string_set:
+#             # old_string_set.all().delete()
+#             should_rename = True
+#     except:
+#         pass
+#
+#     return old_string_set, should_rename
 
 
 """ Save Error Handling """
@@ -142,58 +142,85 @@ class SaveSet(View):
     response = {}
     errors = []
     valid_strings = []
+    user = ''
+    old_name = ''
+    name = ''
+    description = ' '
 
-    def renamed_set_exists(should_rename, name, user):
-        if should_rename:
-            renamed_to_existing_set = StringSet.objects.filter(name=name, user=user)
-            if renamed_to_existing_set:
-                return True
-        return False
+    def write_strings(self, string_set):
+        for s in range(1, len(self.valid_strings)):
+            string_inputs = self.valid_strings[s]
+            print(string_inputs)
+            string = String(string_set=string_set,
+                            string_number=string_inputs['string_number'], 
+                            scale_length=string_inputs['scale_length'],
+                            note=string_inputs['note'], 
+                            octave=string_inputs['octave'], 
+                            gauge=string_inputs['gauge'],
+                            string_type=string_inputs['string_type'])
+            string.save()
+            try:
+                string.full_clean()
+                string_set.save()
+            except ValidationError:
+                self.errors.append("Could not validate string " + str(s) + ".")
 
-    def rename_set(self, old_name, name):
-        # changing set name
-        old_string_set = ''
-        should_rename = False
-        # try:
-        #     print('changing set name')
-        #     print(name, old_name)
-        #     if name != old_name:
-        #         old_string_set = StringSet.objects.filter(name=old_name, user=user)
-        #         # print(old_string_set, old_name)
-        #         # if old_string_set:
-        #         # old_string_set.all().delete()
-        #         # should_rename = True
-        #         renamed_to_existing_set = StringSet.objects.filter(name=name, user=user)
-        #         if renamed_to_existing_set:
-        #             self.errors.append("You already have a String Set named that! Delete or rename the set '" + name + "' first.")
-        #
-        # except:
-        #     pass
-        # # old_string_set, should_rename = renaming_set(name, request, user)
-        # # check if stringset name exists already
-        #
-        #
-        # # if self.renamed_set_exists(should_rename, name, user):
-        # #     self.errors.append("You already have a String Set named that! Delete or rename the set '" + name + "' first.")
-        #
-        #
-        # # just updating, name stayed the same
-        # revised_string_set = StringSet.objects.filter(name=name, user=user)
-        # should_update = False
-        # if revised_string_set:
-        #     should_update = True
+    def write_set(self):
+        string_set = StringSet(name=self.name, user=self.user, description=self.description)
+        try:
+            string_set.full_clean()
+            string_set.save()
+        except ValidationError:
+            self.errors.append("Could not validate String Set input!")
+        
+        self.write_strings(string_set)
 
-    def validate_name(self, old_name, name, user):
-        if name == 'Empty' or name == '':
+    def renamed_set_exists(self):
+        renamed_to_existing_set = StringSet.objects.filter(name=self.old_name, user=self.user)
+        if renamed_to_existing_set:
+            self.errors.append(
+                "You already have a String Set named that! Delete or rename the set '" + self.name + "' first.")
+            return True
+        else:
+            return False
+
+    def rename_set(self):
+        if not self.renamed_set_exists():
+            self.write_set()
+
+    def revise_set(self):
+        revised_set = StringSet.objects.filter(name=self.name, user=self.user)
+        if revised_set:
+            revised_set.all().delete()
+            self.write_set()
+
+    def validate_rename(self):
+        try:
+            if self.name != self.old_name:
+                self.rename_set()
+            else:
+                self.revise_set()
+        except:
+            pass
+
+    def validate_name(self):
+        if self.name == 'Empty' or self.name == '':
             self.errors.append('Name your string set to save it.')
-        self.rename_set(old_name, name)
+    
+    def manage_sets(self):
+        if self.name != self.old_name:
+            self.rename_set()
+        elif self.name != self.old_name:
+            self.revise_set()
+        else:
+            self.write_set()
 
+    def validate_description(self):
+        if self.description == '':
+            self.description = ' '
 
-    def validate_description(self, description):
-        pass
-
-    def validate_user_status(self, user):
-        if is_anonymous(user):
+    def validate_user_status(self):
+        if is_anonymous(self.user):
             self.errors.append("Log in to save sets.")
 
     def validate_total_strings(self, total):
@@ -202,23 +229,22 @@ class SaveSet(View):
 
     def validate_rows(self, request):
         total = int(request.POST['total_strings'])
-
         for i in range(1, total + 1):
-            try:
-                tension_input = {
-                    'scale_length': request.POST['scale_length'],
-                    'total_strings': request.POST['total_strings'],
-                    'string_number': i,
-                    'note': self.get_row_input(request, i, 'note'),
-                    'octave': self.get_row_input(request, i, 'octave'),
-                    'gauge': self.get_row_input(request, i, 'gauge'),
-                    'string_material': self.get_row_input(request, i, 'string_type')
-                }
-                print(get_tension(tension_input))
-                self.valid_strings.append(tension_input)
-                print(self.valid_strings)
-            except:
-                self.errors.append("An error occured saving string " + str(i) + ".")
+            # try:
+            tension_input = {
+                'scale_length': request.POST['scale_length'],
+                'total_strings': request.POST['total_strings'],
+                'string_number': i,
+                'note': self.get_row_input(request, i, 'note'),
+                'octave': self.get_row_input(request, i, 'octave'),
+                'gauge': self.get_row_input(request, i, 'gauge'),
+                'string_type': self.get_row_input(request, i, 'string_type')
+            }
+            print(get_tension(tension_input))
+            self.valid_strings.append(tension_input)
+            print(self.valid_strings)
+            # except:
+            #     self.errors.append("An error occured validating string " + str(i) + ".")
 
     def get_row_input(self, request, number, input):
         return request.POST['row[' + str(number) + '][' + input + ']']
@@ -228,29 +254,24 @@ class SaveSet(View):
         self.errors = []
         if request.is_ajax():
             # User Validation
-            user = request.user
-            self.validate_user_status(user)
-
+            self.user = request.user
+            self.validate_user_status()
             # Description Validation
             try:
-                description = request.POST['description']
-                if description == '':
-                    description = ' '
-                self.validate_description(description)
+                self.description = request.POST['description']
+                self.validate_description()
             except MultiValueDictKeyError:
-                description = ' '
-
+                pass
             # Total Strings Validation
             self.validate_total_strings(request.POST['total_strings'])
-
             # Validate Rows with Model
             self.validate_rows(request)
-
             # Name Validation
-            name = request.POST['name']
-            old_name = request.POST['old_name']
-            self.validate_name(old_name, name, user)
+            self.name = request.POST['name']
+            self.old_name = request.POST['old_name']
+            self.validate_name()
 
+            self.manage_sets()
             if len(self.errors) == 0:
                 self.response['successMessage'] = 'String set has been saved successfully.'
                 return HttpResponse(json.dumps(self.response), content_type='application/javascript')
@@ -306,9 +327,9 @@ def save_set(request):
     name = request.GET['string_set_name']
     user = request.user
 
-    desc = request.GET['desc']
-    if desc == '':
-        desc = ' '
+    description = request.GET['description']
+    if description == '':
+        description = ' '
     # check if user is logged in
     if is_anonymous(user):
         errors.append("Register and Log In to Save Sets!")
@@ -354,7 +375,7 @@ def save_set(request):
     elif should_rename:
         old_string_set.all().delete()
 
-    string_set = StringSet(name=name, user=request.user, desc=desc, is_mscale=is_mscale,
+    string_set = StringSet(name=name, user=request.user, description=desc, is_mscale=is_mscale,
                            number_of_strings=number_of_strings)
     try:
         string_set.full_clean()

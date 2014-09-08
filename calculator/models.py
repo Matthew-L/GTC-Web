@@ -24,9 +24,9 @@ STRING_TYPE = (("CKPLG", "Plain Steel - CK"),
 class StringSet(models.Model):
     name = models.CharField(max_length=30)
     user = models.ForeignKey(User)
-    desc = models.CharField(max_length=15000)
+    description = models.CharField(max_length=15000)
     # is_mscale = models.BooleanField()
-    number_of_strings = models.IntegerField(max_length=2)
+    # number_of_strings = models.IntegerField(max_length=2)
 
     class Meta:
         ordering = ['name']
