@@ -23,7 +23,7 @@ def search(request):
             errors.append('Please enter at most 50 characters.')
         else:
             context['search_name_results'] = StringSet.objects.filter(name__icontains=query)
-            context['search_desc_results'] = StringSet.objects.filter(desc__icontains=query)
+            context['search_description_results'] = StringSet.objects.filter(description__icontains=query)
         context['errors'] = errors
     print(request)
     return render_to_response('search-results.html', context, context_instance=RequestContext(request))

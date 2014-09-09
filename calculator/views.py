@@ -44,20 +44,24 @@ def get_users_strings(string_set_name, strings, user_set, username):
 
 
 def get_users_string_set(context, request):
-    username = str(request.GET['users_set'])
-    get_user_id(username)
-    string_set_name = str(request.GET['string_set_name'])
-    string_set = StringSet.objects.filter(name=string_set_name)
-    user_set = []
-    context['string_set_name'] = string_set_name
-    strings = String.objects.all()
-    for set in string_set:
-        # print('username: ', set.user, username)
-        if str(set.user) == str(username):
-            context['description'] = set.description
-            # context['total_strings'] = set.number_of_strings
-            user_set = get_users_strings(string_set_name, strings, user_set, username)
-    context['json_string_set'] = serializers.serialize("json", user_set)
+    user_set = ''
+    try:
+        username = str(request.GET['users_set'])
+        get_user_id(username)
+        string_set_name = str(request.GET['string_set_name'])
+        string_set = StringSet.objects.filter(name=string_set_name)
+        user_set = []
+        context['string_set_name'] = string_set_name
+        strings = String.objects.all()
+        for set in string_set:
+            # print('username: ', set.user, username)
+            if str(set.user) == str(username):
+                context['description'] = set.description
+                # context['total_strings'] = set.number_of_strings
+                user_set = get_users_strings(string_set_name, strings, user_set, username)
+        context['json_string_set'] = serializers.serialize("json", user_set)
+    except:
+        pass
     return user_set, context
 
 
@@ -148,7 +152,7 @@ class SaveSet(View):
     description = ' '
 
     def write_strings(self, string_set):
-        for s in range(1, len(self.valid_strings)):
+        for s in range(1, len(self.valid_strings)+1):
             string_inputs = self.valid_strings[s]
             print(string_inputs)
             string = String(string_set=string_set,
@@ -159,21 +163,23 @@ class SaveSet(View):
                             gauge=string_inputs['gauge'],
                             string_type=string_inputs['string_type'])
             string.save()
-            try:
-                string.full_clean()
-                string_set.save()
-            except ValidationError:
-                self.errors.append("Could not validate string " + str(s) + ".")
+            print(string)
+            # try:
+            string.full_clean()
+
+            # except ValidationError:
+            #     self.errors.append("Could not validate string " + str(s) + ".")
 
     def write_set(self):
         string_set = StringSet(name=self.name, user=self.user, description=self.description)
         try:
-            string_set.full_clean()
             string_set.save()
+            string_set.full_clean()
+            self.write_strings(string_set)
         except ValidationError:
             self.errors.append("Could not validate String Set input!")
         
-        self.write_strings(string_set)
+
 
     def renamed_set_exists(self):
         renamed_to_existing_set = StringSet.objects.filter(name=self.old_name, user=self.user)
@@ -187,6 +193,8 @@ class SaveSet(View):
     def rename_set(self):
         if not self.renamed_set_exists():
             self.write_set()
+            old_string_set = StringSet.objects.filter(name=self.old_name, user=self.user)
+            old_string_set.all().delete()
 
     def revise_set(self):
         revised_set = StringSet.objects.filter(name=self.name, user=self.user)
@@ -210,7 +218,7 @@ class SaveSet(View):
     def manage_sets(self):
         if self.name != self.old_name:
             self.rename_set()
-        elif self.name != self.old_name:
+        elif self.name == self.old_name:
             self.revise_set()
         else:
             self.write_set()
@@ -270,8 +278,9 @@ class SaveSet(View):
             self.name = request.POST['name']
             self.old_name = request.POST['old_name']
             self.validate_name()
-
-            self.manage_sets()
+            if len(self.errors) == 0:
+                # self.manage_sets()
+                pass
             if len(self.errors) == 0:
                 self.response['successMessage'] = 'String set has been saved successfully.'
                 return HttpResponse(json.dumps(self.response), content_type='application/javascript')

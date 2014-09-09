@@ -5,82 +5,82 @@
   <div class="calculate">
     <h1>Search Results</h1>
     {% if errors %}
-        <ul>
-            {% for error in errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
+      <ul>
+        {% for error in errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
     {% else %}
-        {% if search_name_results%}
+      {% if search_name_results %}
         <ul>
-            <div class="row">
+          <div class="row">
             <a>
-                <div class="col-md-3  col-md-offset-3 my-grid text-left">
-                    Results in a String Set's Name
-                </div>
+              <div class="col-md-3  col-md-offset-3 my-grid text-left">
+                Results in a String Set's Name
+              </div>
             </a>
-            </div>
+          </div>
 
-            {% for result in search_name_results %}
-                <div class="row">
-                    <a href="/calculate?string_set_name={{ result.name }}&users_set={{ result.user }}">
-                        <div class="col-md-3 col-md-offset-3 my-grid text-left">
-                            {{ result.name }}
-                        </div>
-                    </a>
-
-                    <a>
-                        <div class="col-md-2 my-grid">
-                            <span> {{ result.user }}</span>
-                        </div>
-                    </a>
-                    <a href="/download-set?string_set_name={{ result.name }}&user={{ username }}" >
-                        <div class="col-md-1 my-grid">
-                            <span class="glyphicon glyphicon-floppy-save"></span>
-                        </div>
-                    </a>
+          {% for result in search_name_results %}
+            <div class="row">
+              <a href="/calculate?string_set_name={{ result.name }}&users_set={{ result.user }}">
+                <div class="col-md-3 col-md-offset-3 my-grid text-left">
+                  {{ result.name }}
                 </div>
-            {% endfor %}
-        </ul>
-        {% else %}
-            No String Set Name Results!
-            <br>
-        {% endif %}
+              </a>
 
-        {% if search_desc_results %}
+              <a>
+                <div class="col-md-2 my-grid">
+                  <span> {{ result.user }}</span>
+                </div>
+              </a>
+              <a href="/download-set?string_set_name={{ result.name }}&user={{ username }}">
+                <div class="col-md-1 my-grid">
+                  <span class="glyphicon glyphicon-floppy-save"></span>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+        </ul>
+      {% else %}
+        No String Set Name Results!
+        <br>
+      {% endif %}
+
+      {% if search_description_results %}
         <ul>
-            <div class="row">
+          <div class="row">
             <a>
-                <div class="col-md-3  col-md-offset-3 my-grid text-left">
-                    Results in a String Set's Description
-                </div>
+              <div class="col-md-3  col-md-offset-3 my-grid text-left">
+                Results in a String Set's Description
+              </div>
             </a>
-            </div>
-            {% for result in search_desc_results %}
-                <div class="row">
-                    <a href="/calculate?string_set_name={{ result.name }}&users_set={{ result.user }}">
-                        <div class="col-md-3 col-md-offset-3 my-grid text-left">
-                            {{ result.name }}
-                        </div>
-                    </a>
-
-                    <a>
-                        <div class="col-md-2 my-grid">
-                            <span> {{ result.user }}</span>
-                        </div>
-                    </a>
-
-                    <a href="/download-set?string_set_name={{ string_set.name }}" >
-                        <div class="col-md-1 my-grid">
-                            <span class="glyphicon glyphicon-floppy-save"></span>
-                        </div>
-                    </a>
+          </div>
+          {% for result in search_description_results %}
+            <div class="row">
+              <a href="/calculate?string_set_name={{ result.name }}&users_set={{ result.user }}">
+                <div class="col-md-3 col-md-offset-3 my-grid text-left">
+                  {{ result.name }}
                 </div>
-            {% endfor %}
+              </a>
+
+              <a>
+                <div class="col-md-2 my-grid">
+                  <span> {{ result.user }}</span>
+                </div>
+              </a>
+
+              <a href="/download-set?string_set_name={{ string_set.name }}">
+                <div class="col-md-1 my-grid">
+                  <span class="glyphicon glyphicon-floppy-save"></span>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
         </ul>
-        {% else %}
-            No String Set Description Results!
-        {% endif %}
+      {% else %}
+        No String Set Description Results!
+      {% endif %}
     {% endif %}
   </div>
 {% endblock %}
