@@ -72,7 +72,7 @@ body {
 
 .homepage {
   background: rgba(255, 255, 255, .9);
-  max-width: 500px;
+  max-width: 800px;
   padding: 40px;
   margin: 80px auto;
   margin-bottom: 0;
@@ -100,7 +100,7 @@ body {
 }
 
 .footer {
-  max-width: 500px;
+  max-width: 800px;
   margin: 0 auto;
   text-align: center;
   color: #ddd;
@@ -123,6 +123,57 @@ body {
 
 .contributors {
 
+}
+
+/*Kevin's changes*/
+
+.homepage a:hover {
+  text-decoration: none;
+}
+
+.header a {
+  color: #444;
+}
+
+.header .morph-button button:hover {
+  text-decoration: underline;
+}
+
+.header #search {
+  height: 40px;
+//  font-size: 14px;
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+.navbar-form {
+  margin: 10px 15px;
+  padding: 0;
+}
+
+.search-button {
+  height: 40px;
+  border-radius: 0;
+  background-color: #eee;
+}
+
+.content-style-form label {
+  font-size: 10px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+div#string-set-name {
+  font-size: 14px;
+  padding-bottom: 15px;
+}
+
+div#scale-length {
+  font-size: 14px;
+  padding: 5px;
 }
 
 @media all and (min-width: 650px) {
@@ -243,3 +294,4 @@ body {
     float: none;
   }
 }
+
