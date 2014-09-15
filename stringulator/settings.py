@@ -2,7 +2,7 @@ import os
 
 ROOT_PATH = os.path.dirname(__file__)
 
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -17,7 +17,7 @@ import dj_database_url
 if DEBUG:
     DATABASE_URL = 'postgres://localhost/storage'
 else:
-    DATABASE_URL = 'postgres://hxtnsxsmxkrgor:H5vYN7g2Nn0ZQCmWZeGiUzLvMC@ec2-54-204-21-178.compute-1.amazonaws.com:5432/dk5va592r6j0v'
+    DATABASE_URL = os.environ.get('DATABASE_URL')
 DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
@@ -105,7 +105,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '*gis)!8a&uptme_abhztm8o#c)n%v%euqs2&%!zaym7anjc^0*'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
