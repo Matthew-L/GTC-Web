@@ -252,8 +252,10 @@ function setSortableListener() {
     itemPath: '> tbody',
     itemSelector: '.sortable-row',
     onDrop: function ($item, container, _super) {
+      $('.placeholder').remove();
       updateAllStringNumbers($item);
       _super($item);
+
     },
     tolerence: 100,
     placeholder: '<tr class="placeholder"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td></tr>'
