@@ -152,8 +152,11 @@ class SaveSet(View):
     description = ' '
 
     def write_strings(self, string_set):
-        for s in range(1, len(self.valid_strings)+1):
-            string_inputs = self.valid_strings[s]
+        for s in range(1, len(self.valid_strings) + 1):
+
+
+            string_inputs = self.valid_strings[s-1]
+
             print(string_inputs)
             string = String(string_set=string_set,
                             string_number=string_inputs['string_number'], 
@@ -162,19 +165,19 @@ class SaveSet(View):
                             octave=string_inputs['octave'], 
                             gauge=string_inputs['gauge'],
                             string_type=string_inputs['string_type'])
-            string.save()
+
             print(string)
             # try:
             string.full_clean()
-
+            string.save()
             # except ValidationError:
             #     self.errors.append("Could not validate string " + str(s) + ".")
 
     def write_set(self):
         string_set = StringSet(name=self.name, user=self.user, description=self.description)
         try:
-            string_set.save()
             string_set.full_clean()
+            string_set.save()
             self.write_strings(string_set)
         except ValidationError:
             self.errors.append("Could not validate String Set input!")
@@ -182,7 +185,7 @@ class SaveSet(View):
 
 
     def renamed_set_exists(self):
-        renamed_to_existing_set = StringSet.objects.filter(name=self.old_name, user=self.user)
+        renamed_to_existing_set = StringSet.objects.filter(name=self.name, user=self.user)
         if renamed_to_existing_set:
             self.errors.append(
                 "You already have a String Set named that! Delete or rename the set '" + self.name + "' first.")
@@ -201,15 +204,6 @@ class SaveSet(View):
         if revised_set:
             revised_set.all().delete()
             self.write_set()
-
-    def validate_rename(self):
-        try:
-            if self.name != self.old_name:
-                self.rename_set()
-            else:
-                self.revise_set()
-        except:
-            pass
 
     def validate_name(self):
         if self.name == 'Empty' or self.name == '':
@@ -260,6 +254,10 @@ class SaveSet(View):
     def post(self, request):
         print(request.POST)
         self.errors = []
+        self.valid_strings = []
+
+
+
         if request.is_ajax():
             # User Validation
             self.user = request.user
@@ -279,8 +277,8 @@ class SaveSet(View):
             self.old_name = request.POST['old_name']
             self.validate_name()
             if len(self.errors) == 0:
-                # self.manage_sets()
-                pass
+                self.manage_sets()
+                # pass
             if len(self.errors) == 0:
                 self.response['successMessage'] = 'String set has been saved successfully.'
                 return HttpResponse(json.dumps(self.response), content_type='application/javascript')
