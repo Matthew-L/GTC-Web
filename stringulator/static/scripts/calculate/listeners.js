@@ -237,6 +237,7 @@ function setDeleteRowListeners() {
     $('#confirm-delete').click(function () {
       $('#delete-alert').addClass('hidden');
       row.remove();
+      updateAllStringNumbers();
     });
     $('#cancel-delete').click(function () {
       $('#delete-alert').addClass('hidden');

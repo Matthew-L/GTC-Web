@@ -153,11 +153,7 @@ class SaveSet(View):
 
     def write_strings(self, string_set):
         for s in range(1, len(self.valid_strings) + 1):
-
-
             string_inputs = self.valid_strings[s-1]
-
-            print(string_inputs)
             string = String(string_set=string_set,
                             string_number=string_inputs['string_number'], 
                             scale_length=string_inputs['scale_length'],
@@ -165,13 +161,11 @@ class SaveSet(View):
                             octave=string_inputs['octave'], 
                             gauge=string_inputs['gauge'],
                             string_type=string_inputs['string_type'])
-
-            print(string)
-            # try:
-            string.full_clean()
-            string.save()
-            # except ValidationError:
-            #     self.errors.append("Could not validate string " + str(s) + ".")
+            try:
+                string.full_clean()
+                string.save()
+            except ValidationError:
+                self.errors.append("Could not validate string " + str(s) + ".")
 
     def write_set(self):
         string_set = StringSet(name=self.name, user=self.user, description=self.description)
@@ -222,7 +216,7 @@ class SaveSet(View):
             self.description = ' '
 
     def validate_user_status(self):
-        if is_anonymous(self.user):
+        if self.user.is_anonymous():
             self.errors.append("Log in to save sets.")
 
     def validate_total_strings(self, total):
@@ -232,32 +226,26 @@ class SaveSet(View):
     def validate_rows(self, request):
         total = int(request.POST['total_strings'])
         for i in range(1, total + 1):
-            # try:
-            tension_input = {
-                'scale_length': request.POST['scale_length'],
-                'total_strings': request.POST['total_strings'],
-                'string_number': i,
-                'note': self.get_row_input(request, i, 'note'),
-                'octave': self.get_row_input(request, i, 'octave'),
-                'gauge': self.get_row_input(request, i, 'gauge'),
-                'string_type': self.get_row_input(request, i, 'string_type')
-            }
-            print(get_tension(tension_input))
-            self.valid_strings.append(tension_input)
-            print(self.valid_strings)
-            # except:
-            #     self.errors.append("An error occured validating string " + str(i) + ".")
+            try:
+                tension_input = {
+                    'scale_length': request.POST['scale_length'],
+                    'total_strings': request.POST['total_strings'],
+                    'string_number': i,
+                    'note': self.get_row_input(request, i, 'note'),
+                    'octave': self.get_row_input(request, i, 'octave'),
+                    'gauge': self.get_row_input(request, i, 'gauge'),
+                    'string_type': self.get_row_input(request, i, 'string_type')
+                }
+                self.valid_strings.append(tension_input)
+            except:
+                self.errors.append("An error occured validating string " + str(i) + ".")
 
     def get_row_input(self, request, number, input):
         return request.POST['row[' + str(number) + '][' + input + ']']
 
     def post(self, request):
-        print(request.POST)
         self.errors = []
         self.valid_strings = []
-
-
-
         if request.is_ajax():
             # User Validation
             self.user = request.user
@@ -294,224 +282,3 @@ class SaveSet(View):
     def dispatch(self, *args, **kwargs):
         return super(SaveSet, self).dispatch(*args, **kwargs)
 
-
-# def check_string_submitted():
-#     pass
-
-@csrf_exempt
-def asynchronous_save_set(request):
-    response = {}
-    if request.is_ajax() and request.method == "POST":
-        errors = []
-        # if no_string_submitted(errors)
-
-
-        print(request.POST)
-        print(request.POST['row[4][note]'])
-        print(request.POST['name'])
-        # print(request.POST['description'])
-        print(request.POST['total_strings'])
-        print(request.POST['scale_length'])
-
-        return HttpResponse(json.dumps(response), content_type='application/javascript')
-
-
-"""End Async save"""
-
-
-def save_set(request):
-    context = {}
-    errors = []
-
-    # context = user_login_context(context, request)
-
-    curr = count_string_rows(request)
-    if curr == 0:
-        errors.append("Nothing Submitted!")
-        return return_save_errors(context, errors, request)
-
-    # make new string set
-    name = request.GET['string_set_name']
-    user = request.user
-
-    description = request.GET['description']
-    if description == '':
-        description = ' '
-    # check if user is logged in
-    if is_anonymous(user):
-        errors.append("Register and Log In to Save Sets!")
-        return return_save_errors(context, errors, request)
-
-    if is_valid_name(name):
-        errors.append("You must give the String Set a name")
-        return return_save_errors(context, errors, request)
-
-    # changing set name
-    old_string_set = ''
-    should_rename = False
-    try:
-        old_name = request.GET['save-set']
-        print('changing set name')
-        print(name, old_name)
-        if name != old_name:
-            old_string_set = StringSet.objects.filter(name=old_name, user=user)
-            # print(old_string_set, old_name)
-            # if old_string_set:
-            # old_string_set.all().delete()
-            should_rename = True
-    except:
-        pass
-    # old_string_set, should_rename = renaming_set(name, request, user)
-    # check if stringset name exists already
-
-    if renamed_set_exists(should_rename, name, user):
-        errors.append("You already have a String Set named that! Delete or rename the set '" + name + "' first.")
-        return return_save_errors(context, errors, request)
-
-    # just updating, name stayed the same
-    revised_string_set = StringSet.objects.filter(name=name, user=user)
-    should_update = False
-    if revised_string_set:
-        should_update = True
-
-    # verify string parameters
-    is_mscale, scale_length, number_of_strings = is_valid_scale_length(context, request, errors)
-
-    if should_update:
-        revised_string_set.all().delete()
-    elif should_rename:
-        old_string_set.all().delete()
-
-    string_set = StringSet(name=name, user=request.user, description=desc, is_mscale=is_mscale,
-                           number_of_strings=number_of_strings)
-    try:
-        string_set.full_clean()
-        string_set.save()
-    except ValidationError:
-        errors.append("Could not validate String Set input!")
-        return return_save_errors(context, errors, request)
-
-    number_of_parameters = 5
-    row_errors = 0
-    i = 0
-    while i < curr:
-        # print(i)
-        # print(number_of_strings)
-
-        try:
-            string_number = request.GET['string_number_GTC_' + str(i)]
-            GuSt.sanitize_string_number(string_number)
-        except:
-            row_errors += 1
-            errors.append('Invalid String Number in Row' + str(i))
-
-        try:
-            note = request.GET['note_GTC_' + str(i)]
-            GuSt.sanitize_note(note)
-        except:
-            row_errors += 1
-            errors.append('Invalid Note in Row' + str(i))
-
-        try:
-            octave = request.GET['octave_GTC_' + str(i)]
-            GuSt.sanitize_octave(octave)
-        except:
-            row_errors += 1
-            errors.append('Invalid Octave in Row' + str(i))
-
-        try:
-            gauge = request.GET['gauge_GTC_' + str(i)]
-            GuSt.sanitize_gauge(gauge)
-        except:
-            row_errors += 1
-            errors.append('Invalid Gauge in Row' + str(i))
-
-        try:
-            string_type = request.GET['string_type_GTC_' + str(i)]
-            GuSt.is_valid_string_material(string_type)
-        except:
-            row_errors += 1
-            errors.append('Invalid String Type in Row' + str(i))
-        i += 1
-
-        #print("row_err " + str(row_errors) )
-        if row_errors == number_of_parameters:
-            while row_errors > 0:
-                errors.pop()
-                row_errors -= 1
-        else:
-            row_errors = 0
-            string = String(string_set=string_set, string_number=string_number, scale_length=scale_length,
-                            note=note, octave=octave, gauge=gauge, string_type=string_type)
-            string.save()
-            try:
-                string.full_clean()
-                string_set.save()
-            except ValidationError:
-                errors.append("Could not validate a guitar string input!")
-                return return_save_errors(context, errors, request)
-
-    return return_save_errors(context, errors, request)
-
-
-def count_string_rows(request):
-    curr = 0
-    if request.method == 'GET':
-        try:
-            while request.GET['gauge_GTC_' + str(curr)] is not None:
-                print(request.GET['gauge_GTC_' + str(curr)])
-                curr += 1
-        except KeyError:
-            pass
-
-    return curr
-
-
-def is_anonymous(user):
-    if user.is_anonymous():
-        return True
-    return False
-
-
-def is_valid_name(name):
-    if name == "":
-        return True
-
-
-def is_valid_scale_length(context, request, errors):
-    try:
-        is_mscale = request.GET["is_mscale"]
-        is_mscale = True
-    except:
-        is_mscale = False
-
-    if is_mscale:
-        try:
-            scale_length = request.GET['scale_length']
-            GuSt.sanitize_multiscale(scale_length)
-        except:
-            errors.append("Invalid MultiScale Length!")
-            return return_save_errors(context, errors, request)
-        try:
-            number_of_strings = request.GET['number_of_strings']
-            GuSt.sanitize_number_of_strings(number_of_strings)
-        except:
-            errors.append("Invalid Number of Strings!")
-            return return_save_errors(context, errors, request)
-    else:
-        try:
-            scale_length = request.GET['scale_length']
-            GuSt.sanitize_scale_length(scale_length)
-        except:
-            errors.append("Invalid Scale Length!")
-            return return_save_errors(context, errors, request)
-        number_of_strings = 0
-    return is_mscale, scale_length, number_of_strings
-
-
-def renamed_set_exists(should_rename, name, user):
-    if should_rename:
-        renamed_to_existing_set = StringSet.objects.filter(name=name, user=user)
-        if renamed_to_existing_set:
-            return True
-    return False
