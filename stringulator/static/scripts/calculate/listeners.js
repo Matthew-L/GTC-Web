@@ -231,17 +231,19 @@ function setEditableListeners() {
 function setDeleteRowListeners() {
   'use strict';
   $('.delete').click(function () {
-    console.log('here');
     var row = $(this).closest('tr');
-    $('#delete-alert').removeClass('hidden');
-    $('#confirm-delete').click(function () {
-      $('#delete-alert').addClass('hidden');
-      row.remove();
-      updateAllStringNumbers();
-    });
-    $('#cancel-delete').click(function () {
-      $('#delete-alert').addClass('hidden');
-    });
+    //check if there is only one row to prevent deleting only row
+    if(row.attr('id') !== 'string-row-1'||  $('#string-row-2').length  ) {
+      $('#delete-alert').removeClass('hidden');
+      $('#confirm-delete').click(function () {
+        $('#delete-alert').addClass('hidden');
+        row.remove();
+        updateAllStringNumbers();
+      });
+      $('#cancel-delete').click(function () {
+        $('#delete-alert').addClass('hidden');
+      });
+    }
   });
 }
 

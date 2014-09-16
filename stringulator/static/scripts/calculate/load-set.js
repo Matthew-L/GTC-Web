@@ -16,6 +16,7 @@ function addRow(index) {
   row.after(clone);
   $('#strings-table').find('tr:last > td > .string-number').text(index);
   return(row);
+
 }
 
 function loadRow(guitarString) {
@@ -86,7 +87,7 @@ function getTotalStrings() {
   return $('#strings-table').find('tr:last > td > .string-number').text();
 }
 
-function getOldName(){
+function getOldName() {
   'use strict';
   return $('#string-set-name').data('originalName');
 }
@@ -151,13 +152,13 @@ function saveAllStrings() {
   'use strict';
   var totalRows = $('.sortable-row').length;
   var rows = {};
-  for (var i = 1; i-1 < totalRows; ++i) {
+  for (var i = 1; i - 1 < totalRows; ++i) {
     rows[i] = getRowInputs('string-row-' + (i));
   }
   var set = {
-    rows : rows,
-    name : getSetName(),
-    desc : getSetDescription(),
+    rows: rows,
+    name: getSetName(),
+    desc: getSetDescription(),
     scale_length: getScaleLength()
   };
 //  console.log(set);
