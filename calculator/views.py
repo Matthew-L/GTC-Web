@@ -15,7 +15,7 @@ from .models import StringSet, String
 
 
 # new calculate
-from calculator.stringcalculator.string.length import Length, InvalidStringNumberError
+from calculator.stringcalculator.string.length import Length, InvalidStringNumberError, InvalidScaleLengthError
 from calculator.stringcalculator.string.guitar_string import GuitarString
 from calculator.stringcalculator.scientificpitch.scientific_pitch import ScientificPitch
 from calculator.stringcalculator.string_calculator import calculate_tension
@@ -236,11 +236,15 @@ class SaveSet(View):
                     'gauge': self.get_row_input(request, i, 'gauge'),
                     'string_type': self.get_row_input(request, i, 'string_type')
                 }
+                get_tension(tension_input)
                 self.valid_strings.append(tension_input)
+            except InvalidScaleLengthError:
+                self.errors.append("An error occurred validating your scale length.")
             except:
-                self.errors.append("An error occured validating string " + str(i) + ".")
+                self.errors.append("An error occurred validating string " + str(i))
 
-    def get_row_input(self, request, number, input):
+    @staticmethod
+    def get_row_input(request, number, input):
         return request.POST['row[' + str(number) + '][' + input + ']']
 
     def post(self, request):

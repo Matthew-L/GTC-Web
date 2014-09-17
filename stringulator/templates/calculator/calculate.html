@@ -65,15 +65,16 @@
           <button id="cancel-delete" type="button" class="btn btn-default">Cancel</button>
         </p>
       </div>
-      <div id="calculate-error-alert" class="hidden alert alert-danger fade in" role="alert">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Error!</strong> A problem has occurred while calculating your string row input.
+      <div id="error-alert" class="hidden alert alert-danger fade in" role="alert">
+        <a href="#" class="close">&times;</a>
+        <strong>Error! Make sure no fields are Empty.</strong>
+        <ul id="error-message" class="text-left"></ul>
       </div>
 
-      <div id="save-error-alert" class="hidden alert alert-danger fade in" role="alert">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Error!</strong> A problem has occurred while calculating your string row input.
-      </div>
+{#      <div id="error-alert" class="hidden alert alert-danger fade in" role="alert">#}
+{#        <a href="#" class="close" data-dismiss="alert">&times;</a>#}
+{#        <strong>Error!</strong> A problem has occurred while calculating your string row input.#}
+{#      </div>#}
 
       <div>
         <button class="btn btn-primary" id="insert-more" type="button">

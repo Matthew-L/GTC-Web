@@ -4,41 +4,42 @@
 {% block content %}
   <div class="profile">
     <h3>String Sets <b>{{ user }}</b> Made</h3>
- <div class="panel panel-default">
-    <table id="strings-table" class="table table-striped">
-      <tbody>
-      {% for string_set in string_sets %}
-        <tr class="profile-row" id="row-{{ forloop.counter0 }}">
-          <td>
-            <a href="/calculate?string_set_name={{ string_set.name }}&users_set={{ user }}">
-              <div class="text-left">
-                {{ string_set.name }}
-              </div>
-            </a>
-          </td>
 
-          <td>
-            <a href="/download-set?string_set_name={{ string_set.name }}&user={{ user }}">
-              <div>
-                <span class="glyphicon glyphicon-floppy-save"></span>
-              </div>
-            </a>
-          </td>
+    <div class="panel panel-default">
+      <table id="strings-table" class="table table-striped">
+        <tbody>
+        {% for string_set in string_sets %}
+          <tr class="profile-row" id="row-{{ forloop.counter0 }}">
+            <td>
+              <a href="/calculate?string_set_name={{ string_set.name }}&users_set={{ user }}">
+                <div class="text-left">
+                  {{ string_set.name }}
+                </div>
+              </a>
+            </td>
 
-          <td>
-            <a>
-              <div class="delete-set-btn" data-row="{{ forloop.counter0 }}"
-                   data-user="{{ user }}" data-set="{{ string_set.name }}">
-                <span class="glyphicon glyphicon-trash"></span>
-              </div>
-            </a>
-          </td>
-        </tr>
-      {% empty %}
-        <p><a href="/calculate/">You have not made any string sets.</a></p>
-      {% endfor %}
-      </tbody>
-    </table>
- </div>
+            <td>
+              <a href="/download-set?string_set_name={{ string_set.name }}&user={{ user }}">
+                <div>
+                  <span class="glyphicon glyphicon-floppy-save"></span>
+                </div>
+              </a>
+            </td>
+
+            <td>
+              <a>
+                <div class="delete-set-btn" data-row="{{ forloop.counter0 }}"
+                     data-user="{{ user }}" data-set="{{ string_set.name }}">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </div>
+              </a>
+            </td>
+          </tr>
+        {% empty %}
+          <p><a href="/calculate/">You have not made any string sets.</a></p>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
 {% endblock %}

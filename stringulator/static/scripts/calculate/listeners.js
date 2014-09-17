@@ -283,6 +283,14 @@ function setSaveSetListener() {
   });
 }
 
+
+function setErrorAlertListener() {
+  'use strict';
+  $('.close').on('click', function () {
+    $('#error-alert').addClass('hidden');
+  });
+}
+
 function setDragDropButton() {
   'use strict';
   $('#enable-drag-drop').on('click', function () {
@@ -318,6 +326,7 @@ $(document).ready(function () {
   setRowListeners();
   setAddRowListener();
   setSaveSetListener();
+  setErrorAlertListener();
 });
 
 

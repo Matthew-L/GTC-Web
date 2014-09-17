@@ -1,21 +1,35 @@
 @import "variables";
 
 .table th {
-   text-align: center;   
+  text-align: center;
 }
 
 .no-border > td {
   border: 0 none !important;
 }
 
-#strings-table{
+#strings-table {
   font-size: $readable-size;
 }
 
-#string-set-name{
+#string-set-name {
   font-size: $readable-size;
 }
 
-#scale-length{
+#scale-length {
   font-size: $readable-size;
+}
+
+#error-alert {
+  font-size: $readable-size;
+
+}
+
+#error-message {
+  display: table;
+  margin: 0 auto;
+  padding : 10px;
+  > li {
+    padding: 5px;
+  }
 }

@@ -1,3 +1,19 @@
+function displayErrors(errors){
+  'use strict';
+  $('#error-alert').removeClass('hidden');
+  $('#error-message > li').remove();
+  for(var i = 0; i < errors.length; ++i){
+    console.log(errors[i].toString());
+    $('#error-message').append('<li>'+errors[i].toString()+'</li>');
+  }
+
+}
+
+function hideErrors(){
+  'use strict';
+  $('#error-alert').addClass('hidden');
+}
+
 function calculateString(row) {
   'use strict';
   console.log(row);
@@ -19,18 +35,19 @@ function calculateString(row) {
     /* jshint camelcase: true*/
     dataType: 'json',
     success: function (response) {
-      console.log(response)
+      console.log(response);
       var tension = response.tension;
       if (tension < 0) {
         tension = 0;
       }
       console.log(tension);
       $('#string-row-' + index + ' > td > .tension').text(tension);
+      hideErrors();
     },
     error: function (response, error) {
       var json = JSON.parse(response.responseText);
       console.log(json.error);
-      $('#calculate-error-alert').removeClass('hidden');
+//      displayErrors(json.errors);
     }
   });
 }
@@ -57,12 +74,13 @@ function saveStringSet(set){
     success: function (response) {
       console.log(response);
       alert(response.successMessage);
-
+      hideErrors();
     },
     error: function (response, error) {
       var json = JSON.parse(response.responseText);
       console.log(json.errors);
-      $('#save-error-alert').removeClass('hidden').text(json.errors);
+      displayErrors(json.errors);
+
     }
   });
 }

@@ -115,6 +115,22 @@ tr.table_row {
   font-size: 1.4em;
 }
 
+/* line 23, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
+#error-alert {
+  font-size: 1.4em;
+}
+
+/* line 28, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
+#error-message {
+  display: table;
+  margin: 0 auto;
+  padding: 10px;
+}
+/* line 32, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
+#error-message > li {
+  padding: 5px;
+}
+
 /* line 1, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_header.scss */
 .navbar {
   background: rgba(255, 255, 255, 0.85);
