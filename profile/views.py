@@ -1,7 +1,7 @@
 import csv
 import json
 from django.core.context_processors import csrf
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
@@ -74,15 +74,24 @@ def downloadStringSet(request):
     return response
 
 @csrf_exempt
-def ajax_delete_set(request):
+def delete_set(request):
     if request.is_ajax() and request.method == "POST":
-        name = request.POST['string_set_name']
+        response = {}
+        errors = []
+
+        name = request.POST['setName']
         user = request.user
 
         string_set = StringSet.objects.filter(name=name, user=user)
-        if string_set:
-            string_set.all().delete()
-            response = {"name": name}
-
-        return HttpResponse(json.dumps(response), mimetype='application/javascript')
+        if str(request.user) == str(user):
+            if string_set:
+                string_set.all().delete()
+                response = {"name": name}
+                return HttpResponse(json.dumps(response), content_type='application/javascript')
+            else:
+                errors.append("The string set does not exist anymore.")
+        else:
+            errors.append("You can only delete your own strings.")
+        response['errors'] = errors
+        return HttpResponseBadRequest(json.dumps(response), content_type='application/json')
 

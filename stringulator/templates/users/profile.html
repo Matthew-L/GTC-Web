@@ -3,34 +3,42 @@
 
 {% block content %}
   <div class="profile">
-    <h1>{{ user.username }}'s Profile</h1>
-    <h2>String Sets {{ user.username }} Made</h2>
-
-    <div>
+    <h3>String Sets <b>{{ user }}</b> Made</h3>
+ <div class="panel panel-default">
+    <table id="strings-table" class="table table-striped">
+      <tbody>
       {% for string_set in string_sets %}
-        <div class="row" id="row-{{ forloop.counter0 }}">
-          <a href="/calculate?string_set_name={{ string_set.name }}&users_set={{ user }}">
-            <div class="col-sm-4 col-sm-offset-3 my-grid text-left" id={{ string_set.name }}>
-              {{ string_set.name }}
-            </div>
-          </a>
+        <tr class="profile-row" id="row-{{ forloop.counter0 }}">
+          <td>
+            <a href="/calculate?string_set_name={{ string_set.name }}&users_set={{ user }}">
+              <div class="text-left">
+                {{ string_set.name }}
+              </div>
+            </a>
+          </td>
 
-          <a href="/download-set?string_set_name={{ string_set.name }}&user={{ user.username }}">
-            <div class="col-sm-1 my-grid">
-              <span class="glyphicon glyphicon-floppy-save"></span>
-            </div>
-          </a>
+          <td>
+            <a href="/download-set?string_set_name={{ string_set.name }}&user={{ user }}">
+              <div>
+                <span class="glyphicon glyphicon-floppy-save"></span>
+              </div>
+            </a>
+          </td>
 
-          <a>
-            <div class="col-sm-1 my-grid delete-set-btn" id="del-{{ string_set }}" num={{ forloop.counter0 }}>
-              <span class="glyphicon glyphicon-trash"></span>
-            </div>
-          </a>
-
-        </div>
+          <td>
+            <a>
+              <div class="delete-set-btn" data-row="{{ forloop.counter0 }}"
+                   data-user="{{ user }}" data-set="{{ string_set.name }}">
+                <span class="glyphicon glyphicon-trash"></span>
+              </div>
+            </a>
+          </td>
+        </tr>
       {% empty %}
         <p><a href="/calculate/">You have not made any string sets.</a></p>
       {% endfor %}
-    </div>
+      </tbody>
+    </table>
+ </div>
   </div>
 {% endblock %}

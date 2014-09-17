@@ -39,7 +39,7 @@ urlpatterns = patterns('',
 
                        # Profile
                        (r'^profile/$', 'profile.views.profile'),
-                       (r'^ajax-delete/$', 'profile.views.ajax_delete_set'),
+                       (r'^delete-set/$', 'profile.views.delete_set'),
 
                        # Contact
                        (r'^contact/$', 'contact.views.load_contact_page'),

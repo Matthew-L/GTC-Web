@@ -1,3 +1,21 @@
+@import "variables";
+
 .table th {
    text-align: center;   
+}
+
+.no-border > td {
+  border: 0 none !important;
+}
+
+#strings-table{
+  font-size: $readable-size;
+}
+
+#string-set-name{
+  font-size: $readable-size;
+}
+
+#scale-length{
+  font-size: $readable-size;
 }

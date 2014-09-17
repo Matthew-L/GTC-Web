@@ -23,34 +23,36 @@
         <a href="#"></a>
       </div>
       <div class="panel panel-default">
-        <table id="strings-table" class="table sortable-table table-bordered table-striped">
-          <tr id="table-headers">
-            <th>
-              <div class="popover_header" id="number"></div>
-            </th>
-            <th>
-              <div class="popover_header" id="note">Note</div>
-            </th>
-            <th>
-              <div class="popover_header" id="octave">Octave</div>
-            </th>
-            <th>
-              <div class="popover_header" id="gauge">Gauge</div>
-            </th>
-            <th>
-              <div class="popover_header" id="string-type">String Type</div>
-            </th>
-            <th>
-              <div class="popover_header" id="tension">Tension</div>
-            </th>
-            <th>
+        <table id="strings-table" class="table sortable-table table-striped">
+          <thead>
+            <tr id="table-headers">
+              <th>
+                <div class="popover_header" id="number"></div>
+              </th>
+              <th>
+                <div class="popover_header" id="note">Note</div>
+              </th>
+              <th>
+                <div class="popover_header" id="octave">Octave</div>
+              </th>
+              <th>
+                <div class="popover_header" id="gauge">Gauge</div>
+              </th>
+              <th>
+                <div class="popover_header" id="string-type">String Type</div>
+              </th>
+              <th>
+                <div class="popover_header" id="tension">Tension</div>
+              </th>
+              <th>
 
-            </th>
-          </tr>
-          <tbody>
-            <tr id="string-row-1" class="sortable-row">
-              {% include "pretty-forms.html" %}
+              </th>
             </tr>
+          </thead>
+          <tbody>
+          <tr id="string-row-1" class="no-border sortable-row">
+            {% include "pretty-forms.html" %}
+          </tr>
           </tbody>
         </table>
       </div>

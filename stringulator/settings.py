@@ -17,7 +17,7 @@ import dj_database_url
 if DEBUG:
     DATABASE_URL = 'postgres://localhost/storage'
 else:
-    DATABASE_URL = os.environ.get('DATABASE_URL')
+    DATABASE_URL = os.environ.get('LIVE_URL')
 DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
