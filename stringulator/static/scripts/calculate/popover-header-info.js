@@ -4,8 +4,8 @@
 
 $(document).ready(function () {
 
-  $("#string_set_name").popover(
-    { placement: "bottom", animation: "true", trigger: "hover",
+  $("#string-set-name").popover(
+    { placement: "right", animation: "true", trigger: "hover",
       title: "The Name of Your String Set",
       content: "A descriptive name that others can search by.\n Must be less than 30 characters."});
 
@@ -21,8 +21,8 @@ $(document).ready(function () {
     title: 'Determines the Width of the Fan',
     content: "This is only needed if you have a multi-scale instrument. Put the total number of strings on your guitar " +
       "Must be less than 100."});
-  $("#scale_length_popover").popover({ placement: "bottom", animation: "true", trigger: "hover",
-    title: 'The Length of the Guitar From Neck to Bridge',
+  $("#scale-length").popover({ placement: "right", animation: "true", trigger: "hover",
+    title: 'Length From Neck to Bridge',
     content: "Assumes inches. Must be less than 100. If it is multi-scale it should follow the format '27-28.625'," +
       " where the lower value is first"});
   $("#number").popover({ placement: "top", animation: "true", trigger: "hover",

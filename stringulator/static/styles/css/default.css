@@ -90,6 +90,11 @@ tr.table_row {
   text-align: center;
 }
 
+/* line 80, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_main.scss */
+.readable {
+  font-size: 1.4em;
+}
+
 /* line 3, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
 .table th {
   text-align: center;
@@ -98,26 +103,6 @@ tr.table_row {
 /* line 7, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
 .no-border > td {
   border: 0 none !important;
-}
-
-/* line 11, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
-#strings-table {
-  font-size: 1.4em;
-}
-
-/* line 15, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
-#string-set-name {
-  font-size: 1.4em;
-}
-
-/* line 19, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
-#scale-length {
-  font-size: 1.4em;
-}
-
-/* line 23, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
-#error-alert {
-  font-size: 1.4em;
 }
 
 /* line 28, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
@@ -129,6 +114,26 @@ tr.table_row {
 /* line 32, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
 #error-message > li {
   padding: 5px;
+}
+
+/* line 37, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
+.block {
+  display: inline-block;
+  padding: 5px;
+  font-size: 1.4em;
+}
+
+/* line 43, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
+.popover-content {
+  font-size: 1.4em;
+  font-weight: normal;
+  line-height: 1.42857;
+}
+
+/* line 49, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
+.popover-title {
+  font-size: 1.4em;
+  line-height: 1.42857;
 }
 
 /* line 1, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_header.scss */
@@ -313,13 +318,13 @@ p {
 
 /* line 169, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
 div#string-set-name {
-  font-size: 14px;
-  padding-bottom: 15px;
+  font-size: 1.4em;
+  padding: 5px;
 }
 
 /* line 174, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
 div#scale-length {
-  font-size: 14px;
+  font-size: 1.4em;
   padding: 5px;
 }
 

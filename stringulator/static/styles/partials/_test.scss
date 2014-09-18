@@ -141,7 +141,7 @@ body {
 
 .header #search {
   height: 40px;
-//  font-size: 14px;
+//  font-size: $readable-size;
   padding: 8px;
   border: 1px solid #ccc;
 }
@@ -167,12 +167,12 @@ p {
 }
 
 div#string-set-name {
-  font-size: 14px;
-  padding-bottom: 15px;
+  font-size: $readable-size;
+  padding: 5px;
 }
 
 div#scale-length {
-  font-size: 14px;
+  font-size: $readable-size;
   padding: 5px;
 }
 

@@ -3,93 +3,101 @@
 {% load get_range %}
 
 {% block content %}
-  <div class="calculate">
-    <form method="get" action="/save-set/">
-      {#      <input type="hidden" id="string_data" name="variable" value='{{ json_string_set }}'>#}
+  <div class="calculate" class="readable">
+    {#    <form method="get" action="/save-set/">#}
+    {#      <input type="hidden" id="string_data" name="variable" value='{{ json_string_set }}'>#}
 
+    <div class="block panel panel-default">
       <div id="string-set-name" data-original-name="{{ string_set_name }}">
-        <label for="name">Name</label>
+        <strong>Name</strong>
         <a href="#">{{ string_set_name }}</a>
       </div>
-
-      {#      <div id="description">#}
-      {#        <label for="description">Description</label>#}
-      {#        <a href="#">{{ description }}</a>#}
-      {#      </div>#}
-      {#      <div id="summernote">Hello Summernote</div>#}
-
-      <div id="scale-length">
-        <label for="description">Scale Length</label>
-        <a href="#"></a>
+    </div>
+    {#      <div id="description">#}
+    {#        <label for="description">Description</label>#}
+    {#        <a href="#">{{ description }}</a>#}
+    {#      </div>#}
+    {#      <div id="summernote">Hello Summernote</div>#}
+    <div>
+      <div class="block panel panel-default">
+        <div id="scale-length" class="readable">
+          <strong>Scale Length</strong>
+          <a href="#"></a>
+        </div>
       </div>
-      <div class="panel panel-default">
-        <table id="strings-table" class="table sortable-table table-striped">
-          <thead>
-            <tr id="table-headers">
-              <th>
-                <div class="popover_header" id="number"></div>
-              </th>
-              <th>
-                <div class="popover_header" id="note">Note</div>
-              </th>
-              <th>
-                <div class="popover_header" id="octave">Octave</div>
-              </th>
-              <th>
-                <div class="popover_header" id="gauge">Gauge</div>
-              </th>
-              <th>
-                <div class="popover_header" id="string-type">String Type</div>
-              </th>
-              <th>
-                <div class="popover_header" id="tension">Tension</div>
-              </th>
-              <th>
+    </div>
+    <div class="panel panel-default">
+      <table id="strings-table" class="readable table sortable-table table-striped">
+        <thead>
+        <tr id="table-headers">
+          <th>
+            <div class="popover-header" id="number"></div>
+          </th>
+          <th>
+            <div class="popover-header" id="note">Note</div>
+          </th>
+          <th>
+            <div class="popover-header" id="octave">Octave</div>
+          </th>
+          <th>
+            <div class="popover-header" id="gauge">Gauge</div>
+          </th>
+          <th>
+            <div class="popover-header" id="string-type">String Type</div>
+          </th>
+          <th>
+            <div class="popover-header" id="tension">Tension</div>
+          </th>
+          <th>
 
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-          <tr id="string-row-1" class="no-border sortable-row">
-            {% include "pretty-forms.html" %}
-          </tr>
-          </tbody>
-        </table>
-      </div>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="string-row-1" class="no-border sortable-row">
+          {% include "pretty-forms.html" %}
+        </tr>
+        </tbody>
+      </table>
+    </div>
 
-      <div id="delete-alert" class="hidden alert alert-danger fade in" role="alert">
-        <h4>Are you sure you want to delete the string row?</h4>
+    <div id="warn-alert" class="readable hidden alert alert-warning fade in" role="alert">
+      <strong>Warning</strong>
+    </div>
 
-        <p>
-          <button id="confirm-delete" type="button" class="btn btn-danger">Delete String Row</button>
-          <button id="cancel-delete" type="button" class="btn btn-default">Cancel</button>
-        </p>
-      </div>
-      <div id="error-alert" class="hidden alert alert-danger fade in" role="alert">
-        <a href="#" class="close">&times;</a>
-        <strong>Error! Make sure no fields are Empty.</strong>
-        <ul id="error-message" class="text-left"></ul>
-      </div>
+    <div id="delete-alert" class="readable hidden alert alert-danger fade in" role="alert">
+      <h4>Are you sure you want to delete the string row?</h4>
 
-{#      <div id="error-alert" class="hidden alert alert-danger fade in" role="alert">#}
-{#        <a href="#" class="close" data-dismiss="alert">&times;</a>#}
-{#        <strong>Error!</strong> A problem has occurred while calculating your string row input.#}
-{#      </div>#}
+      <p>
+        <button id="confirm-delete" type="button" class="btn btn-danger">Delete String Row</button>
+        <button id="cancel-delete" type="button" class="btn btn-default">Cancel</button>
+      </p>
+    </div>
+    <div id="error-alert" class="readable hidden alert alert-danger fade in" role="alert">
+      <a href="#" class="close">&times;</a>
+      <strong>Error! Make sure no fields are Empty.</strong>
+      <ul id="error-message" class="text-left"></ul>
+    </div>
 
-      <div>
-        <button class="btn btn-primary" id="insert-more" type="button">
-          <span class="glyphicon glyphicon-plus btn-divider"></span>
-          Add String
-        </button>
-        <button class="btn btn-info" id="enable-drag-drop" type="button">
-          <span class="glyphicon glyphicon-sort btn-divider"></span>
-          <span id="drag-enable-message">Toggle Drag/Drop</span>
-        </button>
-        <button class="btn btn-success" id="save-set" type="submit" name="save-set" value="{{ string_set_name }}">
-          <span class="glyphicon glyphicon-floppy-disk btn-divider"></span>
-          Save String Set
-        </button>
-      </div>
+    {#      <div id="error-alert" class="hidden alert alert-danger fade in" role="alert">#}
+    {#        <a href="#" class="close" data-dismiss="alert">&times;</a>#}
+    {#        <strong>Error!</strong> A problem has occurred while calculating your string row input.#}
+    {#      </div>#}
+
+    <div>
+      <button class="btn btn-primary" id="insert-more" type="button">
+        <span class="glyphicon glyphicon-plus btn-divider"></span>
+        Add String
+      </button>
+      <button class="btn btn-info" id="enable-drag-drop" type="button">
+        <span class="glyphicon glyphicon-sort btn-divider"></span>
+        <span id="drag-enable-message">Toggle Drag/Drop</span>
+      </button>
+      <button class="btn btn-success" id="save-set" type="submit" name="save-set" value="{{ string_set_name }}">
+        <span class="glyphicon glyphicon-floppy-disk btn-divider"></span>
+        Save String Set
+      </button>
+    </div>
     </form>
   </div>
 {% endblock %}
