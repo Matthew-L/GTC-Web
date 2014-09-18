@@ -117,23 +117,33 @@ tr.table_row {
 }
 
 /* line 37, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
+.warning-message {
+  padding: 10px;
+}
+
+/* line 41, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
 .block {
   display: inline-block;
   padding: 5px;
   font-size: 1.4em;
 }
 
-/* line 43, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
+/* line 47, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
 .popover-content {
   font-size: 1.4em;
   font-weight: normal;
   line-height: 1.42857;
 }
 
-/* line 49, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
+/* line 53, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
 .popover-title {
   font-size: 1.4em;
   line-height: 1.42857;
+}
+
+/* line 58, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
+.heavy {
+  font-weight: bold;
 }
 
 /* line 1, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_header.scss */

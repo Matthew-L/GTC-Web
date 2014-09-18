@@ -34,6 +34,10 @@
   }
 }
 
+.warning-message{
+  padding: 10px;
+}
+
 .block {
   display: inline-block;
   padding: 5px;
@@ -49,4 +53,8 @@
 .popover-title {
   font-size: $readable-size;
   line-height: 1.42857;
+}
+
+.heavy {
+  font-weight: bold;
 }

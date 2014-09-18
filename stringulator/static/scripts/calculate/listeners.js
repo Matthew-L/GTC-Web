@@ -271,6 +271,7 @@ function setDisableSortableListener() {
   setDragDropButton();
   $('#enable-drag-drop').removeClass('btn-warning');
   $('#enable-drag-drop').addClass('btn-info');
+  $('#warn-alert').addClass('hidden');
 
 }
 
@@ -301,6 +302,7 @@ function setDragDropButton() {
     });
 //    $(this).removeClass('btn-info');
     $(this).addClass('btn-warning');
+    $('#warn-alert').removeClass('hidden');
   });
 
 }
