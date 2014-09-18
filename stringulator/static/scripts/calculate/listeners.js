@@ -242,6 +242,7 @@ function setDeleteRowListeners() {
       });
       $('#cancel-delete').click(function () {
         $('#delete-alert').addClass('hidden');
+        $('#confirm-delete').off('click');
       });
     }
   });
