@@ -20,12 +20,6 @@ from calculator.stringcalculator.string.guitar_string import GuitarString
 from calculator.stringcalculator.scientificpitch.scientific_pitch import ScientificPitch
 from calculator.stringcalculator.string_calculator import calculate_tension
 
-ERRORS = []
-error = {
-    InvalidStringNumberError: 'invalid string number'
-}
-
-
 def get_user_id(username):
     return User.objects.get(username=username).pk
 
@@ -107,40 +101,9 @@ def convert_input_to_tension(request):
     return HttpResponse(json.dumps(response), content_type='application/javascript')
 
 
-# def user_login_context(context, request):
-# if request.user.is_authenticated():
-# context['is_logged_in'] = True
-# context['username'] = request.user.get_username()
-# else:
-# context['is_logged_in'] = False
-#     return context
-
-
 def return_save_errors(context, errors, request):
     context['errors'] = errors
     return render(request, 'save_set.html', context)
-
-
-# def renaming_set(name, request, user):
-#     should_rename = False
-#     try:
-#         old_name = request.GET['save-set']
-#         print('changing set name')
-#         print(name, old_name)
-#         if name != old_name:
-#             old_string_set = StringSet.objects.filter(name=old_name, user=user)
-#             # print(old_string_set, old_name)
-#             # if old_string_set:
-#             # old_string_set.all().delete()
-#             should_rename = True
-#     except:
-#         pass
-#
-#     return old_string_set, should_rename
-
-
-""" Save Error Handling """
-
 
 class SaveSet(View):
     response = {}

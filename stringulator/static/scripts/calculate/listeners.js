@@ -286,10 +286,10 @@ function setSaveSetListener() {
 }
 
 
-function setErrorAlertListener() {
+function setCloseAlertListener() {
   'use strict';
   $('.close').on('click', function () {
-    $('#error-alert').addClass('hidden');
+    $('div .alert').addClass('hidden');
   });
 }
 
@@ -329,7 +329,7 @@ $(document).ready(function () {
   setRowListeners();
   setAddRowListener();
   setSaveSetListener();
-  setErrorAlertListener();
+  setCloseAlertListener();
 });
 
 

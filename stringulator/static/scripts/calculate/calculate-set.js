@@ -1,3 +1,8 @@
+function showSuccess(){
+  'use strict';
+  $('#success-alert').removeClass('hidden');
+}
+
 function displayErrors(errors){
   'use strict';
   $('#error-alert').removeClass('hidden');
@@ -6,7 +11,6 @@ function displayErrors(errors){
     console.log(errors[i].toString());
     $('#error-message').append('<li>'+errors[i].toString()+'</li>');
   }
-
 }
 
 function hideErrors(){
@@ -72,8 +76,8 @@ function saveStringSet(set){
     /* jshint camelcase: true*/
     dataType: 'json',
     success: function (response) {
+      showSuccess();
       console.log(response);
-      alert(response.successMessage);
       hideErrors();
     },
     error: function (response, error) {
