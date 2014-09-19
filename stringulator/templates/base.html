@@ -18,7 +18,8 @@
           <input placeholder="Find string sets!" type="text" value="" name="query"
                  id="search">
         </div>
-        <button type="submit" class="search-button btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+        <button type="submit" class="search-button btn btn-default"><span class="glyphicon glyphicon-search"></span>
+        </button>
       </form>
 
 
@@ -143,6 +144,7 @@
 
   <div class="footer">
     <span class="contributors left"><a href="https://www.linkedin.com/in/micahgajewski/">Micah Gajewski</a></span>
+
     <form class="donate-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
       <input type="hidden" name="cmd" value="_s-xclick" display="inline">
       <input type="hidden" name="hosted_button_id" value="62ZVBQ4ZEZTBA">
@@ -160,8 +162,8 @@
   </script>
 
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
-{#  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.svg"></script>#}
-{#  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.ttf"></script>#}
+  {#  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.svg"></script>#}
+  {#  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/fonts/glyphicons-halflings-regular.ttf"></script>#}
 
   <script src="{{ STATIC_URL }}scripts/dependencies/summernote.js"></script>
 
@@ -198,6 +200,23 @@
   {#    <script src='{{ STATIC_URL }}scripts/dependencies/jquery-sortable.js'></script>#}
   {#    <script src='{{ STATIC_URL }}scripts/calculate/sortable-calculate.js'></script>#}
   {#  {% endif %}#}
+
+   <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54964640-1', 'auto');
+    ga('send', 'pageview');
+  </script>
 {% endblock %}
 </body>
 </html>
