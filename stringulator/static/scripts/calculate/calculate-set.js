@@ -1,19 +1,23 @@
-function showSuccess(){
+function showSuccess() {
   'use strict';
   $('#success-alert').removeClass('hidden');
+  var name = getSetName();
+  var link = $('#reload-link');
+  var user = link.data('user');
+  link.attr('href', '/calculate?string_set_name=' + name + '&users_set=' + user);
 }
 
-function displayErrors(errors){
+function displayErrors(errors) {
   'use strict';
   $('#error-alert').removeClass('hidden');
   $('#error-message > li').remove();
-  for(var i = 0; i < errors.length; ++i){
+  for (var i = 0; i < errors.length; ++i) {
     console.log(errors[i].toString());
-    $('#error-message').append('<li>'+errors[i].toString()+'</li>');
+    $('#error-message').append('<li>' + errors[i].toString() + '</li>');
   }
 }
 
-function hideErrors(){
+function hideErrors() {
   'use strict';
   $('#error-alert').addClass('hidden');
 }
@@ -56,8 +60,8 @@ function calculateString(row) {
   });
 }
 
-function saveStringSet(set){
-    'use strict';
+function saveStringSet(set) {
+  'use strict';
   console.log(set);
   /* jshint camelcase: false */
 
