@@ -1,5 +1,6 @@
 body {
   text-align: center;
+  height: 100vh;
 }
 
 .jumbotron {
@@ -79,4 +80,8 @@ tr.table_row {
 
 .readable {
   font-size: $readable-size;
+}
+
+.wrapper {
+  height: 100vh;
 }
