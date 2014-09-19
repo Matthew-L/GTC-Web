@@ -289,7 +289,7 @@ function setSaveSetListener() {
 function setCloseAlertListener() {
   'use strict';
   $('.close').on('click', function () {
-    $('div .alert').addClass('hidden');
+    $('#error-alert').addClass('hidden');
   });
 }
 
