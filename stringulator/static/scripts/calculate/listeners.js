@@ -85,6 +85,9 @@ function setEditableListeners() {
       if ($.trim(value) === '') {
         return 'This field is required';
       }
+      if ($.trim(value).length >= 30) {
+        return 'Must be less than 30 characters';
+      }
     }
   });
 
