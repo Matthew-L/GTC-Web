@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Your login details are invalid</h2>
+  <div class="profile">
+    <div class="block panel panel-default">
+      <h3> Your login details are invalid. </h3>
+      <h4>{{ error }}</h2>
+    </div>
+  </div>
 {% endblock %}
 
 

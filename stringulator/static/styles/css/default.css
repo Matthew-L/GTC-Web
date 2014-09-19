@@ -401,37 +401,37 @@ div#scale-length {
   }
 }
 @media all and (max-width: 480px) {
-  /* line 246, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 249, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .logo {
     width: 100px;
     margin-top: 15px;
   }
 
-  /* line 251, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 254, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .sb-search {
     margin-right: 0px;
     margin-left: 5px;
   }
 
-  /* line 256, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 259, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .morph-button {
     margin: 10px 5px !important;
   }
 
-  /* line 260, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 263, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .morph-button-fixed {
     width: 70px;
     font-size: 70%;
   }
 
-  /* line 265, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 268, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .content-style-form .icon-close {
     top: 15px;
     right: 15px;
     font-size: 80%;
   }
 
-  /* line 271, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 274, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .hompepage {
     background: none;
     max-width: initial;
@@ -439,12 +439,12 @@ div#scale-length {
     width: 100%;
   }
 
-  /* line 278, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 281, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .padding-bottom-10 {
     padding-bottom: 0;
   }
 
-  /* line 282, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 285, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .footer {
     max-width: initial;
     margin: 0 auto;
@@ -455,7 +455,7 @@ div#scale-length {
     width: 100%;
   }
 
-  /* line 292, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
+  /* line 295, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_test.scss */
   .footer span {
     display: block;
     width: 100%;

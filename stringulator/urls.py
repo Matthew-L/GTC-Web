@@ -25,28 +25,27 @@ urlpatterns = patterns('',
                        # USERS
 
                        # Login
-                       (r'^accounts/login/$', 'users.views.login'),
+                       # (r'^accounts/login/$', 'users.views.login'),
                        # (r'^$', 'users.views.login'),
-                       (r'^accounts/invalid/$', 'users.views.invalid_login'),
+                       (r'^invalid-login/$', 'users.views.invalid_login'),
                        # Authorize user
-                       (r'^authorize-account/$', 'users.views.auth_view'),
-                       (r'^login/$', 'users.views.auth_view'),
+                       # (r'^authorize-account/$', 'users.views.auth_view'),
+                       (r'^login/$', 'users.views.login'),
                        # Logout
                        (r'^logout/$', 'users.views.logout'),
                        # Register
-                       (r'^accounts/register_success/$', 'users.views.register_success'),
-                       (r'^accounts/register/$', 'users.views.register_user'),
+                       (r'^register/$', 'users.views.register_user'),
 
                        # Profile
                        (r'^profile/$', 'profile.views.profile'),
                        (r'^delete-set/$', 'profile.views.delete_set'),
 
                        # Contact
-                       (r'^contact/$', 'contact.views.load_contact_page'),
+                       # (r'^contact/$', 'contact.views.load_contact_page'),
 
                        # Test
                        # (r'^test/$', 'contact.views.load_test_page'),
-                       (r'^base-bak/$', 'contact.views.load_base_bak_page'),
+                       # (r'^base-bak/$', 'contact.views.load_base_bak_page'),
                        (r'^$', 'stringulator.views.load_homepage'),
 )
 

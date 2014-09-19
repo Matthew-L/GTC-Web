@@ -64,7 +64,7 @@
 
                 <h2>Login</h2>
 
-                <form action="/authorize-account/" method="post">
+                <form action="/login/" method="post">
                   {% csrf_token %}
                   <p><label>Username</label>
                     <input type="text" name="username"
@@ -93,7 +93,7 @@
 
                 <h2>Register</h2>
 
-                <form class="navbar-form navbar-center" action="/accounts/register/" method="post">
+                <form class="navbar-form navbar-center" action="/register/" method="post">
                   {% csrf_token %}
                   <p><label>Username</label><input id="id_username" maxlength="30" name="username" type="text"
                                                    placeholder="Username"
