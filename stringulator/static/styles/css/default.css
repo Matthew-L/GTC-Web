@@ -153,6 +153,11 @@ tr.table_row {
   font-weight: bold;
 }
 
+/* line 63, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_calculate.scss */
+.disqus-block {
+  margin-top: 80px;
+}
+
 /* line 1, D:/Dropbox/PycharmProjects/Stringulator-Web/stringulator/static/styles/partials/_header.scss */
 .navbar {
   background: rgba(255, 255, 255, 0.85);
