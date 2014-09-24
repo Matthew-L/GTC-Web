@@ -125,12 +125,17 @@
 
   {% block content %}
     <div class="homepage">
-      <h1>Welcome!</h1>
+      <h1 class="slogan"><i>Improve your speed and accuracy by building balanced string sets.</i></h1>
 
-      <p><b>Stringulator</b> allows you to create custom guitar string sets. After you build a set, you can save them to
-        your profile to compare to other sets you've tried. Don't want to make your own String Set? Use the search bar
-        to find custom sets other Stringulator users are rocking! If you have questions on how to use the site
-        check out the GitHub Readme or use the Contact Us page to send us a message.</p>
+      <p info><b>Stringulator</b> allows you to create custom guitar string sets. After you build a set, you can save
+        them to
+        your profile to compare to other sets you've tried. Document your experience with comments!</p>
+
+      <p> Don't want to make your own String Set? Use the search bar
+        to find custom sets other Stringulator users are rocking!</p>
+
+      <p> If you have questions on how to use the site
+        check out the GitHub Readme or contact me at stringulatorgtc at gmail.com or tweet @stringulator</p>
 
       <p class="padding-bottom-10">
         <a class="button-1" href="calculate/?string_set_name=8%20string%20set&users_set=micah">
@@ -139,6 +144,9 @@
       </p>
 
       <p><a class="button-1" href="https://github.com/gajewsk2/Stringulator">Check out the GitHub repo!</a></p>
+
+
+
     </div>
   {% endblock %}
 
@@ -200,8 +208,19 @@
   {#    <script src='{{ STATIC_URL }}scripts/dependencies/jquery-sortable.js'></script>#}
   {#    <script src='{{ STATIC_URL }}scripts/calculate/sortable-calculate.js'></script>#}
   {#  {% endif %}#}
+  <script>
+    !function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+      if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = p + "://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }
+    }(document, "script", "twitter-wjs");
+  </script>
 
-   <script>
+  <script>
     (function (i, s, o, g, r, a, m) {
       i['GoogleAnalyticsObject'] = r;
       i[r] = i[r] || function () {
@@ -215,6 +234,7 @@
     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
     ga('create', 'UA-54964640-1', 'auto');
+    ga('require', 'displayfeatures');
     ga('send', 'pageview');
   </script>
 {% endblock %}
