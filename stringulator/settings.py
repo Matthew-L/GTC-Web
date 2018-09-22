@@ -83,7 +83,7 @@ STATIC_ROOT = os.path.abspath('static')
 COMPRESS_ROOT = os.path.abspath('static')
 
 STATICFILES_DIRS = (
-    os.path.abspath('stringulator\\static'),
+    os.path.join('stringulator', 'static'),
     # os.path.abspath('dist'),
 )
 
